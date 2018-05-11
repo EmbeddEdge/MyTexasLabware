@@ -94,36 +94,46 @@ void UART_OutChar(unsigned char data){
 // Output: 32-bit unsigned number
 // If you enter a number above 4294967295, it will return an incorrect value
 // Backspace will remove last digit typed
-unsigned long UART_InUDec(void){
-unsigned long number=0, length=0;
-char character;
+unsigned long UART_InUDec(void)
+{
+	unsigned long number=0, length=0;
+	char character;
   character = UART_InChar();
-  while(character != CR){ // accepts until <enter> is typed
-// The next line checks that the input is a digit, 0-9.
-// If the character is not 0-9, it is ignored and not echoed
-    if((character>='0') && (character<='9')) {
-      number = 10*number+(character-'0');   // this line overflows if above 4294967295
-      length++;
-      UART_OutChar(character);
-    }
-// If the input is a backspace, then the return number is
-// changed and a backspace is outputted to the screen
-    else if((character==BS) && length){
-      number /= 10;
-      length--;
-      UART_OutChar(character);
-    }
-    character = UART_InChar();
-  }
+  while(character != CR)
+		{ // accepts until <enter> is typed
+			// The next line checks that the input is a digit, 0-9.
+			// If the character is not 0-9, it is ignored and not echoed
+			if((character>='0') && (character<='9'))
+			{
+				number = 10*number+(character-'0');   // this line overflows if above 4294967295
+				length++;
+				UART_OutChar(character);
+			}
+			// If the input is a backspace, then the return number is
+			// changed and a backspace is outputted to the screen
+			else if((character==BS) && length)
+			{
+				number /= 10;
+				length--;
+				UART_OutChar(character);
+			}
+			character = UART_InChar();
+		}
   return number;
 }
 //------------UART_OutString------------
 // Output String (NULL termination)
 // Input: pointer to a NULL-terminated string to be transferred
 // Output: none
-void UART_OutString(unsigned char buffer[]){
-// as part of Lab 11 implement this function
-
+void UART_OutString(unsigned char buffer[])
+{
+	// as part of Lab 11 implement this function
+	unsigned long index = 0;
+	while(buffer[index] != 0) //Stop on Null 
+	{
+		UART_OutChar(buffer[index]);
+		index++;
+	}
 }
 
 unsigned char String[10];
