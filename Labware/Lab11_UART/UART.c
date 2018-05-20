@@ -148,9 +148,42 @@ unsigned char String[10];
 //  102 to " 102 " 
 // 2210 to "2210 "
 //10000 to "**** "  any value larger than 9999 converted to "**** "
-void UART_ConvertUDec(unsigned long n){
-// as part of Lab 11 implement this function
-  
+void UART_ConvertUDec(unsigned long n)
+{
+	// as part of Lab 11 implement this function
+	unsigned long i,length = 4,digitThousands,decThousands,digitHundreds,decHundreds,digitTens,decTens,Ones;
+	if(n<=9999)
+	{
+		//n = 0 - 9999
+		String[0] = n/1000 + '0';
+		if(String[0] == '0'){
+			String[0] = SP;
+		}
+		n = n % 1000;								//0-999
+		String[1] = n/100 + '0';
+		if(String[0] == SP && String[1] == '0'){
+			String[1] = SP;
+		}
+		n = n % 100;								//0-99
+		String[2] = n/10 + '0';
+		if(String[0] == SP && String[1] == SP && String[2] == '0'){
+			String[2] = SP;
+		}
+		n = n % 10;									//0-9
+		String[3] = n/1 +'0';
+	
+		String[4] = SP;
+		String[5] = 0;
+	}
+	else
+	{
+		for(i=0;i<4;i++)
+		{
+			String[i] = '*';
+		}
+		String[4] =  SP;
+		String[5] =   0;
+	}
 }
 
 //-----------------------UART_OutUDec-----------------------
@@ -176,7 +209,43 @@ void UART_OutUDec(unsigned long n){
 //10000 to "*.*** cm"  any value larger than 9999 converted to "*.*** cm"
 void UART_ConvertDistance(unsigned long n){
 // as part of Lab 11 implement this function
-  
+	unsigned long i,length = 4,digitWhole,FirstDec,numFirstDec,SecondDec,numSecondDec,ThirdDec;
+	if(n<=9999)
+	{
+		digitWhole = n/1000+'0';       // digit to the left of the decimal
+		String[0] = digitWhole;
+		n=n%1000;											 //0-999
+		String[1] = '.';
+	
+		FirstDec = n/100+'0';
+		numFirstDec = n/100 * 100;
+		String[2] = FirstDec;
+		n=n-numFirstDec;
+	
+		SecondDec = n/10+'0';
+		numSecondDec = n/10 * 10;
+		String[3] = SecondDec;
+		n=n-numSecondDec;
+	
+		ThirdDec = n/1+'0';
+		String[4] = ThirdDec;
+	
+		String[5] =  SP;
+		String[6] = 'c';
+		String[7] = 'm';
+	}
+	else
+	{
+		for(i=0;i<5;i++)
+		{
+			String[i] = '*';
+		}
+		String[1]	=	'.';
+		String[5] =  SP;
+		String[6] = 'c';
+		String[7] = 'm';
+	}
+
 }
 
 //-----------------------UART_OutDistance-----------------------
