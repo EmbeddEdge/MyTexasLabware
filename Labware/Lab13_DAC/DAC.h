@@ -4,6 +4,7 @@
 // Header file for the 4-bit digital to analog converter
 // Daniel Valvano, Jonathan Valvano
 // March 13, 2014
+// Port bits PB3-PB0 make up the DAC
 
 // **************DAC_Init*********************
 // Initialize 4-bit DAC 
