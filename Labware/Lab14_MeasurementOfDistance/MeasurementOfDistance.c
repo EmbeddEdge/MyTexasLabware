@@ -4,7 +4,7 @@
 // triggered ADC conversion, convert the sample to a fixed-
 // point decimal distance, and store the result in a mailbox.
 // The foreground thread takes the result from the mailbox,
-// converts the result to a string, and prints it to the
+// converts the result to a String1, and prints it to the
 // Nokia5110 LCD.  The display is optional.
 // January 15, 2016
 
@@ -33,13 +33,14 @@
 #include "..//tm4c123gh6pm.h"
 #include "Nokia5110.h"
 #include "TExaS.h"
+#include "UART.h"
 
 #define SP   0x20
 
 enum OnboardLED
 {
-  Red 		= 0x02,
-	Blue 		= 0x04,
+	Red		= 0x02,
+	Blue 	= 0x04,
 	Green 	= 0x08,
 	Yellow 	= 0x0A,
 	SkyBlue = 0x0C,
@@ -48,7 +49,7 @@ enum OnboardLED
 
 void EnableInterrupts(void);  // Enable interrupts
 
-unsigned char String[10]; // null-terminated ASCII string
+unsigned char String1[10]; // null-terminated ASCII String1
 unsigned long Distance;   // units 0.001 cm
 unsigned long ADCdata;    // 12-bit 0 to 4095 sample
 unsigned long Flag;       // 1 means valid Distance, 0 means Distance is empty
@@ -97,13 +98,15 @@ void HB_Toggle(enum OnboardLED color)
 // data is gathered using known distances and reading the
 // ADC value measured on PE1.  
 // Overflow and dropout should be considered 
+// Maps 0V-3.3V to 0.000cm-2.000cm or 0.000cm-6.200cm
 // Input: sample  12-bit ADC sample
 // Output: 32-bit distance (resolution 0.001cm)
 unsigned long Convert(unsigned long sample)
 {
-	unsigned long A=500,
+	double A=1.514,//A=500
 								B=1;
-	Distance = ((A*sample)>>10)+B;
+	//Distance = ((A*sample)>>10)+B;
+	Distance = A*sample+B;
   return Distance; 
 }
 
@@ -119,18 +122,18 @@ void SysTick_Init(unsigned long period)
 // executes every 25 ms, collects a sample, converts and stores in mailbox
 void SysTick_Handler(void)
 { 
-	HB_Toggle(Blue);
-	HB_Toggle(Blue);
+	HB_Toggle(Red);
+	HB_Toggle(Red);
 	ADCdata = ADC0_In();
 	Distance = Convert(ADCdata);
 	Flag = 1;
-	HB_Toggle(Blue);
+	HB_Toggle(Red);
 }
 
-//-----------------------UART_ConvertDistance-----------------------
-// Converts a 32-bit distance into an ASCII string
+//-----------------------ConvertDistance-----------------------
+// Converts a 32-bit distance into an ASCII String1
 // Input: 32-bit number to be converted (resolution 0.001cm)
-// Output: store the conversion in global variable String[10]
+// Output: store the conversion in global variable String1[10]
 // Fixed format 1 digit, point, 3 digits, space, units, null termination
 // Examples
 //    4 to "0.004 cm"  
@@ -138,43 +141,43 @@ void SysTick_Handler(void)
 //  102 to "0.102 cm" 
 // 2210 to "2.210 cm"
 //10000 to "*.*** cm"  any value larger than 9999 converted to "*.*** cm"
-void UART_ConvertDistance(unsigned long n){
+void ConvertDistance(unsigned long n){
 // as part of Lab 11 implement this function
 	unsigned long i,digitWhole,FirstDec,numFirstDec,SecondDec,numSecondDec,ThirdDec;
 	if(n<=9999)
 	{
 		digitWhole = n/1000+'0';       // digit to the left of the decimal
-		String[0] = digitWhole;
+		String1[0] = digitWhole;
 		n=n%1000;											 //0-999
-		String[1] = '.';
+		String1[1] = '.';
 	
 		FirstDec = n/100+'0';
 		numFirstDec = n/100 * 100;
-		String[2] = FirstDec;
+		String1[2] = FirstDec;
 		n=n-numFirstDec;
 	
 		SecondDec = n/10+'0';
 		numSecondDec = n/10 * 10;
-		String[3] = SecondDec;
+		String1[3] = SecondDec;
 		n=n-numSecondDec;
 	
 		ThirdDec = n/1+'0';
-		String[4] = ThirdDec;
+		String1[4] = ThirdDec;
 	
-		String[5] =  SP;
-		String[6] = 'c';
-		String[7] = 'm';
+		String1[5] =  SP;
+		String1[6] = 'c';
+		String1[7] = 'm';
 	}
 	else
 	{
 		for(i=0;i<5;i++)
 		{
-			String[i] = '*';
+			String1[i] = '*';
 		}
-		String[1]	=	'.';
-		String[5] =  SP;
-		String[6] = 'c';
-		String[7] = 'm';
+		String1[1]	=	'.';
+		String1[5] =  SP;
+		String1[6] = 'c';
+		String1[7] = 'm';
 	}
 
 }
@@ -202,23 +205,27 @@ int main2(void)
     ADCdata = ADC0_In();
     Nokia5110_SetCursor(0, 0);
     Distance = Convert(ADCdata);
-    UART_ConvertDistance(Distance); // from Lab 11
-    Nokia5110_OutString(String);    // output to Nokia5110 LCD (optional)
+    ConvertDistance(Distance); // from Lab 11
+    Nokia5110_OutString(String1);    // output to Nokia5110 LCD (optional)
   }
 }
+
+//-----------------------Main Function-----------------------
+// Initialize the ADC and the Nokia5110 Display (Or optionally the uart)
+// Input: None
+// Output: None
 // once the ADC and convert to distance functions are operational,
 // you should use this main to build the final solution with interrupts and mailbox
 int main(void)
 { 
   volatile unsigned long delay;
   TExaS_Init(ADC0_AIN1_PIN_PE2, SSI0_Real_Nokia5110_Scope);
-	ADC0_Init();						// initialize ADC0, channel 1, sequencer 3
-	//UART_Init();					// initialize UART (optional)
-	Nokia5110_Init();				// initialize Nokia5110 LCD (optional)
-	SysTick_Init(2000000);	// initialize SysTick for 40 Hz interrupts and set reload value to 2000001 (2000000+1), which sets the period to 2000000*12.5ns=0.025ms 
-	HB_Init();    					// initialize profiling on PF1 (optional)
-                                    //    wait for clock to stabilize
-
+	ADC0_Init();				// initialize ADC0, channel 1, sequencer 3
+	//UART_Init();				// initialize UART (optional)
+	Nokia5110_Init();			// initialize Nokia5110 LCD (optional)
+	SysTick_Init(2000000);		// initialize SysTick for 40 Hz interrupts and set reload value to 2000001 (2000000+1), which sets the period to 2000000*12.5ns=0.025ms 
+	//HB_Init();    				// initialize profiling on PF1 (optional)
+								//    wait for clock to stabilize
   EnableInterrupts();
 // print a welcome message  (optional)
   while(1)
@@ -227,11 +234,11 @@ int main(void)
 		// read mailbox
 		if(Flag==1)
 		{
-			UART_ConvertDistance(Distance);
+			ConvertDistance(Distance);
 			Nokia5110_SetCursor(0, 0); 
-			Nokia5110_OutString(String); 
+			Nokia5110_OutString(String1); 
 			//Or
-			//UART_OutString(String); 
+			//UART_OutString(String1); 
 			//UART_OutChar('\n');
 		}
 // output to Nokia5110 LCD (optional)

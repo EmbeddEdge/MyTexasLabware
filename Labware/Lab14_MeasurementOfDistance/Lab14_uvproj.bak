@@ -425,11 +425,6 @@
               <FileType>1</FileType>
               <FilePath>.\ADC.c</FilePath>
             </File>
-            <File>
-              <FileName>UART.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\UART.c</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
