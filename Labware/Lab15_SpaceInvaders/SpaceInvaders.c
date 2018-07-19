@@ -76,13 +76,18 @@
 void DisableInterrupts(void); // Disable interrupts
 void EnableInterrupts(void);  // Enable interrupts
 void Timer2_Init(unsigned long period);
+void Timer2A_Start(void);
+void Timer2A_Stop(void);
+void Delay100ms(unsigned long count); // time delay in 0.1 seconds
 void DAC_Init(void);
 void DAC_Out(unsigned long);
-void Delay100ms(unsigned long count); // time delay in 0.1 seconds
+void Sound_Play(const unsigned char*,unsigned long);
 
 unsigned long timerCount;
 unsigned long semaphore;
-unsigned char soundIndex;
+unsigned long soundIndex = 0;
+const unsigned char *Wave;
+unsigned long arrayCount = 0;
 
 
 // *************************** Images ***************************
@@ -554,7 +559,7 @@ int main(void){
   Nokia5110_DisplayBuffer();     // draw buffer
 
   Delay100ms(5);              // delay 5 sec at 50 MHz
-  
+  Sound_Play(shoot,4080);
 
 
   Nokia5110_Clear();
@@ -594,8 +599,31 @@ void Timer2_Init(unsigned long period)
   TIMER2_CTL_R = 0x00000001;    // 10) enable timer2A
 }
 
-void Timer2A_Handler(void){ 
+void Timer2A_Start(void)
+{
+  NVIC_EN0_R = 1<<23; // enable IRQ 23 in NVIC
+}
+
+void Timer2A_Stop(void)
+{
+  DAC_Out(0);
+  NVIC_DIS0_R = 1<<23; // disable IRQ 23 in NVIC
+}
+
+void Timer2A_Handler(void)
+{ 
   TIMER2_ICR_R = 0x00000001;   // acknowledge timer2A timeout
+  if(arrayCount)
+  {
+    DAC_Out(Wave[soundIndex]>>4);   //Sound.c data is 8 bits therefore use the top 4 bits
+    soundIndex = soundIndex + 1;
+    arrayCount = arrayCount - 1;
+  }
+  else
+  {
+    Timer2A_Stop();
+  }
+  /*
   semaphore = 1; // trigger
   if(semaphore==1)
   {
@@ -607,7 +635,9 @@ void Timer2A_Handler(void){
     semaphore = 0;
   }
   timerCount++;
+  */
 }
+
 void Delay100ms(unsigned long count){unsigned long volatile time;
   while(count>0){
     time = 727240;  // 0.1sec at 80 MHz
@@ -642,4 +672,11 @@ void DAC_Init(void)
 void DAC_Out(unsigned long data)
 {
 		GPIO_PORTB_DATA_R = data;
+}
+
+void Sound_Play(const unsigned char *pt, unsigned long count){
+  Wave = pt;
+  soundIndex = 0;
+  arrayCount = count;
+  Timer2A_Start();
 }
