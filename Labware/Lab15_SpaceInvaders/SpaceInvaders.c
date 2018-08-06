@@ -589,8 +589,10 @@ int main(void){
   Nokia5110_PrintBMP(32, ENEMY10H - 1, SmallEnemy20PointA, 0);
   Nokia5110_PrintBMP(48, ENEMY10H - 1, SmallEnemy30PointA, 0);
   Nokia5110_PrintBMP(64, ENEMY10H - 1, SmallEnemy30PointA, 0);
+  Backlight_On();
   Nokia5110_DisplayBuffer();     // draw buffer
 
+  /*
   Delay100ms(5);              // delay 5 sec at 50 MHz
   Sound_Play(shoot,4080);
   //LED1_On();
@@ -606,6 +608,7 @@ int main(void){
   Nokia5110_OutString("Sucka!");
   Nokia5110_SetCursor(2, 4);
   Nokia5110_OutUDec(1234);
+  */
   while(1)
   {
     while(semaphore==0)
@@ -622,8 +625,19 @@ int main(void){
           LED2_Off();
 			  break;
 			  case 0x02:
-				  LED1_Off();
-          LED2_On();
+				  //LED1_Off();
+          //LED2_On();
+          Sound_Play(shoot,4080);
+        
+          Nokia5110_Clear();
+          Nokia5110_SetCursor(1, 1);
+          Nokia5110_OutString("GAME OVER");
+          Nokia5110_SetCursor(1, 2);
+          Nokia5110_OutString("Nice try,");
+          Nokia5110_SetCursor(1, 3);
+          Nokia5110_OutString("Sucka!");
+          Nokia5110_SetCursor(2, 4);
+          Nokia5110_OutUDec(1234);
 			  break;
 			  case 0x03:
 				  LED1_On();
