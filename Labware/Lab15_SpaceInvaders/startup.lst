@@ -484,7 +484,8 @@ ARM Macro Assembler    Page 8
   274 0000026C         ; .bss section.
   275 0000026C         ;
   276 0000026C                 IMPORT           __main
-  277 0000026C F7FF BFFE       B                __main
+  277 0000026C F7FF BFFE 
+                       4       B                __main
   278 00000270         
   279 00000270         ;*******************************************************
                        ***********************
@@ -517,13 +518,13 @@ ARM Macro Assembler    Page 8
                        ***********************
   299 00000272         HardFault_Handler
                                PROC
-  300 00000272                 EXPORT           HardFault_Handler         [WEAK
 
 
 
 ARM Macro Assembler    Page 9 
 
 
+  300 00000272                 EXPORT           HardFault_Handler         [WEAK
 ]
   301 00000272 E7FE            B                .
   302 00000274                 ENDP
@@ -582,13 +583,13 @@ ARM Macro Assembler    Page 9
   342 00000282                 EXPORT           GPIOPortD_Handler         [WEAK
 ]
   343 00000282                 EXPORT           GPIOPortE_Handler         [WEAK
-]
 
 
 
 ARM Macro Assembler    Page 10 
 
 
+]
   344 00000282                 EXPORT           UART0_Handler             [WEAK
 ]
   345 00000282                 EXPORT           UART1_Handler             [WEAK
@@ -647,13 +648,13 @@ ARM Macro Assembler    Page 10
 ]
   372 00000282                 EXPORT           UART2_Handler             [WEAK
 ]
-  373 00000282                 EXPORT           SSI1_Handler              [WEAK
 
 
 
 ARM Macro Assembler    Page 11 
 
 
+  373 00000282                 EXPORT           SSI1_Handler              [WEAK
 ]
   374 00000282                 EXPORT           Timer3A_Handler           [WEAK
 ]
@@ -712,13 +713,13 @@ ARM Macro Assembler    Page 11
   401 00000282                 EXPORT           UART6_Handler             [WEAK
 ]
   402 00000282                 EXPORT           UART7_Handler             [WEAK
-]
 
 
 
 ARM Macro Assembler    Page 12 
 
 
+]
   403 00000282                 EXPORT           I2C2_Handler              [WEAK
 ]
   404 00000282                 EXPORT           I2C3_Handler              [WEAK
@@ -777,13 +778,13 @@ ARM Macro Assembler    Page 12
 ]
   431 00000282                 EXPORT           GPIOPortP1_Handler        [WEAK
 ]
-  432 00000282                 EXPORT           GPIOPortP2_Handler        [WEAK
 
 
 
 ARM Macro Assembler    Page 13 
 
 
+  432 00000282                 EXPORT           GPIOPortP2_Handler        [WEAK
 ]
   433 00000282                 EXPORT           GPIOPortP3_Handler        [WEAK
 ]
@@ -842,13 +843,13 @@ ARM Macro Assembler    Page 13
   467 00000282         Quadrature0_Handler
   468 00000282         ADC0Seq0_Handler
   469 00000282         ADC0Seq1_Handler
-  470 00000282         ADC0Seq2_Handler
 
 
 
 ARM Macro Assembler    Page 14 
 
 
+  470 00000282         ADC0Seq2_Handler
   471 00000282         ADC0Seq3_Handler
   472 00000282         WDT_Handler
   473 00000282         Timer0A_Handler
@@ -907,13 +908,13 @@ ARM Macro Assembler    Page 14
   526 00000282         WideTimer1A_Handler
   527 00000282         WideTimer1B_Handler
   528 00000282         WideTimer2A_Handler
-  529 00000282         WideTimer2B_Handler
 
 
 
 ARM Macro Assembler    Page 15 
 
 
+  529 00000282         WideTimer2B_Handler
   530 00000282         WideTimer3A_Handler
   531 00000282         WideTimer3B_Handler
   532 00000282         WideTimer4A_Handler
@@ -972,13 +973,13 @@ ARM Macro Assembler    Page 15
   582 00000284         ; Some code in the normal code section for initializing 
                        the heap and stack.
   583 00000284         ;
-  584 00000284         ;*******************************************************
 
 
 
 ARM Macro Assembler    Page 16 
 
 
+  584 00000284         ;*******************************************************
                        ***********************
   585 00000284                 AREA             |.text|, CODE, READONLY
   586 00000000         
@@ -1037,13 +1038,13 @@ ARM Macro Assembler    Page 16
   634 00000016         ; outputs: none
   635 00000016         WaitForInterrupt
   636 00000016 BF30            WFI
-  637 00000018 4770            BX               LR
 
 
 
 ARM Macro Assembler    Page 17 
 
 
+  637 00000018 4770            BX               LR
   638 0000001A         
   639 0000001A         ;*******************************************************
                        ***********************
@@ -1172,6 +1173,14 @@ Comment: __heap_limit unused
 ARM Macro Assembler    Page 1 Alphabetic symbol ordering
 Relocatable symbols
 
+ 0000026C
+
+Symbol: 
+   Definitions
+      None
+   Uses
+      None
+Warning:  undefinedComment:  unused
 ADC0Seq0_Handler 00000282
 
 Symbol: ADC0Seq0_Handler
@@ -1223,6 +1232,12 @@ Symbol: ADC1Seq1_Handler
    Definitions
       At line 503 in file startup.s
    Uses
+
+
+
+ARM Macro Assembler    Page 2 Alphabetic symbol ordering
+Relocatable symbols
+
       At line 155 in file startup.s
       At line 388 in file startup.s
 
@@ -1231,12 +1246,6 @@ ADC1Seq2_Handler 00000282
 Symbol: ADC1Seq2_Handler
    Definitions
       At line 504 in file startup.s
-
-
-
-ARM Macro Assembler    Page 2 Alphabetic symbol ordering
-Relocatable symbols
-
    Uses
       At line 156 in file startup.s
       At line 389 in file startup.s
@@ -1288,6 +1297,12 @@ Symbol: CAN2_Handler
 
 Comp0_Handler 00000282
 
+
+
+
+ARM Macro Assembler    Page 3 Alphabetic symbol ordering
+Relocatable symbols
+
 Symbol: Comp0_Handler
    Definitions
       At line 479 in file startup.s
@@ -1296,12 +1311,6 @@ Symbol: Comp0_Handler
       At line 364 in file startup.s
 
 Comp1_Handler 00000282
-
-
-
-ARM Macro Assembler    Page 3 Alphabetic symbol ordering
-Relocatable symbols
-
 
 Symbol: Comp1_Handler
    Definitions
@@ -1353,6 +1362,12 @@ Symbol: FPU_Handler
       At line 536 in file startup.s
    Uses
       At line 212 in file startup.s
+
+
+
+ARM Macro Assembler    Page 4 Alphabetic symbol ordering
+Relocatable symbols
+
       At line 421 in file startup.s
 
 Fan0_Handler 00000282
@@ -1361,12 +1376,6 @@ Symbol: Fan0_Handler
    Definitions
       At line 544 in file startup.s
    Uses
-
-
-
-ARM Macro Assembler    Page 4 Alphabetic symbol ordering
-Relocatable symbols
-
       At line 220 in file startup.s
       At line 429 in file startup.s
 
@@ -1418,6 +1427,12 @@ Symbol: GPIOPortD_Handler
 GPIOPortE_Handler 00000282
 
 Symbol: GPIOPortE_Handler
+
+
+
+ARM Macro Assembler    Page 5 Alphabetic symbol ordering
+Relocatable symbols
+
    Definitions
       At line 458 in file startup.s
    Uses
@@ -1425,12 +1440,6 @@ Symbol: GPIOPortE_Handler
       At line 343 in file startup.s
 
 GPIOPortF_Handler 00000282
-
-
-
-
-ARM Macro Assembler    Page 5 Alphabetic symbol ordering
-Relocatable symbols
 
 Symbol: GPIOPortF_Handler
    Definitions
@@ -1484,6 +1493,12 @@ Symbol: GPIOPortL_Handler
       At line 162 in file startup.s
       At line 395 in file startup.s
 
+
+
+ARM Macro Assembler    Page 6 Alphabetic symbol ordering
+Relocatable symbols
+
+
 GPIOPortM_Handler 00000282
 
 Symbol: GPIOPortM_Handler
@@ -1491,12 +1506,6 @@ Symbol: GPIOPortM_Handler
       At line 541 in file startup.s
    Uses
       At line 217 in file startup.s
-
-
-
-ARM Macro Assembler    Page 6 Alphabetic symbol ordering
-Relocatable symbols
-
       At line 426 in file startup.s
 
 GPIOPortN_Handler 00000282
@@ -1548,6 +1557,12 @@ GPIOPortP5_Handler 00000282
 
 Symbol: GPIOPortP5_Handler
    Definitions
+
+
+
+ARM Macro Assembler    Page 7 Alphabetic symbol ordering
+Relocatable symbols
+
       At line 550 in file startup.s
    Uses
       At line 227 in file startup.s
@@ -1556,12 +1571,6 @@ Symbol: GPIOPortP5_Handler
 GPIOPortP6_Handler 00000282
 
 Symbol: GPIOPortP6_Handler
-
-
-
-ARM Macro Assembler    Page 7 Alphabetic symbol ordering
-Relocatable symbols
-
    Definitions
       At line 551 in file startup.s
    Uses
@@ -1613,6 +1622,12 @@ Symbol: GPIOPortQ3_Handler
       At line 233 in file startup.s
       At line 441 in file startup.s
 
+
+
+
+ARM Macro Assembler    Page 8 Alphabetic symbol ordering
+Relocatable symbols
+
 GPIOPortQ4_Handler 00000282
 
 Symbol: GPIOPortQ4_Handler
@@ -1621,12 +1636,6 @@ Symbol: GPIOPortQ4_Handler
    Uses
       At line 234 in file startup.s
       At line 442 in file startup.s
-
-
-
-ARM Macro Assembler    Page 8 Alphabetic symbol ordering
-Relocatable symbols
-
 
 GPIOPortQ5_Handler 00000282
 
@@ -1678,6 +1687,12 @@ GPIOPortS_Handler 00000282
 Symbol: GPIOPortS_Handler
    Definitions
       At line 562 in file startup.s
+
+
+
+ARM Macro Assembler    Page 9 Alphabetic symbol ordering
+Relocatable symbols
+
    Uses
       At line 239 in file startup.s
       At line 447 in file startup.s
@@ -1686,12 +1701,6 @@ HardFault_Handler 00000272
 
 Symbol: HardFault_Handler
    Definitions
-
-
-
-ARM Macro Assembler    Page 9 Alphabetic symbol ordering
-Relocatable symbols
-
       At line 299 in file startup.s
    Uses
       At line 93 in file startup.s
@@ -1744,18 +1753,18 @@ Symbol: I2C3_Handler
 
 I2C4_Handler 00000282
 
+
+
+ARM Macro Assembler    Page 10 Alphabetic symbol ordering
+Relocatable symbols
+
+
 Symbol: I2C4_Handler
    Definitions
       At line 539 in file startup.s
    Uses
       At line 215 in file startup.s
       At line 424 in file startup.s
-
-
-
-
-ARM Macro Assembler    Page 10 Alphabetic symbol ordering
-Relocatable symbols
 
 I2C5_Handler 00000282
 
@@ -1808,6 +1817,12 @@ Symbol: NMI_Handler
       At line 286 in file startup.s
    Uses
       At line 92 in file startup.s
+
+
+
+ARM Macro Assembler    Page 11 Alphabetic symbol ordering
+Relocatable symbols
+
       At line 287 in file startup.s
 
 PECI0_Handler 00000282
@@ -1816,12 +1831,6 @@ Symbol: PECI0_Handler
    Definitions
       At line 537 in file startup.s
    Uses
-
-
-
-ARM Macro Assembler    Page 11 Alphabetic symbol ordering
-Relocatable symbols
-
       At line 213 in file startup.s
       At line 422 in file startup.s
 
@@ -1873,6 +1882,12 @@ Symbol: PWM0Generator3_Handler
 PWM1Fault_Handler 00000282
 
 Symbol: PWM1Fault_Handler
+
+
+
+ARM Macro Assembler    Page 12 Alphabetic symbol ordering
+Relocatable symbols
+
    Definitions
       At line 567 in file startup.s
    Uses
@@ -1880,12 +1895,6 @@ Symbol: PWM1Fault_Handler
       At line 452 in file startup.s
 
 PWM1Generator0_Handler 00000282
-
-
-
-
-ARM Macro Assembler    Page 12 Alphabetic symbol ordering
-Relocatable symbols
 
 Symbol: PWM1Generator0_Handler
    Definitions
@@ -1939,6 +1948,12 @@ Symbol: Quadrature0_Handler
       At line 119 in file startup.s
       At line 352 in file startup.s
 
+
+
+ARM Macro Assembler    Page 13 Alphabetic symbol ordering
+Relocatable symbols
+
+
 Quadrature1_Handler 00000282
 
 Symbol: Quadrature1_Handler
@@ -1946,12 +1961,6 @@ Symbol: Quadrature1_Handler
       At line 492 in file startup.s
    Uses
       At line 144 in file startup.s
-
-
-
-ARM Macro Assembler    Page 13 Alphabetic symbol ordering
-Relocatable symbols
-
       At line 377 in file startup.s
 
 Quadrature2_Handler 00000282
@@ -2003,6 +2012,12 @@ SSI2_Handler 00000282
 Symbol: SSI2_Handler
    Definitions
       At line 511 in file startup.s
+
+
+
+ARM Macro Assembler    Page 14 Alphabetic symbol ordering
+Relocatable symbols
+
    Uses
       At line 163 in file startup.s
       At line 396 in file startup.s
@@ -2011,12 +2026,6 @@ SSI3_Handler 00000282
 
 Symbol: SSI3_Handler
    Definitions
-
-
-
-ARM Macro Assembler    Page 14 Alphabetic symbol ordering
-Relocatable symbols
-
       At line 512 in file startup.s
    Uses
       At line 164 in file startup.s
@@ -2069,18 +2078,18 @@ Symbol: Timer0B_Handler
 
 Timer1A_Handler 00000282
 
+
+
+ARM Macro Assembler    Page 15 Alphabetic symbol ordering
+Relocatable symbols
+
+
 Symbol: Timer1A_Handler
    Definitions
       At line 475 in file startup.s
    Uses
       At line 127 in file startup.s
       At line 360 in file startup.s
-
-
-
-
-ARM Macro Assembler    Page 15 Alphabetic symbol ordering
-Relocatable symbols
 
 Timer1B_Handler 00000282
 
@@ -2133,6 +2142,12 @@ Symbol: Timer4A_Handler
    Definitions
       At line 520 in file startup.s
    Uses
+
+
+
+ARM Macro Assembler    Page 16 Alphabetic symbol ordering
+Relocatable symbols
+
       At line 176 in file startup.s
       At line 405 in file startup.s
 
@@ -2141,12 +2156,6 @@ Timer4B_Handler 00000282
 Symbol: Timer4B_Handler
    Definitions
       At line 521 in file startup.s
-
-
-
-ARM Macro Assembler    Page 16 Alphabetic symbol ordering
-Relocatable symbols
-
    Uses
       At line 177 in file startup.s
       At line 406 in file startup.s
@@ -2198,6 +2207,12 @@ Symbol: UART2_Handler
 
 UART3_Handler 00000282
 
+
+
+
+ARM Macro Assembler    Page 17 Alphabetic symbol ordering
+Relocatable symbols
+
 Symbol: UART3_Handler
    Definitions
       At line 513 in file startup.s
@@ -2206,12 +2221,6 @@ Symbol: UART3_Handler
       At line 398 in file startup.s
 
 UART4_Handler 00000282
-
-
-
-ARM Macro Assembler    Page 17 Alphabetic symbol ordering
-Relocatable symbols
-
 
 Symbol: UART4_Handler
    Definitions
@@ -2263,6 +2272,12 @@ Symbol: UsageFault_Handler
       At line 315 in file startup.s
    Uses
       At line 96 in file startup.s
+
+
+
+ARM Macro Assembler    Page 18 Alphabetic symbol ordering
+Relocatable symbols
+
       At line 316 in file startup.s
 
 WDT_Handler 00000282
@@ -2271,12 +2286,6 @@ Symbol: WDT_Handler
    Definitions
       At line 472 in file startup.s
    Uses
-
-
-
-ARM Macro Assembler    Page 18 Alphabetic symbol ordering
-Relocatable symbols
-
       At line 124 in file startup.s
       At line 357 in file startup.s
 
@@ -2328,6 +2337,12 @@ Symbol: WideTimer2A_Handler
 WideTimer2B_Handler 00000282
 
 Symbol: WideTimer2B_Handler
+
+
+
+ARM Macro Assembler    Page 19 Alphabetic symbol ordering
+Relocatable symbols
+
    Definitions
       At line 529 in file startup.s
    Uses
@@ -2335,12 +2350,6 @@ Symbol: WideTimer2B_Handler
       At line 414 in file startup.s
 
 WideTimer3A_Handler 00000282
-
-
-
-
-ARM Macro Assembler    Page 19 Alphabetic symbol ordering
-Relocatable symbols
 
 Symbol: WideTimer3A_Handler
    Definitions
@@ -2394,6 +2403,12 @@ Symbol: WideTimer5B_Handler
       At line 211 in file startup.s
       At line 420 in file startup.s
 
+
+
+ARM Macro Assembler    Page 20 Alphabetic symbol ordering
+Relocatable symbols
+
+
 __Vectors 00000000
 
 Symbol: __Vectors
@@ -2401,12 +2416,6 @@ Symbol: __Vectors
       At line 89 in file startup.s
    Uses
       At line 88 in file startup.s
-
-
-
-ARM Macro Assembler    Page 20 Alphabetic symbol ordering
-Relocatable symbols
-
 Comment: __Vectors used once
 uDMA_Error 00000282
 
@@ -2426,7 +2435,7 @@ Symbol: uDMA_Handler
       At line 152 in file startup.s
       At line 385 in file startup.s
 
-127 symbols
+128 symbols
 
 
 
@@ -2539,4 +2548,4 @@ Symbol: __use_two_region_memory
       None
 Comment: __use_two_region_memory unused
 2 symbols
-481 symbols in table
+482 symbols in table

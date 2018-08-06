@@ -73,6 +73,7 @@
 #include "Random.h"
 #include "TExaS.h"
 
+// ******************* Funsction Prototypes *****************************
 void DisableInterrupts(void); // Disable interrupts
 void EnableInterrupts(void);  // Enable interrupts
 void Timer2_Init(unsigned long period);
@@ -82,13 +83,29 @@ void Delay100ms(unsigned long count); // time delay in 0.1 seconds
 void DAC_Init(void);
 void DAC_Out(unsigned long);
 void Sound_Play(const unsigned char*,unsigned long);
+void ADC0_Init(void);
+unsigned long ADC0_In(void);
+void SystickInit(void);
+void Buttons_Init(void);
+unsigned long Read_Buttons(void);
+void LEDs_Init(void);
+void LED1_On(void);
+void LED1_Off(void);
+void LED2_On(void);
+void LED2_Off(void);
+void Backlight_Init(void);
+void Backlight_On(void);
+void Backlight_Off(void);
 
+// ******************* Global Variables *****************************
 unsigned long timerCount;
 unsigned long semaphore;
 unsigned long soundIndex = 0;
 const unsigned char *Wave;
 unsigned long arrayCount = 0;
-
+unsigned char String[10]; // null-terminated ASCII String1
+unsigned long ADCdata;    // 12-bit 0 to 4095 sample
+int adc = 0;
 
 // *************************** Images ***************************
 // enemy ship that starts at the top of the screen (arms/mouth closed)
@@ -538,6 +555,16 @@ const unsigned char shoot[4080] = {
 #define PLAYERW     ((unsigned char)PlayerShip0[18])
 #define PLAYERH     ((unsigned char)PlayerShip0[22])
 
+// *************************** Structures**********
+struct State {
+  unsigned long x;      // x coordinate
+  unsigned long y;      // y coordinate
+  const unsigned char *image; // ptr->image
+  long life;            // 0=dead, 1=alive
+};          
+typedef struct State STyp;
+
+STyp Enemy[4];
 
 int main(void){
   TExaS_Init(SSI0_Real_Nokia5110_Scope);  // set system clock to 80 MHz
@@ -545,6 +572,12 @@ int main(void){
   Nokia5110_Init();
   Timer2_Init(7272);
   DAC_Init();
+  LEDs_Init();
+  ADC0_Init();
+  SystickInit();
+	Buttons_Init();
+  Backlight_Init();
+  EnableInterrupts();
   Nokia5110_ClearBuffer();
 	Nokia5110_DisplayBuffer();      // draw buffer
 
@@ -560,6 +593,8 @@ int main(void){
 
   Delay100ms(5);              // delay 5 sec at 50 MHz
   Sound_Play(shoot,4080);
+  //LED1_On();
+  Backlight_On();
 
 
   Nokia5110_Clear();
@@ -571,11 +606,89 @@ int main(void){
   Nokia5110_OutString("Sucka!");
   Nokia5110_SetCursor(2, 4);
   Nokia5110_OutUDec(1234);
-  while(1){
+  while(1)
+  {
+    while(semaphore==0)
+    {
+      //Draw();
+      switch(Read_Buttons())
+		  {
+			  case 0x00:
+				  LED1_Off();
+          LED2_Off();
+			  break;
+			  case 0x01:
+				  LED1_On();
+          LED2_Off();
+			  break;
+			  case 0x02:
+				  LED1_Off();
+          LED2_On();
+			  break;
+			  case 0x03:
+				  LED1_On();
+          LED2_On();
+			  break;
+			  default:
+				  LED1_Off();
+          LED2_Off();
+			  break;	
+		  }
+    }
+    semaphore = 0;
   }
 
 }
 
+//------------Animation Thread section(main thread)------------------------------------------------------------------
+void Init(void)
+{ 
+  int i;
+  for(i=0;i<4;i++)
+  {
+    Enemy[i].x = 20*i;
+    Enemy[i].y = 10;
+    Enemy[i].image = SmallEnemy30PointA;
+    Enemy[i].life = 1;
+  }
+}
+
+// **************Backlight_Init*********************
+// Initialize Backlight LED
+// Input: none
+// Output: none
+void Backlight_Init(void)
+{
+	volatile unsigned long delay;
+	SYSCTL_RCGC2_R |= 0x04;    			 //1. Activate clock for PortC
+	delay = SYSCTL_RCGC2_R;    			 // allow time for clock to stabilize
+	GPIO_PORTC_DIR_R |= 0x80;	 			 //2. Bits PC7 set as output
+	GPIO_PORTC_AFSEL_R |= 0x00; 			 //3. No alternate functions
+	GPIO_PORTC_DEN_R	|=	0x80;	 			 //4. Set digital enable on pins PB5-4 
+	GPIO_PORTC_PCTL_R |= 0x00000000;  //5. configure PB7-0 as GPIO
+	GPIO_PORTC_AMSEL_R &= ~0xFF;      //6. Disable analog function
+	
+}
+
+// **************Backlight_On*********************
+// Activate Backlight LED
+// Input: none
+// Output: none
+void Backlight_On(void)
+{
+		GPIO_PORTC_DATA_R |= 0x80;
+}
+
+// **************Backlight_Off*********************
+// Deactivate Backlight LED
+// Input: none
+// Output: none
+void Backlight_Off(void)
+{
+		GPIO_PORTC_DATA_R &= ~0x80;
+}
+
+//------------Sound Thread Section------------------------------------------------------------------
 
 // You can use this timer only if you learn how it works
 void Timer2_Init(unsigned long period)
@@ -606,16 +719,23 @@ void Timer2A_Start(void)
 
 void Timer2A_Stop(void)
 {
-  DAC_Out(0);
+  unsigned long currentData,mask;
+  currentData = GPIO_PORTB_DATA_R;
+  mask = currentData & 0xF0;
+  DAC_Out(mask);
   NVIC_DIS0_R = 1<<23; // disable IRQ 23 in NVIC
 }
 
 void Timer2A_Handler(void)
 { 
+  unsigned long currentData,mask;
   TIMER2_ICR_R = 0x00000001;   // acknowledge timer2A timeout
   if(arrayCount)
   {
-    DAC_Out(Wave[soundIndex]>>4);   //Sound.c data is 8 bits therefore use the top 4 bits
+    currentData = GPIO_PORTB_DATA_R;
+    mask = currentData & 0xF0;
+    mask = mask | Wave[soundIndex]>>4;
+    DAC_Out(mask);   //Sound.c data is 8 bits therefore use the top 4 bits
     soundIndex = soundIndex + 1;
     arrayCount = arrayCount - 1;
   }
@@ -623,19 +743,6 @@ void Timer2A_Handler(void)
   {
     Timer2A_Stop();
   }
-  /*
-  semaphore = 1; // trigger
-  if(semaphore==1)
-  {
-    DAC_Out(shoot[soundIndex]);
-  }
-  soundIndex++;
-  if(soundIndex>4080)
-  {
-    semaphore = 0;
-  }
-  timerCount++;
-  */
 }
 
 void Delay100ms(unsigned long count){unsigned long volatile time;
@@ -671,7 +778,7 @@ void DAC_Init(void)
 // Output: none
 void DAC_Out(unsigned long data)
 {
-		GPIO_PORTB_DATA_R = data;
+	GPIO_PORTB_DATA_R = data;
 }
 
 void Sound_Play(const unsigned char *pt, unsigned long count){
@@ -679,4 +786,148 @@ void Sound_Play(const unsigned char *pt, unsigned long count){
   soundIndex = 0;
   arrayCount = count;
   Timer2A_Start();
+}
+
+//------------Systick Thread Section------------------------------------------------------------------
+
+// This initialization function sets up the ADC 
+// Max sample rate: <=125,000 samples/second
+// SS3 triggering event: software trigger
+// SS3 1st sample source:  channel 1
+// SS3 interrupts: enabled but not promoted to controller
+void ADC0_Init(void){ 
+	volatile unsigned long delay;
+  SYSCTL_RCGC2_R |= 0x00000010;   // 1) activate clock for Port E
+  delay = SYSCTL_RCGC2_R;         //    allow time for clock to stabilize
+  GPIO_PORTE_DIR_R &= ~0x04;      // 2) make PE2 input
+  GPIO_PORTE_AFSEL_R |= 0x04;     // 3) enable alternate function on PE2
+  GPIO_PORTE_DEN_R &= ~0x04;      // 4) disable digital I/O on PE2
+  GPIO_PORTE_AMSEL_R |= 0x04;     // 5) enable analog function on PE2
+  SYSCTL_RCGC0_R |= 0x00010000;   // 6) activate ADC0 
+  delay = SYSCTL_RCGC2_R;         
+  SYSCTL_RCGC0_R &= ~0x00000300;  // 7) configure for 125K 
+  ADC0_SSPRI_R = 0x0123;          // 8) Sequencer 3 is highest priority
+  ADC0_ACTSS_R &= ~0x0008;        // 9) disable sample sequencer 3
+  ADC0_EMUX_R &= ~0xF000;         // 10) seq3 is software trigger
+  ADC0_SSMUX3_R = (ADC0_SSMUX3_R&0xFFFFFFF0)+1; // 11) channel Ain1 (PE2)
+  ADC0_SSCTL3_R = 0x0006;         // 12) no TS0 D0, yes IE0 END0
+  ADC0_ACTSS_R |= 0x0008;         // 13) enable sample sequencer 3
+}
+
+//------------ADC0_In------------
+// Busy-wait Analog to digital conversion
+// Input: none
+// Output: 12-bit result of ADC conversion
+unsigned long ADC0_In(void){  
+	unsigned long result;
+  ADC0_PSSI_R = 0x0008;            // 1) initiate SS3
+  while((ADC0_RIS_R&0x08)==0){};   // 2) wait for conversion done
+  result = ADC0_SSFIFO3_R&0xFFF;   // 3) read result
+  ADC0_ISC_R = 0x0008;             // 4) acknowledge completion
+  return result;
+}
+
+// **************SystickInit*********************
+// Initialize Systick periodic interrupts
+// Also calls DAC_Init() to initialize DAC
+// Input: none
+// Output: none
+void SystickInit(void)
+{
+  NVIC_ST_CTRL_R = 0;            // disable SysTick during setup
+  NVIC_ST_RELOAD_R = 0x0028B0AA; // set reload value to max as default, it will be recognfigured from inputs
+  NVIC_ST_CURRENT_R = 0;      	 // any write to current clears it
+  NVIC_SYS_PRI3_R = (NVIC_SYS_PRI3_R&0x00FFFFFF)|0x20000000; // priority 1      
+  NVIC_ST_CTRL_R = 0x0007;  // enable SysTick with core clock and interrupts
+}
+
+
+// Interrupt service routine
+// Executed every 12.5ns*(period)
+void SysTick_Handler(void)
+{
+  ADCdata = ADC0_In();
+  semaphore = 1; // trigger
+}
+
+//------------Switches and LED Thread Section------------------------------------------------------------------
+// **************Buttons_Init*********************
+// Initialize switch key inputs
+// Input: none
+// Output: none
+void Buttons_Init(void){ 
+  volatile unsigned long  delay;
+  SYSCTL_RCGC2_R |= SYSCTL_RCGC2_GPIOE;     // 1) activate clock for Port E
+  delay = SYSCTL_RCGC2_R;           // allow time for clock to start
+  //GPIO_PORTE_LOCK_R = 0x4C4F434B;   // 2) unlock GPIO Port E
+  //GPIO_PORTE_CR_R = 0x03;           // allow changes to PE1-0
+  // only PF0 needs to be unlocked, other bits can't be locked
+  GPIO_PORTE_AMSEL_R = 0x00;        // 3) disable analog on PE
+  GPIO_PORTE_PCTL_R = 0x00000000;   // 4) PCTL GPIO on PE7-0
+  GPIO_PORTE_DIR_R = 0x00;          // 5) PE7-0 in
+  GPIO_PORTE_AFSEL_R = 0x00;        // 6) disable alt funct on PE7-0
+  //GPIO_PORTA_PUR_R = 0x03;          // enable pull-up on PE1-0
+  GPIO_PORTE_DEN_R = 0x03;          // 7) enable digital I/O on PE1-0
+}
+
+// **************Read_Buttons*********************
+// Returns Buttons status
+// Input: none
+// Output: 0-3 depending on buttons pressed
+unsigned long Read_Buttons(void)
+{
+		return (GPIO_PORTE_DATA_R&0x03); // read the two keys
+}
+
+// **************LEDs_Init*********************
+// Initialize LED's
+// Input: none
+// Output: none
+void LEDs_Init(void)
+{
+	volatile unsigned long delay;
+	SYSCTL_RCGC2_R |= 0x02;    			 //1. Activate clock for PortB
+	delay = SYSCTL_RCGC2_R;    			 // allow time for clock to stabilize
+	GPIO_PORTB_DIR_R |= 0x30;	 			 //2. Bits PB5-4 set as output
+	GPIO_PORTB_AFSEL_R |= 0x00; 			 //3. No alternate functions
+	GPIO_PORTB_DEN_R	|=	0x30;	 			 //4. Set digital enable on pins PB5-4 
+	GPIO_PORTB_PCTL_R |= 0x00000000;  //5. configure PB7-0 as GPIO
+	GPIO_PORTB_AMSEL_R &= ~0xFF;      //6. Disable analog function
+	
+}
+
+// **************LED1_On*********************
+// Activate L1
+// Input: none
+// Output: none
+void LED1_On(void)
+{
+		GPIO_PORTB_DATA_R |= 0x10;
+}
+
+// **************LED2_On*********************
+// Activate L2
+// Input: none
+// Output: none
+void LED2_On(void)
+{
+		GPIO_PORTB_DATA_R |= 0x20;
+}
+
+// **************LED1_Off*********************
+// Dectivate L1
+// Input: none 
+// Output: none
+void LED1_Off(void)
+{
+		GPIO_PORTB_DATA_R &= ~0x10;
+}
+
+// **************LED2_Off*********************
+// Dectivate L2
+// Input: none 
+// Output: none
+void LED2_Off(void)
+{
+		GPIO_PORTB_DATA_R &= ~0x20;
 }
