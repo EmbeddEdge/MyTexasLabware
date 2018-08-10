@@ -76,6 +76,10 @@
 // ******************* Funsction Prototypes *****************************
 void DisableInterrupts(void); // Disable interrupts
 void EnableInterrupts(void);  // Enable interrupts
+void MainLoop1(void);
+void Init(void);
+void Move(void);
+void Draw(void);
 void Timer2_Init(unsigned long period);
 void Timer2A_Start(void);
 void Timer2A_Stop(void);
@@ -559,7 +563,7 @@ const unsigned char shoot[4080] = {
 struct State {
   unsigned long x;      // x coordinate
   unsigned long y;      // y coordinate
-  const unsigned char *image; // ptr->image
+  const unsigned char *image[2]; // ptr->image
   long life;            // 0=dead, 1=alive
 };          
 typedef struct State STyp;
@@ -567,6 +571,8 @@ typedef struct State STyp;
 STyp Enemy[4];
 
 int main(void){
+
+  int semaphoreWait = 0;
   TExaS_Init(SSI0_Real_Nokia5110_Scope);  // set system clock to 80 MHz
   Random_Init(1);
   Nokia5110_Init();
@@ -580,17 +586,19 @@ int main(void){
   EnableInterrupts();
   Nokia5110_ClearBuffer();
 	Nokia5110_DisplayBuffer();      // draw buffer
-
-  Nokia5110_PrintBMP(32, 47, PlayerShip0, 0); // player ship middle bottom
-  Nokia5110_PrintBMP(33, 47 - PLAYERH, Bunker0, 0);
-
-  Nokia5110_PrintBMP(0, ENEMY10H - 1, SmallEnemy10PointA, 0);
-  Nokia5110_PrintBMP(16, ENEMY10H - 1, SmallEnemy20PointA, 0);
-  Nokia5110_PrintBMP(32, ENEMY10H - 1, SmallEnemy20PointA, 0);
-  Nokia5110_PrintBMP(48, ENEMY10H - 1, SmallEnemy30PointA, 0);
-  Nokia5110_PrintBMP(64, ENEMY10H - 1, SmallEnemy30PointA, 0);
   Backlight_On();
-  Nokia5110_DisplayBuffer();     // draw buffer
+
+  
+  //Nokia5110_PrintBMP(32, 47, PlayerShip0, 0); // player ship middle bottom
+  //Nokia5110_PrintBMP(33, 47 - PLAYERH, Bunker0, 0);
+
+  //Nokia5110_PrintBMP(0, ENEMY10H - 1, SmallEnemy10PointA, 0);
+  //Nokia5110_PrintBMP(16, ENEMY10H - 1, SmallEnemy20PointA, 0);
+  //Nokia5110_PrintBMP(32, ENEMY10H - 1, SmallEnemy20PointA, 0);
+  //Nokia5110_PrintBMP(48, ENEMY10H - 1, SmallEnemy30PointA, 0);
+  //Nokia5110_PrintBMP(64, ENEMY10H - 1, SmallEnemy30PointA, 0);
+  //Backlight_On();
+  //Nokia5110_DisplayBuffer();     // draw buffer
 
   /*
   Delay100ms(5);              // delay 5 sec at 50 MHz
@@ -609,11 +617,37 @@ int main(void){
   Nokia5110_SetCursor(2, 4);
   Nokia5110_OutUDec(1234);
   */
+
+  Init();
+  Draw();
   while(1)
   {
+    
     while(semaphore==0)
+    {  
+      //Delay100ms(2);
+      //MainLoop1();
+    }
+    //increment semaphore counter
+    semaphoreWait++;
+    //condition for right counter value
+    if(semaphoreWait>7)
     {
-      //Draw();
+      //Run code on that value
+      Move();
+      Draw();
+      semaphoreWait = 0;
+    }
+    
+    semaphore = 0;
+  }
+
+}
+
+//------------Animation Thread section(main thread)------------------------------------------------------------------
+void MainLoop1(void)
+{
+        //Draw();
       switch(Read_Buttons())
 		  {
 			  case 0x00:
@@ -648,13 +682,8 @@ int main(void){
           LED2_Off();
 			  break;	
 		  }
-    }
-    semaphore = 0;
-  }
-
 }
 
-//------------Animation Thread section(main thread)------------------------------------------------------------------
 void Init(void)
 { 
   int i;
@@ -662,9 +691,41 @@ void Init(void)
   {
     Enemy[i].x = 20*i;
     Enemy[i].y = 10;
-    Enemy[i].image = SmallEnemy30PointA;
+    Enemy[i].image[0] = SmallEnemy30PointA;
+    Enemy[i].image[1] = SmallEnemy30PointB;
     Enemy[i].life = 1;
   }
+}
+
+void Move(void)
+{ 
+  int i;
+  for(i=0;i<4;i++)
+  {
+    if(Enemy[i].x < 72)
+    {
+      Enemy[i].x += 2;
+    }else
+    {
+      Enemy[i].life = 0;
+    }
+  }
+}
+
+unsigned long frameCount=0;
+void Draw(void)
+{
+  int i;
+  Nokia5110_ClearBuffer();
+  for(i=0;i<4;i++)
+  {
+    if(Enemy[i].life > 0)
+    {
+     Nokia5110_PrintBMP(Enemy[i].x, Enemy[i].y, Enemy[i].image[frameCount], 5);
+    }
+  }
+  Nokia5110_DisplayBuffer();      // draw buffer
+  frameCount = (frameCount+1)&0x01;
 }
 
 // **************Backlight_Init*********************
@@ -759,10 +820,14 @@ void Timer2A_Handler(void)
   }
 }
 
-void Delay100ms(unsigned long count){unsigned long volatile time;
-  while(count>0){
+void Delay100ms(unsigned long count)
+{
+  unsigned long volatile time;
+  while(count>0)
+  {
     time = 727240;  // 0.1sec at 80 MHz
-    while(time){
+    while(time)
+    {
 	  	time--;
     }
     count--;
@@ -849,7 +914,8 @@ unsigned long ADC0_In(void){
 void SystickInit(void)
 {
   NVIC_ST_CTRL_R = 0;            // disable SysTick during setup
-  NVIC_ST_RELOAD_R = 0x0028B0AA; // set reload value to max as default, it will be recognfigured from inputs
+  NVIC_ST_RELOAD_R = 0x09896800;
+  //NVIC_ST_RELOAD_R = 0x0028B0AA; // set reload value to 2666666, which makes the period = 0.033 which makes an approx 30Hz interrupt trigger
   NVIC_ST_CURRENT_R = 0;      	 // any write to current clears it
   NVIC_SYS_PRI3_R = (NVIC_SYS_PRI3_R&0x00FFFFFF)|0x20000000; // priority 1      
   NVIC_ST_CTRL_R = 0x0007;  // enable SysTick with core clock and interrupts
@@ -945,3 +1011,4 @@ void LED2_Off(void)
 {
 		GPIO_PORTB_DATA_R &= ~0x20;
 }
+
