@@ -77,9 +77,11 @@
 void DisableInterrupts(void); // Disable interrupts
 void EnableInterrupts(void);  // Enable interrupts
 void MainLoop1(void);
-void Init(void);
-void Move(void);
+void InitEnemies(void);
+void MoveLeft(void);
+void MoveRight(void);
 void Draw(void);
+int GetRandomNumber(void);
 void Timer2_Init(unsigned long period);
 void Timer2A_Start(void);
 void Timer2A_Stop(void);
@@ -573,6 +575,7 @@ STyp Enemy[4];
 int main(void){
 
   int semaphoreWait = 0;
+  int randomEnemies;
   TExaS_Init(SSI0_Real_Nokia5110_Scope);  // set system clock to 80 MHz
   Random_Init(1);
   Nokia5110_Init();
@@ -588,7 +591,18 @@ int main(void){
 	Nokia5110_DisplayBuffer();      // draw buffer
   Backlight_On();
 
-  
+  //Display the start screen
+  Nokia5110_Clear();
+  Nokia5110_SetCursor(3, 0);
+  Nokia5110_OutString("Space");
+  Nokia5110_SetCursor(1, 1);
+  Nokia5110_OutString("Invaders!!");
+  Nokia5110_SetCursor(1, 3);
+  Nokia5110_OutString("Press any");
+  Nokia5110_SetCursor(3, 4);
+  Nokia5110_OutString("button");
+  Nokia5110_SetCursor(2, 5);
+  Nokia5110_OutString("to start");
   //Nokia5110_PrintBMP(32, 47, PlayerShip0, 0); // player ship middle bottom
   //Nokia5110_PrintBMP(33, 47 - PLAYERH, Bunker0, 0);
 
@@ -618,8 +632,8 @@ int main(void){
   Nokia5110_OutUDec(1234);
   */
 
-  Init();
-  Draw();
+  InitEnemies();
+  //Draw();
   while(1)
   {
     
@@ -628,16 +642,21 @@ int main(void){
       //Delay100ms(2);
       //MainLoop1();
     }
+    //Get random number from button press
+    randomEnemies = GetRandomNumber();
+    Nokia5110_SetCursor(1, 2);
+    Nokia5110_OutUDec(randomEnemies);
+    
     //increment semaphore counter
-    semaphoreWait++;
+    //semaphoreWait++;
     //condition for right counter value
-    if(semaphoreWait>7)
-    {
+    //if(semaphoreWait>7)
+    //{
       //Run code on that value
-      Move();
-      Draw();
-      semaphoreWait = 0;
-    }
+      //MoveRight();
+      //Draw();
+      //semaphoreWait = 0;
+    //}
     
     semaphore = 0;
   }
@@ -684,7 +703,7 @@ void MainLoop1(void)
 		  }
 }
 
-void Init(void)
+void InitEnemies(void)
 { 
   int i;
   for(i=0;i<4;i++)
@@ -697,7 +716,22 @@ void Init(void)
   }
 }
 
-void Move(void)
+void MoveLeft(void)
+{ 
+  int i;
+  for(i=0;i<4;i++)
+  {
+    if(Enemy[i].x > 0)
+    {
+      Enemy[i].x -= 2;
+    }else
+    {
+      Enemy[i].life = 0;
+    }
+  }
+}
+
+void MoveRight(void)
 { 
   int i;
   for(i=0;i<4;i++)
@@ -712,9 +746,10 @@ void Move(void)
   }
 }
 
-unsigned long frameCount=0;
+
 void Draw(void)
 {
+  static unsigned long frameCount=0;
   int i;
   Nokia5110_ClearBuffer();
   for(i=0;i<4;i++)
@@ -726,6 +761,21 @@ void Draw(void)
   }
   Nokia5110_DisplayBuffer();      // draw buffer
   frameCount = (frameCount+1)&0x01;
+}
+
+int GetRandomNumber(void)
+{
+  int randomEnemyFormation = 0;
+  if(Read_Buttons() == 0x01 |Read_Buttons() == 0x02)
+    {
+      randomEnemyFormation = Random32()%5;
+      Nokia5110_Clear();
+      //Nokia5110_SetCursor(1, 2);
+      //Nokia5110_OutUDec(randomEnemyFormation);
+      //Delay100ms(5); 
+      //Draw();
+    }
+  return randomEnemyFormation;
 }
 
 // **************Backlight_Init*********************
