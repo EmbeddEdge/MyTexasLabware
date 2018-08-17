@@ -78,10 +78,13 @@ void DisableInterrupts(void); // Disable interrupts
 void EnableInterrupts(void);  // Enable interrupts
 void MainLoop1(void);
 void InitEnemies(void);
+void DrawArea(void);
+void DrawPlayer(void);
 void MoveLeft(void);
 void MoveRight(void);
-void Draw(void);
+void Draw(int);
 int GetRandomNumber(void);
+void UpdateFrame(int);
 void Timer2_Init(unsigned long period);
 void Timer2A_Start(void);
 void Timer2A_Stop(void);
@@ -112,6 +115,7 @@ unsigned long arrayCount = 0;
 unsigned char String[10]; // null-terminated ASCII String1
 unsigned long ADCdata;    // 12-bit 0 to 4095 sample
 int adc = 0;
+
 
 // *************************** Images ***************************
 // enemy ship that starts at the top of the screen (arms/mouth closed)
@@ -560,6 +564,18 @@ const unsigned char shoot[4080] = {
 #define MISSILEH    ((unsigned char)Missile0[22])
 #define PLAYERW     ((unsigned char)PlayerShip0[18])
 #define PLAYERH     ((unsigned char)PlayerShip0[22])
+#define START_SCREEN 0
+#define GAME_SCREEN  1
+
+// *************************** Enums****************
+/*
+enum Screen{
+  START,
+  RUN
+};
+*/
+
+// *************************************************
 
 // *************************** Structures**********
 struct State {
@@ -569,13 +585,20 @@ struct State {
   long life;            // 0=dead, 1=alive
 };          
 typedef struct State STyp;
+// *************************************************
 
+
+// **************** Structure Instances*************
 STyp Enemy[4];
+
+// *************************************************
+
+const unsigned char *EnemyTypes1[4] = {SmallEnemy10PointA,SmallEnemy20PointA, SmallEnemy30PointA,SmallEnemy20PointA};
+const unsigned char *EnemyTypes2[4] = {SmallEnemy10PointB,SmallEnemy20PointB, SmallEnemy30PointB,SmallEnemy20PointB};
 
 int main(void){
 
-  int semaphoreWait = 0;
-  int randomEnemies;
+  //int semaphoreWait = 0;
   TExaS_Init(SSI0_Real_Nokia5110_Scope);  // set system clock to 80 MHz
   Random_Init(1);
   Nokia5110_Init();
@@ -634,6 +657,8 @@ int main(void){
 
   InitEnemies();
   //Draw();
+	//enum Screen screen;
+	//screen = START;
   while(1)
   {
     
@@ -642,10 +667,9 @@ int main(void){
       //Delay100ms(2);
       //MainLoop1();
     }
-    //Get random number from button press
-    randomEnemies = GetRandomNumber();
-    Nokia5110_SetCursor(1, 2);
-    Nokia5110_OutUDec(randomEnemies);
+    //Update the Frame
+    UpdateFrame(semaphore);
+
     
     //increment semaphore counter
     //semaphoreWait++;
@@ -660,7 +684,6 @@ int main(void){
     
     semaphore = 0;
   }
-
 }
 
 //------------Animation Thread section(main thread)------------------------------------------------------------------
@@ -710,10 +733,22 @@ void InitEnemies(void)
   {
     Enemy[i].x = 20*i;
     Enemy[i].y = 10;
-    Enemy[i].image[0] = SmallEnemy30PointA;
-    Enemy[i].image[1] = SmallEnemy30PointB;
+    Enemy[i].image[0] = EnemyTypes1[i];
+    Enemy[i].image[1] = EnemyTypes2[i];
+    //Enemy[i].image[0] = SmallEnemy30PointA;
+    //Enemy[i].image[1] = SmallEnemy30PointB;
     Enemy[i].life = 1;
   }
+}
+
+void DrawArea(void)
+{
+  Nokia5110_PrintBMP(33, 47 - PLAYERH, Bunker0, 0);
+}
+
+void DrawPlayer(void)
+{
+  Nokia5110_PrintBMP(32, 47, PlayerShip0, 0); // player ship middle bottom
 }
 
 void MoveLeft(void)
@@ -747,18 +782,26 @@ void MoveRight(void)
 }
 
 
-void Draw(void)
+void Draw(int semaphoreWait)
 {
   static unsigned long frameCount=0;
+  static int semaphoreCount = 0;
   int i;
   Nokia5110_ClearBuffer();
-  for(i=0;i<4;i++)
+  semaphoreCount = semaphoreCount + semaphoreWait;
+  if(semaphoreCount == 5)
   {
-    if(Enemy[i].life > 0)
+    for(i=0;i<4;i++)
     {
-     Nokia5110_PrintBMP(Enemy[i].x, Enemy[i].y, Enemy[i].image[frameCount], 5);
+      if(Enemy[i].life > 0)
+      {
+        Nokia5110_PrintBMP(Enemy[i].x, Enemy[i].y, Enemy[i].image[frameCount], 5);
+      }
     }
+    semaphoreCount = 0;
   }
+  DrawArea();
+  DrawPlayer();
   Nokia5110_DisplayBuffer();      // draw buffer
   frameCount = (frameCount+1)&0x01;
 }
@@ -769,6 +812,7 @@ int GetRandomNumber(void)
   if(Read_Buttons() == 0x01 |Read_Buttons() == 0x02)
     {
       randomEnemyFormation = Random32()%5;
+      randomEnemyFormation++;
       Nokia5110_Clear();
       //Nokia5110_SetCursor(1, 2);
       //Nokia5110_OutUDec(randomEnemyFormation);
@@ -776,6 +820,31 @@ int GetRandomNumber(void)
       //Draw();
     }
   return randomEnemyFormation;
+}
+
+void UpdateFrame(int semaphoreTrigger)
+{
+  static int Screen = START_SCREEN;
+  int randomEnemies;
+  //Was the button pressed?
+  //Get random number from button if pressed
+  randomEnemies = GetRandomNumber();
+  if(Screen == START_SCREEN)
+  {
+    if(randomEnemies)
+    {
+      //Nokia5110_SetCursor(1, 2);
+      //Nokia5110_OutUDec(randomEnemies);
+      Draw(semaphoreTrigger);
+      Screen = GAME_SCREEN;
+    } 
+  }
+  else if(Screen == GAME_SCREEN)
+  {
+    Draw(semaphoreTrigger); 
+  }
+  
+  //
 }
 
 // **************Backlight_Init*********************
