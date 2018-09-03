@@ -56,7 +56,7 @@ int main(void){
       GPIO_PORTF_DATA_R = 0x08;  // LED is green
 		} 
 		else{                        // 0x10 means SW1 is not pressed
-      GPIO_PORTF_DATA_R = 0x0A;  // LED is yellow
+      GPIO_PORTF_DATA_R = 0x02;  // LED is red
     }
     Delay();                     // wait 0.1 sec
     GPIO_PORTF_DATA_R = 0x04;    // LED is blue
