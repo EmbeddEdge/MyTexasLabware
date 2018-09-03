@@ -54,8 +54,9 @@ int main(void){
 		In = GPIO_PORTF_DATA_R&0x10; // read PF4 into In
     if(In == 0x00){              // zero means SW1 is pressed
       GPIO_PORTF_DATA_R = 0x08;  // LED is green
-		} else{                      // 0x10 means SW1 is not pressed
-      GPIO_PORTF_DATA_R = 0x02;  // LED is red
+		} 
+		else{                        // 0x10 means SW1 is not pressed
+      GPIO_PORTF_DATA_R = 0x0A;  // LED is yellow
     }
     Delay();                     // wait 0.1 sec
     GPIO_PORTF_DATA_R = 0x04;    // LED is blue
@@ -69,7 +70,8 @@ int main(void){
 // Inputs: None
 // Outputs: None
 // Notes: These five pins are connected to hardware on the LaunchPad
-void PortF_Init(void){ volatile unsigned long delay;
+void PortF_Init(void){
+	volatile unsigned long delay;
   SYSCTL_RCGC2_R |= 0x00000020;     // 1) F clock
   delay = SYSCTL_RCGC2_R;           // delay   
   GPIO_PORTF_LOCK_R = 0x4C4F434B;   // 2) unlock PortF PF0  
@@ -95,7 +97,8 @@ void PortF_Init(void){ volatile unsigned long delay;
 // Inputs: None
 // Outputs: None
 // Notes: ...
-void Delay(void){unsigned long volatile time;
+void Delay(void){
+	unsigned long volatile time;
   time = 727240*200/91;  // 0.1sec
   while(time){
 		time--;
