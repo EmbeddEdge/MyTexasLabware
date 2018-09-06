@@ -27,10 +27,8 @@ int main (void) {
   printf("\nThis program calculates areas of rectangular rooms.\n");
   EnableInterrupts();  // the grader needs interrupts
   while(1) {
-    printf("\nGive length: "); 
-		scanf("%ld", &length);  // Get input
-    printf("\nGive width: ");  
-		scanf("%ld", &width);   // Get input
+    printf("\nGive length: "); scanf("%ld", &length);  // Get input
+    printf("\nGive width: ");  scanf("%ld", &width);   // Get input
     area = Calc_Area(length, width);
     printf("\nArea of the room = %ld\n",  area);
   }
@@ -44,20 +42,25 @@ int main (void) {
 //    the width is less than 3,  
 //    the length is greater than 20 or  
 //    the width is greater than 20. 
-unsigned long Calc_Area(unsigned long l, unsigned long w) {
+unsigned long Calc_Area(unsigned long l, unsigned long w) 
+{
   unsigned long result;
 
-// Put your Lab 5 code here
-  if(l >= 3 && l <= 20 ){
-		if(w >= 3 && w <= 20){
+	// Put your Lab 5 code here
+  if((l>=3) && (w>=3))
+	{
+		if((l<=20) && (w<=20))
+		{
 			result = l*w;
+			return(result);
 		}
-		else{
-			result = 0;
+		else
+		{
+			return 0;
 		}
 	}
-	else{
-		result = 0;
+	else
+	{
+		return 0;
 	}
-  return(result);
 }
