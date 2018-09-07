@@ -19,7 +19,36 @@ void DisableInterrupts(void); // Disable interrupts
 void EnableInterrupts(void);  // Enable interrupts
 
 // ***** 3. Subroutines Section *****
+void PortF_Init(void){
+	volatile unsigned long delay;
+  SYSCTL_RCGC2_R |= 0x00000020;     // 1) activate clock for Port F
+  delay = SYSCTL_RCGC2_R;           // allow time for clock to start
+  GPIO_PORTF_LOCK_R = 0x4C4F434B;   // 2) unlock GPIO Port F
+  GPIO_PORTF_CR_R = 0x1F;           // allow changes to PF4-0
+  // only PF0 needs to be unlocked, other bits can't be locked
+  GPIO_PORTF_AMSEL_R = 0x00;        // 3) disable analog on PF
+  GPIO_PORTF_PCTL_R = 0x00000000;   // 4) PCTL GPIO on PF4-0
+  GPIO_PORTF_DIR_R = 0x0E;          // 5) PF4,PF0 in, PF3-1 out
+  GPIO_PORTF_AFSEL_R = 0x00;        // 6) disable alt funct on PF7-0
+  GPIO_PORTF_PUR_R = 0x11;          // enable pull-up on PF0 and PF4
+  GPIO_PORTF_DEN_R = 0x1F;          // 7) enable digital I/O on PF4-0
+}
 
+// Initialize SysTick with busy wait running at bus clock.
+void SysTick_Init(void){
+  NVIC_ST_CTRL_R = 0;                   // disable SysTick during setup
+  NVIC_ST_RELOAD_R = 0x00FFFFFF;        // maximum reload value
+  NVIC_ST_CURRENT_R = 0;                // any write to current clears it             
+  NVIC_ST_CTRL_R = 0x00000005;          // enable SysTick with core clock
+}
+
+void Delay(void){
+	unsigned long volatile time;
+  time = 71993; // ~0.05sec Calculated using the data dump
+  while(time){
+   time--;
+  }
+}
 
 
 /* 
@@ -42,54 +71,47 @@ This means no adjacent elements in the array should be equal.
 */
 
 
-void PortF_Init(void){ volatile unsigned long delay;
-  SYSCTL_RCGC2_R |= 0x00000020;     // 1) activate clock for Port F
-  delay = SYSCTL_RCGC2_R;           // allow time for clock to start
-  GPIO_PORTF_LOCK_R = 0x4C4F434B;   // 2) unlock GPIO Port F
-  GPIO_PORTF_CR_R = 0x1F;           // allow changes to PF4-0
-  // only PF0 needs to be unlocked, other bits can't be locked
-  GPIO_PORTF_AMSEL_R = 0x00;        // 3) disable analog on PF
-  GPIO_PORTF_PCTL_R = 0x00000000;   // 4) PCTL GPIO on PF4-0
-  GPIO_PORTF_DIR_R = 0x0E;          // 5) PF4,PF0 in, PF3-1 out
-  GPIO_PORTF_AFSEL_R = 0x00;        // 6) disable alt funct on PF7-0
-  GPIO_PORTF_PUR_R = 0x11;          // enable pull-up on PF0 and PF4
-  GPIO_PORTF_DEN_R = 0x1F;          // 7) enable digital I/O on PF4-0
-}
 
-// Initialize SysTick with busy wait running at bus clock.
-void SysTick_Init(void){
-  NVIC_ST_CTRL_R = 0;                   // disable SysTick during setup
-  NVIC_ST_RELOAD_R = 0x00FFFFFF;        // maximum reload value
-  NVIC_ST_CURRENT_R = 0;                // any write to current clears it             
-  NVIC_ST_CTRL_R = 0x00000005;          // enable SysTick with core clock
-}
+
 unsigned long Led;
-void Delay(void){unsigned long volatile time;
-  time = 160000; // 0.1sec
-  while(time){
-   time--;
-  }
-}
+unsigned long SW1, SW2;
 // first data point is wrong, the other 49 will be correct
 unsigned long Time[50];
 // you must leave the Data array defined exactly as it is
 unsigned long Data[50];
-int main(void){  unsigned long i,last,now;
+
+int main(void){  
+	unsigned long i,last,now, dataNow, dataLast;
   TExaS_Init(SW_PIN_PF40, LED_PIN_PF1);  // activate grader and set system clock to 16 MHz
-  PortF_Init();   // initialize PF1 to output
-  SysTick_Init(); // initialize SysTick, runs at 16 MHz
-  i = 0;          // array index
+  PortF_Init();                          // initialize PF1 to output
+  SysTick_Init();                        // initialize SysTick, runs at 16 MHz
+  i = 0;                                 // array index
   last = NVIC_ST_CURRENT_R;
-  EnableInterrupts();           // enable interrupts for the grader
+	dataLast = GPIO_PORTF_DATA_R&0x13;     //Read previous I/O data
+  EnableInterrupts();                    // enable interrupts for the grader
+	
   while(1){
-    Led = GPIO_PORTF_DATA_R;   // read previous
-    Led = Led^0x02;            // toggle red LED
-    GPIO_PORTF_DATA_R = Led;   // output 
-    if(i<50){
+		SW1 = GPIO_PORTF_DATA_R&0x10;	       //Read Button SW1
+		SW2 = GPIO_PORTF_DATA_R&0x01;	       //Read Button SW2
+		
+		if(SW1 == 0x00 || SW2 ==0x00){
+			Led = 0x02;                        //Assign PF1 to Led
+			GPIO_PORTF_DATA_R ^= Led;					 //Toggle Red LED 
+		}
+		else{
+			Led = GPIO_PORTF_DATA_R&0x02;     // read previous
+			if(Led == 0x02){
+				GPIO_PORTF_DATA_R &= ~Led;      // Clear output LED
+			}
+		}
+		dataNow = GPIO_PORTF_DATA_R&0x13;   //Read current I/O data			
+    		
+    if(i<50 && dataNow != dataLast){
       now = NVIC_ST_CURRENT_R;
       Time[i] = (last-now)&0x00FFFFFF;  // 24-bit time difference
-      Data[i] = GPIO_PORTF_DATA_R&0x02; // record PF1
+      Data[i] = GPIO_PORTF_DATA_R&0x13; // record PF1, PF4 and PF0
       last = now;
+			dataLast = dataNow;
       i++;
     }
     Delay();
