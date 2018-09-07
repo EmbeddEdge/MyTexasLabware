@@ -11,12 +11,18 @@
 // ***** 1. Pre-processor Directives Section *****
 #include "TExaS.h"
 #include "tm4c123gh6pm.h"
+//#include "TExaSscope.h"
 
 // ***** 2. Global Declarations Section *****
+unsigned long In; // input from PE0
+unsigned long Out; // output to PE1 (External LED)
 
 // FUNCTION PROTOTYPES: Each subroutine defined
 void DisableInterrupts(void); // Disable interrupts
 void EnableInterrupts(void);  // Enable interrupts
+
+void PortE_Init(void);
+void Delay100ms(unsigned long);
 
 // ***** 3. Subroutines Section *****
 
@@ -29,12 +35,46 @@ int main(void){
 //**********************************************************************
 // The following version tests input on PE0 and output on PE1
 //**********************************************************************
+	unsigned long volatile delay;
   TExaS_Init(SW_PIN_PE0, LED_PIN_PE1, ScopeOn);  // activate grader and set system clock to 80 MHz
-  
-	
+	//TExaS_Scope();
+  // initialization goes here
+	PortE_Init();
   EnableInterrupts();           // enable interrupts for the grader
   while(1){
-    
+    Delay100ms(1);
+		In = GPIO_PORTE_DATA_R&0x01;
+		if(In == 0x01){
+			Out = 0x02;
+			GPIO_PORTE_DATA_R ^= Out;
+		}
+		else{
+			GPIO_PORTE_DATA_R = 0x02;
+		}
   }
   
+}
+
+void PortE_Init(void){
+	volatile unsigned long delay;
+	SYSCTL_RCGC2_R = SYSCTL_RCGC2_GPIOE;
+	delay = SYSCTL_RCGC2_R;
+	GPIO_PORTE_AMSEL_R = 0x00;			//Disable analog
+	GPIO_PORTE_PCTL_R = 0x00000000;	//Clear PCTL to configure PE0 and PE1 as GPIO
+	GPIO_PORTE_DIR_R = 0x02;				//Set PE0 as input and PE1 as output
+	GPIO_PORTE_AFSEL_R = 0x00;			//Disable altenative functions
+	GPIO_PORTE_DEN_R = 0x03;				//Digital I/O enable on PE0 and PE1
+	GPIO_PORTE_PUR_R = 0x00;				//No pullup resistor
+	GPIO_PORTE_DATA_R = 0x02;				//PE1 LED initially on
+}
+
+void Delay100ms(unsigned long time){
+  unsigned long i;
+  while(time > 0){
+    i = 1333333;  // this number means 100ms
+    while(i > 0){
+      i = i - 1;
+    }
+    time = time - 1; // decrements every 100 ms
+  }
 }
