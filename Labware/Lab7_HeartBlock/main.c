@@ -56,15 +56,15 @@ int main(void){
   PortF_Init();                            // Init port PF4 PF3 PF1    
   EnableInterrupts();                      // enable interrupts for the grader  
   while(1){          // Follows the nine steps list above
-    // a) Ready signal goes high
-    // b) wait for switch to be pressed
-    // c) Ready signal goes low
-    // d) wait 10ms
-    // e) wait for switch to be released
-    // f) wait 250ms
-    // g) VT signal goes high
-    // h) wait 250ms
-    // i) VT signal goes low
+    SetReady();			 // a) Ready signal goes high
+    WaitForASLow();  // b) wait for switch to be pressed
+    ClearReady();		 // c) Ready signal goes low
+    Delay1ms(10);    // d) wait 10ms
+    WaitForASHigh(); // e) wait for switch to be released
+    Delay1ms(250);   // f) wait 250ms
+    SetVT();				 // g) VT signal goes high
+    Delay1ms(250);      // h) wait 250ms
+    ClearVT();			 // i) VT signal goes low
   }
 }
 // Subroutine to initialize port F pins for input and output
@@ -100,6 +100,11 @@ void PortF_Init(void){ volatile unsigned long delay;
 // Outputs: None
 void WaitForASLow(void){
 // write this function
+	unsigned long SW1;
+	do{
+		SW1 = GPIO_PORTF_DATA_R&0x10; //read PF4 into SW1
+	}while(SW1==0x10);							//keep reading while the switch is high (not pressed)
+	return;
 }
 
 // Subroutine reads AS input and waits for signal to be high
@@ -109,6 +114,11 @@ void WaitForASLow(void){
 // Outputs: None
 void WaitForASHigh(void){
 // write this function
+	unsigned long SW1;
+	do{
+		SW1 = GPIO_PORTF_DATA_R&0x10; //read PF4 into SW1
+	}while(SW1==0x00);              //keep reading while the switch is low (pressed)
+	return;
 }
 
 // Subroutine sets VT high
@@ -117,6 +127,8 @@ void WaitForASHigh(void){
 // Notes:   friendly means it does not affect other bits in the port
 void SetVT(void){
 // write this function
+	unsigned long On = 0x02;
+	GPIO_PORTF_DATA_R |= On;
 }
 
 // Subroutine clears VT low
@@ -125,6 +137,8 @@ void SetVT(void){
 // Notes:   friendly means it does not affect other bits in the port
 void ClearVT(void){
 // write this function
+	unsigned long Off = 0x02;
+	GPIO_PORTF_DATA_R &= ~Off;
 }
 
 // Subroutine sets Ready high
@@ -133,6 +147,8 @@ void ClearVT(void){
 // Notes:   friendly means it does not affect other bits in the port
 void SetReady(void){
 // write this function
+	unsigned long On = 0x08;
+	GPIO_PORTF_DATA_R |= On;	
 }
 
 
@@ -142,6 +158,8 @@ void SetReady(void){
 // Notes:   friendly means it does not affect other bits in the port
 void ClearReady(void){
 // write this function
+	unsigned long Off = 0x08;
+	GPIO_PORTF_DATA_R &= ~Off;
 }
 
 // Subroutine to delay in units of milliseconds
@@ -150,6 +168,15 @@ void ClearReady(void){
 // Notes:   assumes 80 MHz clock
 void Delay1ms(unsigned long msec){
 // write this function
-
+	unsigned long count;
+  while(msec > 0){ // repeat while still halfsecs to delay
+    count = 15385;  //count down from 62 to get 1 millisec
+// originally count was 80000, which took 1.3 sec to complete an expected 250ms
+// later we change it to 80000*0.250/1.3 ~= 15385 that it takes 0.001 sec 
+    while (count > 0) { 
+      count--;
+    } // This while loop takes approximately 3 cycles
+    msec--;
+  }
 }
 
