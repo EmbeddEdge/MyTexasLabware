@@ -704,13 +704,13 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
-       692        632          0          0       1024        868   startup.o
-        70          6          0          0          0       1177   systick.o
-       484        102        660          8          0       4121   tabletrafficlight.o
+       692        632          0          0       1024        892   startup.o
+        70          6          0          0          0       1221   systick.o
+       484        102        660          8          0       4213   tabletrafficlight.o
       2896        354      14264         68        628      19306   texas.o
 
     ----------------------------------------------------------------------
-      4144       1094      14956         76       1656      25472   Object Totals
+      4144       1094      14956         76       1656      25632   Object Totals
          0          0         32          0          0          0   (incl. Generated)
          2          0          0          0          4          0   (incl. Padding)
 
@@ -759,8 +759,8 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-      4416       1110      14956         76       1756      24956   Grand Totals
-      4416       1110      14956         76       1756      24956   ELF Image Totals
+      4416       1110      14956         76       1756      25116   Grand Totals
+      4416       1110      14956         76       1756      25116   ELF Image Totals
       4416       1110      14956         76          0          0   ROM Totals
 
 ==============================================================================

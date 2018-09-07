@@ -219,6 +219,10 @@
           <Name>OS Support\TExaS Grader v2.1</Name>
           <WinId>35905</WinId>
         </Entry>
+        <Entry>
+          <Name>System Viewer\GPIOA</Name>
+          <WinId>35904</WinId>
+        </Entry>
       </SystemViewers>
     </TargetOption>
   </Target>
@@ -237,7 +241,7 @@
       <Focus>0</Focus>
       <ColumnNumber>0</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>267</TopLine>
+      <TopLine>271</TopLine>
       <CurrentLine>277</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\startup.s</PathWithFileName>
@@ -251,10 +255,10 @@
       <FileType>1</FileType>
       <tvExp>1</tvExp>
       <Focus>0</Focus>
-      <ColumnNumber>37</ColumnNumber>
+      <ColumnNumber>0</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>1</TopLine>
-      <CurrentLine>107</CurrentLine>
+      <TopLine>135</TopLine>
+      <CurrentLine>89</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\TableTrafficLight.c</PathWithFileName>
       <FilenameWithoutPath>TableTrafficLight.c</FilenameWithoutPath>
@@ -269,7 +273,7 @@
       <Focus>0</Focus>
       <ColumnNumber>0</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>23</TopLine>
+      <TopLine>1</TopLine>
       <CurrentLine>50</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\SysTick.c</PathWithFileName>
