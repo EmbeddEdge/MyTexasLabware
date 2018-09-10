@@ -100,12 +100,12 @@ int main(void)
   EnableInterrupts();
   while(1)
 	{
-   ROADLIGHTS = FSM[cState].trafficOut;  
-	 PEDESTRIANLIGHTS = FSM[cState].pedestrianOut;
-	 SysTick_Wait10ms(FSM[cState].Wait);
-	 Input = ROADSENSORS>>2;
-	 cState = FSM[cState].Next[Input]; 
-  }
+   	 	ROADLIGHTS = FSM[cState].trafficOut;  
+	 	PEDESTRIANLIGHTS = FSM[cState].pedestrianOut;
+	 	SysTick_Wait10ms(FSM[cState].Wait);
+	 	Input = ROADSENSORS>>2;
+	 	cState = FSM[cState].Next[Input];
+	} 
 }
 
 void PortB_Init(void)
