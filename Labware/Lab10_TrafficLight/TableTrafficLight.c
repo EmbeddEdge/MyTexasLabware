@@ -89,7 +89,7 @@ void PortA_Init(void);				// Configure and enable PortA for Cars and pedestrians
 
 int main(void)
 { 
-  TExaS_Init(SW_PIN_PA432, LED_PIN_PB543210,ScopeOff); // activate grader and set system clock to 80 MHz
+	TExaS_Init(SW_PIN_PA432, LED_PIN_PB543210,ScopeOff); // activate grader and set system clock to 80 MHz
 	SysTick_Init();   // Program 10.2
 	PortB_Init();
 	PortF_Init();
@@ -97,10 +97,10 @@ int main(void)
 	
 	cState = 0;
   
-  EnableInterrupts();
-  while(1)
+	EnableInterrupts();
+	while(1)
 	{
-   	 	ROADLIGHTS = FSM[cState].trafficOut;  
+   		ROADLIGHTS = FSM[cState].trafficOut;  
 	 	PEDESTRIANLIGHTS = FSM[cState].pedestrianOut;
 	 	SysTick_Wait10ms(FSM[cState].Wait);
 	 	Input = ROADSENSORS>>2;
