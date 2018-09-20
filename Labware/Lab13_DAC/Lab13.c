@@ -42,18 +42,19 @@ int main(void)
 				//HB_Toggle(Green);
 				//EnableInterrupts();
 				Sound_Tone(C0);       //523.3Hz
+				//Sound_Tone(C);
 			break;
 			case 0x02:
 				//HB_Toggle(Yellow);
 				//EnableInterrupts();
-				Sound_Tone(A);				
-				//Sound_Tone(D);				//587.3Hz
+				//Sound_Tone(A);				
+				Sound_Tone(D);				//587.3Hz
 			break;
 			case 0x04:
 				//HB_Toggle(SkyBlue);
 				//EnableInterrupts();
-				Sound_Tone(F);				
-				//Sound_Tone(E);				//659.3Hz
+				//Sound_Tone(F);				
+				Sound_Tone(E);				//659.3Hz
 			break;
 			case 0x08:
 				//HB_Toggle(White);

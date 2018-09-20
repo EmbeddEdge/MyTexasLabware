@@ -39,6 +39,49 @@ struct State
 };
 typedef const struct State Stype;
 
+//optional task
+enum sensor
+{
+	None,
+	West,
+	South,
+	WestandSouth,
+	WalkGo,
+	WalkandWest,
+	WalkandSouth,
+	All,
+};
+
+enum roadLights
+{
+	goWest    = 0x0C,
+	waitWest  = 0x14,
+	goSouth   = 0x21,
+	waitSouth = 0x22,
+	stopBoth  = 0x24,
+};
+
+enum pedLights
+{
+	walkman  = 0x08,
+	stopman  = 0x02,
+	offman   = 0x00,
+};
+/*
+enum lights
+{
+	None,
+	WestGreen,
+	WestYellow,
+	WestandSouth,
+	Walk,
+	WalkandWest,
+	WalkandSouth,
+	All,
+};
+*/
+//unsigned long GreenLight[] = {0x24};
+
 //States
 #define GoWest    0
 #define WaitWest  1
@@ -47,7 +90,7 @@ typedef const struct State Stype;
 #define StopAllW  4
 #define StopAllS  5
 #define StopAllP  6
-#define Walk  		7
+#define Walk  	  7
 #define HurryOff1 8
 #define HurryR1   9
 #define HurryOff2 10
@@ -58,25 +101,27 @@ typedef const struct State Stype;
 
 Stype FSM[15]=
 {
-	{0x0C,0x02,60,{GoWest,GoWest,WaitWest,WaitWest,WaitWest,WaitWest,WaitWest,WaitWest}}, 										//1.  Initial State: GoWest
-	{0x14,0x02,50,{StopAllW,StopAllW,StopAllW,StopAllW,StopAllW,StopAllW,StopAllW,StopAllW}}, 								//2.  WaitWest
-	{0x21,0x02,60,{GoSouth,WaitSouth,GoSouth,WaitSouth,WaitSouth,WaitSouth,WaitSouth,WaitSouth}}, 						//3.  GoSouth
-	{0x22,0x02,50,{StopAllS,StopAllS,StopAllS,StopAllS,StopAllS,StopAllS,StopAllS,StopAllS}}, 								//4.  WaitSouth
-	{0x24,0x02,50,{GoSouth,GoWest,GoSouth,GoSouth,Walk,Walk,GoSouth,GoSouth}}, 															  //5.  StopAllW
-	{0x24,0x02,50,{Walk,GoWest,GoSouth,GoWest,Walk,GoWest,Walk,Walk}}, 																		  	//6.  StopAllS
-	{0x24,0x02,50,{GoWest,GoWest,GoSouth,GoWest,Walk,GoWest,GoSouth,GoWest}}, 																//7.  StopAllP
-	{0x24,0x08,60,{HurryOff1,HurryOff1,HurryOff1,HurryOff1,Walk,HurryOff1,HurryOff1,HurryOff1}}, 				  		//8.  Walk
-	{0x24,0x00,40,{HurryR1,HurryR1,HurryR1,HurryR1,HurryR1,HurryR1,HurryR1,HurryR1}}, 												//9.  HurryOff1
+	{0x0C,0x02,60,{GoWest,GoWest,WaitWest,WaitWest,WaitWest,WaitWest,WaitWest,WaitWest}}, 							//1.  Initial State: GoWest
+	{0x14,0x02,50,{StopAllW,StopAllW,StopAllW,StopAllW,StopAllW,StopAllW,StopAllW,StopAllW}}, 						//2.  WaitWest
+	{0x21,0x02,60,{GoSouth,WaitSouth,GoSouth,WaitSouth,WaitSouth,WaitSouth,WaitSouth,WaitSouth}}, 					//3.  GoSouth
+	{0x22,0x02,50,{StopAllS,StopAllS,StopAllS,StopAllS,StopAllS,StopAllS,StopAllS,StopAllS}}, 						//4.  WaitSouth
+	{0x24,0x02,50,{GoSouth,GoWest,GoSouth,GoSouth,Walk,Walk,GoSouth,GoSouth}}, 										//5.  StopAllW
+	{0x24,0x02,50,{Walk,GoWest,GoSouth,GoWest,Walk,GoWest,Walk,Walk}}, 												//6.  StopAllS
+	{0x24,0x02,50,{GoWest,GoWest,GoSouth,GoWest,Walk,GoWest,GoSouth,GoWest}}, 										//7.  StopAllP
+	{0x24,0x08,60,{HurryOff1,HurryOff1,HurryOff1,HurryOff1,Walk,HurryOff1,HurryOff1,HurryOff1}}, 				  	//8.  Walk
+	{0x24,0x00,40,{HurryR1,HurryR1,HurryR1,HurryR1,HurryR1,HurryR1,HurryR1,HurryR1}}, 								//9.  HurryOff1
 	{0x24,0x02,40,{HurryOff2,HurryOff2,HurryOff2,HurryOff2,HurryOff2,HurryOff2,HurryOff2,HurryOff2}}, 				//10. HurryR1
-	{0x24,0x00,40,{HurryR2,HurryR2,HurryR2,HurryR2,HurryR2,HurryR2,HurryR2,HurryR2}}, 												//11. HurryOff2
+	{0x24,0x00,40,{HurryR2,HurryR2,HurryR2,HurryR2,HurryR2,HurryR2,HurryR2,HurryR2}}, 								//11. HurryOff2
 	{0x24,0x02,40,{HurryOff3,HurryOff3,HurryOff3,HurryOff3,HurryOff3,HurryOff3,HurryOff3,HurryOff3}}, 				//12. HurryR2
-	{0x24,0x00,40,{HurryR3,HurryR3,HurryR3,HurryR3,HurryR3,HurryR3,HurryR3,HurryR3}}, 												//13. HurryOff3
+	{0x24,0x00,40,{HurryR3,HurryR3,HurryR3,HurryR3,HurryR3,HurryR3,HurryR3,HurryR3}}, 								//13. HurryOff3
 	{0x24,0x02,40,{HurryOff4,HurryOff4,HurryOff4,HurryOff4,HurryOff4,HurryOff4,HurryOff4,HurryOff4}}, 				//14. HurryR3
 	{0x24,0x00,40,{StopAllP,StopAllP,StopAllP,StopAllP,StopAllP,StopAllP,StopAllP,StopAllP}},           			//15. HurryOff4
 };
 
 unsigned long cState;			//Index to the state
 unsigned long Input;
+//optional task
+unsigned long inputCode;
 
 // FUNCTION PROTOTYPES: Each subroutine defined
 void DisableInterrupts(void); // Disable interrupts
@@ -84,6 +129,8 @@ void EnableInterrupts(void);  // Enable interrupts
 void PortB_Init(void);				// Configure and enable PortB for Traffic Light output
 void PortF_Init(void);				// Configure and enable PortF for Pedestrian light output 
 void PortA_Init(void);				// Configure and enable PortA for Cars and pedestrians sensor input
+//optional task
+void ConfigureOutput(void);
 
 // ***** 3. Subroutines Section *****
 
@@ -98,13 +145,19 @@ int main(void)
 	cState = 0;
   
 	EnableInterrupts();
+
+	ROADLIGHTS = goWest;
+	PEDESTRIANLIGHTS = stopman;
 	while(1)
 	{
+		/*
    		ROADLIGHTS = FSM[cState].trafficOut;  
 	 	PEDESTRIANLIGHTS = FSM[cState].pedestrianOut;
 	 	SysTick_Wait10ms(FSM[cState].Wait);
 	 	Input = ROADSENSORS>>2;
 	 	cState = FSM[cState].Next[Input];
+		*/
+		ConfigureOutput();
 	} 
 }
 
@@ -160,7 +213,218 @@ void PortA_Init(void)
 	//GPIO_PORTA_PDR_R = 0x1C;					//7. Activate Pull-down resistors on PA2-4
 }
 
+void ConfigureOutput()
+{
+	unsigned long PEDESTRIANLIGHTSMASK = PEDESTRIANLIGHTS & 0x0A;
+	inputCode = ROADSENSORS>>2;
 
+	switch(inputCode) 
+	{
+		case None:
+			if(ROADLIGHTS==goSouth)
+			{
+				ROADLIGHTS = waitSouth;
+				PEDESTRIANLIGHTS = stopman;
+				SysTick_Wait10ms(40);
+				ROADLIGHTS = stopBoth;
+				PEDESTRIANLIGHTS = stopman;
+				SysTick_Wait10ms(50);
+				ROADLIGHTS = goWest;
+				PEDESTRIANLIGHTS = stopman;
+				SysTick_Wait10ms(60);
+			}
+			else if(PEDESTRIANLIGHTSMASK==walkman)
+			{
+				int i;
+				for(i=0;i<3;i++)
+				{
+					PEDESTRIANLIGHTS = stopman;
+					SysTick_Wait10ms(30);
+					PEDESTRIANLIGHTS = offman;
+					SysTick_Wait10ms(30);
+				}
+				PEDESTRIANLIGHTS = stopman;
+				SysTick_Wait10ms(60);
+				ROADLIGHTS = goWest;
+				SysTick_Wait10ms(60);
+			}
+			else
+			{
+				ROADLIGHTS = goWest;
+				PEDESTRIANLIGHTS = stopman;
+				SysTick_Wait10ms(60);
+			}
+		break; 
+		case West:
+			if(ROADLIGHTS!=goWest)
+			{
+				ROADLIGHTS = waitSouth;
+				PEDESTRIANLIGHTS = stopman;
+				SysTick_Wait10ms(40);
+				ROADLIGHTS = stopBoth;
+				PEDESTRIANLIGHTS = stopman;
+				SysTick_Wait10ms(50);
+				ROADLIGHTS = goWest;
+				PEDESTRIANLIGHTS = stopman;
+				SysTick_Wait10ms(60);
+			}
+			else
+			{
+				ROADLIGHTS = goWest;
+				PEDESTRIANLIGHTS = stopman;
+				SysTick_Wait10ms(60);
+			} 
+		break; /* optional */
+		case South:
+			if(ROADLIGHTS!=goSouth)
+			{
+				ROADLIGHTS = waitWest;
+				PEDESTRIANLIGHTS = stopman;
+				SysTick_Wait10ms(40);
+				ROADLIGHTS = stopBoth;
+				PEDESTRIANLIGHTS = stopman;
+				SysTick_Wait10ms(50);
+				ROADLIGHTS = goSouth;
+				PEDESTRIANLIGHTS = stopman;
+				SysTick_Wait10ms(60);
+			}
+			else
+			{
+				ROADLIGHTS = goSouth;
+				PEDESTRIANLIGHTS = stopman;
+				SysTick_Wait10ms(60);
+			} 
+		break; /* optional */
+		case WestandSouth:
+			if(ROADLIGHTS==goSouth)
+			{
+				ROADLIGHTS = waitWest;
+				PEDESTRIANLIGHTS = stopman;
+				SysTick_Wait10ms(40);
+				ROADLIGHTS = stopBoth;
+				PEDESTRIANLIGHTS = stopman;
+				SysTick_Wait10ms(50);
+				ROADLIGHTS = goWest;
+				PEDESTRIANLIGHTS = stopman;
+				SysTick_Wait10ms(60);
+			}
+			else
+			{
+				ROADLIGHTS = waitSouth;
+				PEDESTRIANLIGHTS = stopman;
+				SysTick_Wait10ms(40);
+				ROADLIGHTS = stopBoth;
+				PEDESTRIANLIGHTS = stopman;
+				SysTick_Wait10ms(50);
+				ROADLIGHTS = goSouth;
+				PEDESTRIANLIGHTS = stopman;
+				SysTick_Wait10ms(60);
+			} 
+		break; /* optional */
+		case WalkGo:
+			if(ROADLIGHTS==goSouth)
+			{
+				ROADLIGHTS = waitSouth;
+				PEDESTRIANLIGHTS = stopman;
+				SysTick_Wait10ms(40);
+				ROADLIGHTS = stopBoth;
+				PEDESTRIANLIGHTS = stopman;
+				SysTick_Wait10ms(50);
+				ROADLIGHTS = stopBoth;
+				PEDESTRIANLIGHTS = walkman;
+				SysTick_Wait10ms(60);
+			}
+			else if(ROADLIGHTS==goWest)
+			{
+				ROADLIGHTS = waitWest;
+				PEDESTRIANLIGHTS = stopman;
+				SysTick_Wait10ms(40);
+				ROADLIGHTS = stopBoth;
+				PEDESTRIANLIGHTS = stopman;
+				SysTick_Wait10ms(50);
+				ROADLIGHTS = stopBoth;
+				PEDESTRIANLIGHTS = walkman;
+				SysTick_Wait10ms(60);
+			}
+			else
+			{
+				ROADLIGHTS = stopBoth;
+				PEDESTRIANLIGHTS = walkman;
+				SysTick_Wait10ms(60);
+			} 
+		break; /* optional */
+		case WalkandWest:
+			if(ROADLIGHTS!=goWest)
+			{
+				ROADLIGHTS = waitSouth;
+				PEDESTRIANLIGHTS = stopman;
+				SysTick_Wait10ms(40);
+				ROADLIGHTS = stopBoth;
+				PEDESTRIANLIGHTS = stopman;
+				SysTick_Wait10ms(50);
+				ROADLIGHTS = goWest;
+				PEDESTRIANLIGHTS = walkman;
+				SysTick_Wait10ms(60);
+			}
+			//else if()
+			{
+				ROADLIGHTS = stopBoth;
+				PEDESTRIANLIGHTS = walkman;
+				SysTick_Wait10ms(60);
+			} 
+		break; /* optional */
+		case WalkandSouth:
+			if(ROADLIGHTS!=goSouth)
+			{
+				ROADLIGHTS = waitWest;
+				PEDESTRIANLIGHTS = stopman;
+				SysTick_Wait10ms(40);
+				ROADLIGHTS = stopBoth;
+				PEDESTRIANLIGHTS = stopman;
+				SysTick_Wait10ms(50);
+				ROADLIGHTS = stopBoth;
+				PEDESTRIANLIGHTS = walkman;
+				SysTick_Wait10ms(60);
+			}
+			else
+			{
+				ROADLIGHTS = stopBoth;
+				PEDESTRIANLIGHTS = walkman;
+				SysTick_Wait10ms(60);
+			} 
+		break; /* optional */
+		case All:
+			if(ROADLIGHTS==goSouth)
+			{
+				ROADLIGHTS = waitWest;
+				PEDESTRIANLIGHTS = stopman;
+				SysTick_Wait10ms(60);
+				ROADLIGHTS = stopBoth;
+				PEDESTRIANLIGHTS = walkman;
+				SysTick_Wait10ms(60);
+			}
+			else if(ROADLIGHTS==goWest)
+			{
+				ROADLIGHTS = waitWest;
+				PEDESTRIANLIGHTS = stopman;
+				SysTick_Wait10ms(60);
+				ROADLIGHTS = stopBoth;
+				PEDESTRIANLIGHTS = walkman;
+				SysTick_Wait10ms(60);
+			}
+			else
+			{
+				ROADLIGHTS = stopBoth;
+				PEDESTRIANLIGHTS = walkman;
+				SysTick_Wait10ms(60);
+			} 
+		break; /* optional */
+		/* you can have any number of case statements */
+   		default : /* Optional */
+   			//statement(s);
+		break;
+	}
+}
 
 
 

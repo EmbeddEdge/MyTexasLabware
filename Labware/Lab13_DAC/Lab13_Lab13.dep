@@ -1,12 +1,12 @@
 Dependencies for Project 'Lab13', Target 'Lab13': (DO NOT MODIFY !)
 F (.\startup.s)(0x5B147EED)(--cpu Cortex-M4 --pd "__EVAL SETA 1" -g --apcs=interwork -I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Luminary--list .\startup.lst --xref -o .\startup.o --depend .\startup.d)
-F (.\Lab13.c)(0x5B1D3BF5)(-c --cpu Cortex-M4 -D__EVAL -g -O0 --apcs=interwork --split_sections --signed_chars -I.. -I..\..\..-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Luminary-Drvmdk -DPART_LM4F120H5QR-o .\lab13.o --omf_browse .\lab13.crf --depend .\lab13.d)
+F (.\Lab13.c)(0x5BA2ABE0)(-c --cpu Cortex-M4 -D__EVAL -g -O0 --apcs=interwork --split_sections --signed_chars -I.. -I..\..\..-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Luminary-Drvmdk -DPART_LM4F120H5QR-o .\lab13.o --omf_browse .\lab13.crf --depend .\lab13.d)
 I (..//tm4c123gh6pm.h)(0x5B147EEF)
 I (Sound.h)(0x5B1AC3A9)
 I (Piano.h)(0x5B147EED)
 I (TExaS.h)(0x5B147EED)
 I (DAC.h)(0x5B1484D7)
-F (.\Sound.c)(0x5B1D38D6)(-c --cpu Cortex-M4 -D__EVAL -g -O0 --apcs=interwork --split_sections --signed_chars -I.. -I..\..\..-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Luminary-Drvmdk -DPART_LM4F120H5QR-o .\sound.o --omf_browse .\sound.crf --depend .\sound.d)
+F (.\Sound.c)(0x5B50FE54)(-c --cpu Cortex-M4 -D__EVAL -g -O0 --apcs=interwork --split_sections --signed_chars -I.. -I..\..\..-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Luminary-Drvmdk -DPART_LM4F120H5QR-o .\sound.o --omf_browse .\sound.crf --depend .\sound.d)
 I (Sound.h)(0x5B1AC3A9)
 I (DAC.h)(0x5B1484D7)
 I (..//tm4c123gh6pm.h)(0x5B147EEF)
