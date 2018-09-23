@@ -123,10 +123,10 @@ void SysTick_Init(unsigned long period)
 void SysTick_Handler(void)
 { 
 	HB_Toggle(Red);
-	HB_Toggle(Red);
-	ADCdata = ADC0_In();
+	HB_Toggle(Red);			//Toggle for debugging
+	ADCdata = ADC0_In();	//Read and convert the adc value to Distance in cm
 	Distance = Convert(ADCdata);
-	Flag = 1;
+	Flag = 1;					
 	HB_Toggle(Red);
 }
 
