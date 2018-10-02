@@ -3,9 +3,9 @@
 <title>Static Call Graph - [.\SpaceInvaders.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\SpaceInvaders.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5.03 [Build 76]: Last Updated: Thu Sep 27 22:44:31 2018
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5.03 [Build 76]: Last Updated: Tue Oct 02 23:46:19 2018
 <BR><P>
-<H3>Maximum Stack Usage =         92 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
+<H3>Maximum Stack Usage =        108 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
 __rt_entry_main &rArr; main &rArr; UpdateFrame &rArr; Draw &rArr; DrawLasers &rArr; Nokia5110_PrintBMP
 <P>
@@ -675,7 +675,7 @@ Global Symbols
 <P><STRONG><a name="[f4]"></a>__rt_entry_postsh_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, rtentry2.o(.ARM.Collect$$rtentry$$00000009))
 
 <P><STRONG><a name="[89]"></a>__rt_entry_main</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, rtentry2.o(.ARM.Collect$$rtentry$$0000000D))
-<BR><BR>[Stack]<UL><LI>Max Depth = 92 + Unknown Stack Size
+<BR><BR>[Stack]<UL><LI>Max Depth = 108 + Unknown Stack Size
 <LI>Call Chain = __rt_entry_main &rArr; main &rArr; UpdateFrame &rArr; Draw &rArr; DrawLasers &rArr; Nokia5110_PrintBMP
 </UL>
 <BR>[Calls]<UL><LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;exit
@@ -804,8 +804,8 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[93]"></a>CrashCheck</STRONG> (Thumb, 228 bytes, Stack size 16 bytes, spaceinvaders.o(i.CrashCheck))
-<BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = CrashCheck &rArr; Sound_Play
+<P><STRONG><a name="[93]"></a>CrashCheck</STRONG> (Thumb, 242 bytes, Stack size 40 bytes, spaceinvaders.o(i.CrashCheck))
+<BR><BR>[Stack]<UL><LI>Max Depth = 44<LI>Call Chain = CrashCheck &rArr; Sound_Play
 </UL>
 <BR>[Calls]<UL><LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Sound_Play
 </UL>
@@ -823,7 +823,7 @@ Global Symbols
 <LI><a href="#[24]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Timer2A_Handler
 </UL>
 
-<P><STRONG><a name="[95]"></a>Draw</STRONG> (Thumb, 40 bytes, Stack size 16 bytes, spaceinvaders.o(i.Draw))
+<P><STRONG><a name="[95]"></a>Draw</STRONG> (Thumb, 44 bytes, Stack size 16 bytes, spaceinvaders.o(i.Draw))
 <BR><BR>[Stack]<UL><LI>Max Depth = 68<LI>Call Chain = Draw &rArr; DrawLasers &rArr; Nokia5110_PrintBMP
 </UL>
 <BR>[Calls]<UL><LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DrawPlayer
@@ -837,8 +837,8 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UpdateFrame
 </UL>
 
-<P><STRONG><a name="[99]"></a>DrawArea</STRONG> (Thumb, 26 bytes, Stack size 8 bytes, spaceinvaders.o(i.DrawArea))
-<BR><BR>[Stack]<UL><LI>Max Depth = 44<LI>Call Chain = DrawArea &rArr; Nokia5110_PrintBMP
+<P><STRONG><a name="[99]"></a>DrawArea</STRONG> (Thumb, 64 bytes, Stack size 16 bytes, spaceinvaders.o(i.DrawArea))
+<BR><BR>[Stack]<UL><LI>Max Depth = 52<LI>Call Chain = DrawArea &rArr; Nokia5110_PrintBMP
 </UL>
 <BR>[Calls]<UL><LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Nokia5110_PrintBMP
 </UL>
@@ -887,7 +887,7 @@ Global Symbols
 <LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RandomInvaderShuffle
 </UL>
 
-<P><STRONG><a name="[b4]"></a>InitBunkerObjects</STRONG> (Thumb, 42 bytes, Stack size 0 bytes, spaceinvaders.o(i.InitBunkerObjects))
+<P><STRONG><a name="[b4]"></a>InitBunkerObjects</STRONG> (Thumb, 120 bytes, Stack size 0 bytes, spaceinvaders.o(i.InitBunkerObjects))
 <BR><BR>[Called By]<UL><LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Start_Screen
 </UL>
 
@@ -897,7 +897,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Start_Screen
 </UL>
 
-<P><STRONG><a name="[c3]"></a>InitLaser</STRONG> (Thumb, 170 bytes, Stack size 0 bytes, spaceinvaders.o(i.InitLaser))
+<P><STRONG><a name="[c3]"></a>InitLaser</STRONG> (Thumb, 174 bytes, Stack size 0 bytes, spaceinvaders.o(i.InitLaser))
 <BR><BR>[Called By]<UL><LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UpdateFrame
 </UL>
 
@@ -920,13 +920,13 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[c5]"></a>LifeCheck</STRONG> (Thumb, 88 bytes, Stack size 8 bytes, spaceinvaders.o(i.LifeCheck))
+<P><STRONG><a name="[c5]"></a>LifeCheck</STRONG> (Thumb, 92 bytes, Stack size 8 bytes, spaceinvaders.o(i.LifeCheck))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = LifeCheck
 </UL>
 <BR>[Called By]<UL><LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UpdateFrame
 </UL>
 
-<P><STRONG><a name="[c4]"></a>MoveLaser</STRONG> (Thumb, 130 bytes, Stack size 0 bytes, spaceinvaders.o(i.MoveLaser))
+<P><STRONG><a name="[c4]"></a>MoveLaser</STRONG> (Thumb, 124 bytes, Stack size 0 bytes, spaceinvaders.o(i.MoveLaser))
 <BR><BR>[Called By]<UL><LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UpdateFrame
 </UL>
 
@@ -1150,8 +1150,8 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TExaS_Init
 </UL>
 
-<P><STRONG><a name="[c0]"></a>UpdateFrame</STRONG> (Thumb, 264 bytes, Stack size 24 bytes, spaceinvaders.o(i.UpdateFrame))
-<BR><BR>[Stack]<UL><LI>Max Depth = 92 + Unknown Stack Size
+<P><STRONG><a name="[c0]"></a>UpdateFrame</STRONG> (Thumb, 322 bytes, Stack size 40 bytes, spaceinvaders.o(i.UpdateFrame))
+<BR><BR>[Stack]<UL><LI>Max Depth = 108 + Unknown Stack Size
 <LI>Call Chain = UpdateFrame &rArr; Draw &rArr; DrawLasers &rArr; Nokia5110_PrintBMP
 </UL>
 <BR>[Calls]<UL><LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Start_Screen
@@ -1176,7 +1176,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[8a]"></a>main</STRONG> (Thumb, 94 bytes, Stack size 0 bytes, spaceinvaders.o(i.main))
-<BR><BR>[Stack]<UL><LI>Max Depth = 92 + Unknown Stack Size
+<BR><BR>[Stack]<UL><LI>Max Depth = 108 + Unknown Stack Size
 <LI>Call Chain = main &rArr; UpdateFrame &rArr; Draw &rArr; DrawLasers &rArr; Nokia5110_PrintBMP
 </UL>
 <BR>[Calls]<UL><LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TExaS_Init
