@@ -72,6 +72,8 @@
 #include "Nokia5110.h"
 #include "Random.h"
 #include "TExaS.h"
+#include "stdio.h"
+#include "stdlib.h"
 
 // *************************** Images ***************************
 // enemy ship that starts at the top of the screen (arms/mouth closed)
@@ -367,10 +369,109 @@ const unsigned char titlescreennew[] ={
  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF,
-
 };
-
 // *************************** Sounds ***************************
+const unsigned char explosion[2000] = {
+  120, 119, 119, 119, 120, 120, 129, 130, 133, 129, 125, 119, 119, 119, 125, 128, 135, 137, 133, 123, 
+  109, 99, 91, 92, 101, 116, 135, 140, 143, 130, 123, 105, 96, 89, 92, 105, 115, 116, 120, 119, 
+  130, 133, 139, 149, 163, 171, 174, 173, 161, 143, 133, 115, 99, 79, 72, 75, 79, 82, 87, 103, 
+  125, 143, 139, 137, 137, 149, 163, 173, 168, 153, 133, 111, 105, 106, 109, 119, 137, 149, 140, 133, 
+  133, 143, 154, 168, 183, 187, 188, 184, 173, 163, 143, 113, 75, 39, 5, 0, 0, 3, 9, 19, 
+  46, 82, 105, 120, 135, 139, 144, 173, 195, 208, 211, 202, 191, 181, 181, 202, 236, 255, 255, 255, 
+  255, 255, 240, 212, 192, 171, 130, 85, 47, 36, 41, 37, 33, 43, 57, 51, 33, 3, 0, 0, 
+  0, 0, 5, 9, 24, 67, 120, 157, 177, 201, 222, 239, 250, 246, 236, 216, 192, 159, 101, 41, 
+  0, 0, 0, 0, 0, 0, 58, 103, 129, 161, 192, 218, 239, 242, 221, 184, 163, 157, 157, 159, 
+  163, 161, 129, 81, 37, 17, 7, 19, 41, 61, 89, 139, 178, 195, 205, 202, 184, 161, 153, 157, 
+  161, 181, 187, 177, 164, 149, 161, 197, 246, 255, 255, 255, 255, 255, 252, 226, 173, 105, 39, 0, 
+  0, 0, 19, 71, 101, 133, 168, 183, 174, 163, 139, 113, 99, 77, 47, 31, 36, 41, 39, 43, 
+  77, 125, 154, 149, 128, 95, 65, 57, 79, 99, 130, 161, 173, 192, 221, 246, 255, 235, 181, 115, 
+  48, 0, 0, 0, 19, 58, 115, 171, 216, 216, 177, 119, 67, 43, 39, 31, 24, 17, 12, 15, 
+  27, 79, 149, 226, 255, 255, 255, 255, 255, 255, 255, 240, 207, 157, 77, 3, 0, 0, 0, 0, 
+  0, 0, 41, 72, 79, 67, 67, 95, 115, 125, 128, 120, 125, 147, 188, 222, 255, 255, 255, 255, 
+  255, 255, 249, 255, 255, 255, 255, 255, 202, 140, 85, 29, 0, 0, 0, 0, 0, 46, 113, 129, 
+  113, 79, 41, 17, 27, 61, 79, 92, 103, 103, 106, 115, 125, 154, 212, 255, 255, 255, 255, 255, 
+  255, 222, 163, 115, 85, 96, 128, 163, 192, 207, 195, 143, 72, 0, 0, 0, 0, 0, 0, 0, 
+  0, 53, 135, 201, 255, 255, 255, 255, 255, 222, 183, 144, 106, 63, 0, 0, 0, 0, 0, 0, 
+  0, 29, 133, 192, 212, 207, 216, 245, 255, 255, 255, 249, 211, 205, 221, 250, 255, 255, 255, 255, 
+  212, 140, 106, 105, 135, 167, 195, 218, 216, 192, 164, 135, 115, 105, 96, 92, 95, 103, 109, 119, 
+  115, 85, 47, 15, 15, 47, 87, 115, 135, 149, 159, 188, 232, 255, 255, 255, 255, 255, 255, 255, 
+  255, 255, 183, 106, 55, 17, 27, 58, 87, 129, 174, 218, 239, 215, 161, 95, 31, 0, 0, 0, 
+  2, 17, 39, 87, 129, 147, 157, 168, 183, 188, 168, 115, 65, 31, 29, 33, 29, 36, 53, 61, 
+  65, 70, 85, 92, 82, 82, 75, 58, 41, 48, 58, 72, 103, 149, 192, 229, 239, 226, 201, 164, 
+  144, 143, 147, 137, 119, 103, 87, 85, 115, 161, 221, 255, 255, 246, 236, 218, 208, 183, 150, 128, 
+  111, 101, 92, 99, 116, 135, 144, 149, 157, 163, 164, 164, 167, 159, 154, 154, 163, 173, 183, 187, 
+  187, 191, 187, 177, 167, 161, 150, 137, 119, 106, 101, 99, 99, 96, 103, 105, 99, 92, 79, 70, 
+  70, 71, 75, 77, 77, 82, 101, 123, 137, 144, 154, 163, 174, 177, 173, 173, 161, 153, 137, 111, 
+  82, 53, 29, 22, 29, 37, 58, 87, 106, 119, 133, 149, 163, 173, 174, 164, 147, 137, 135, 133, 
+  135, 139, 135, 120, 95, 72, 65, 58, 65, 75, 85, 99, 119, 130, 140, 147, 143, 135, 137, 153, 
+  168, 168, 171, 161, 139, 123, 106, 113, 135, 171, 207, 235, 255, 255, 255, 255, 255, 221, 154, 77, 
+  17, 0, 3, 46, 79, 91, 103, 120, 128, 119, 113, 92, 70, 51, 31, 17, 7, 12, 27, 48, 
+  81, 130, 187, 212, 202, 171, 139, 113, 106, 116, 119, 129, 140, 140, 153, 171, 191, 195, 173, 130, 
+  92, 57, 23, 13, 22, 36, 58, 99, 143, 177, 183, 157, 119, 85, 71, 77, 89, 91, 79, 71, 
+  71, 79, 119, 171, 216, 255, 255, 249, 236, 225, 211, 202, 191, 173, 143, 82, 19, 0, 0, 0, 
+  0, 0, 0, 46, 72, 79, 67, 70, 95, 113, 123, 123, 120, 123, 144, 178, 205, 240, 255, 255, 
+  255, 255, 246, 236, 246, 255, 255, 255, 252, 205, 150, 101, 43, 0, 0, 0, 0, 0, 48, 109, 
+  123, 105, 71, 36, 15, 24, 58, 77, 95, 103, 101, 106, 113, 128, 154, 212, 255, 255, 255, 255, 
+  255, 255, 222, 163, 115, 85, 96, 128, 163, 192, 207, 195, 143, 72, 0, 0, 0, 0, 0, 0, 
+  0, 0, 53, 135, 201, 255, 255, 255, 255, 255, 222, 183, 144, 106, 63, 0, 0, 0, 0, 0, 
+  0, 0, 29, 133, 192, 212, 207, 216, 245, 255, 255, 255, 249, 211, 205, 221, 250, 255, 255, 255, 
+  255, 212, 140, 106, 105, 135, 167, 195, 218, 216, 192, 164, 135, 115, 105, 96, 92, 95, 103, 109, 
+  119, 115, 85, 43, 13, 12, 46, 85, 115, 133, 149, 161, 188, 236, 255, 255, 255, 255, 255, 255, 
+  255, 255, 255, 191, 106, 51, 13, 22, 51, 82, 125, 177, 226, 250, 225, 164, 96, 22, 0, 0, 
+  0, 0, 0, 24, 77, 125, 144, 157, 167, 183, 192, 168, 113, 53, 19, 17, 24, 19, 24, 47, 
+  57, 57, 57, 72, 81, 72, 70, 58, 33, 12, 19, 37, 57, 99, 159, 216, 255, 255, 249, 216, 
+  171, 149, 147, 147, 133, 103, 77, 55, 53, 92, 157, 240, 255, 255, 255, 255, 255, 255, 250, 208, 
+  173, 149, 123, 101, 101, 115, 135, 147, 150, 153, 149, 147, 144, 149, 140, 143, 143, 144, 140, 140, 
+  144, 140, 143, 143, 143, 143, 139, 140, 140, 140, 140, 137, 135, 137, 137, 137, 133, 130, 129, 130, 
+  129, 129, 128, 128, 125, 125, 125, 128, 128, 128, 120, 120, 119, 123, 119, 116, 120, 116, 119, 119, 
+  119, 115, 119, 116, 113, 115, 115, 115, 115, 113, 109, 106, 109, 113, 109, 109, 109, 109, 109, 109, 
+  109, 109, 109, 109, 113, 113, 111, 115, 116, 116, 115, 115, 113, 96, 77, 75, 75, 67, 71, 105, 
+  153, 183, 181, 154, 120, 87, 61, 48, 46, 48, 63, 87, 143, 212, 255, 255, 255, 255, 255, 235, 
+  143, 77, 58, 67, 92, 92, 75, 57, 37, 24, 17, 15, 9, 0, 0, 0, 0, 0, 0, 3, 
+  71, 159, 250, 255, 255, 255, 255, 240, 232, 229, 211, 171, 128, 95, 70, 55, 46, 43, 33, 3, 
+  0, 33, 81, 113, 111, 96, 77, 61, 53, 53, 57, 75, 96, 120, 149, 177, 212, 255, 255, 255, 
+  255, 255, 255, 255, 255, 183, 106, 43, 0, 0, 0, 0, 0, 0, 5, 67, 99, 105, 103, 96, 
+  89, 82, 77, 79, 77, 79, 82, 89, 92, 99, 103, 109, 111, 115, 115, 116, 101, 55, 24, 7, 
+  7, 24, 48, 75, 113, 147, 171, 202, 218, 236, 242, 255, 255, 255, 255, 255, 255, 255, 255, 250, 
+  109, 9, 0, 0, 0, 0, 0, 23, 96, 130, 120, 89, 53, 19, 3, 0, 0, 0, 0, 3, 
+  15, 24, 24, 0, 0, 9, 61, 109, 125, 120, 105, 101, 130, 178, 226, 245, 229, 198, 164, 139, 
+  116, 103, 99, 92, 95, 99, 96, 89, 61, 36, 22, 31, 87, 159, 207, 215, 202, 174, 168, 177, 
+  171, 154, 133, 129, 150, 154, 154, 157, 183, 218, 229, 225, 221, 225, 215, 178, 133, 89, 57, 29, 
+  15, 9, 12, 17, 24, 31, 41, 43, 29, 37, 51, 63, 92, 133, 154, 149, 147, 135, 125, 123, 
+  115, 113, 111, 109, 105, 106, 105, 89, 87, 115, 137, 149, 149, 144, 143, 137, 133, 129, 128, 125, 
+  125, 123, 128, 125, 128, 128, 128, 128, 130, 128, 128, 125, 125, 129, 129, 130, 133, 129, 128, 128, 
+  125, 125, 113, 113, 109, 115, 133, 143, 149, 144, 137, 135, 129, 120, 123, 113, 106, 113, 119, 119, 
+  123, 120, 120, 119, 115, 119, 116, 113, 103, 75, 58, 72, 113, 149, 164, 183, 188, 181, 163, 143, 
+  128, 116, 111, 103, 103, 103, 99, 103, 105, 105, 106, 106, 109, 109, 113, 111, 115, 116, 116, 116, 
+  119, 116, 120, 119, 119, 119, 119, 119, 119, 113, 85, 55, 29, 33, 70, 103, 125, 135, 140, 137, 
+  135, 135, 140, 171, 208, 236, 255, 255, 255, 255, 242, 202, 171, 129, 87, 71, 67, 55, 41, 48, 
+  77, 113, 120, 125, 139, 144, 135, 103, 71, 43, 24, 15, 5, 0, 0, 0, 0, 19, 37, 67, 
+  113, 174, 226, 245, 229, 211, 177, 149, 129, 111, 106, 95, 96, 99, 103, 109, 115, 119, 120, 99, 
+  71, 77, 89, 95, 101, 105, 137, 187, 240, 255, 245, 211, 184, 178, 174, 163, 153, 163, 197, 218, 
+  216, 216, 225, 225, 202, 159, 120, 95, 63, 48, 43, 39, 43, 48, 53, 61, 67, 71, 79, 85, 
+  89, 91, 92, 87, 61, 36, 19, 12, 19, 33, 71, 129, 168, 192, 198, 205, 232, 255, 255, 255, 
+  255, 255, 255, 222, 192, 171, 140, 92, 47, 17, 0, 0, 0, 0, 0, 0, 23, 63, 99, 111, 
+  109, 92, 75, 75, 103, 154, 192, 202, 188, 178, 171, 154, 163, 178, 198, 211, 184, 139, 81, 27, 
+  15, 12, 19, 53, 96, 143, 159, 154, 133, 115, 92, 67, 51, 46, 33, 23, 12, 13, 23, 39, 
+  91, 163, 226, 255, 255, 255, 255, 255, 255, 242, 205, 154, 125, 103, 95, 96, 123, 150, 161, 147, 
+  125, 109, 91, 85, 79, 79, 79, 85, 85, 91, 96, 101, 105, 109, 113, 115, 123, 120, 123, 128, 
+  130, 119, 96, 58, 36, 19, 23, 39, 63, 89, 119, 150, 174, 198, 222, 255, 255, 255, 255, 255, 
+  255, 255, 249, 168, 128, 111, 95, 101, 123, 150, 168, 154, 128, 95, 48, 2, 0, 0, 0, 0, 
+  0, 13, 57, 92, 130, 150, 149, 137, 130, 135, 120, 92, 72, 53, 41, 33, 36, 33, 22, 17, 
+  48, 91, 129, 144, 144, 149, 147, 147, 143, 140, 140, 139, 140, 143, 149, 149, 150, 153, 154, 157, 
+  157, 159, 161, 161, 161, 161, 161, 161, 157, 161, 157, 153, 153, 150, 149, 147, 144, 147, 140, 135, 
+  115, 79, 53, 31, 27, 37, 55, 77, 105, 133, 177, 232, 255, 255, 255, 255, 255, 255, 255, 212, 
+  154, 101, 65, 57, 81, 128, 174, 215, 235, 231, 197, 129, 58, 13, 0, 0, 0, 0, 0, 0, 
+  0, 0, 51, 135, 198, 249, 252, 229, 205, 188, 163, 128, 96, 70, 53, 46, 43, 46, 53, 61, 
+  57, 51, 57, 53, 51, 53, 57, 79, 125, 181, 221, 229, 225, 211, 211, 226, 255, 255, 255, 255, 
+  246, 208, 164, 130, 116, 125, 133, 133, 137, 150, 168, 168, 153, 135, 115, 105, 92, 87, 89, 89, 
+  95, 101, 103, 109, 113, 116, 115, 116, 125, 133, 133, 128, 115, 103, 111, 128, 139, 149, 150, 150, 
+  144, 144, 139, 143, 153, 163, 174, 184, 201, 202, 195, 178, 163, 150, 139, 120, 116, 113, 109, 101, 
+  103, 113, 129, 133, 133, 137, 139, 130, 119, 106, 92, 82, 65, 41, 39, 43, 57, 70, 65, 65, 
+  82, 111, 140, 168, 173, 163, 161, 159, 181, 188, 188, 191, 192, 187, 164, 137, 106, 91, 87, 87, 
+  81, 82, 103, 111, 101, 96, 95, 103, 123, 139, 140, 130, 115, 101, 106, 116, 128, 154, 195, 240, 
+  255, 255, 249, 242, 235, 211, 164, 119, 92, 65, 43, 17, 9, 5, 9, 9, 22, 41, 70, 96, 
+  116, 115, 105, 95, 81, 71, 71, 65, 63, 72, 85, 105, 144, 164, 187, 198, 208, 231, 252, 252};
 const unsigned char shoot[4080] = {
   129, 99, 103, 164, 214, 129, 31, 105, 204, 118, 55, 92, 140, 225, 152, 61, 84, 154, 184, 101, 
   75, 129, 209, 135, 47, 94, 125, 207, 166, 72, 79, 135, 195, 118, 68, 122, 205, 136, 64, 106, 
@@ -748,6 +849,9 @@ const unsigned char invaderkilled[3377] = {
   117, 124, 148, 150, 109, 112, 123, 151, 138, 96, 112, 124, 152, 142, 105, 112, 125, 154, 133, 102, 
   116, 126, 154, 145, 108, 111, 115, 141, 150, 110, 116, 122, 133, 158, 115, 111, 128};
 
+
+
+
 // *************************** Capture image dimensions out of BMP**********
 #define BUNKERW     ((unsigned char)Bunker0[18])
 #define BUNKERH     ((unsigned char)Bunker0[22])
@@ -780,6 +884,9 @@ const unsigned char invaderkilled[3377] = {
 #define OFFSET_COLLISION_LASER_Y    5
 #define OFFSET_COLLISION_LASER_X    2
 #define OFFSET_COLLISION_ENEMY_X    15
+#define OFFSET_COLLISION_ENEMY_Y    8
+#define OFFSET_COLLISION_PLAYER_X   16
+#define OFFSET_COLLISION_PLAYER_Y   5
 
 // *************************** Enums****************
 
@@ -797,8 +904,8 @@ enum FireRate{
 }LaserFire;
 
 enum ProjectileSpeed{
-  SLOW_MOVE   = 3,
-  MEDIUM_MOVE = 2,
+  SLOW_MOVE   = 4,
+  MEDIUM_MOVE = 3,
   FAST_MOVE   = 1
 }LaserSpeed;
 
@@ -832,12 +939,15 @@ typedef struct laserLimits LTyp;
 
 // **************** Structure Instances*************
 
-STyp Player;
-LTyp LaserParams;
+STyp Player[1];
+LTyp LaserParamsPlayer;
+LTyp LaserParamsEnemy;
 STyp ExplosionObject[4];
-STyp Enemy[MAX_ENEMIES];
 STyp Bunker[3];
-STyp LaserImage[MAX_LASERS];
+STyp LaserImageEnemy[10];
+STyp Enemy[MAX_ENEMIES];
+STyp LaserImagePlayer[MAX_LASERS];
+
 
 // *************************************************
 
@@ -851,6 +961,10 @@ unsigned char String[10]; // null-terminated ASCII String1
 unsigned long ADCdata;    // 12-bit 0 to 4095 sample
 int adc = 0;
 int playerLaserCount = 0;
+int enemyLaserCount = 0;
+int playerLaserIndex = 0;
+int enemyLaserIndex = 0;
+
 
 const unsigned char *EnemyTypes1[4] = {SmallEnemy10PointA,SmallEnemy20PointA, SmallEnemy30PointA,SmallEnemy20PointA};
 const unsigned char *EnemyTypes2[4] = {SmallEnemy10PointB,SmallEnemy20PointB, SmallEnemy30PointB,SmallEnemy20PointB};
@@ -864,24 +978,34 @@ void MainLoop1(void);
 void InitEnemies(int);
 void InitBunkerObjects(void);
 void InitPlayer(void);
-void InitLaser(int);
-int GetRandomNumber(int);
-int RandomInvaderShuffle(void);
+int InitPlayerLaser(int, STyp*, STyp*);
+void InitLaserEnemy(int, int);
+unsigned long GetRandomNumber(unsigned long);
+unsigned long RandomInvaderShuffle(void);
+unsigned long RandomInvaderFire(void);
+unsigned long FireEnemyLaser(int);
 void MoveLeft(void);
 void MoveRight(void);
 void InvaderShuffle(int);
-void FireWeapon(int);
 unsigned long AnimateEnemies(void);
 void MovePlayer(void);
-void MoveLaser(void);
+void MoveLaserUp(void);
+void MoveLaserDown(void);
 void DrawEnemies(unsigned long);
 void DrawExplosions(int);
 void DrawArea(int);
-void DrawPlayer(void);
+void DrawPlayer(int);
+void DrawLasers(void);
+void DrawEnemyLasers(void);
 enum ScreenType Start_Screen(int);
 enum ScreenType LifeCheck(void);
-void Draw(unsigned long, int, int);
-int CrashCheck(STyp*, STyp*, int, int, int, int, int);
+void PlayerLifeDisplay(void);
+void Draw(unsigned long, int, int, int, int);
+int CrashCheck(STyp*, STyp*, int, int, int, int, int, int);
+void CountLasers(int, int);
+void PlaySoundShoot(int);
+void PlaySoundInvaderKilled(int);
+void PlaySoundExplosion(int);
 void UpdateFrame(void);
 void Timer2_Init(unsigned long period);
 void Timer2A_Start(void);
@@ -909,7 +1033,7 @@ int main(void){
   DisplayMode = START;
   //int semaphoreWait = 0;
   TExaS_Init(SSI0_Real_Nokia5110_Scope);  // set system clock to 80 MHz
-  Random_Init(1);
+  //srand(time(NULL));
   Nokia5110_Init();
   Timer2_Init(7272);
   DAC_Init();
@@ -922,24 +1046,11 @@ int main(void){
   Nokia5110_ClearBuffer();
 	Nokia5110_DisplayBuffer();      // draw buffer
   Backlight_On();
+  //Random_Init(4);
+  
 
-  /*
-  Nokia5110_Clear();
-  Nokia5110_SetCursor(1, 1);
-  Nokia5110_OutString("GAME OVER");
-  Nokia5110_SetCursor(1, 2);
-  Nokia5110_OutString("Nice try,");
-  Nokia5110_SetCursor(1, 3);
-  Nokia5110_OutString("Sucka!");
-  Nokia5110_SetCursor(2, 4);
-  Nokia5110_OutUDec(1234);
-  */
-  //Draw();
-	//enum Screen screen;
-	//screen = START;
   while(1)
   {
-    
     while(semaphore==0)
     {  
       //Delay100ms(2);
@@ -1037,52 +1148,127 @@ void InitBunkerObjects(void)
 // Output: none
 void InitPlayer(void)
 { 
-  Player.x = 32;
-  Player.y = 47;
-  Player.image[0] = PlayerShip0;
-  Player.image[1] = PlayerShip0;
-  Player.life = 1;
+  Player[0].x = 32;
+  Player[0].y = 47;
+  Player[0].image[0] = PlayerShip0;
+  Player[0].image[1] = PlayerShip0;
+  Player[0].life = 2;
 }
 
-void InitLaser(int codeFromButton)
+// **************InitPlayerLaser*********************************
+// Initializes a laser object at the postion in front 
+// of the firing object
+// Input: The button code, the Laser object structure, 
+//        The firing object structure
+// Output: none
+int InitPlayerLaser(int codeFromButton, STyp *Projectile, STyp *FiringObject)
 {
   //static int laserCount = 0;
   static int semaphoreCount_IL = 0;
-  static int laserIndex = 0;
+  int SoundFlag = 0;
+  //static int playerLaserIndex = 0;
   
-  if(laserIndex>LaserParams.maxLasers-1)
+  if(playerLaserIndex>LaserParamsPlayer.maxLasers-1)
   {
-    laserIndex=0;
+    playerLaserIndex=0;
   }
-  if(codeFromButton == 1 && playerLaserCount<LaserParams.maxLasers && semaphoreCount_IL >= LaserParams.fireRate)            //Was the button pressed to fire and max amount of lasers not exceeded?
+  if(codeFromButton == 1 && playerLaserCount<LaserParamsPlayer.maxLasers && semaphoreCount_IL >= LaserParamsPlayer.fireRate)            //Was the button pressed to fire and max amount of lasers not exceeded?
   {
-    LaserImage[laserIndex].x = Player.x+8;
-    LaserImage[laserIndex].y = Player.y-8;
-    LaserImage[laserIndex].image[0] = Laser0;
-    LaserImage[laserIndex].image[1] = Laser1;
-    LaserImage[laserIndex].life = 1;
+    if(Projectile[playerLaserIndex].life==0)
+    {
+      Projectile[playerLaserIndex].x = FiringObject[0].x+8;
+      Projectile[playerLaserIndex].y = FiringObject[0].y-8;
+      Projectile[playerLaserIndex].image[0] = Laser0;
+      Projectile[playerLaserIndex].image[1] = Laser1;
+      Projectile[playerLaserIndex].life = 1;
+      SoundFlag = 1;
+      //Sound_Play(shoot,4080);           //Play a shooting sound
+      //LED2_On();                        //Trigger a shooting LED
+      playerLaserIndex++;
+      playerLaserCount++;                     //Increase the laser count so that when the button is pressed again a new object is created instead of overwriting
+      semaphoreCount_IL=0;
+    }
+  }
+  semaphoreCount_IL++;
+  return SoundFlag;
+}
+
+
+// **************InitLaserEnemy*********************************
+// Initializes a laser object at the postion in front 
+// of the firing object
+// Input: The flag for whether the laser should be fired 
+//        the index for which enemy will fire
+// Output: none
+void InitLaserEnemy(int laserFlag, int enemyIndex)
+{
+  //static int laserCount = 0;
+  static int semaphoreCount_IL = 0;
+  //static int enemyLaserIndex = 0;
+  
+  if(enemyLaserIndex>LaserParamsEnemy.maxLasers-1)
+  {
+    enemyLaserIndex=0;
+  }
+  if(laserFlag == 1 && enemyLaserCount<LaserParamsEnemy.maxLasers && semaphoreCount_IL >= 10)            //Was the button pressed to fire and max amount of lasers not exceeded?
+  {
+    LaserImageEnemy[enemyLaserIndex].x = Enemy[enemyIndex].x+7;
+    LaserImageEnemy[enemyLaserIndex].y = Enemy[enemyIndex].y+7;
+    LaserImageEnemy[enemyLaserIndex].image[0] = Laser0;
+    LaserImageEnemy[enemyLaserIndex].image[1] = Laser1;
+    LaserImageEnemy[enemyLaserIndex].life = 1;
     //Sound_Play(shoot,4080);           //Play a shooting sound
     //LED2_On();                        //Trigger a shooting LED
-    laserIndex++;
-    playerLaserCount++;                     //Increase the laser count so that when the button is pressed again a new object is created instead of overwriting
+    enemyLaserIndex++;
+    enemyLaserCount++;                     //Increase the laser count so that when the button is pressed again a new object is created instead of overwriting
     semaphoreCount_IL=0;
   }
   semaphoreCount_IL++;
 }
 
-int GetRandomNumber(int number)
+unsigned long GetRandomNumber(unsigned long number)
 {
-  int randomEnemyFormation = 0;
-  randomEnemyFormation = Random32()%number;
+  unsigned long randomEnemyFormation = 0;
+  randomEnemyFormation = rand()%number;
   return randomEnemyFormation;
 }
 
-int RandomInvaderShuffle(void)
+unsigned long RandomInvaderShuffle(void)
 {
-  int shuffleDirection;
-  shuffleDirection = GetRandomNumber(RANDOM_ENEMY_MOVES);
+  unsigned long shuffleDirection;
+  shuffleDirection = GetRandomNumber(RANDOM_ENEMY_MOVES); //Returns a number from 0 to parameter-1
 
   return shuffleDirection;
+}
+
+unsigned long RandomInvaderFire(void)
+{
+  unsigned long randomEnemyFire;
+  randomEnemyFire = GetRandomNumber(MAX_ENEMIES); //Returns a number from 0 to 3
+  if(Enemy[randomEnemyFire].life==0)
+  {
+    if(randomEnemyFire>0)
+    {
+      randomEnemyFire--;
+    }
+    else
+    {
+      randomEnemyFire++;
+    }
+  }
+  return randomEnemyFire;
+}
+
+unsigned long FireEnemyLaser(int enemyIndex)
+{
+  unsigned long fireFlag;
+  fireFlag = GetRandomNumber(2); //Returns a number from 0 to 1
+  if(Enemy[enemyIndex].life==0)
+  {
+    fireFlag=0;
+  }
+  return fireFlag;
+
 }
 
 void MoveLeft(void)
@@ -1157,54 +1343,6 @@ void InvaderShuffle(int shuffleDirection)
   }
 }
 
-// **************FireWeapon*********************************
-// Creates the laser object/s on the screen 
-// Input: none
-// Output: none
-void FireWeapon(int codeFromButton)
-{
-  static int laserCount = 0;
-  int laserNumber;
-  if(codeFromButton==1 & laserCount<MAX_LASERS)
-  {
-    //laserNumber = InitLaser(laserCount);
-    laserCount++;
-  }
-  
-  /*
-  static int semaphoreCount = 0;
-  static int laserCount = 0;
-  int i;
-  LaserParams.speed = 1;
-  LaserParams.fireRate = 2;
-  LaserParams.maxLasers = 3;
-  laserCount = InitLaser(laserCount);            //Create a laser object if button is pressed
-  for(i=0;i<LaserParams.maxLasers;i++)                     //For all laser objects
-  {
-    if(LaserImage[i].life==1)                   //Is the laser active?
-    {
-      if(semaphoreCount == LaserParams.speed)  //Is it time for laser to move?  
-      {
-        if(LaserImage[i].y == 9)                //Has the laser reached the end of the screen?
-        {
-          LaserImage[i].life=0;                 //Deactivate laser pbject
-          laserCount=0;                         //Reset the laser count                 
-        }
-        else
-        {
-          Nokia5110_PrintBMP(LaserImage[i].x, LaserImage[i].y, LaserImage[i].image[0], 0);
-        }
-        LaserImage[i].y = LaserImage[i].y-1;
-        semaphoreCount=0;
-        LED1_Off();
-      }
-      Nokia5110_PrintBMP(LaserImage[i].x, LaserImage[i].y, LaserImage[i].image[0], 0);
-      semaphoreCount++;
-    }
-  }
-  */
-}
-
 unsigned long AnimateEnemies(void)
 {
   static unsigned long frameCount=0;
@@ -1224,27 +1362,51 @@ unsigned long AnimateEnemies(void)
 
 void MovePlayer(void)
 {
-  Player.x = (float)ADCdata/62.04;
-  Player.x = (int)Player.x;
+  Player[0].x = (float)ADCdata/62.04;
+  Player[0].x = (int)Player[0].x;
 }
 
-void MoveLaser(void)
+void MoveLaserUp(void)
 {
   static int semaphoreCount = 0;
   int laserIndex;
 
-  if(semaphoreCount == LaserParams.speed)                        //Is it time for laser to move?
+  if(semaphoreCount == LaserParamsPlayer.speed)                        //Is it time for laser to move?
   {
-    for(laserIndex=0;laserIndex<LaserParams.maxLasers;laserIndex++)    //For all laser objects
+    for(laserIndex=0;laserIndex<LaserParamsPlayer.maxLasers;laserIndex++)    //For all laser objects
     {
-      if(LaserImage[laserIndex].life==1)                               //Is the laser active?
+      if(LaserImagePlayer[laserIndex].life==1)                               //Is the laser active?
       {
-        if(LaserImage[laserIndex].y == 9)                            //Has the laser reached the end of the screen?
+        if(LaserImagePlayer[laserIndex].y == 9)                            //Has the laser reached the end of the screen?
         {
-          LaserImage[laserIndex].life=0;                             //Deactivate laser pbject
+          LaserImagePlayer[laserIndex].life=0;                             //Deactivate laser pbject
           playerLaserCount--;
         }
-        LaserImage[laserIndex].y = LaserImage[laserIndex].y-1;
+        LaserImagePlayer[laserIndex].y = LaserImagePlayer[laserIndex].y-1;    //Move the laser up one bit
+      }
+    }
+    semaphoreCount=0;
+  }
+  semaphoreCount++;
+}
+
+void MoveLaserDown(void)
+{
+  static int semaphoreCount = 0;
+  int laserIndex;
+
+  if(semaphoreCount == LaserParamsEnemy.speed)                        //Is it time for laser to move?
+  {
+    for(laserIndex=0;laserIndex<LaserParamsEnemy.maxLasers;laserIndex++)    //For all laser objects
+    {
+      if(LaserImageEnemy[laserIndex].life==1)                               //Is the laser active?
+      {
+        if(LaserImageEnemy[laserIndex].y == 47)                            //Has the laser reached the end of the screen?
+        {
+          LaserImageEnemy[laserIndex].life=0;                             //Deactivate laser pbject
+          enemyLaserCount--;
+        }
+        LaserImageEnemy[laserIndex].y = LaserImageEnemy[laserIndex].y+1;    //Move the laser down one bit
       }
     }
     semaphoreCount=0;
@@ -1304,9 +1466,9 @@ void DrawArea(int drawBunkerDamage)
   }
 }
 
-void DrawPlayer(void)
+void DrawPlayer(int playerShot)
 {
-  Nokia5110_PrintBMP(Player.x, Player.y, Player.image[0], 0); // player ship according to ADC value
+  Nokia5110_PrintBMP(Player[0].x, Player[0].y, Player[0].image[0], 0); // player ship according to ADC value
 }
 
 void DrawLasers(void)
@@ -1314,14 +1476,26 @@ void DrawLasers(void)
   int laserIndex;
   for(laserIndex=0;laserIndex<MAX_LASERS;laserIndex++)
   {
-    if(LaserImage[laserIndex].life==1)
+    if(LaserImagePlayer[laserIndex].life==1)
     {
-      Nokia5110_PrintBMP(LaserImage[laserIndex].x, LaserImage[laserIndex].y, LaserImage[laserIndex].image[0], 0);
+      Nokia5110_PrintBMP(LaserImagePlayer[laserIndex].x, LaserImagePlayer[laserIndex].y, LaserImagePlayer[laserIndex].image[0], 0);
     }
   }
 }
 
-int CrashCheck(STyp *ProjectileObject, STyp *TargetObject, int pOffsetX, int pOffsetY, int tOffsetX, int maxFirstObject, int maxSecondObject)
+void DrawEnemyLasers(void)
+{
+  int laserIndex;
+  for(laserIndex=0;laserIndex<10;laserIndex++)
+  {
+    if(LaserImageEnemy[laserIndex].life==1)
+    {
+      Nokia5110_PrintBMP(LaserImageEnemy[laserIndex].x, LaserImageEnemy[laserIndex].y, LaserImageEnemy[laserIndex].image[0], 0);
+    }
+  }
+}
+
+int CrashCheck(STyp *ProjectileObject, STyp *TargetObject, int pOffsetX, int pOffsetY, int tOffsetX, int tOffsetY, int maxFirstObject, int maxSecondObject)
 {
   //Find the objects we want to compare for collisions
   int firstObjectIndex = 0;
@@ -1341,18 +1515,17 @@ int CrashCheck(STyp *ProjectileObject, STyp *TargetObject, int pOffsetX, int pOf
         {
           //Now check collision
           if(ProjectileObject[firstObjectIndex].y-pOffsetY < TargetObject[secondObjectIndex].y
+          && ProjectileObject[firstObjectIndex].y >= TargetObject[secondObjectIndex].y-tOffsetY
           && ProjectileObject[firstObjectIndex].x >= TargetObject[secondObjectIndex].x 
           && ProjectileObject[firstObjectIndex].x+pOffsetX <= TargetObject[secondObjectIndex].x+tOffsetX)
           {
             TargetObject[secondObjectIndex].life--;
             ProjectileObject[firstObjectIndex].life=0;
-            playerLaserCount--;
             ExplosionObject[0].life = 1;
             ExplosionObject[0].x = TargetObject[secondObjectIndex].x;
             ExplosionObject[0].y = TargetObject[secondObjectIndex].y;
             ExplosionObject[0].image[0] = SmallExplosion0;
             crashFlag = 1;
-            Sound_Play(invaderkilled,3377);
           }   
         }
       }
@@ -1361,16 +1534,54 @@ int CrashCheck(STyp *ProjectileObject, STyp *TargetObject, int pOffsetX, int pOf
   return crashFlag;
 }
 
+void CountLasers(int laserOrigin, int explodedLaser)
+{
+  if(laserOrigin==0 && explodedLaser==1)
+  {
+    playerLaserCount = playerLaserCount-explodedLaser;
+  }
+  else if(laserOrigin==1 && explodedLaser==1)
+  {
+    enemyLaserCount = enemyLaserCount-explodedLaser;
+  }
+}
+
+void PlaySoundShoot(int shotsFired)
+{
+  if(shotsFired)
+  {
+    Sound_Play(shoot,4080);
+  }
+}
+
+
+void PlaySoundInvaderKilled(int invaderKilled)
+{
+  if(invaderKilled)
+  {
+    Sound_Play(invaderkilled,3377);
+  }
+}
+
+void PlaySoundExplosion(int bunkerHit)
+{
+  if(bunkerHit)
+  {
+    Sound_Play(explosion,2000);
+  }
+}
+
 enum ScreenType Start_Screen(int codeFromButton)
 {
   int randomEnemiesFormation = 0;
   if(codeFromButton==1 | codeFromButton==2)
   {
-      randomEnemiesFormation = GetRandomNumber(RANDOM_FORMATIONS);
-      Nokia5110_Clear();
-      InitEnemies(randomEnemiesFormation);
-      InitBunkerObjects();
-      InitPlayer();
+    srand(NVIC_ST_CURRENT_R);
+    randomEnemiesFormation = GetRandomNumber(RANDOM_FORMATIONS);
+    Nokia5110_Clear();
+    InitEnemies(randomEnemiesFormation);
+    InitBunkerObjects();
+    InitPlayer();
     DisplayMode = ROUND1;
   }
   else
@@ -1396,7 +1607,7 @@ enum ScreenType LifeCheck(void)
   }
 
   //Check for player life
-  if(Player.life > 0)
+  if(Player[0].life > 0)
   {
     playerLife = 1;
   }
@@ -1416,21 +1627,42 @@ enum ScreenType LifeCheck(void)
   }
   else if(liveEnemyCount!=0 && playerLife==0)
   {
+    Sound_Play(explosion,2000);
     DisplayMode = LOSE;
   }
   return DisplayMode;
 }
 
-void Draw(unsigned long enemyFrame, int explosionDraw, int bunkerHit)
+void PlayerLifeDisplay(void)
+{
+  if(Player[0].life==2)
+  {
+    LED1_On();
+    LED2_On();
+  }
+  else if(Player[0].life==1)
+  {
+    LED1_Off();
+    LED2_On();
+  }
+  else
+  {
+    LED1_Off();
+    LED2_Off();
+  }
+}
+
+void Draw(unsigned long enemyFrame, int explosionDraw, int bunkerHit, int bunkerHit1, int playerShot)
 {
   Nokia5110_ClearBuffer();
   
   DrawEnemies(enemyFrame);
   DrawExplosions(explosionDraw);
   DrawArea(bunkerHit);
-  DrawPlayer();
-  DrawLasers();
-  //FireWeapon();//Fire weapon  
+  DrawArea(bunkerHit1);
+  DrawPlayer(playerShot);
+  DrawLasers();  
+  DrawEnemyLasers();
   Nokia5110_DisplayBuffer();      // draw buffer
 }
 
@@ -1461,28 +1693,59 @@ void UpdateFrame(void)
     break;
     case ROUND1:
     {
-      int buttonCode, shuffleDirection, areaDamage, explosion = 0;
+      int buttonCode, shuffleDirection, enemyIndexFire, enemyFireFlag, bunkerDamage, bunkerDamage1, enemyHit, shootSound, playerHit;
       unsigned long enemyFrame;
-      LaserParams.speed = SLOW_MOVE;
-      LaserParams.fireRate = SLOW_RATE;
-      LaserParams.maxLasers = 2;
-      //Pull in data 
+      //static int playerLaserIndex = 0;
+
+      //Settings for this round
+      LaserParamsEnemy.speed = SLOW_MOVE;
+      LaserParamsEnemy.fireRate = SLOW_RATE;
+      LaserParamsEnemy.maxLasers = 5;
+      LaserParamsPlayer.speed = SLOW_MOVE;
+      LaserParamsPlayer.fireRate = SLOW_RATE;
+      LaserParamsPlayer.maxLasers = 2;
+
+      //Input data and random numbers to work with
+      //Random_Init(3);
       buttonCode = Read_Buttons();
       shuffleDirection = RandomInvaderShuffle();
+      enemyIndexFire = RandomInvaderFire();            //Which enemy should fire?
+      enemyFireFlag  = FireEnemyLaser(enemyIndexFire);          //Should that chosen enemy fire?
       
-      //Set up positions
       //Create or dissipate Image Objects
+      //Move existing objects
       enemyFrame = AnimateEnemies();
       InvaderShuffle(shuffleDirection);
       MovePlayer();
-      InitLaser(buttonCode);
-      MoveLaser();
+      shootSound = InitPlayerLaser(buttonCode, LaserImagePlayer, Player);
+      //Fire enemy laser if active
+      InitLaserEnemy(enemyFireFlag, enemyIndexFire);
+      
+      //Move Lasers
+      MoveLaserUp();      //Player Laser
+      MoveLaserDown();    //Enemy Lasers
+
       //Collision Detection
-      explosion = CrashCheck(LaserImage, Enemy, OFFSET_COLLISION_LASER_X, OFFSET_COLLISION_LASER_Y, OFFSET_COLLISION_ENEMY_X, MAX_LASERS, MAX_ENEMIES);
-      areaDamage = CrashCheck(LaserImage, Bunker, OFFSET_COLLISION_LASER_X, OFFSET_COLLISION_LASER_Y, 19, MAX_LASERS, 3);
-      //RefreshArea();
+      enemyHit = CrashCheck(LaserImagePlayer, Enemy, OFFSET_COLLISION_LASER_X, OFFSET_COLLISION_LASER_Y, OFFSET_COLLISION_ENEMY_X, OFFSET_COLLISION_ENEMY_Y, MAX_LASERS, MAX_ENEMIES);
+      bunkerDamage = CrashCheck(LaserImagePlayer, Bunker, OFFSET_COLLISION_LASER_X, OFFSET_COLLISION_LASER_Y, 19, 5, MAX_LASERS, 3);
+      bunkerDamage1 = CrashCheck(LaserImageEnemy, Bunker, OFFSET_COLLISION_LASER_X, OFFSET_COLLISION_LASER_Y, 19, 5, MAX_LASERS, 3);
+      playerHit = CrashCheck(LaserImageEnemy, Player, OFFSET_COLLISION_LASER_X, OFFSET_COLLISION_LASER_Y, OFFSET_COLLISION_PLAYER_X, OFFSET_COLLISION_PLAYER_Y, MAX_LASERS, MAX_ENEMIES);
+
+      //Adjust the laser object numbers
+      CountLasers(0, enemyHit);
+      CountLasers(0, bunkerDamage);
+      CountLasers(1, playerHit);
+      CountLasers(1, bunkerDamage1);
+
+      PlaySoundShoot(shootSound);
+      PlaySoundInvaderKilled(enemyHit);
+      PlaySoundExplosion(bunkerDamage1);
+      
+      //LED Life
+      PlayerLifeDisplay();
+
       //Print Bitmaps
-      Draw(enemyFrame, explosion,areaDamage);
+      Draw(enemyFrame, enemyHit, bunkerDamage, bunkerDamage1,playerHit);
       DisplayMode = LifeCheck();
     }
     break;
