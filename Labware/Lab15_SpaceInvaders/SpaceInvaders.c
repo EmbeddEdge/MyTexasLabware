@@ -1608,10 +1608,10 @@ int CrashCheck(STyp *ProjectileObject, STyp *TargetObject,STyp *CollisionIndicat
         if(TargetObject[secondObjectIndex].life>0)
         {
           //Now check collision
-          if(ProjectileObject[firstObjectIndex].y-pOffsetY < TargetObject[secondObjectIndex].y
+          if(ProjectileObject[firstObjectIndex].y-pOffsetY <= TargetObject[secondObjectIndex].y
           && ProjectileObject[firstObjectIndex].y >= TargetObject[secondObjectIndex].y-tOffsetY
-          && ProjectileObject[firstObjectIndex].x >= TargetObject[secondObjectIndex].x 
-          && ProjectileObject[firstObjectIndex].x+pOffsetX <= TargetObject[secondObjectIndex].x+tOffsetX)
+          && ProjectileObject[firstObjectIndex].x+pOffsetX >= TargetObject[secondObjectIndex].x 
+          && ProjectileObject[firstObjectIndex].x <= TargetObject[secondObjectIndex].x+tOffsetX)
           {
             TargetObject[secondObjectIndex].life--;
             ProjectileObject[firstObjectIndex].life=0;
@@ -1789,7 +1789,8 @@ void UpdateFrame(void)
     break;
     case ROUND1:
     {
-      int buttonCode, shuffleDirection, enemyIndexFire, enemyFireFlag, bunkerDamage, bunkerDamage1, enemyHit, shootSound, playerHit;
+      int buttonCode, shuffleDirection, enemyIndexFire, enemyFireFlag, 
+          lasersCollide, bunkerDamage, bunkerDamage1, enemyHit, shootSound, playerHit;
       unsigned long enemyFrame;
       //static int playerLaserIndex = 0;
 
@@ -1822,16 +1823,23 @@ void UpdateFrame(void)
       MoveLaserDown();    //Enemy Lasers
 
       //Collision Detection
-      enemyHit = CrashCheck(LaserImagePlayer, Enemy, ExplosionObject, 1, OFFSET_COLLISION_LASER_X, OFFSET_COLLISION_LASER_Y, OFFSET_COLLISION_ENEMY_X, OFFSET_COLLISION_ENEMY_Y, MAX_LASERS, MAX_ENEMIES);
-      bunkerDamage = CrashCheck(LaserImagePlayer, Bunker, ExplosionObject, 0, OFFSET_COLLISION_LASER_X, OFFSET_COLLISION_LASER_Y, 19, 5, MAX_LASERS, 3);
-      bunkerDamage1 = CrashCheck(LaserImageEnemy, Bunker, ExplosionObject, 0, OFFSET_COLLISION_LASER_X, OFFSET_COLLISION_LASER_Y, 19, 3, MAX_LASERS, 3);
-      playerHit = CrashCheck(LaserImageEnemy, Player, ExplosionObject, 1, OFFSET_COLLISION_LASER_X, OFFSET_COLLISION_LASER_Y, OFFSET_COLLISION_PLAYER_X, OFFSET_COLLISION_PLAYER_Y, FULL_ENEMY_LASER_INDEX, MAX_ENEMIES);
+      enemyHit      = CrashCheck(LaserImagePlayer, Enemy, ExplosionObject, 1, OFFSET_COLLISION_LASER_X, OFFSET_COLLISION_LASER_Y,
+                                 OFFSET_COLLISION_ENEMY_X, OFFSET_COLLISION_ENEMY_Y, MAX_LASERS, MAX_ENEMIES);
+      bunkerDamage  = CrashCheck(LaserImagePlayer, Bunker, ExplosionObject, 0, OFFSET_COLLISION_LASER_X, 
+                                OFFSET_COLLISION_LASER_Y, 19, 5, MAX_LASERS, 3);
+      bunkerDamage1 = CrashCheck(LaserImageEnemy, Bunker, ExplosionObject, 0, OFFSET_COLLISION_LASER_X, OFFSET_COLLISION_LASER_Y, 19, 3, FULL_ENEMY_LASER_INDEX, 3);
+      playerHit     = CrashCheck(LaserImageEnemy, Player, ExplosionObject, 1, OFFSET_COLLISION_LASER_X, OFFSET_COLLISION_LASER_Y,
+                                 OFFSET_COLLISION_PLAYER_X, OFFSET_COLLISION_PLAYER_Y, FULL_ENEMY_LASER_INDEX, MAX_ENEMIES);
+      lasersCollide = CrashCheck(LaserImagePlayer, LaserImageEnemy, ExplosionObject, 0, OFFSET_COLLISION_LASER_X, OFFSET_COLLISION_LASER_Y, 
+                                 OFFSET_COLLISION_LASER_X, OFFSET_COLLISION_LASER_Y, MAX_LASERS, FULL_ENEMY_LASER_INDEX);
 
       //Adjust the laser object numbers
       CountLasers(0, enemyHit);
       CountLasers(0, bunkerDamage);
+      CountLasers(0, lasersCollide);
       CountLasers(1, playerHit);
       CountLasers(1, bunkerDamage1);
+      CountLasers(1, lasersCollide);
 
       PlaySoundShoot(shootSound);
       PlaySoundInvaderKilled(enemyHit);
