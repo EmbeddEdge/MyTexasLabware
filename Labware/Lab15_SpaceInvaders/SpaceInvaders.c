@@ -968,6 +968,7 @@ const unsigned char highpitch[1802] = {
 #define RANDOM_FORMATIONS   5
 #define RANDOM_ENEMY_MOVES  3
 #define MAX_LASERS          5
+#define FULL_ENEMY_LASER_INDEX  10
 #define MAX_FIRST_OBJECT    3
 #define MAX_SECOND_OBJECT   4
 #define MAX_ENEMIES         4
@@ -1034,7 +1035,7 @@ LTyp LaserParamsPlayer;
 LTyp LaserParamsEnemy;
 STyp ExplosionObject[4];
 STyp Bunker[3];
-STyp LaserImageEnemy[10];
+STyp LaserImageEnemy[FULL_ENEMY_LASER_INDEX];
 STyp Enemy[MAX_ENEMIES];
 STyp LaserImagePlayer[MAX_LASERS];
 
@@ -1091,7 +1092,7 @@ enum ScreenType Start_Screen(int);
 enum ScreenType LifeCheck(void);
 void PlayerLifeDisplay(void);
 void Draw(unsigned long, int, int, int, int);
-int CrashCheck(STyp*, STyp*, int, int, int, int, int, int);
+int CrashCheck(STyp*, STyp*, STyp*, int, int, int, int, int, int, int);
 void CountLasers(int, int);
 void PlaySoundShoot(int);
 void PlaySoundInvaderKilled(int);
@@ -1302,13 +1303,16 @@ void InitLaserEnemy(int laserFlag, int enemyIndex)
   }
   if(laserFlag == 1 && enemyLaserCount<LaserParamsEnemy.maxLasers && semaphoreCount_IL >= 10)            //Was the button pressed to fire and max amount of lasers not exceeded?
   {
+    while(LaserImageEnemy[enemyLaserIndex].life==1)
+    {
+      enemyLaserIndex++;
+    }
     LaserImageEnemy[enemyLaserIndex].x = Enemy[enemyIndex].x+7;
     LaserImageEnemy[enemyLaserIndex].y = Enemy[enemyIndex].y+7;
     LaserImageEnemy[enemyLaserIndex].image[0] = Laser0;
     LaserImageEnemy[enemyLaserIndex].image[1] = Laser1;
     LaserImageEnemy[enemyLaserIndex].life = 1;
-    //Sound_Play(shoot,4080);           //Play a shooting sound
-    //LED2_On();                        //Trigger a shooting LED
+
     enemyLaserIndex++;
     enemyLaserCount++;                     //Increase the laser count so that when the button is pressed again a new object is created instead of overwriting
     semaphoreCount_IL=0;
@@ -1487,7 +1491,7 @@ void MoveLaserDown(void)
 
   if(semaphoreCount == LaserParamsEnemy.speed)                        //Is it time for laser to move?
   {
-    for(laserIndex=0;laserIndex<LaserParamsEnemy.maxLasers;laserIndex++)    //For all laser objects
+    for(laserIndex=0;laserIndex<FULL_ENEMY_LASER_INDEX;laserIndex++)    //For all laser objects
     {
       if(LaserImageEnemy[laserIndex].life==1)                               //Is the laser active?
       {
@@ -1520,12 +1524,12 @@ void DrawEnemies(unsigned long enemyFrame)
 void DrawExplosions(int explosionDraw)
 {
   static int semaphoreCount = 0;
-  if(explosionDraw)
+  if(explosionDraw) //Initial draw when explosion occurs
   {
     Nokia5110_PrintBMP(ExplosionObject[0].x , ExplosionObject[0].y , ExplosionObject[0].image[0], 0);
     semaphoreCount++;
   }
-  if(semaphoreCount<10 && semaphoreCount!=0)
+  if(semaphoreCount<10 && semaphoreCount!=0) //Keep the draw for some time after impact
   {
     Nokia5110_PrintBMP(ExplosionObject[0].x , ExplosionObject[0].y , ExplosionObject[0].image[0], 0);
     semaphoreCount++;
@@ -1585,7 +1589,7 @@ void DrawEnemyLasers(void)
   }
 }
 
-int CrashCheck(STyp *ProjectileObject, STyp *TargetObject, int pOffsetX, int pOffsetY, int tOffsetX, int tOffsetY, int maxFirstObject, int maxSecondObject)
+int CrashCheck(STyp *ProjectileObject, STyp *TargetObject,STyp *CollisionIndicator, int collideFlag, int pOffsetX, int pOffsetY, int tOffsetX, int tOffsetY, int maxFirstObject, int maxSecondObject)
 {
   //Find the objects we want to compare for collisions
   int firstObjectIndex = 0;
@@ -1611,10 +1615,13 @@ int CrashCheck(STyp *ProjectileObject, STyp *TargetObject, int pOffsetX, int pOf
           {
             TargetObject[secondObjectIndex].life--;
             ProjectileObject[firstObjectIndex].life=0;
-            ExplosionObject[0].life = 1;
-            ExplosionObject[0].x = TargetObject[secondObjectIndex].x;
-            ExplosionObject[0].y = TargetObject[secondObjectIndex].y;
-            ExplosionObject[0].image[0] = SmallExplosion0;
+            if(collideFlag==1)
+            {
+              CollisionIndicator[0].life = 1;
+              CollisionIndicator[0].x = TargetObject[secondObjectIndex].x;
+              CollisionIndicator[0].y = TargetObject[secondObjectIndex].y;
+              CollisionIndicator[0].image[0] = SmallExplosion0;
+            }
             crashFlag = 1;
           }   
         }
@@ -1767,7 +1774,6 @@ void UpdateFrame(void)
   {
     case START:
     {
-      //static int Screen = START_SCREEN;
       int buttonCode;
 
       //Was the button pressed?
@@ -1816,10 +1822,10 @@ void UpdateFrame(void)
       MoveLaserDown();    //Enemy Lasers
 
       //Collision Detection
-      enemyHit = CrashCheck(LaserImagePlayer, Enemy, OFFSET_COLLISION_LASER_X, OFFSET_COLLISION_LASER_Y, OFFSET_COLLISION_ENEMY_X, OFFSET_COLLISION_ENEMY_Y, MAX_LASERS, MAX_ENEMIES);
-      bunkerDamage = CrashCheck(LaserImagePlayer, Bunker, OFFSET_COLLISION_LASER_X, OFFSET_COLLISION_LASER_Y, 19, 5, MAX_LASERS, 3);
-      bunkerDamage1 = CrashCheck(LaserImageEnemy, Bunker, OFFSET_COLLISION_LASER_X, OFFSET_COLLISION_LASER_Y, 19, 5, MAX_LASERS, 3);
-      playerHit = CrashCheck(LaserImageEnemy, Player, OFFSET_COLLISION_LASER_X, OFFSET_COLLISION_LASER_Y, OFFSET_COLLISION_PLAYER_X, OFFSET_COLLISION_PLAYER_Y, MAX_LASERS, MAX_ENEMIES);
+      enemyHit = CrashCheck(LaserImagePlayer, Enemy, ExplosionObject, 1, OFFSET_COLLISION_LASER_X, OFFSET_COLLISION_LASER_Y, OFFSET_COLLISION_ENEMY_X, OFFSET_COLLISION_ENEMY_Y, MAX_LASERS, MAX_ENEMIES);
+      bunkerDamage = CrashCheck(LaserImagePlayer, Bunker, ExplosionObject, 0, OFFSET_COLLISION_LASER_X, OFFSET_COLLISION_LASER_Y, 19, 5, MAX_LASERS, 3);
+      bunkerDamage1 = CrashCheck(LaserImageEnemy, Bunker, ExplosionObject, 0, OFFSET_COLLISION_LASER_X, OFFSET_COLLISION_LASER_Y, 19, 3, MAX_LASERS, 3);
+      playerHit = CrashCheck(LaserImageEnemy, Player, ExplosionObject, 1, OFFSET_COLLISION_LASER_X, OFFSET_COLLISION_LASER_Y, OFFSET_COLLISION_PLAYER_X, OFFSET_COLLISION_PLAYER_Y, FULL_ENEMY_LASER_INDEX, MAX_ENEMIES);
 
       //Adjust the laser object numbers
       CountLasers(0, enemyHit);
@@ -1854,6 +1860,8 @@ void UpdateFrame(void)
     break;
     case LOSE:
     {
+      int buttonCode;
+
       Nokia5110_Clear();
       Nokia5110_SetCursor(1, 1);
       Nokia5110_OutString("GAME OVER");
@@ -1863,6 +1871,14 @@ void UpdateFrame(void)
       Nokia5110_OutString("Sucka!");
       Nokia5110_SetCursor(2, 4);
       Nokia5110_OutUDec(1234);
+
+      buttonCode = Read_Buttons();
+
+      if(buttonCode==1 || buttonCode==2)
+      {
+        DisplayMode = START;
+      }
+      
     }
     break;
     default:
@@ -2101,7 +2117,17 @@ void Buttons_Init(void){
 // Output: 0-3 depending on buttons pressed
 unsigned long Read_Buttons(void)
 {
-		return (GPIO_PORTE_DATA_R&0x03); // read the two keys
+  static int semaphoreCount=0;
+  if(semaphoreCount>3)  //Delay for debounce
+  {
+    semaphoreCount=0;
+    return (GPIO_PORTE_DATA_R&0x03); // read the two keys
+  }
+  else
+  {
+    semaphoreCount++;
+    return 0; // read the two keys
+  }
 }
 
 // **************LEDs_Init*********************
