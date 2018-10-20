@@ -973,17 +973,21 @@ const unsigned char highpitch[1802] = {
 #define MAX_SECOND_OBJECT   4
 #define MAX_ENEMIES         4
 #define OFFSET_COLLISION_LASER_Y    5
-#define OFFSET_COLLISION_LASER_X    2
+#define OFFSET_COLLISION_LASER_X    1
 #define OFFSET_COLLISION_ENEMY_X    15
 #define OFFSET_COLLISION_ENEMY_Y    8
 #define OFFSET_COLLISION_PLAYER_X   16
-#define OFFSET_COLLISION_PLAYER_Y   5
+#define OFFSET_COLLISION_PLAYER_Y   3
 
 // *************************** Enums****************
 
 enum ScreenType{
   START,
   ROUND1,
+  TRANSITION_ROUND2,
+  ROUND2,
+  TRANSITION_ROUND3,
+  ROUND3,
   WIN,
   LOSE
 }DisplayMode;
@@ -1027,21 +1031,6 @@ struct laserLimits {
 typedef struct laserLimits LTyp;
 // *************************************************
 
-
-// **************** Structure Instances*************
-
-STyp Player[1];
-LTyp LaserParamsPlayer;
-LTyp LaserParamsEnemy;
-STyp ExplosionObject[4];
-STyp Bunker[3];
-STyp LaserImageEnemy[FULL_ENEMY_LASER_INDEX];
-STyp Enemy[MAX_ENEMIES];
-STyp LaserImagePlayer[MAX_LASERS];
-
-
-// *************************************************
-
 // **************** Global Variables***********************************************************************************
 unsigned long timerCount;
 unsigned long semaphore;
@@ -1060,6 +1049,20 @@ int enemyLaserIndex = 0;
 const unsigned char *EnemyTypes1[4] = {SmallEnemy10PointA,SmallEnemy20PointA, SmallEnemy30PointA,SmallEnemy20PointA};
 const unsigned char *EnemyTypes2[4] = {SmallEnemy10PointB,SmallEnemy20PointB, SmallEnemy30PointB,SmallEnemy20PointB};
 
+// **************** Structure Instances*************
+
+STyp Player[1];
+LTyp LaserParamsPlayer;
+LTyp LaserParamsEnemy;
+STyp ExplosionObject[4];
+STyp Bunker[3];
+STyp LaserImageEnemy[FULL_ENEMY_LASER_INDEX];
+STyp Enemy[MAX_ENEMIES];
+STyp LaserImagePlayer[MAX_LASERS];
+
+
+// *************************************************
+
 // ********************************************************************************************************************
 
 // ******************* Funsction Prototypes *****************************
@@ -1071,6 +1074,7 @@ void InitBunkerObjects(void);
 void InitPlayer(void);
 int InitPlayerLaser(int, STyp*, STyp*);
 void InitLaserEnemy(int, int);
+void ClearAllObjects(void);
 unsigned long GetRandomNumber(unsigned long);
 unsigned long RandomInvaderShuffle(void);
 unsigned long RandomInvaderFire(void);
@@ -1094,6 +1098,7 @@ void PlayerLifeDisplay(void);
 void Draw(unsigned long, int, int, int, int);
 int CrashCheck(STyp*, STyp*, STyp*, int, int, int, int, int, int, int);
 void CountLasers(int, int);
+void UpdateSettings(void);
 void PlaySoundShoot(int);
 void PlaySoundInvaderKilled(int);
 void PlaySoundExplosion(int);
@@ -1155,44 +1160,6 @@ int main(void){
 }
 
 //------------Animation Thread section(main thread)------------------------------------------------------------------
-void MainLoop1(void)
-{
-        //Draw();
-      switch(Read_Buttons())
-		  {
-			  case 0x00:
-				  LED1_Off();
-          LED2_Off();
-			  break;
-			  case 0x01:
-				  LED1_On();
-          LED2_Off();
-			  break;
-			  case 0x02:
-				  //LED1_Off();
-          //LED2_On();
-          Sound_Play(shoot,4080);
-        
-          Nokia5110_Clear();
-          Nokia5110_SetCursor(1, 1);
-          Nokia5110_OutString("GAME OVER");
-          Nokia5110_SetCursor(1, 2);
-          Nokia5110_OutString("Nice try,");
-          Nokia5110_SetCursor(1, 3);
-          Nokia5110_OutString("Sucka!");
-          Nokia5110_SetCursor(2, 4);
-          Nokia5110_OutUDec(1234);
-			  break;
-			  case 0x03:
-				  LED1_On();
-          LED2_On();
-			  break;
-			  default:
-				  LED1_Off();
-          LED2_Off();
-			  break;	
-		  }
-}
 
 // **************InitEnemies*********************************
 // Initializes four enemies in start position
@@ -1220,10 +1187,10 @@ void InitBunkerObjects(void)
   {
     Bunker[i].x = 32;
     Bunker[i].y = 47-PLAYERH;
-    Bunker[i].image[0] = Bunker0;
-    Bunker[i].image[1] = Bunker1;
-    Bunker[i].image[2] = Bunker2;
-    Bunker[i].image[3] = Bunker3;
+    Bunker[i].image[0] = Bunker3;
+    Bunker[i].image[1] = Bunker2;
+    Bunker[i].image[2] = Bunker1;
+    Bunker[i].image[3] = Bunker0;
     Bunker[i].life = 3;
     if(i>0)
     {
@@ -1318,6 +1285,31 @@ void InitLaserEnemy(int laserFlag, int enemyIndex)
     semaphoreCount_IL=0;
   }
   semaphoreCount_IL++;
+}
+
+void ClearAllObjects(void)
+{
+
+  //STyp Player[1];
+  //STyp ExplosionObject[4];
+  //STyp Bunker[3];
+  int i;
+  Player[0].life = 0;
+
+  for(i=0;i<FULL_ENEMY_LASER_INDEX;i++)
+  {
+    LaserImageEnemy[i].life = 0;
+  }
+
+  for(i=0;i<MAX_LASERS;i++)
+  {
+    LaserImagePlayer[i].life=0;
+  }
+
+  for(i=0;i<3;i++)
+  {
+    Bunker[i].life=0;
+  }
 }
 
 unsigned long GetRandomNumber(unsigned long number)
@@ -1542,22 +1534,18 @@ void DrawExplosions(int explosionDraw)
 
 void DrawArea(int drawBunkerDamage)
 {
-  //Start a counter to tally the bunker damage
-  static int damageCounter = 0;
+  int damageState = 0;
   //Check if the Bunker is active/live
   if(Bunker[0].life>0)
   {
-    if(drawBunkerDamage)  //If the bunker has been hit then increment the damage counter
-    {
-      damageCounter++;
-    }
-    //Nokia5110_PrintBMP(33, 47 - PLAYERH, Bunker0.image, 0);
-    Nokia5110_PrintBMP(Bunker[0].x, Bunker[0].y, Bunker[0].image[damageCounter], 0);
+    //Read the bunker life count
+    damageState = Bunker[0].life;
+    Nokia5110_PrintBMP(Bunker[0].x, Bunker[0].y, Bunker[0].image[damageState], 0);
   }
-  if(damageCounter>4)   //Reset the damage counter
-  {
-    damageCounter = 0;
-  }
+  //if(damageCounter>4)   //Reset the damage counter
+  //{
+    //damageCounter = 0;
+  //}
 }
 
 void DrawPlayer(int playerShot)
@@ -1643,6 +1631,28 @@ void CountLasers(int laserOrigin, int explodedLaser)
   }
 }
 
+void UpdateSettings(void)
+{
+  int i;
+  int enemyCount = 4;
+  LaserParamsEnemy.maxLasers = 5;
+  //Non-Condiitonal settings
+  LaserParamsEnemy.speed = SLOW_MOVE;
+  LaserParamsEnemy.fireRate = SLOW_RATE;
+  LaserParamsPlayer.speed = SLOW_MOVE;
+  LaserParamsPlayer.fireRate = SLOW_RATE;
+  LaserParamsPlayer.maxLasers = 2;
+  //Conditional Settings
+  for(i=0;i<MAX_ENEMIES;i++)
+  {
+    if(Enemy[i].life==0)
+    {
+      enemyCount--;
+    }
+  }
+  LaserParamsEnemy.maxLasers = LaserParamsEnemy.maxLasers-(4-enemyCount);
+}
+
 void PlaySoundShoot(int shotsFired)
 {
   if(shotsFired)
@@ -1676,6 +1686,7 @@ enum ScreenType Start_Screen(int codeFromButton)
     srand(NVIC_ST_CURRENT_R);
     randomEnemiesFormation = GetRandomNumber(RANDOM_FORMATIONS);
     Nokia5110_Clear();
+    ClearAllObjects();
     InitEnemies(randomEnemiesFormation);
     InitBunkerObjects();
     InitPlayer();
@@ -1716,16 +1727,16 @@ enum ScreenType LifeCheck(void)
   //Evaluate from results
   if(liveEnemyCount!=0 && playerLife==1)
   {
-    DisplayMode = ROUND1;
+    DisplayMode = DisplayMode; //Stay in this round
   }
   else if(liveEnemyCount==0 && playerLife==1)
   {
-    DisplayMode = WIN;
+    DisplayMode = DisplayMode+1; //Go to next round
   }
   else if(liveEnemyCount!=0 && playerLife==0)
   {
     Sound_Play(highpitch,1802);
-    DisplayMode = LOSE;
+    DisplayMode = LOSE; //Go to end round
   }
   return DisplayMode;
 }
@@ -1749,6 +1760,11 @@ void PlayerLifeDisplay(void)
   }
 }
 
+// **************Draw*********************************
+// Calls all the functions to draw the different 
+// elements, depending on the flags and settings
+// Input: none
+// Output: none
 void Draw(unsigned long enemyFrame, int explosionDraw, int bunkerHit, int bunkerHit1, int playerShot)
 {
   Nokia5110_ClearBuffer();
@@ -1789,18 +1805,194 @@ void UpdateFrame(void)
     break;
     case ROUND1:
     {
-      int buttonCode, shuffleDirection, enemyIndexFire, enemyFireFlag, 
-          lasersCollide, bunkerDamage, bunkerDamage1, enemyHit, shootSound, playerHit;
+      int buttonCode, shuffleDirection, enemyIndexFire, enemyFireFlag;
+      int lasersCollide, bunkerDamage, bunkerDamage1, enemyHit, shootSound, playerHit;
       unsigned long enemyFrame;
       //static int playerLaserIndex = 0;
 
       //Settings for this round
-      LaserParamsEnemy.speed = SLOW_MOVE;
-      LaserParamsEnemy.fireRate = SLOW_RATE;
-      LaserParamsEnemy.maxLasers = 5;
-      LaserParamsPlayer.speed = SLOW_MOVE;
-      LaserParamsPlayer.fireRate = SLOW_RATE;
-      LaserParamsPlayer.maxLasers = 2;
+      //Update Laser Settings
+      UpdateSettings();
+
+      //Input data and random numbers to work with
+      //Random_Init(3);
+      buttonCode = Read_Buttons();
+      shuffleDirection = RandomInvaderShuffle();
+      enemyIndexFire = RandomInvaderFire();            //Which enemy should fire?
+      enemyFireFlag  = FireEnemyLaser(enemyIndexFire);          //Should that chosen enemy fire?
+      
+      //Create or dissipate Image Objects
+      //Move existing objects
+      enemyFrame = AnimateEnemies();
+      InvaderShuffle(shuffleDirection);
+      MovePlayer();
+      shootSound = InitPlayerLaser(buttonCode, LaserImagePlayer, Player);
+      //Fire enemy laser if active
+      InitLaserEnemy(enemyFireFlag, enemyIndexFire);
+      
+      //Move Lasers
+      MoveLaserUp();      //Player Laser
+      MoveLaserDown();    //Enemy Lasers
+
+      //Collision Detection
+      enemyHit      = CrashCheck(LaserImagePlayer, Enemy, ExplosionObject, 1, OFFSET_COLLISION_LASER_X, OFFSET_COLLISION_LASER_Y,
+                                 OFFSET_COLLISION_ENEMY_X, OFFSET_COLLISION_ENEMY_Y, MAX_LASERS, MAX_ENEMIES);
+      bunkerDamage  = CrashCheck(LaserImagePlayer, Bunker, ExplosionObject, 0, OFFSET_COLLISION_LASER_X, 
+                                OFFSET_COLLISION_LASER_Y, 19, 5, MAX_LASERS, 3);
+      bunkerDamage1 = CrashCheck(LaserImageEnemy, Bunker, ExplosionObject, 0, OFFSET_COLLISION_LASER_X, OFFSET_COLLISION_LASER_Y, 19, 3, FULL_ENEMY_LASER_INDEX, 3);
+      playerHit     = CrashCheck(LaserImageEnemy, Player, ExplosionObject, 1, OFFSET_COLLISION_LASER_X, OFFSET_COLLISION_LASER_Y,
+                                 OFFSET_COLLISION_PLAYER_X, OFFSET_COLLISION_PLAYER_Y, FULL_ENEMY_LASER_INDEX, MAX_ENEMIES);
+      lasersCollide = CrashCheck(LaserImagePlayer, LaserImageEnemy, ExplosionObject, 0, OFFSET_COLLISION_LASER_X, OFFSET_COLLISION_LASER_Y, 
+                                 OFFSET_COLLISION_LASER_X, OFFSET_COLLISION_LASER_Y, MAX_LASERS, FULL_ENEMY_LASER_INDEX);
+
+      //Adjust the laser object numbers
+      CountLasers(0, enemyHit);
+      CountLasers(0, bunkerDamage);
+      CountLasers(0, lasersCollide);
+      CountLasers(1, playerHit);
+      CountLasers(1, bunkerDamage1);
+      CountLasers(1, lasersCollide);
+
+      PlaySoundShoot(shootSound);
+      PlaySoundInvaderKilled(enemyHit);
+      PlaySoundExplosion(bunkerDamage1);
+      
+      //LED Life
+      PlayerLifeDisplay();
+
+      //Print Bitmaps
+      Draw(enemyFrame, enemyHit, bunkerDamage, bunkerDamage1,playerHit);
+      DisplayMode = LifeCheck();
+    }
+    break;
+    case TRANSITION_ROUND2:
+    {
+      static int semaphoreCount=0;
+      int randomEnemiesFormation = 0;
+      //Clear all the objects and variables
+      Nokia5110_Clear();
+      ClearAllObjects();
+      Nokia5110_SetCursor(1, 2);
+      Nokia5110_OutString("Round 2");
+      //Wait for some time then refresh
+      if(semaphoreCount>30)
+      {
+        semaphoreCount = 0;
+        randomEnemiesFormation = GetRandomNumber(RANDOM_FORMATIONS);
+        InitEnemies(randomEnemiesFormation);
+        InitBunkerObjects();
+        InitPlayer();
+        DisplayMode = ROUND2;
+        //Nokia5110_SetCursor(2, 2);
+        //Nokia5110_OutString("TREd");
+      }
+      else
+      {
+        semaphoreCount++;
+      }
+
+    }
+    break;
+    case ROUND2:
+    {
+      int buttonCode, shuffleDirection, enemyIndexFire, enemyFireFlag;
+      int lasersCollide, bunkerDamage, bunkerDamage1, enemyHit, shootSound, playerHit;
+      unsigned long enemyFrame;
+      //static int playerLaserIndex = 0;
+
+      //Settings for this round
+      //Update Laser Settings
+      UpdateSettings();
+
+      //Input data and random numbers to work with
+      //Random_Init(3);
+      buttonCode = Read_Buttons();
+      shuffleDirection = RandomInvaderShuffle();
+      enemyIndexFire = RandomInvaderFire();            //Which enemy should fire?
+      enemyFireFlag  = FireEnemyLaser(enemyIndexFire);          //Should that chosen enemy fire?
+      
+      //Create or dissipate Image Objects
+      //Move existing objects
+      enemyFrame = AnimateEnemies();
+      InvaderShuffle(shuffleDirection);
+      MovePlayer();
+      shootSound = InitPlayerLaser(buttonCode, LaserImagePlayer, Player);
+      //Fire enemy laser if active
+      InitLaserEnemy(enemyFireFlag, enemyIndexFire);
+      
+      //Move Lasers
+      MoveLaserUp();      //Player Laser
+      MoveLaserDown();    //Enemy Lasers
+
+      //Collision Detection
+      enemyHit      = CrashCheck(LaserImagePlayer, Enemy, ExplosionObject, 1, OFFSET_COLLISION_LASER_X, OFFSET_COLLISION_LASER_Y,
+                                 OFFSET_COLLISION_ENEMY_X, OFFSET_COLLISION_ENEMY_Y, MAX_LASERS, MAX_ENEMIES);
+      bunkerDamage  = CrashCheck(LaserImagePlayer, Bunker, ExplosionObject, 0, OFFSET_COLLISION_LASER_X, 
+                                OFFSET_COLLISION_LASER_Y, 19, 5, MAX_LASERS, 3);
+      bunkerDamage1 = CrashCheck(LaserImageEnemy, Bunker, ExplosionObject, 0, OFFSET_COLLISION_LASER_X, OFFSET_COLLISION_LASER_Y, 19, 3, FULL_ENEMY_LASER_INDEX, 3);
+      playerHit     = CrashCheck(LaserImageEnemy, Player, ExplosionObject, 1, OFFSET_COLLISION_LASER_X, OFFSET_COLLISION_LASER_Y,
+                                 OFFSET_COLLISION_PLAYER_X, OFFSET_COLLISION_PLAYER_Y, FULL_ENEMY_LASER_INDEX, MAX_ENEMIES);
+      lasersCollide = CrashCheck(LaserImagePlayer, LaserImageEnemy, ExplosionObject, 0, OFFSET_COLLISION_LASER_X, OFFSET_COLLISION_LASER_Y, 
+                                 OFFSET_COLLISION_LASER_X, OFFSET_COLLISION_LASER_Y, MAX_LASERS, FULL_ENEMY_LASER_INDEX);
+
+      //Adjust the laser object numbers
+      CountLasers(0, enemyHit);
+      CountLasers(0, bunkerDamage);
+      CountLasers(0, lasersCollide);
+      CountLasers(1, playerHit);
+      CountLasers(1, bunkerDamage1);
+      CountLasers(1, lasersCollide);
+
+      PlaySoundShoot(shootSound);
+      PlaySoundInvaderKilled(enemyHit);
+      PlaySoundExplosion(bunkerDamage1);
+      
+      //LED Life
+      PlayerLifeDisplay();
+
+      //Print Bitmaps
+      Draw(enemyFrame, enemyHit, bunkerDamage, bunkerDamage1,playerHit);
+      DisplayMode = LifeCheck();
+    }
+    break;
+    case TRANSITION_ROUND3:
+    {
+      static int semaphoreCount=0;
+      int randomEnemiesFormation = 0;
+      //Clear all the objects and variables
+      Nokia5110_Clear();
+      ClearAllObjects();
+      Nokia5110_SetCursor(1, 2);
+      Nokia5110_OutString("Round 3");
+      //Wait for some time then refresh
+      if(semaphoreCount>30)
+      {
+        semaphoreCount = 0;
+        randomEnemiesFormation = GetRandomNumber(RANDOM_FORMATIONS);
+        InitEnemies(randomEnemiesFormation);
+        InitBunkerObjects();
+        InitPlayer();
+        DisplayMode = ROUND2;
+        //Nokia5110_SetCursor(2, 2);
+        //Nokia5110_OutString("TREd");
+      }
+      else
+      {
+        semaphoreCount++;
+      }
+
+    }
+    break;
+    case ROUND3:
+    {
+      int buttonCode, shuffleDirection, enemyIndexFire, enemyFireFlag;
+      int lasersCollide, bunkerDamage, bunkerDamage1, enemyHit, shootSound, playerHit;
+      unsigned long enemyFrame;
+      //static int playerLaserIndex = 0;
+
+      //Settings for this round
+      //Update Laser Settings
+      UpdateSettings();
 
       //Input data and random numbers to work with
       //Random_Init(3);
@@ -1855,20 +2047,29 @@ void UpdateFrame(void)
     break;
     case WIN:
     {
+      int buttonCode;
+      buttonCode = Read_Buttons();
+
       Nokia5110_Clear();
       Nokia5110_SetCursor(1, 1);
       Nokia5110_OutString("Congrats");
       Nokia5110_SetCursor(1, 2);
       Nokia5110_OutString("You Won");
-      Nokia5110_SetCursor(1, 3);
+      Nokia5110_SetCursor(2, 3);
       Nokia5110_OutString("Hero");
       Nokia5110_SetCursor(2, 4);
       Nokia5110_OutUDec(1234);
+            
+      if(buttonCode==1 || buttonCode==2)
+      {
+        DisplayMode = START;
+      }
     }
     break;
     case LOSE:
     {
       int buttonCode;
+      buttonCode = Read_Buttons();
 
       Nokia5110_Clear();
       Nokia5110_SetCursor(1, 1);
@@ -1879,8 +2080,6 @@ void UpdateFrame(void)
       Nokia5110_OutString("Sucka!");
       Nokia5110_SetCursor(2, 4);
       Nokia5110_OutUDec(1234);
-
-      buttonCode = Read_Buttons();
 
       if(buttonCode==1 || buttonCode==2)
       {
@@ -2174,7 +2373,7 @@ void LED2_On(void)
 }
 
 // **************LED1_Off*********************
-// Dectivate L1
+// Deactivate L1
 // Input: none 
 // Output: none
 void LED1_Off(void)
@@ -2183,7 +2382,7 @@ void LED1_Off(void)
 }
 
 // **************LED2_Off*********************
-// Dectivate L2
+// Deactivate L2
 // Input: none 
 // Output: none
 void LED2_Off(void)
