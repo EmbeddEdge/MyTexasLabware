@@ -1070,7 +1070,7 @@ void DisableInterrupts(void); // Disable interrupts
 void EnableInterrupts(void);  // Enable interrupts
 void MainLoop1(void);
 void InitEnemies(int);
-void InitBunkerObjects(void);
+void InitBunkerObjects(enum ScreenType);
 void InitPlayer(void);
 int InitPlayerLaser(int, STyp*, STyp*);
 void InitLaserEnemy(int, int);
@@ -1180,23 +1180,95 @@ void InitEnemies(int enemyFormation)
   }
 }
 
-void InitBunkerObjects(void)
+void InitBunkerObjects(enum ScreenType displayMode)
 {
   int i = 0;
-  for(i=0;i<3;i++)
+  switch(displayMode)
   {
-    Bunker[i].x = 32;
-    Bunker[i].y = 47-PLAYERH;
-    Bunker[i].image[0] = Bunker3;
-    Bunker[i].image[1] = Bunker2;
-    Bunker[i].image[2] = Bunker1;
-    Bunker[i].image[3] = Bunker0;
-    Bunker[i].life = 3;
-    if(i>0)
+    case START:
     {
-      Bunker[i].life = 0;
+      for(i=0;i<3;i++)
+      {
+        Bunker[i].x = 32;
+        Bunker[i].y = 47-PLAYERH;
+        Bunker[i].image[0] = Bunker3;
+        Bunker[i].image[1] = Bunker2;
+        Bunker[i].image[2] = Bunker1;
+        Bunker[i].image[3] = Bunker0;
+        Bunker[i].life = 3;
+        if(i>0)
+        {
+          Bunker[i].life = 0;
+        }
+      }
     }
+    break;
+    case ROUND1:
+    {
+      
+    }
+    break;
+    case TRANSITION_ROUND2:
+    {
+      for(i=0;i<3;i++)
+      {
+        Bunker[i].x = 50;
+        Bunker[i].y = 47-PLAYERH;
+        Bunker[i].image[0] = Bunker3;
+        Bunker[i].image[1] = Bunker2;
+        Bunker[i].image[2] = Bunker1;
+        Bunker[i].image[3] = Bunker0;
+        Bunker[i].life = 3;
+        if(i>0)
+        {
+          Bunker[i].life = 0;
+        }
+      }
+    }
+    break;
+    case ROUND2:
+    {
+      
+    }
+    break;
+    case TRANSITION_ROUND3:
+    {
+      
+    }
+    break;
+    case ROUND3:
+    {
+            for(i=0;i<3;i++)
+      {
+        Bunker[i].x = 5;
+        Bunker[i].y = 47-PLAYERH;
+        Bunker[i].image[0] = Bunker3;
+        Bunker[i].image[1] = Bunker2;
+        Bunker[i].image[2] = Bunker1;
+        Bunker[i].image[3] = Bunker0;
+        Bunker[i].life = 3;
+        if(i>0)
+        {
+          Bunker[i].life = 0;
+        }
+      }
+    }
+    break;
+    case WIN:
+    {
+     
+    }
+    break;
+    case LOSE:
+    {
+      
+    }
+    break;
+    default:
+    {
 
+    }
+    break;
   }
 }
 
@@ -1330,10 +1402,12 @@ unsigned long RandomInvaderShuffle(void)
 unsigned long RandomInvaderFire(void)
 {
   unsigned long randomEnemyFire;
+  int leftOrRight;
   randomEnemyFire = GetRandomNumber(MAX_ENEMIES); //Returns a number from 0 to 3
-  if(Enemy[randomEnemyFire].life==0)
+  while(Enemy[randomEnemyFire].life==0)
   {
-    if(randomEnemyFire>0)
+    leftOrRight = GetRandomNumber(2); 
+    if(leftOrRight==1)
     {
       randomEnemyFire--;
     }
@@ -1631,6 +1705,11 @@ void CountLasers(int laserOrigin, int explodedLaser)
   }
 }
 
+// **************UpdateSettings*********************************
+// Make sure the global variables representing the settings are
+// in order. Also change the settings if need be
+// Input: None
+// Output: None
 void UpdateSettings(void)
 {
   int i;
@@ -1678,9 +1757,16 @@ void PlaySoundExplosion(int bunkerHit)
   }
 }
 
+// **************Start_Screen*********************************
+// Clears the screen and initializes all the elements if a 
+// button is pressed, otherwise it returns the current screen 
+// enum.
+// Input: integer input from buttons
+// Output: ScreenType enum to show the next screen
 enum ScreenType Start_Screen(int codeFromButton)
 {
   int randomEnemiesFormation = 0;
+  //If any button is pressed, Prepare the round and change the display mode
   if(codeFromButton==1 | codeFromButton==2)
   {
     srand(NVIC_ST_CURRENT_R);
@@ -1688,7 +1774,7 @@ enum ScreenType Start_Screen(int codeFromButton)
     Nokia5110_Clear();
     ClearAllObjects();
     InitEnemies(randomEnemiesFormation);
-    InitBunkerObjects();
+    InitBunkerObjects(DisplayMode);
     InitPlayer();
     DisplayMode = ROUND1;
   }
@@ -1731,7 +1817,7 @@ enum ScreenType LifeCheck(void)
   }
   else if(liveEnemyCount==0 && playerLife==1)
   {
-    DisplayMode = DisplayMode+1; //Go to next round
+    DisplayMode = DisplayMode++; //Go to next round
   }
   else if(liveEnemyCount!=0 && playerLife==0)
   {
@@ -1829,7 +1915,6 @@ void UpdateFrame(void)
       shootSound = InitPlayerLaser(buttonCode, LaserImagePlayer, Player);
       //Fire enemy laser if active
       InitLaserEnemy(enemyFireFlag, enemyIndexFire);
-      
       //Move Lasers
       MoveLaserUp();      //Player Laser
       MoveLaserDown();    //Enemy Lasers
@@ -1853,11 +1938,12 @@ void UpdateFrame(void)
       CountLasers(1, bunkerDamage1);
       CountLasers(1, lasersCollide);
 
+      //Play Sounds
       PlaySoundShoot(shootSound);
       PlaySoundInvaderKilled(enemyHit);
       PlaySoundExplosion(bunkerDamage1);
       
-      //LED Life
+      //LED Life display
       PlayerLifeDisplay();
 
       //Print Bitmaps
@@ -1880,7 +1966,7 @@ void UpdateFrame(void)
         semaphoreCount = 0;
         randomEnemiesFormation = GetRandomNumber(RANDOM_FORMATIONS);
         InitEnemies(randomEnemiesFormation);
-        InitBunkerObjects();
+        InitBunkerObjects(DisplayMode);
         InitPlayer();
         DisplayMode = ROUND2;
         //Nokia5110_SetCursor(2, 2);
@@ -1970,9 +2056,9 @@ void UpdateFrame(void)
         semaphoreCount = 0;
         randomEnemiesFormation = GetRandomNumber(RANDOM_FORMATIONS);
         InitEnemies(randomEnemiesFormation);
-        InitBunkerObjects();
+        InitBunkerObjects(DisplayMode);
         InitPlayer();
-        DisplayMode = ROUND2;
+        DisplayMode = ROUND3;
         //Nokia5110_SetCursor(2, 2);
         //Nokia5110_OutString("TREd");
       }
@@ -2055,10 +2141,10 @@ void UpdateFrame(void)
       Nokia5110_OutString("Congrats");
       Nokia5110_SetCursor(1, 2);
       Nokia5110_OutString("You Won");
-      Nokia5110_SetCursor(2, 3);
-      Nokia5110_OutString("Hero");
       Nokia5110_SetCursor(2, 4);
-      Nokia5110_OutUDec(1234);
+      Nokia5110_OutString("Hero");
+      //Nokia5110_SetCursor(2, 4);
+      //Nokia5110_OutUDec(1234);
             
       if(buttonCode==1 || buttonCode==2)
       {
@@ -2075,11 +2161,11 @@ void UpdateFrame(void)
       Nokia5110_SetCursor(1, 1);
       Nokia5110_OutString("GAME OVER");
       Nokia5110_SetCursor(1, 2);
-      Nokia5110_OutString("Nice try,");
+      Nokia5110_OutString("You Lost");
       Nokia5110_SetCursor(1, 3);
-      Nokia5110_OutString("Sucka!");
-      Nokia5110_SetCursor(2, 4);
-      Nokia5110_OutUDec(1234);
+      Nokia5110_OutString("Try again?");
+      //Nokia5110_SetCursor(2, 4);
+      //Nokia5110_OutUDec(1234);
 
       if(buttonCode==1 || buttonCode==2)
       {
