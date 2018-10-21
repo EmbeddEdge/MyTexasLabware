@@ -1052,14 +1052,14 @@ const unsigned char *EnemyTypes2[4] = {SmallEnemy10PointB,SmallEnemy20PointB, Sm
 // **************** Structure Instances*************
 
 STyp Player[1];
+STyp Enemy[MAX_ENEMIES];
+STyp LaserImageEnemy[FULL_ENEMY_LASER_INDEX];
+STyp LaserImagePlayer[MAX_LASERS];
+STyp Bunker[3];
+STyp ExplosionObject[4];
+//Variables for rules
 LTyp LaserParamsPlayer;
 LTyp LaserParamsEnemy;
-STyp ExplosionObject[4];
-STyp Bunker[3];
-STyp LaserImageEnemy[FULL_ENEMY_LASER_INDEX];
-STyp Enemy[MAX_ENEMIES];
-STyp LaserImagePlayer[MAX_LASERS];
-
 
 // *************************************************
 
@@ -1072,8 +1072,9 @@ void MainLoop1(void);
 void InitEnemies(int);
 void InitBunkerObjects(enum ScreenType);
 void InitPlayer(void);
-int InitPlayerLaser(int, STyp*, STyp*);
-void InitLaserEnemy(int, int);
+void InitLasers(void);
+int firePlayerLaser(int, STyp*, STyp*);
+void fireLaserEnemy(int, int);
 void ClearAllObjects(void);
 unsigned long GetRandomNumber(unsigned long);
 unsigned long RandomInvaderShuffle(void);
@@ -1081,9 +1082,10 @@ unsigned long RandomInvaderFire(void);
 unsigned long FireEnemyLaser(int);
 void MoveLeft(void);
 void MoveRight(void);
-void InvaderShuffle(int);
+void MoveInvaderShuffle(int);
 unsigned long AnimateEnemies(void);
 void MovePlayer(void);
+int MoveInvaderAdvance(void);
 void MoveLaserUp(void);
 void MoveLaserDown(void);
 void DrawEnemies(unsigned long);
@@ -1102,6 +1104,7 @@ void UpdateSettings(void);
 void PlaySoundShoot(int);
 void PlaySoundInvaderKilled(int);
 void PlaySoundExplosion(int);
+void PlaySoundHighPitch(int);
 void UpdateFrame(void);
 void Timer2_Init(unsigned long period);
 void Timer2A_Start(void);
@@ -1203,11 +1206,6 @@ void InitBunkerObjects(enum ScreenType displayMode)
       }
     }
     break;
-    case ROUND1:
-    {
-      
-    }
-    break;
     case TRANSITION_ROUND2:
     {
       for(i=0;i<3;i++)
@@ -1226,19 +1224,9 @@ void InitBunkerObjects(enum ScreenType displayMode)
       }
     }
     break;
-    case ROUND2:
-    {
-      
-    }
-    break;
     case TRANSITION_ROUND3:
     {
-      
-    }
-    break;
-    case ROUND3:
-    {
-            for(i=0;i<3;i++)
+      for(i=0;i<3;i++)
       {
         Bunker[i].x = 5;
         Bunker[i].y = 47-PLAYERH;
@@ -1252,16 +1240,6 @@ void InitBunkerObjects(enum ScreenType displayMode)
           Bunker[i].life = 0;
         }
       }
-    }
-    break;
-    case WIN:
-    {
-     
-    }
-    break;
-    case LOSE:
-    {
-      
     }
     break;
     default:
@@ -1285,13 +1263,38 @@ void InitPlayer(void)
   Player[0].life = 2;
 }
 
-// **************InitPlayerLaser*********************************
+// **************InitLasers*********************************
+// Initializes all laser objects and sets all related
+// global variables to zero
+// Input: none
+// Output: none
+void InitLasers(void)
+{ 
+  int index = 0;
+
+  for(index=0;index<FULL_ENEMY_LASER_INDEX;index++)
+  {
+    LaserImageEnemy[index].life = 0;
+  }
+
+  for(index=0;index<MAX_LASERS;index++)
+  {
+    LaserImagePlayer[index].life = 0;
+  }
+  playerLaserCount = 0;
+  enemyLaserCount  = 0;
+  playerLaserIndex = 0;
+  enemyLaserIndex  = 0;
+
+}
+
+// **************firePlayerLaser*********************************
 // Initializes a laser object at the postion in front 
 // of the firing object
 // Input: The button code, the Laser object structure, 
 //        The firing object structure
 // Output: none
-int InitPlayerLaser(int codeFromButton, STyp *Projectile, STyp *FiringObject)
+int firePlayerLaser(int codeFromButton, STyp *Projectile, STyp *FiringObject)
 {
   //static int laserCount = 0;
   static int semaphoreCount_IL = 0;
@@ -1312,8 +1315,6 @@ int InitPlayerLaser(int codeFromButton, STyp *Projectile, STyp *FiringObject)
       Projectile[playerLaserIndex].image[1] = Laser1;
       Projectile[playerLaserIndex].life = 1;
       SoundFlag = 1;
-      //Sound_Play(shoot,4080);           //Play a shooting sound
-      //LED2_On();                        //Trigger a shooting LED
       playerLaserIndex++;
       playerLaserCount++;                     //Increase the laser count so that when the button is pressed again a new object is created instead of overwriting
       semaphoreCount_IL=0;
@@ -1324,13 +1325,13 @@ int InitPlayerLaser(int codeFromButton, STyp *Projectile, STyp *FiringObject)
 }
 
 
-// **************InitLaserEnemy*********************************
+// **************fireLaserEnemy*********************************
 // Initializes a laser object at the postion in front 
 // of the firing object
 // Input: The flag for whether the laser should be fired 
 //        the index for which enemy will fire
 // Output: none
-void InitLaserEnemy(int laserFlag, int enemyIndex)
+void fireLaserEnemy(int laserFlag, int enemyIndex)
 {
   //static int laserCount = 0;
   static int semaphoreCount_IL = 0;
@@ -1361,26 +1362,22 @@ void InitLaserEnemy(int laserFlag, int enemyIndex)
 
 void ClearAllObjects(void)
 {
-
-  //STyp Player[1];
-  //STyp ExplosionObject[4];
-  //STyp Bunker[3];
-  int i;
+  int index;
   Player[0].life = 0;
 
-  for(i=0;i<FULL_ENEMY_LASER_INDEX;i++)
+  for(index=0;index<FULL_ENEMY_LASER_INDEX;index++)
   {
-    LaserImageEnemy[i].life = 0;
+    LaserImageEnemy[index].life = 0;
   }
 
-  for(i=0;i<MAX_LASERS;i++)
+  for(index=0;index<MAX_LASERS;index++)
   {
-    LaserImagePlayer[i].life=0;
+    LaserImagePlayer[index].life=0;
   }
 
-  for(i=0;i<3;i++)
+  for(index=0;index<3;index++)
   {
-    Bunker[i].life=0;
+    Bunker[index].life=0;
   }
 }
 
@@ -1440,19 +1437,21 @@ void MoveLeft(void)
     //Shift all enemies to the left as long as they dont exceed the leftmost limit
     for(i=0;i<4;i++)
     {
-      if(Enemy[i].x > 0)
+      if(Enemy[i].life>0)
       {
-        Enemy[i].x -= 2;
+        if(Enemy[i].x >= 2)
+        {
+          Enemy[i].x -= 2;
+        } 
+        else
+        {
+          //Enemy[i].life = 0;
+          Enemy[0].x = 0;
+          Enemy[1].x = 20;
+          Enemy[2].x = 40;
+          Enemy[3].x = 60;
+        } 
       }
-      else
-      {
-        //Enemy[i].life = 0;
-        Enemy[0].x = 0;
-        Enemy[1].x = 20;
-        Enemy[2].x = 40;
-        Enemy[3].x = 60;
-      }
-      
     }
     semaphoreCount = 0;
   }
@@ -1471,16 +1470,19 @@ void MoveRight(void)
     //Shift all enemies to the right as long as they dont exceed the rightmost limit
     for(i=0;i<4;i++)
     {
-      if(Enemy[i].x < 67)
+      if(Enemy[i].life>0)
       {
-        Enemy[i].x += 2;
-      }
-      else
-      {
-        Enemy[0].x = 4;
-        Enemy[1].x = 24;
-        Enemy[2].x = 44;
-        Enemy[3].x = 64;
+        if(Enemy[i].x < 67)
+        {
+          Enemy[i].x += 2;
+        }
+        else
+        {
+          Enemy[0].x = 4;
+          Enemy[1].x = 24;
+          Enemy[2].x = 44;
+          Enemy[3].x = 64;
+        }
       }
     }
     semaphoreCount = 0;
@@ -1491,7 +1493,7 @@ void MoveRight(void)
   }
 }
 
-void InvaderShuffle(int shuffleDirection)
+void MoveInvaderShuffle(int shuffleDirection)
 {
   if(shuffleDirection == 1)
   {
@@ -1524,6 +1526,29 @@ void MovePlayer(void)
 {
   Player[0].x = (float)ADCdata/62.04;
   Player[0].x = (int)Player[0].x;
+}
+
+int MoveInvaderAdvance(void)
+{
+  static int semaphoreWait=0;
+  int index=0;
+  int soundFlag=0;
+  
+  if(semaphoreWait>60)
+  {
+    for(index=0;index<MAX_ENEMIES;index++)
+    {
+      if(Enemy[index].life!=0)  //All the Invaders that are alive
+      {
+        Enemy[index].y=Enemy[index].y+1;
+        soundFlag=1;
+        //Sound_Play(highpitch,1802);
+      }
+    }
+    semaphoreWait=0;
+  }
+  semaphoreWait++;
+  return soundFlag;
 }
 
 void MoveLaserUp(void)
@@ -1757,6 +1782,14 @@ void PlaySoundExplosion(int bunkerHit)
   }
 }
 
+void PlaySoundHighPitch(int soundFlag)
+{
+  if(soundFlag)
+  {
+    Sound_Play(highpitch,1802);
+  }
+}
+
 // **************Start_Screen*********************************
 // Clears the screen and initializes all the elements if a 
 // button is pressed, otherwise it returns the current screen 
@@ -1776,6 +1809,7 @@ enum ScreenType Start_Screen(int codeFromButton)
     InitEnemies(randomEnemiesFormation);
     InitBunkerObjects(DisplayMode);
     InitPlayer();
+    InitLasers();
     DisplayMode = ROUND1;
   }
   else
@@ -1892,7 +1926,7 @@ void UpdateFrame(void)
     case ROUND1:
     {
       int buttonCode, shuffleDirection, enemyIndexFire, enemyFireFlag;
-      int lasersCollide, bunkerDamage, bunkerDamage1, enemyHit, shootSound, playerHit;
+      int lasersCollide, bunkerDamage, bunkerDamage1, enemyHit, shootSound, playerHit, enemyAdvanceFlag;
       unsigned long enemyFrame;
       //static int playerLaserIndex = 0;
 
@@ -1905,16 +1939,17 @@ void UpdateFrame(void)
       buttonCode = Read_Buttons();
       shuffleDirection = RandomInvaderShuffle();
       enemyIndexFire = RandomInvaderFire();            //Which enemy should fire?
-      enemyFireFlag  = FireEnemyLaser(enemyIndexFire);          //Should that chosen enemy fire?
+      enemyFireFlag  = 0;//FireEnemyLaser(enemyIndexFire);          //Should that chosen enemy fire?
       
       //Create or dissipate Image Objects
       //Move existing objects
       enemyFrame = AnimateEnemies();
-      InvaderShuffle(shuffleDirection);
+      MoveInvaderShuffle(shuffleDirection);
       MovePlayer();
-      shootSound = InitPlayerLaser(buttonCode, LaserImagePlayer, Player);
+      enemyAdvanceFlag = MoveInvaderAdvance();
+      shootSound = firePlayerLaser(buttonCode, LaserImagePlayer, Player);
       //Fire enemy laser if active
-      InitLaserEnemy(enemyFireFlag, enemyIndexFire);
+      fireLaserEnemy(enemyFireFlag, enemyIndexFire);
       //Move Lasers
       MoveLaserUp();      //Player Laser
       MoveLaserDown();    //Enemy Lasers
@@ -1942,6 +1977,7 @@ void UpdateFrame(void)
       PlaySoundShoot(shootSound);
       PlaySoundInvaderKilled(enemyHit);
       PlaySoundExplosion(bunkerDamage1);
+      PlaySoundHighPitch(enemyAdvanceFlag);
       
       //LED Life display
       PlayerLifeDisplay();
@@ -1953,30 +1989,26 @@ void UpdateFrame(void)
     break;
     case TRANSITION_ROUND2:
     {
-      static int semaphoreCount=0;
+      //static int semaphoreCount=0;
+      int buttonCode;
       int randomEnemiesFormation = 0;
       //Clear all the objects and variables
       Nokia5110_Clear();
       ClearAllObjects();
       Nokia5110_SetCursor(1, 2);
       Nokia5110_OutString("Round 2");
-      //Wait for some time then refresh
-      if(semaphoreCount>30)
+      //Refresh if the button is pressed
+      buttonCode = Read_Buttons();
+      if(buttonCode!=0)
       {
-        semaphoreCount = 0;
+        //semaphoreCount = 0;
         randomEnemiesFormation = GetRandomNumber(RANDOM_FORMATIONS);
         InitEnemies(randomEnemiesFormation);
         InitBunkerObjects(DisplayMode);
         InitPlayer();
+        InitLasers();
         DisplayMode = ROUND2;
-        //Nokia5110_SetCursor(2, 2);
-        //Nokia5110_OutString("TREd");
       }
-      else
-      {
-        semaphoreCount++;
-      }
-
     }
     break;
     case ROUND2:
@@ -2000,11 +2032,12 @@ void UpdateFrame(void)
       //Create or dissipate Image Objects
       //Move existing objects
       enemyFrame = AnimateEnemies();
-      InvaderShuffle(shuffleDirection);
+      MoveInvaderShuffle(shuffleDirection);
       MovePlayer();
-      shootSound = InitPlayerLaser(buttonCode, LaserImagePlayer, Player);
+
+      shootSound = firePlayerLaser(buttonCode, LaserImagePlayer, Player);
       //Fire enemy laser if active
-      InitLaserEnemy(enemyFireFlag, enemyIndexFire);
+      fireLaserEnemy(enemyFireFlag, enemyIndexFire);
       
       //Move Lasers
       MoveLaserUp();      //Player Laser
@@ -2032,6 +2065,7 @@ void UpdateFrame(void)
       PlaySoundShoot(shootSound);
       PlaySoundInvaderKilled(enemyHit);
       PlaySoundExplosion(bunkerDamage1);
+      PlaySoundExplosion(playerHit);
       
       //LED Life
       PlayerLifeDisplay();
@@ -2058,6 +2092,7 @@ void UpdateFrame(void)
         InitEnemies(randomEnemiesFormation);
         InitBunkerObjects(DisplayMode);
         InitPlayer();
+        InitLasers();
         DisplayMode = ROUND3;
         //Nokia5110_SetCursor(2, 2);
         //Nokia5110_OutString("TREd");
@@ -2090,11 +2125,11 @@ void UpdateFrame(void)
       //Create or dissipate Image Objects
       //Move existing objects
       enemyFrame = AnimateEnemies();
-      InvaderShuffle(shuffleDirection);
+      MoveInvaderShuffle(shuffleDirection);
       MovePlayer();
-      shootSound = InitPlayerLaser(buttonCode, LaserImagePlayer, Player);
+      shootSound = firePlayerLaser(buttonCode, LaserImagePlayer, Player);
       //Fire enemy laser if active
-      InitLaserEnemy(enemyFireFlag, enemyIndexFire);
+      fireLaserEnemy(enemyFireFlag, enemyIndexFire);
       
       //Move Lasers
       MoveLaserUp();      //Player Laser
@@ -2160,7 +2195,7 @@ void UpdateFrame(void)
       Nokia5110_Clear();
       Nokia5110_SetCursor(1, 1);
       Nokia5110_OutString("GAME OVER");
-      Nokia5110_SetCursor(1, 2);
+      Nokia5110_SetCursor(2, 2);
       Nokia5110_OutString("You Lost");
       Nokia5110_SetCursor(1, 3);
       Nokia5110_OutString("Try again?");
