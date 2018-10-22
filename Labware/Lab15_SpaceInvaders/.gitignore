@@ -3,3 +3,9 @@
 
 #Ignore htm files
 *.htm
+
+#Ignore Keil project files
+*.uvopt
+*.uvgui
+*.dep
+*.crf
