@@ -942,6 +942,115 @@ const unsigned char highpitch[1802] = {
   67, 119, 148, 166, 164, 238, 223, 202, 174, 112, 96, 78, 0, 34, 54, 99, 143, 160, 166, 183, 
   250, 207};
 
+const unsigned char fastinvader1[982] = {
+  122, 105, 88, 60, 43, 20, 15, 9, 20, 31, 48, 65, 94, 105, 128, 144, 167, 184, 195, 218, 
+  224, 235, 240, 246, 252, 255, 252, 252, 252, 246, 246, 240, 235, 224, 218, 207, 201, 195, 184, 178, 
+  167, 161, 144, 139, 133, 122, 116, 105, 99, 88, 82, 71, 65, 54, 60, 65, 65, 77, 82, 94, 
+  94, 88, 94, 82, 71, 60, 48, 37, 26, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 15, 26, 31, 48, 60, 71, 77, 94, 
+  111, 122, 128, 139, 150, 167, 178, 190, 201, 207, 218, 224, 235, 240, 255, 255, 255, 255, 255, 255, 
+  255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 
+  255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 246, 235, 235, 229, 224, 212, 212, 201, 195, 195, 
+  184, 178, 167, 161, 156, 150, 150, 139, 133, 128, 122, 116, 111, 105, 99, 94, 94, 82, 82, 77, 
+  77, 65, 65, 60, 43, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 26, 
+  43, 60, 77, 82, 99, 105, 116, 116, 128, 128, 128, 128, 128, 128, 122, 116, 111, 105, 99, 105, 
+  94, 88, 82, 77, 65, 60, 48, 43, 37, 31, 26, 20, 15, 9, 3, 3, 0, 0, 0, 3, 
+  9, 26, 37, 48, 48, 48, 48, 43, 37, 26, 15, 9, 0, 0, 0, 0, 0, 0, 0, 0, 
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 15, 26, 37, 48, 60, 71, 88, 105, 
+  116, 128, 139, 150, 167, 178, 195, 207, 218, 235, 246, 255, 255, 255, 255, 255, 255, 255, 255, 255, 
+  255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 
+  255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 
+  255, 255, 252, 240, 240, 235, 224, 212, 207, 195, 195, 184, 173, 167, 161, 156, 150, 139, 133, 133, 
+  128, 128, 116, 111, 105, 105, 94, 88, 71, 43, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+  0, 9, 26, 37, 54, 71, 82, 94, 105, 111, 116, 116, 122, 122, 122, 128, 122, 122, 116, 116, 
+  111, 111, 99, 88, 82, 77, 71, 65, 54, 43, 43, 31, 20, 15, 3, 0, 0, 0, 0, 0, 
+  0, 0, 0, 0, 0, 3, 9, 15, 20, 15, 20, 9, 0, 0, 0, 0, 0, 0, 0, 0, 
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 
+  15, 26, 43, 54, 71, 88, 99, 111, 122, 133, 150, 161, 173, 190, 201, 212, 224, 235, 246, 255, 
+  255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 
+  255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 
+  255, 255, 255, 255, 246, 240, 235, 224, 218, 212, 207, 201, 190, 184, 178, 173, 167, 156, 156, 150, 
+  139, 128, 128, 128, 122, 116, 111, 105, 99, 94, 94, 88, 65, 43, 15, 0, 0, 0, 0, 0, 
+  0, 0, 0, 3, 15, 31, 48, 65, 82, 94, 105, 116, 128, 133, 139, 144, 150, 150, 144, 150, 
+  144, 139, 139, 133, 128, 116, 111, 99, 94, 82, 82, 77, 60, 54, 48, 43, 37, 26, 15, 15, 
+  9, 3, 0, 0, 0, 0, 0, 3, 15, 26, 31, 43, 43, 37, 37, 31, 20, 15, 3, 0, 
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+  3, 15, 31, 43, 48, 65, 77, 94, 105, 122, 128, 144, 156, 167, 184, 195, 207, 218, 229, 240, 
+  252, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 
+  255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 
+  255, 255, 255, 255, 255, 252, 246, 235, 229, 224, 218, 212, 207, 201, 195, 184, 178, 178, 173, 156, 
+  150, 150, 139, 128, 128, 128, 122, 116, 111, 99, 94, 88, 88, 82, 77, 71, 71, 65, 60, 54, 
+  48, 43, 48, 43, 37, 31, 26, 31, 26, 26, 26, 26, 20, 20, 15, 15, 9, 15, 9, 15, 
+  9, 15, 9, 15, 15, 15, 9, 15, 15, 15, 20, 26, 20, 26, 20, 26, 31, 26, 31, 31, 
+  31, 31, 37, 37, 43, 43, 43, 48, 54, 48, 54, 60, 54, 60, 60, 65, 71, 65, 71, 77, 
+  71, 77, 82, 82, 88, 94, 88, 94, 99, 99, 105, 99, 105, 105, 111, 111, 116, 116, 122, 128, 
+  128, 128, 128, 128, 128, 128, 133, 128, 133, 139, 139, 133, 139, 139, 144, 150, 144, 150, 156, 150, 
+  156, 150, 156, 161, 156, 161, 156, 161, 161, 161, 161, 167, 161, 167, 173, 167, 173, 173, 173, 167, 
+  173, 173, 178, 173, 178, 173, 178, 173, 173, 178, 173, 173, 178, 173, 173, 178, 173, 178, 173, 173, 
+  178, 173, 178, 173, 167, 167, 173, 167, 173, 167, 161, 161, 167, 161, 167, 161, 161, 161, 167, 161, 
+  156, 161, 161, 161, 156, 150, 156, 156, 156, 156, 150, 156, 156, 156, 150, 144, 144, 150, 144, 150, 
+  144, 150, 144, 139, 144, 139, 144, 144, 139, 144, 139, 133, 139, 139, 139, 133, 139, 133, 133, 133, 
+  139, 133, 133, 128, 133, 128, 128, 128, 128, 128, 128, 128, 128, 128, 116, 122, 116, 122, 116, 111, 
+  116, 116, 111, 111, 116, 111, 116, 111, 116, 111, 111, 116, 111, 116, 111, 111, 116, 111, 116, 111, 
+  111, 111};
+
+const unsigned char fastinvader2[1042] = {
+  128, 128, 116, 94, 71, 54, 31, 20, 9, 20, 31, 48, 65, 88, 105, 128, 139, 161, 178, 190, 
+  207, 218, 229, 240, 252, 252, 252, 255, 255, 252, 252, 252, 240, 240, 229, 224, 212, 207, 201, 184, 
+  184, 173, 161, 150, 144, 128, 128, 122, 111, 99, 94, 82, 77, 65, 60, 54, 54, 71, 71, 82, 
+  88, 94, 94, 94, 82, 77, 65, 60, 37, 31, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 9, 20, 26, 43, 54, 65, 71, 88, 
+  99, 116, 122, 133, 144, 156, 167, 178, 184, 195, 207, 218, 229, 235, 246, 252, 255, 255, 255, 255, 
+  255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 
+  255, 255, 255, 255, 255, 255, 255, 255, 255, 252, 246, 240, 235, 224, 218, 218, 207, 201, 195, 190, 
+  184, 178, 173, 167, 161, 156, 144, 139, 144, 133, 128, 128, 122, 116, 116, 105, 105, 94, 94, 88, 
+  82, 77, 77, 65, 65, 60, 60, 54, 54, 48, 43, 43, 37, 37, 31, 31, 26, 26, 15, 3, 
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 37, 54, 71, 82, 94, 105, 
+  111, 122, 128, 133, 133, 139, 133, 139, 139, 139, 133, 139, 128, 128, 128, 116, 116, 111, 111, 99, 
+  88, 94, 82, 77, 71, 65, 60, 60, 48, 43, 37, 31, 37, 43, 54, 71, 77, 88, 94, 94, 
+  88, 88, 77, 71, 60, 54, 43, 31, 20, 15, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+  0, 3, 3, 15, 20, 31, 43, 48, 60, 71, 82, 99, 111, 122, 128, 139, 150, 167, 178, 190, 
+  201, 212, 224, 235, 246, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 
+  255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 
+  255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 252, 240, 235, 224, 218, 218, 207, 
+  201, 195, 190, 178, 178, 167, 156, 150, 144, 139, 133, 128, 122, 116, 116, 105, 99, 94, 94, 82, 
+  71, 77, 71, 60, 54, 54, 48, 43, 37, 31, 26, 26, 26, 20, 15, 3, 0, 0, 0, 0, 
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 31, 48, 60, 77, 88, 94, 99, 105, 116, 
+  116, 122, 122, 128, 122, 122, 116, 116, 111, 105, 99, 94, 88, 82, 77, 65, 60, 54, 48, 48, 
+  37, 31, 26, 20, 15, 9, 3, 0, 3, 0, 9, 26, 31, 43, 48, 54, 48, 48, 43, 31, 
+  26, 15, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+  0, 0, 0, 15, 20, 31, 43, 54, 65, 82, 94, 105, 122, 128, 144, 156, 167, 184, 190, 207, 
+  218, 229, 240, 252, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 
+  255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 
+  255, 255, 255, 255, 255, 255, 255, 255, 255, 252, 240, 235, 229, 224, 218, 207, 201, 195, 190, 184, 
+  178, 178, 167, 161, 156, 144, 139, 133, 128, 133, 128, 116, 111, 111, 105, 94, 88, 77, 71, 65, 
+  60, 60, 54, 54, 48, 48, 43, 43, 37, 31, 26, 20, 3, 0, 0, 0, 0, 0, 0, 0, 
+  0, 0, 0, 0, 0, 15, 26, 48, 65, 82, 94, 111, 122, 128, 128, 133, 133, 139, 139, 144, 
+  139, 144, 139, 139, 133, 128, 128, 116, 116, 111, 99, 94, 88, 82, 82, 71, 60, 54, 48, 43, 
+  37, 31, 26, 20, 26, 20, 26, 43, 48, 60, 65, 65, 65, 71, 65, 54, 48, 43, 31, 20, 
+  9, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 20, 
+  26, 43, 48, 60, 77, 88, 105, 116, 128, 133, 144, 161, 173, 190, 201, 212, 218, 229, 240, 252, 
+  255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 
+  255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 
+  255, 255, 255, 252, 246, 240, 235, 224, 218, 212, 201, 195, 184, 184, 178, 167, 161, 156, 150, 144, 
+  139, 128, 128, 128, 116, 116, 111, 99, 99, 94, 88, 82, 82, 77, 77, 65, 60, 54, 54, 48, 
+  43, 43, 37, 31, 31, 26, 20, 26, 20, 15, 15, 20, 15, 15, 15, 15, 9, 9, 9, 9, 
+  15, 9, 9, 15, 9, 3, 9, 15, 15, 9, 15, 9, 15, 15, 20, 15, 20, 26, 26, 20, 
+  31, 31, 31, 37, 31, 37, 37, 43, 43, 48, 54, 48, 54, 54, 60, 60, 65, 65, 71, 71, 
+  77, 77, 82, 82, 88, 88, 94, 99, 94, 99, 105, 105, 111, 116, 111, 116, 116, 122, 122, 128, 
+  128, 128, 133, 128, 133, 139, 133, 139, 144, 139, 144, 144, 150, 156, 156, 156, 150, 156, 161, 156, 
+  161, 156, 161, 161, 167, 167, 173, 167, 167, 173, 167, 173, 173, 167, 167, 173, 173, 178, 173, 178, 
+  173, 178, 178, 173, 178, 178, 173, 178, 173, 178, 178, 173, 173, 178, 173, 178, 184, 178, 184, 178, 
+  173, 178, 178, 173, 178, 173, 178, 178, 173, 173, 178, 178, 173, 167, 173, 178, 173, 167, 167, 173, 
+  167, 173, 167, 161, 167, 161, 161, 156, 150, 150, 156, 150, 144, 144, 150, 144, 144, 150, 144, 139, 
+  139, 144, 139, 144, 139, 144, 139, 133, 133, 133, 139, 133, 139, 133, 128, 133, 133, 128, 128, 133, 
+  128, 133, 128, 133, 128, 133, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 122, 
+  128, 122, 128, 122, 122, 122, 116, 122, 116, 116, 122, 122, 116, 122, 116, 111, 116, 116, 111, 111, 
+  116, 111, 116, 111, 116, 111, 111, 111, 116, 111, 116, 111, 116, 111, 111, 116, 111, 111, 111, 111, 
+  111, 116};
+
+
+
 // *************************** Capture image dimensions out of BMP**********
 #define BUNKERW     ((unsigned char)Bunker0[18])
 #define BUNKERH     ((unsigned char)Bunker0[22])
@@ -968,6 +1077,7 @@ const unsigned char highpitch[1802] = {
 #define RANDOM_FORMATIONS   5
 #define RANDOM_ENEMY_MOVES  3
 #define MAX_LASERS          5
+#define MAX_MISSILES        1
 #define FULL_ENEMY_LASER_INDEX  10
 #define MAX_FIRST_OBJECT    3
 #define MAX_SECOND_OBJECT   4
@@ -1023,12 +1133,12 @@ struct imageStateB {
 };          
 typedef struct imageStateB BTyp;
 
-struct laserLimits {
+struct ProjectileLimits {
   unsigned long speed;      // speed limit of the laser
   unsigned long fireRate;   // Speed at which lasers can be generated
   unsigned long maxLasers;  // maximum amount of lasers on screen
 };          
-typedef struct laserLimits LTyp;
+typedef struct ProjectileLimits LTyp;
 // *************************************************
 
 // **************** Global Variables***********************************************************************************
@@ -1040,10 +1150,12 @@ unsigned long arrayCount = 0;
 unsigned char String[10]; // null-terminated ASCII String1
 unsigned long ADCdata;    // 12-bit 0 to 4095 sample
 int adc = 0;
-int playerLaserCount = 0;
-int enemyLaserCount = 0;
-int playerLaserIndex = 0;
-int enemyLaserIndex = 0;
+int playerLaserCount   = 0;
+int playerMissileCount = 0;
+int enemyLaserCount    = 0;
+int playerLaserIndex   = 0;
+int playerMissileIndex = 0;
+int enemyLaserIndex    = 0;
 
 
 const unsigned char *EnemyTypes1[4] = {SmallEnemy10PointA,SmallEnemy20PointA, SmallEnemy30PointA,SmallEnemy20PointA};
@@ -1055,10 +1167,12 @@ STyp Player[1];
 STyp Enemy[MAX_ENEMIES];
 STyp LaserImageEnemy[FULL_ENEMY_LASER_INDEX];
 STyp LaserImagePlayer[MAX_LASERS];
+STyp MissileImagePlayer[MAX_MISSILES];
 STyp Bunker[3];
 STyp ExplosionObject[4];
 //Variables for rules
 LTyp LaserParamsPlayer;
+LTyp MissileParamsPlayer;
 LTyp LaserParamsEnemy;
 
 // *************************************************
@@ -1072,8 +1186,9 @@ void MainLoop1(void);
 void InitEnemies(int);
 void InitBunkerObjects(enum ScreenType);
 void InitPlayer(void);
-void InitLasers(void);
+void InitProjectiles(void);
 int firePlayerLaser(int, STyp*, STyp*);
+int firePlayerMissile(int, STyp*, STyp*);
 void fireLaserEnemy(int, int);
 void ClearAllObjects(void);
 unsigned long GetRandomNumber(unsigned long);
@@ -1088,16 +1203,18 @@ void MovePlayer(void);
 int MoveInvaderAdvance(void);
 void MoveLaserUp(void);
 void MoveLaserDown(void);
+void MoveMissile(void);
 void DrawEnemies(unsigned long);
 void DrawExplosions(int);
 void DrawArea(int);
 void DrawPlayer(int);
 void DrawLasers(void);
+void DrawMissiles(void);
 void DrawEnemyLasers(void);
 enum ScreenType Start_Screen(int);
 enum ScreenType LifeCheck(void);
 void PlayerLifeDisplay(void);
-void Draw(unsigned long, int, int, int, int);
+void Draw(unsigned long, int, int, int, int, int);
 int CrashCheck(STyp*, STyp*, STyp*, int, int, int, int, int, int, int);
 void CountLasers(int, int);
 void UpdateSettings(void);
@@ -1105,6 +1222,7 @@ void PlaySoundShoot(int);
 void PlaySoundInvaderKilled(int);
 void PlaySoundExplosion(int);
 void PlaySoundHighPitch(int);
+void PlaySoundFastInvader1(int);
 void UpdateFrame(void);
 void Timer2_Init(unsigned long period);
 void Timer2A_Start(void);
@@ -1193,6 +1311,7 @@ void InitBunkerObjects(enum ScreenType displayMode)
       for(i=0;i<3;i++)
       {
         Bunker[i].x = 32;
+        //Bunker[i].y = 25;
         Bunker[i].y = 47-PLAYERH;
         Bunker[i].image[0] = Bunker3;
         Bunker[i].image[1] = Bunker2;
@@ -1263,12 +1382,12 @@ void InitPlayer(void)
   Player[0].life = 2;
 }
 
-// **************InitLasers*********************************
-// Initializes all laser objects and sets all related
+// **************InitProjectiles*********************************
+// Initializes all Projectile objects and sets all related
 // global variables to zero
 // Input: none
 // Output: none
-void InitLasers(void)
+void InitProjectiles(void)
 { 
   int index = 0;
 
@@ -1281,10 +1400,17 @@ void InitLasers(void)
   {
     LaserImagePlayer[index].life = 0;
   }
-  playerLaserCount = 0;
-  enemyLaserCount  = 0;
-  playerLaserIndex = 0;
-  enemyLaserIndex  = 0;
+
+  for(index=0;index<1;index++)
+  {
+    MissileImagePlayer[index].life = 0;
+  }
+  playerLaserCount   = 0;
+  enemyLaserCount    = 0;
+  playerMissileCount = 0;
+  playerLaserIndex   = 0;
+  enemyLaserIndex    = 0;
+  playerMissileIndex = 0;
 
 }
 
@@ -1324,6 +1450,39 @@ int firePlayerLaser(int codeFromButton, STyp *Projectile, STyp *FiringObject)
   return SoundFlag;
 }
 
+// **************firePlayerMissile*********************************
+// Initializes a Missile object at the postion in front 
+// of the firing object
+// Input: The button code, the Laser object structure, 
+//        The firing object structure
+// Output: none
+int firePlayerMissile(int codeFromButton, STyp *Projectile, STyp *FiringObject)
+{
+  static int semaphoreCount_IL = 0;
+  int SoundFlag = 0;
+  
+  if(playerMissileIndex>MissileParamsPlayer.maxLasers-1)
+  {
+    playerMissileIndex=0;
+  }
+  if(codeFromButton == 2 && playerMissileCount<MissileParamsPlayer.maxLasers && semaphoreCount_IL >= MissileParamsPlayer.fireRate)            //Was the button pressed to fire and max amount of lasers not exceeded?
+  {
+    if(Projectile[playerMissileIndex].life==0)
+    {
+      Projectile[playerMissileIndex].x = FiringObject[0].x+8;
+      Projectile[playerMissileIndex].y = FiringObject[0].y-8;
+      Projectile[playerMissileIndex].image[0] = Missile0;
+      Projectile[playerMissileIndex].image[1] = Missile1;
+      Projectile[playerMissileIndex].life = 1;
+      SoundFlag = 1;
+      playerMissileIndex++;
+      playerMissileCount++;                     //Increase the laser count so that when the button is pressed again a new object is created instead of overwriting
+      semaphoreCount_IL=0;
+    }
+  }
+  semaphoreCount_IL++;
+  return SoundFlag;
+}
 
 // **************fireLaserEnemy*********************************
 // Initializes a laser object at the postion in front 
@@ -1373,6 +1532,11 @@ void ClearAllObjects(void)
   for(index=0;index<MAX_LASERS;index++)
   {
     LaserImagePlayer[index].life=0;
+  }
+
+    for(index=0;index<MAX_MISSILES;index++)
+  {
+    MissileImagePlayer[index].life=0;
   }
 
   for(index=0;index<3;index++)
@@ -1540,9 +1704,11 @@ int MoveInvaderAdvance(void)
     {
       if(Enemy[index].life!=0)  //All the Invaders that are alive
       {
-        Enemy[index].y=Enemy[index].y+1;
-        soundFlag=1;
-        //Sound_Play(highpitch,1802);
+        if(Enemy[index].y<25)
+        {
+          Enemy[index].y=Enemy[index].y+1;
+          soundFlag=1;
+        }
       }
     }
     semaphoreWait=0;
@@ -1598,6 +1764,31 @@ void MoveLaserDown(void)
   }
   semaphoreCount++;
 }
+
+void MoveMissile(void)
+{
+  static int semaphoreCount = 0;
+  int missileIndex;
+
+  if(semaphoreCount == MissileParamsPlayer.speed)                        //Is it time for laser to move?
+  {
+    for(missileIndex=0;missileIndex<MissileParamsPlayer.maxLasers;missileIndex++)    //For all laser objects
+    {
+      if(MissileImagePlayer[missileIndex].life==1)                               //Is the laser active?
+      {
+        if(MissileImagePlayer[missileIndex].y == 47)                            //Has the laser reached the end of the screen?
+        {
+          MissileImagePlayer[missileIndex].life=0;                             //Deactivate laser pbject
+          playerMissileCount--;
+        }
+        MissileImagePlayer[missileIndex].y = MissileImagePlayer[missileIndex].y-1;    //Move the laser down one bit
+      }
+    }
+    semaphoreCount=0;
+  }
+  semaphoreCount++;
+}
+
 
 void DrawEnemies(unsigned long enemyFrame)
 {
@@ -1660,6 +1851,18 @@ void DrawLasers(void)
     if(LaserImagePlayer[laserIndex].life==1)
     {
       Nokia5110_PrintBMP(LaserImagePlayer[laserIndex].x, LaserImagePlayer[laserIndex].y, LaserImagePlayer[laserIndex].image[0], 0);
+    }
+  }
+}
+
+void DrawMissiles(void)
+{
+  int laserIndex;
+  for(laserIndex=0;laserIndex<MAX_MISSILES;laserIndex++)
+  {
+    if(MissileImagePlayer[laserIndex].life==1)
+    {
+      Nokia5110_PrintBMP(MissileImagePlayer[laserIndex].x, MissileImagePlayer[laserIndex].y, MissileImagePlayer[laserIndex].image[0], 0);
     }
   }
 }
@@ -1728,6 +1931,10 @@ void CountLasers(int laserOrigin, int explodedLaser)
   {
     enemyLaserCount = enemyLaserCount-explodedLaser;
   }
+  else if(laserOrigin==2 && explodedLaser==1)
+  {
+    playerMissileCount = playerMissileCount-explodedLaser;
+  }
 }
 
 // **************UpdateSettings*********************************
@@ -1746,6 +1953,11 @@ void UpdateSettings(void)
   LaserParamsPlayer.speed = SLOW_MOVE;
   LaserParamsPlayer.fireRate = SLOW_RATE;
   LaserParamsPlayer.maxLasers = 2;
+  MissileParamsPlayer.speed = MEDIUM_MOVE;
+  MissileParamsPlayer.fireRate = SLOW_RATE;
+  MissileParamsPlayer.maxLasers = 1;
+  
+
   //Conditional Settings
   for(i=0;i<MAX_ENEMIES;i++)
   {
@@ -1790,6 +2002,14 @@ void PlaySoundHighPitch(int soundFlag)
   }
 }
 
+void PlaySoundFastInvader1(int soundFlag)
+{
+  if(soundFlag)
+  {
+    Sound_Play(fastinvader1,982);
+  }
+}
+
 // **************Start_Screen*********************************
 // Clears the screen and initializes all the elements if a 
 // button is pressed, otherwise it returns the current screen 
@@ -1809,7 +2029,7 @@ enum ScreenType Start_Screen(int codeFromButton)
     InitEnemies(randomEnemiesFormation);
     InitBunkerObjects(DisplayMode);
     InitPlayer();
-    InitLasers();
+    InitProjectiles();
     DisplayMode = ROUND1;
   }
   else
@@ -1885,16 +2105,18 @@ void PlayerLifeDisplay(void)
 // elements, depending on the flags and settings
 // Input: none
 // Output: none
-void Draw(unsigned long enemyFrame, int explosionDraw, int bunkerHit, int bunkerHit1, int playerShot)
+void Draw(unsigned long enemyFrame, int explosionDraw, int explosionDraw2, int bunkerHit, int bunkerHit1, int playerShot)
 {
   Nokia5110_ClearBuffer();
   
   DrawEnemies(enemyFrame);
   DrawExplosions(explosionDraw);
+  DrawExplosions(explosionDraw2);
   DrawArea(bunkerHit);
   DrawArea(bunkerHit1);
   DrawPlayer(playerShot);
   DrawLasers();  
+  DrawMissiles();
   DrawEnemyLasers();
   Nokia5110_DisplayBuffer();      // draw buffer
 }
@@ -1926,7 +2148,7 @@ void UpdateFrame(void)
     case ROUND1:
     {
       int buttonCode, shuffleDirection, enemyIndexFire, enemyFireFlag;
-      int lasersCollide, bunkerDamage, bunkerDamage1, enemyHit, shootSound, playerHit, enemyAdvanceFlag;
+      int lasersCollide, bunkerDamage, bunkerDamage1, enemyHitL, enemyHitM, shootSound, shootSound1, playerHit, enemyAdvanceFlag;
       unsigned long enemyFrame;
       //static int playerLaserIndex = 0;
 
@@ -1948,14 +2170,18 @@ void UpdateFrame(void)
       MovePlayer();
       enemyAdvanceFlag = MoveInvaderAdvance();
       shootSound = firePlayerLaser(buttonCode, LaserImagePlayer, Player);
+      shootSound1 = firePlayerMissile(buttonCode, MissileImagePlayer, Player);
       //Fire enemy laser if active
       fireLaserEnemy(enemyFireFlag, enemyIndexFire);
       //Move Lasers
+      MoveMissile();      //Move and animate the Missile
       MoveLaserUp();      //Player Laser
       MoveLaserDown();    //Enemy Lasers
 
       //Collision Detection
-      enemyHit      = CrashCheck(LaserImagePlayer, Enemy, ExplosionObject, 1, OFFSET_COLLISION_LASER_X, OFFSET_COLLISION_LASER_Y,
+      enemyHitL      = CrashCheck(LaserImagePlayer, Enemy, ExplosionObject, 1, OFFSET_COLLISION_LASER_X, OFFSET_COLLISION_LASER_Y,
+                                 OFFSET_COLLISION_ENEMY_X, OFFSET_COLLISION_ENEMY_Y, MAX_LASERS, MAX_ENEMIES);
+      enemyHitM      = CrashCheck(MissileImagePlayer, Enemy, ExplosionObject, 1, OFFSET_COLLISION_LASER_X, OFFSET_COLLISION_LASER_Y,
                                  OFFSET_COLLISION_ENEMY_X, OFFSET_COLLISION_ENEMY_Y, MAX_LASERS, MAX_ENEMIES);
       bunkerDamage  = CrashCheck(LaserImagePlayer, Bunker, ExplosionObject, 0, OFFSET_COLLISION_LASER_X, 
                                 OFFSET_COLLISION_LASER_Y, 19, 5, MAX_LASERS, 3);
@@ -1966,7 +2192,8 @@ void UpdateFrame(void)
                                  OFFSET_COLLISION_LASER_X, OFFSET_COLLISION_LASER_Y, MAX_LASERS, FULL_ENEMY_LASER_INDEX);
 
       //Adjust the laser object numbers
-      CountLasers(0, enemyHit);
+      CountLasers(0, enemyHitL);
+      CountLasers(2, enemyHitM);
       CountLasers(0, bunkerDamage);
       CountLasers(0, lasersCollide);
       CountLasers(1, playerHit);
@@ -1975,15 +2202,18 @@ void UpdateFrame(void)
 
       //Play Sounds
       PlaySoundShoot(shootSound);
-      PlaySoundInvaderKilled(enemyHit);
+      PlaySoundShoot(shootSound1);
+      PlaySoundInvaderKilled(enemyHitL);
+      PlaySoundInvaderKilled(enemyHitM);
       PlaySoundExplosion(bunkerDamage1);
-      PlaySoundHighPitch(enemyAdvanceFlag);
+      PlaySoundFastInvader1(enemyAdvanceFlag);
+      //PlaySoundHighPitch(enemyAdvanceFlag);
       
       //LED Life display
       PlayerLifeDisplay();
 
       //Print Bitmaps
-      Draw(enemyFrame, enemyHit, bunkerDamage, bunkerDamage1,playerHit);
+      Draw(enemyFrame, enemyHitL, enemyHitM, bunkerDamage, bunkerDamage1,playerHit);
       DisplayMode = LifeCheck();
     }
     break;
@@ -2006,7 +2236,7 @@ void UpdateFrame(void)
         InitEnemies(randomEnemiesFormation);
         InitBunkerObjects(DisplayMode);
         InitPlayer();
-        InitLasers();
+        InitProjectiles();
         DisplayMode = ROUND2;
       }
     }
@@ -2071,7 +2301,7 @@ void UpdateFrame(void)
       PlayerLifeDisplay();
 
       //Print Bitmaps
-      Draw(enemyFrame, enemyHit, bunkerDamage, bunkerDamage1,playerHit);
+      Draw(enemyFrame, enemyHit, enemyHit, bunkerDamage, bunkerDamage1,playerHit);
       DisplayMode = LifeCheck();
     }
     break;
@@ -2092,7 +2322,7 @@ void UpdateFrame(void)
         InitEnemies(randomEnemiesFormation);
         InitBunkerObjects(DisplayMode);
         InitPlayer();
-        InitLasers();
+        InitProjectiles();
         DisplayMode = ROUND3;
         //Nokia5110_SetCursor(2, 2);
         //Nokia5110_OutString("TREd");
@@ -2162,7 +2392,7 @@ void UpdateFrame(void)
       PlayerLifeDisplay();
 
       //Print Bitmaps
-      Draw(enemyFrame, enemyHit, bunkerDamage, bunkerDamage1,playerHit);
+      Draw(enemyFrame, enemyHit, enemyHit, bunkerDamage, bunkerDamage1,playerHit);
       DisplayMode = LifeCheck();
     }
     break;
