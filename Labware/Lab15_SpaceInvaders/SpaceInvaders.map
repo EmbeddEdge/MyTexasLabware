@@ -33,6 +33,7 @@ Section Cross References
     nokia5110.o(i.Nokia5110_SetCursor) refers to nokia5110.o(i.lcdwrite) for lcdwrite
     random.o(.text) refers to random.o(DATA) for M
     spaceinvaders.o(i.AnimateEnemies) refers to spaceinvaders.o(.data) for semaphoreCount
+    spaceinvaders.o(i.ClearAllObjects) refers to spaceinvaders.o(.bss) for Player
     spaceinvaders.o(i.CountLasers) refers to spaceinvaders.o(.data) for playerLaserCount
     spaceinvaders.o(i.CrashCheck) refers to spaceinvaders.o(.constdata) for SmallExplosion0
     spaceinvaders.o(i.Draw) refers to nokia5110.o(i.Nokia5110_ClearBuffer) for Nokia5110_ClearBuffer
@@ -41,11 +42,11 @@ Section Cross References
     spaceinvaders.o(i.Draw) refers to spaceinvaders.o(i.DrawArea) for DrawArea
     spaceinvaders.o(i.Draw) refers to spaceinvaders.o(i.DrawPlayer) for DrawPlayer
     spaceinvaders.o(i.Draw) refers to spaceinvaders.o(i.DrawLasers) for DrawLasers
+    spaceinvaders.o(i.Draw) refers to spaceinvaders.o(i.DrawMissiles) for DrawMissiles
     spaceinvaders.o(i.Draw) refers to spaceinvaders.o(i.DrawEnemyLasers) for DrawEnemyLasers
     spaceinvaders.o(i.Draw) refers to nokia5110.o(i.Nokia5110_DisplayBuffer) for Nokia5110_DisplayBuffer
     spaceinvaders.o(i.DrawArea) refers to nokia5110.o(i.Nokia5110_PrintBMP) for Nokia5110_PrintBMP
     spaceinvaders.o(i.DrawArea) refers to spaceinvaders.o(.bss) for Bunker
-    spaceinvaders.o(i.DrawArea) refers to spaceinvaders.o(.data) for damageCounter
     spaceinvaders.o(i.DrawEnemies) refers to nokia5110.o(i.Nokia5110_PrintBMP) for Nokia5110_PrintBMP
     spaceinvaders.o(i.DrawEnemies) refers to spaceinvaders.o(.bss) for Enemy
     spaceinvaders.o(i.DrawEnemyLasers) refers to nokia5110.o(i.Nokia5110_PrintBMP) for Nokia5110_PrintBMP
@@ -55,6 +56,8 @@ Section Cross References
     spaceinvaders.o(i.DrawExplosions) refers to spaceinvaders.o(.data) for semaphoreCount
     spaceinvaders.o(i.DrawLasers) refers to nokia5110.o(i.Nokia5110_PrintBMP) for Nokia5110_PrintBMP
     spaceinvaders.o(i.DrawLasers) refers to spaceinvaders.o(.bss) for LaserImagePlayer
+    spaceinvaders.o(i.DrawMissiles) refers to nokia5110.o(i.Nokia5110_PrintBMP) for Nokia5110_PrintBMP
+    spaceinvaders.o(i.DrawMissiles) refers to spaceinvaders.o(.bss) for MissileImagePlayer
     spaceinvaders.o(i.DrawPlayer) refers to nokia5110.o(i.Nokia5110_PrintBMP) for Nokia5110_PrintBMP
     spaceinvaders.o(i.DrawPlayer) refers to spaceinvaders.o(.bss) for Player
     spaceinvaders.o(i.FireEnemyLaser) refers to spaceinvaders.o(i.GetRandomNumber) for GetRandomNumber
@@ -64,37 +67,26 @@ Section Cross References
     spaceinvaders.o(i.InitBunkerObjects) refers to spaceinvaders.o(.constdata) for PlayerShip0
     spaceinvaders.o(i.InitEnemies) refers to spaceinvaders.o(.bss) for Enemy
     spaceinvaders.o(i.InitEnemies) refers to spaceinvaders.o(.data) for EnemyTypes1
-    spaceinvaders.o(i.InitLaserEnemy) refers to spaceinvaders.o(.bss) for LaserParamsEnemy
-    spaceinvaders.o(i.InitLaserEnemy) refers to spaceinvaders.o(.data) for enemyLaserIndex
-    spaceinvaders.o(i.InitLaserEnemy) refers to spaceinvaders.o(.constdata) for Laser0
     spaceinvaders.o(i.InitPlayer) refers to spaceinvaders.o(.bss) for Player
     spaceinvaders.o(i.InitPlayer) refers to spaceinvaders.o(.constdata) for PlayerShip0
-    spaceinvaders.o(i.InitPlayerLaser) refers to spaceinvaders.o(.bss) for LaserParamsPlayer
-    spaceinvaders.o(i.InitPlayerLaser) refers to spaceinvaders.o(.data) for playerLaserIndex
-    spaceinvaders.o(i.InitPlayerLaser) refers to spaceinvaders.o(.constdata) for Laser0
-    spaceinvaders.o(i.InvaderShuffle) refers to spaceinvaders.o(i.MoveRight) for MoveRight
-    spaceinvaders.o(i.InvaderShuffle) refers to spaceinvaders.o(i.MoveLeft) for MoveLeft
+    spaceinvaders.o(i.InitProjectiles) refers to spaceinvaders.o(.bss) for LaserImageEnemy
+    spaceinvaders.o(i.InitProjectiles) refers to spaceinvaders.o(.data) for playerLaserCount
     spaceinvaders.o(i.LifeCheck) refers to spaceinvaders.o(i.Sound_Play) for Sound_Play
     spaceinvaders.o(i.LifeCheck) refers to spaceinvaders.o(.bss) for Enemy
     spaceinvaders.o(i.LifeCheck) refers to spaceinvaders.o(.data) for DisplayMode
     spaceinvaders.o(i.LifeCheck) refers to spaceinvaders.o(.constdata) for highpitch
-    spaceinvaders.o(i.MainLoop1) refers to spaceinvaders.o(i.Read_Buttons) for Read_Buttons
-    spaceinvaders.o(i.MainLoop1) refers to spaceinvaders.o(i.LED1_Off) for LED1_Off
-    spaceinvaders.o(i.MainLoop1) refers to spaceinvaders.o(i.LED2_Off) for LED2_Off
-    spaceinvaders.o(i.MainLoop1) refers to spaceinvaders.o(i.LED1_On) for LED1_On
-    spaceinvaders.o(i.MainLoop1) refers to spaceinvaders.o(i.Sound_Play) for Sound_Play
-    spaceinvaders.o(i.MainLoop1) refers to nokia5110.o(i.Nokia5110_Clear) for Nokia5110_Clear
-    spaceinvaders.o(i.MainLoop1) refers to nokia5110.o(i.Nokia5110_SetCursor) for Nokia5110_SetCursor
-    spaceinvaders.o(i.MainLoop1) refers to nokia5110.o(i.Nokia5110_OutString) for Nokia5110_OutString
-    spaceinvaders.o(i.MainLoop1) refers to nokia5110.o(i.Nokia5110_OutUDec) for Nokia5110_OutUDec
-    spaceinvaders.o(i.MainLoop1) refers to spaceinvaders.o(i.LED2_On) for LED2_On
-    spaceinvaders.o(i.MainLoop1) refers to spaceinvaders.o(.constdata) for shoot
+    spaceinvaders.o(i.MoveInvaderAdvance) refers to spaceinvaders.o(.data) for semaphoreWait
+    spaceinvaders.o(i.MoveInvaderAdvance) refers to spaceinvaders.o(.bss) for Enemy
+    spaceinvaders.o(i.MoveInvaderShuffle) refers to spaceinvaders.o(i.MoveRight) for MoveRight
+    spaceinvaders.o(i.MoveInvaderShuffle) refers to spaceinvaders.o(i.MoveLeft) for MoveLeft
     spaceinvaders.o(i.MoveLaserDown) refers to spaceinvaders.o(.bss) for LaserParamsEnemy
     spaceinvaders.o(i.MoveLaserDown) refers to spaceinvaders.o(.data) for semaphoreCount
     spaceinvaders.o(i.MoveLaserUp) refers to spaceinvaders.o(.bss) for LaserParamsPlayer
     spaceinvaders.o(i.MoveLaserUp) refers to spaceinvaders.o(.data) for semaphoreCount
     spaceinvaders.o(i.MoveLeft) refers to spaceinvaders.o(.data) for semaphoreCount
     spaceinvaders.o(i.MoveLeft) refers to spaceinvaders.o(.bss) for Enemy
+    spaceinvaders.o(i.MoveMissile) refers to spaceinvaders.o(.bss) for MissileParamsPlayer
+    spaceinvaders.o(i.MoveMissile) refers to spaceinvaders.o(.data) for semaphoreCount
     spaceinvaders.o(i.MovePlayer) refers to fflt_clz.o(x$fpl$ffltu) for __aeabi_ui2f
     spaceinvaders.o(i.MovePlayer) refers to f2d.o(x$fpl$f2d) for __aeabi_f2d
     spaceinvaders.o(i.MovePlayer) refers to ddiv.o(x$fpl$ddiv) for __aeabi_ddiv
@@ -105,6 +97,10 @@ Section Cross References
     spaceinvaders.o(i.MoveRight) refers to spaceinvaders.o(.bss) for Enemy
     spaceinvaders.o(i.PlaySoundExplosion) refers to spaceinvaders.o(i.Sound_Play) for Sound_Play
     spaceinvaders.o(i.PlaySoundExplosion) refers to spaceinvaders.o(.constdata) for explosion
+    spaceinvaders.o(i.PlaySoundFastInvader1) refers to spaceinvaders.o(i.Sound_Play) for Sound_Play
+    spaceinvaders.o(i.PlaySoundFastInvader1) refers to spaceinvaders.o(.constdata) for fastinvader1
+    spaceinvaders.o(i.PlaySoundHighPitch) refers to spaceinvaders.o(i.Sound_Play) for Sound_Play
+    spaceinvaders.o(i.PlaySoundHighPitch) refers to spaceinvaders.o(.constdata) for highpitch
     spaceinvaders.o(i.PlaySoundInvaderKilled) refers to spaceinvaders.o(i.Sound_Play) for Sound_Play
     spaceinvaders.o(i.PlaySoundInvaderKilled) refers to spaceinvaders.o(.constdata) for invaderkilled
     spaceinvaders.o(i.PlaySoundShoot) refers to spaceinvaders.o(i.Sound_Play) for Sound_Play
@@ -123,9 +119,11 @@ Section Cross References
     spaceinvaders.o(i.Start_Screen) refers to rand.o(.text) for srand
     spaceinvaders.o(i.Start_Screen) refers to spaceinvaders.o(i.GetRandomNumber) for GetRandomNumber
     spaceinvaders.o(i.Start_Screen) refers to nokia5110.o(i.Nokia5110_Clear) for Nokia5110_Clear
+    spaceinvaders.o(i.Start_Screen) refers to spaceinvaders.o(i.ClearAllObjects) for ClearAllObjects
     spaceinvaders.o(i.Start_Screen) refers to spaceinvaders.o(i.InitEnemies) for InitEnemies
     spaceinvaders.o(i.Start_Screen) refers to spaceinvaders.o(i.InitBunkerObjects) for InitBunkerObjects
     spaceinvaders.o(i.Start_Screen) refers to spaceinvaders.o(i.InitPlayer) for InitPlayer
+    spaceinvaders.o(i.Start_Screen) refers to spaceinvaders.o(i.InitProjectiles) for InitProjectiles
     spaceinvaders.o(i.Start_Screen) refers to spaceinvaders.o(.data) for DisplayMode
     spaceinvaders.o(i.SysTick_Handler) refers to spaceinvaders.o(i.ADC0_In) for ADC0_In
     spaceinvaders.o(i.SysTick_Handler) refers to spaceinvaders.o(.data) for ADCdata
@@ -138,14 +136,17 @@ Section Cross References
     spaceinvaders.o(i.UpdateFrame) refers to nokia5110.o(i.Nokia5110_PrintBMP) for Nokia5110_PrintBMP
     spaceinvaders.o(i.UpdateFrame) refers to nokia5110.o(i.Nokia5110_DisplayBuffer) for Nokia5110_DisplayBuffer
     spaceinvaders.o(i.UpdateFrame) refers to spaceinvaders.o(i.Start_Screen) for Start_Screen
+    spaceinvaders.o(i.UpdateFrame) refers to spaceinvaders.o(i.UpdateSettings) for UpdateSettings
     spaceinvaders.o(i.UpdateFrame) refers to spaceinvaders.o(i.RandomInvaderShuffle) for RandomInvaderShuffle
     spaceinvaders.o(i.UpdateFrame) refers to spaceinvaders.o(i.RandomInvaderFire) for RandomInvaderFire
-    spaceinvaders.o(i.UpdateFrame) refers to spaceinvaders.o(i.FireEnemyLaser) for FireEnemyLaser
     spaceinvaders.o(i.UpdateFrame) refers to spaceinvaders.o(i.AnimateEnemies) for AnimateEnemies
-    spaceinvaders.o(i.UpdateFrame) refers to spaceinvaders.o(i.InvaderShuffle) for InvaderShuffle
+    spaceinvaders.o(i.UpdateFrame) refers to spaceinvaders.o(i.MoveInvaderShuffle) for MoveInvaderShuffle
     spaceinvaders.o(i.UpdateFrame) refers to spaceinvaders.o(i.MovePlayer) for MovePlayer
-    spaceinvaders.o(i.UpdateFrame) refers to spaceinvaders.o(i.InitPlayerLaser) for InitPlayerLaser
-    spaceinvaders.o(i.UpdateFrame) refers to spaceinvaders.o(i.InitLaserEnemy) for InitLaserEnemy
+    spaceinvaders.o(i.UpdateFrame) refers to spaceinvaders.o(i.MoveInvaderAdvance) for MoveInvaderAdvance
+    spaceinvaders.o(i.UpdateFrame) refers to spaceinvaders.o(i.firePlayerLaser) for firePlayerLaser
+    spaceinvaders.o(i.UpdateFrame) refers to spaceinvaders.o(i.firePlayerMissile) for firePlayerMissile
+    spaceinvaders.o(i.UpdateFrame) refers to spaceinvaders.o(i.fireLaserEnemy) for fireLaserEnemy
+    spaceinvaders.o(i.UpdateFrame) refers to spaceinvaders.o(i.MoveMissile) for MoveMissile
     spaceinvaders.o(i.UpdateFrame) refers to spaceinvaders.o(i.MoveLaserUp) for MoveLaserUp
     spaceinvaders.o(i.UpdateFrame) refers to spaceinvaders.o(i.MoveLaserDown) for MoveLaserDown
     spaceinvaders.o(i.UpdateFrame) refers to spaceinvaders.o(i.CrashCheck) for CrashCheck
@@ -153,16 +154,33 @@ Section Cross References
     spaceinvaders.o(i.UpdateFrame) refers to spaceinvaders.o(i.PlaySoundShoot) for PlaySoundShoot
     spaceinvaders.o(i.UpdateFrame) refers to spaceinvaders.o(i.PlaySoundInvaderKilled) for PlaySoundInvaderKilled
     spaceinvaders.o(i.UpdateFrame) refers to spaceinvaders.o(i.PlaySoundExplosion) for PlaySoundExplosion
+    spaceinvaders.o(i.UpdateFrame) refers to spaceinvaders.o(i.PlaySoundFastInvader1) for PlaySoundFastInvader1
     spaceinvaders.o(i.UpdateFrame) refers to spaceinvaders.o(i.PlayerLifeDisplay) for PlayerLifeDisplay
     spaceinvaders.o(i.UpdateFrame) refers to spaceinvaders.o(i.Draw) for Draw
     spaceinvaders.o(i.UpdateFrame) refers to spaceinvaders.o(i.LifeCheck) for LifeCheck
     spaceinvaders.o(i.UpdateFrame) refers to nokia5110.o(i.Nokia5110_Clear) for Nokia5110_Clear
+    spaceinvaders.o(i.UpdateFrame) refers to spaceinvaders.o(i.ClearAllObjects) for ClearAllObjects
     spaceinvaders.o(i.UpdateFrame) refers to nokia5110.o(i.Nokia5110_SetCursor) for Nokia5110_SetCursor
     spaceinvaders.o(i.UpdateFrame) refers to nokia5110.o(i.Nokia5110_OutString) for Nokia5110_OutString
-    spaceinvaders.o(i.UpdateFrame) refers to nokia5110.o(i.Nokia5110_OutUDec) for Nokia5110_OutUDec
+    spaceinvaders.o(i.UpdateFrame) refers to spaceinvaders.o(i.GetRandomNumber) for GetRandomNumber
+    spaceinvaders.o(i.UpdateFrame) refers to spaceinvaders.o(i.InitEnemies) for InitEnemies
+    spaceinvaders.o(i.UpdateFrame) refers to spaceinvaders.o(i.InitBunkerObjects) for InitBunkerObjects
+    spaceinvaders.o(i.UpdateFrame) refers to spaceinvaders.o(i.InitPlayer) for InitPlayer
+    spaceinvaders.o(i.UpdateFrame) refers to spaceinvaders.o(i.InitProjectiles) for InitProjectiles
+    spaceinvaders.o(i.UpdateFrame) refers to spaceinvaders.o(i.FireEnemyLaser) for FireEnemyLaser
     spaceinvaders.o(i.UpdateFrame) refers to spaceinvaders.o(.data) for DisplayMode
     spaceinvaders.o(i.UpdateFrame) refers to spaceinvaders.o(.constdata) for titlescreennew
-    spaceinvaders.o(i.UpdateFrame) refers to spaceinvaders.o(.bss) for LaserParamsEnemy
+    spaceinvaders.o(i.UpdateFrame) refers to spaceinvaders.o(.bss) for Player
+    spaceinvaders.o(i.UpdateSettings) refers to spaceinvaders.o(.bss) for LaserParamsEnemy
+    spaceinvaders.o(i.fireLaserEnemy) refers to spaceinvaders.o(.bss) for LaserParamsEnemy
+    spaceinvaders.o(i.fireLaserEnemy) refers to spaceinvaders.o(.data) for enemyLaserIndex
+    spaceinvaders.o(i.fireLaserEnemy) refers to spaceinvaders.o(.constdata) for Laser0
+    spaceinvaders.o(i.firePlayerLaser) refers to spaceinvaders.o(.bss) for LaserParamsPlayer
+    spaceinvaders.o(i.firePlayerLaser) refers to spaceinvaders.o(.data) for playerLaserIndex
+    spaceinvaders.o(i.firePlayerLaser) refers to spaceinvaders.o(.constdata) for Laser0
+    spaceinvaders.o(i.firePlayerMissile) refers to spaceinvaders.o(.bss) for MissileParamsPlayer
+    spaceinvaders.o(i.firePlayerMissile) refers to spaceinvaders.o(.data) for playerMissileIndex
+    spaceinvaders.o(i.firePlayerMissile) refers to spaceinvaders.o(.constdata) for Missile0
     spaceinvaders.o(i.main) refers to texas.o(i.TExaS_Init) for TExaS_Init
     spaceinvaders.o(i.main) refers to nokia5110.o(i.Nokia5110_Init) for Nokia5110_Init
     spaceinvaders.o(i.main) refers to spaceinvaders.o(i.Timer2_Init) for Timer2_Init
@@ -320,11 +338,12 @@ Section Cross References
 
 Removing Unused input sections from the image.
 
+    Removing nokia5110.o(i.Nokia5110_OutUDec), (412 bytes).
     Removing random.o(DATA), (4 bytes).
     Removing random.o(.text), (64 bytes).
     Removing spaceinvaders.o(i.Backlight_Off), (24 bytes).
     Removing spaceinvaders.o(i.Delay100ms), (36 bytes).
-    Removing spaceinvaders.o(i.MainLoop1), (176 bytes).
+    Removing spaceinvaders.o(i.PlaySoundHighPitch), (24 bytes).
     Removing texas.o(i.SetMode), (24 bytes).
     Removing texas.o(i.StartTimer4), (36 bytes).
     Removing texas.o(i.StopTimer4), (24 bytes).
@@ -335,7 +354,7 @@ Removing Unused input sections from the image.
     Removing texas.o(i.UART0_OutCharNonBlock), (12 bytes).
     Removing texas.o(i.copy), (18 bytes).
 
-14 unused section(s) (total 522 bytes) removed from the image.
+15 unused section(s) (total 782 bytes) removed from the image.
 
 ==============================================================================
 
@@ -346,37 +365,39 @@ Image Symbol Table
     Symbol Name                              Value     Ov Type        Size  Object(Section)
 
     RESET                                    0x00000000   Section      644  startup.o(RESET)
-    ../clib/angel/boardlib.s                 0x00000000   Number         0  boardshut.o ABSOLUTE
-    ../clib/angel/boardlib.s                 0x00000000   Number         0  boardinit1.o ABSOLUTE
-    ../clib/angel/boardlib.s                 0x00000000   Number         0  boardinit2.o ABSOLUTE
     ../clib/angel/boardlib.s                 0x00000000   Number         0  boardinit3.o ABSOLUTE
-    ../clib/angel/handlers.s                 0x00000000   Number         0  __scatter_zi.o ABSOLUTE
+    ../clib/angel/boardlib.s                 0x00000000   Number         0  boardinit2.o ABSOLUTE
+    ../clib/angel/boardlib.s                 0x00000000   Number         0  boardinit1.o ABSOLUTE
+    ../clib/angel/boardlib.s                 0x00000000   Number         0  boardshut.o ABSOLUTE
     ../clib/angel/handlers.s                 0x00000000   Number         0  __scatter_copy.o ABSOLUTE
-    ../clib/angel/kernel.s                   0x00000000   Number         0  rtentry2.o ABSOLUTE
-    ../clib/angel/kernel.s                   0x00000000   Number         0  rtentry4.o ABSOLUTE
+    ../clib/angel/handlers.s                 0x00000000   Number         0  __scatter_zi.o ABSOLUTE
     ../clib/angel/kernel.s                   0x00000000   Number         0  rtexit.o ABSOLUTE
-    ../clib/angel/kernel.s                   0x00000000   Number         0  rtentry.o ABSOLUTE
+    ../clib/angel/kernel.s                   0x00000000   Number         0  rtentry4.o ABSOLUTE
+    ../clib/angel/kernel.s                   0x00000000   Number         0  rtentry2.o ABSOLUTE
     ../clib/angel/kernel.s                   0x00000000   Number         0  rtexit2.o ABSOLUTE
+    ../clib/angel/kernel.s                   0x00000000   Number         0  rtentry.o ABSOLUTE
     ../clib/angel/rt.s                       0x00000000   Number         0  rt_raise.o ABSOLUTE
     ../clib/angel/scatter.s                  0x00000000   Number         0  __scatter.o ABSOLUTE
     ../clib/angel/startup.s                  0x00000000   Number         0  __main.o ABSOLUTE
     ../clib/angel/sys.s                      0x00000000   Number         0  sys_stackheap_outer.o ABSOLUTE
-    ../clib/angel/sys.s                      0x00000000   Number         0  libspace.o ABSOLUTE
     ../clib/angel/sys.s                      0x00000000   Number         0  use_no_semi.o ABSOLUTE
     ../clib/angel/sys.s                      0x00000000   Number         0  indicate_semi.o ABSOLUTE
+    ../clib/angel/sys.s                      0x00000000   Number         0  libspace.o ABSOLUTE
     ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_exit.o ABSOLUTE
     ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_wrch.o ABSOLUTE
     ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_command.o ABSOLUTE
-    ../clib/armsys.c                         0x00000000   Number         0  argv_veneer.o ABSOLUTE
-    ../clib/armsys.c                         0x00000000   Number         0  argv_veneer.o ABSOLUTE
-    ../clib/armsys.c                         0x00000000   Number         0  _get_argv_nomalloc.o ABSOLUTE
     ../clib/armsys.c                         0x00000000   Number         0  no_argv.o ABSOLUTE
+    ../clib/armsys.c                         0x00000000   Number         0  _get_argv_nomalloc.o ABSOLUTE
+    ../clib/armsys.c                         0x00000000   Number         0  argv_veneer.o ABSOLUTE
+    ../clib/armsys.c                         0x00000000   Number         0  argv_veneer.o ABSOLUTE
     ../clib/heapalloc.c                      0x00000000   Number         0  hrguard.o ABSOLUTE
     ../clib/heapaux.c                        0x00000000   Number         0  heapauxi.o ABSOLUTE
-    ../clib/libinit.s                        0x00000000   Number         0  libshutdown.o ABSOLUTE
     ../clib/libinit.s                        0x00000000   Number         0  libshutdown2.o ABSOLUTE
-    ../clib/libinit.s                        0x00000000   Number         0  libinit.o ABSOLUTE
+    ../clib/libinit.s                        0x00000000   Number         0  libshutdown.o ABSOLUTE
     ../clib/libinit.s                        0x00000000   Number         0  libinit2.o ABSOLUTE
+    ../clib/libinit.s                        0x00000000   Number         0  libinit.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_pvfn_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_stak_inner.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_rtred_inner.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_fpe_inner.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_abrt_inner.o ABSOLUTE
@@ -384,17 +405,15 @@ Image Symbol Table
     ../clib/signal.c                         0x00000000   Number         0  __raise.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_inner.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_exit.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_formal.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_outer.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_cppl_inner.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_segv_inner.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_other.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_formal.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_cppl_inner.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_pvfn_inner.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_stak_inner.o ABSOLUTE
     ../clib/signal.s                         0x00000000   Number         0  defsig.o ABSOLUTE
     ../clib/stdlib.c                         0x00000000   Number         0  rand.o ABSOLUTE
-    ../clib/stdlib.c                         0x00000000   Number         0  rand.o ABSOLUTE
     ../clib/stdlib.c                         0x00000000   Number         0  exit.o ABSOLUTE
+    ../clib/stdlib.c                         0x00000000   Number         0  rand.o ABSOLUTE
     ../fplib/ddiv.s                          0x00000000   Number         0  ddiv.o ABSOLUTE
     ../fplib/dfixu.s                         0x00000000   Number         0  dfixu.o ABSOLUTE
     ../fplib/dnaninf.s                       0x00000000   Number         0  dnaninf.o ABSOLUTE
@@ -472,108 +491,118 @@ Image Symbol Table
     i.Backlight_Init                         0x0000064c   Section        0  spaceinvaders.o(i.Backlight_Init)
     i.Backlight_On                           0x000006b4   Section        0  spaceinvaders.o(i.Backlight_On)
     i.Buttons_Init                           0x000006cc   Section        0  spaceinvaders.o(i.Buttons_Init)
-    i.CountLasers                            0x0000071c   Section        0  spaceinvaders.o(i.CountLasers)
-    i.CrashCheck                             0x0000074c   Section        0  spaceinvaders.o(i.CrashCheck)
-    i.DAC_Init                               0x00000874   Section        0  spaceinvaders.o(i.DAC_Init)
-    i.DAC_Out                                0x000008f4   Section        0  spaceinvaders.o(i.DAC_Out)
-    i.Draw                                   0x00000900   Section        0  spaceinvaders.o(i.Draw)
-    i.DrawArea                               0x00000944   Section        0  spaceinvaders.o(i.DrawArea)
-    i.DrawEnemies                            0x0000098c   Section        0  spaceinvaders.o(i.DrawEnemies)
-    i.DrawEnemyLasers                        0x000009d8   Section        0  spaceinvaders.o(i.DrawEnemyLasers)
-    i.DrawExplosions                         0x00000a20   Section        0  spaceinvaders.o(i.DrawExplosions)
-    i.DrawLasers                             0x00000a78   Section        0  spaceinvaders.o(i.DrawLasers)
-    i.DrawPlayer                             0x00000ac0   Section        0  spaceinvaders.o(i.DrawPlayer)
-    i.FireEnemyLaser                         0x00000ad8   Section        0  spaceinvaders.o(i.FireEnemyLaser)
-    i.GetRandomNumber                        0x00000afc   Section        0  spaceinvaders.o(i.GetRandomNumber)
-    i.InitBunkerObjects                      0x00000b14   Section        0  spaceinvaders.o(i.InitBunkerObjects)
-    i.InitEnemies                            0x00000ba4   Section        0  spaceinvaders.o(i.InitEnemies)
-    i.InitLaserEnemy                         0x00000c08   Section        0  spaceinvaders.o(i.InitLaserEnemy)
-    i.InitPlayer                             0x00000d04   Section        0  spaceinvaders.o(i.InitPlayer)
-    i.InitPlayerLaser                        0x00000d28   Section        0  spaceinvaders.o(i.InitPlayerLaser)
-    i.InvaderShuffle                         0x00000e00   Section        0  spaceinvaders.o(i.InvaderShuffle)
-    i.LED1_Off                               0x00000e18   Section        0  spaceinvaders.o(i.LED1_Off)
-    i.LED1_On                                0x00000e30   Section        0  spaceinvaders.o(i.LED1_On)
-    i.LED2_Off                               0x00000e48   Section        0  spaceinvaders.o(i.LED2_Off)
-    i.LED2_On                                0x00000e60   Section        0  spaceinvaders.o(i.LED2_On)
-    i.LEDs_Init                              0x00000e78   Section        0  spaceinvaders.o(i.LEDs_Init)
-    i.LifeCheck                              0x00000ee0   Section        0  spaceinvaders.o(i.LifeCheck)
-    i.MoveLaserDown                          0x00000f58   Section        0  spaceinvaders.o(i.MoveLaserDown)
-    i.MoveLaserUp                            0x00000fe0   Section        0  spaceinvaders.o(i.MoveLaserUp)
-    i.MoveLeft                               0x0000106c   Section        0  spaceinvaders.o(i.MoveLeft)
-    i.MovePlayer                             0x000010d0   Section        0  spaceinvaders.o(i.MovePlayer)
-    i.MoveRight                              0x00001110   Section        0  spaceinvaders.o(i.MoveRight)
-    i.Nokia5110_Clear                        0x00001174   Section        0  nokia5110.o(i.Nokia5110_Clear)
-    i.Nokia5110_ClearBuffer                  0x00001194   Section        0  nokia5110.o(i.Nokia5110_ClearBuffer)
-    i.Nokia5110_DisplayBuffer                0x000011ac   Section        0  nokia5110.o(i.Nokia5110_DisplayBuffer)
-    i.Nokia5110_DrawFullImage                0x000011bc   Section        0  nokia5110.o(i.Nokia5110_DrawFullImage)
-    i.Nokia5110_Init                         0x000011e0   Section        0  nokia5110.o(i.Nokia5110_Init)
-    i.Nokia5110_OutChar                      0x0000134c   Section        0  nokia5110.o(i.Nokia5110_OutChar)
-    i.Nokia5110_OutString                    0x00001384   Section        0  nokia5110.o(i.Nokia5110_OutString)
-    i.Nokia5110_OutUDec                      0x0000139c   Section        0  nokia5110.o(i.Nokia5110_OutUDec)
-    i.Nokia5110_PrintBMP                     0x00001538   Section        0  nokia5110.o(i.Nokia5110_PrintBMP)
-    i.Nokia5110_SetCursor                    0x000016e0   Section        0  nokia5110.o(i.Nokia5110_SetCursor)
-    i.PLL_Init                               0x00001710   Section        0  texas.o(i.PLL_Init)
-    i.PlaySoundExplosion                     0x0000178c   Section        0  spaceinvaders.o(i.PlaySoundExplosion)
-    i.PlaySoundInvaderKilled                 0x000017a4   Section        0  spaceinvaders.o(i.PlaySoundInvaderKilled)
-    i.PlaySoundShoot                         0x000017bc   Section        0  spaceinvaders.o(i.PlaySoundShoot)
-    i.PlayerLifeDisplay                      0x000017d4   Section        0  spaceinvaders.o(i.PlayerLifeDisplay)
-    i.RandomInvaderFire                      0x00001808   Section        0  spaceinvaders.o(i.RandomInvaderFire)
-    i.RandomInvaderShuffle                   0x00001830   Section        0  spaceinvaders.o(i.RandomInvaderShuffle)
-    i.Read_Buttons                           0x00001840   Section        0  spaceinvaders.o(i.Read_Buttons)
-    i.SetCode                                0x00001870   Section        0  texas.o(i.SetCode)
-    i.SetCourse                              0x00001888   Section        0  texas.o(i.SetCourse)
-    i.Sound_Play                             0x000018a0   Section        0  spaceinvaders.o(i.Sound_Play)
-    i.Start_Screen                           0x000018c8   Section        0  spaceinvaders.o(i.Start_Screen)
-    i.SysTick_Handler                        0x00001920   Section        0  spaceinvaders.o(i.SysTick_Handler)
-    i.SystickInit                            0x0000193c   Section        0  spaceinvaders.o(i.SystickInit)
-    i.TExaS_Init                             0x00001970   Section        0  texas.o(i.TExaS_Init)
-    i.Timer2A_Handler                        0x00001b34   Section        0  spaceinvaders.o(i.Timer2A_Handler)
-    i.Timer2A_Start                          0x00001b90   Section        0  spaceinvaders.o(i.Timer2A_Start)
-    i.Timer2A_Stop                           0x00001ba0   Section        0  spaceinvaders.o(i.Timer2A_Stop)
-    i.Timer2_Init                            0x00001bc4   Section        0  spaceinvaders.o(i.Timer2_Init)
-    i.Timer4A_Handler                        0x00001c34   Section        0  texas.o(i.Timer4A_Handler)
-    i.Timer5A_Handler                        0x00001c54   Section        0  texas.o(i.Timer5A_Handler)
-    i.UART0_Init                             0x00001c84   Section        0  texas.o(i.UART0_Init)
-    i.UpdateFrame                            0x00001d44   Section        0  spaceinvaders.o(i.UpdateFrame)
-    i.lcdwrite                               0x00001ffc   Section        0  nokia5110.o(i.lcdwrite)
-    lcdwrite                                 0x00001ffd   Thumb Code    66  nokia5110.o(i.lcdwrite)
-    i.main                                   0x00002048   Section        0  spaceinvaders.o(i.main)
-    x$fpl$ddiv                               0x000020a8   Section      688  ddiv.o(x$fpl$ddiv)
-    ddiv_entry                               0x000020af   Thumb Code     0  ddiv.o(x$fpl$ddiv)
-    x$fpl$dfixu                              0x00002358   Section       90  dfixu.o(x$fpl$dfixu)
-    x$fpl$dnaninf                            0x000023b2   Section      156  dnaninf.o(x$fpl$dnaninf)
-    x$fpl$dretinf                            0x0000244e   Section       12  dretinf.o(x$fpl$dretinf)
-    x$fpl$f2d                                0x0000245c   Section       86  f2d.o(x$fpl$f2d)
-    x$fpl$ffltu                              0x000024b4   Section       38  fflt_clz.o(x$fpl$ffltu)
-    x$fpl$fnaninf                            0x000024da   Section      140  fnaninf.o(x$fpl$fnaninf)
-    .constdata                               0x00002566   Section      480  nokia5110.o(.constdata)
-    x$fpl$usenofp                            0x00002566   Section        0  usenofp.o(x$fpl$usenofp)
-    ASCII                                    0x00002566   Data         480  nokia5110.o(.constdata)
-    .constdata                               0x00002746   Section    17901  spaceinvaders.o(.constdata)
-    ASCII                                    0x00002746   Data         480  spaceinvaders.o(.constdata)
-    .constdata                               0x00006d33   Section      360  texas.o(.constdata)
-    .data                                    0x20000000   Section      124  spaceinvaders.o(.data)
-    semaphoreCount_IL                        0x2000003c   Data           4  spaceinvaders.o(.data)
-    semaphoreCount_IL                        0x20000040   Data           4  spaceinvaders.o(.data)
-    semaphoreCount                           0x20000044   Data           4  spaceinvaders.o(.data)
-    semaphoreCount                           0x20000048   Data           4  spaceinvaders.o(.data)
-    frameCount                               0x2000004c   Data           4  spaceinvaders.o(.data)
+    i.ClearAllObjects                        0x0000071c   Section        0  spaceinvaders.o(i.ClearAllObjects)
+    i.CountLasers                            0x00000798   Section        0  spaceinvaders.o(i.CountLasers)
+    i.CrashCheck                             0x000007e0   Section        0  spaceinvaders.o(i.CrashCheck)
+    i.DAC_Init                               0x00000908   Section        0  spaceinvaders.o(i.DAC_Init)
+    i.DAC_Out                                0x00000988   Section        0  spaceinvaders.o(i.DAC_Out)
+    i.Draw                                   0x00000994   Section        0  spaceinvaders.o(i.Draw)
+    i.DrawArea                               0x000009e0   Section        0  spaceinvaders.o(i.DrawArea)
+    i.DrawEnemies                            0x00000a0c   Section        0  spaceinvaders.o(i.DrawEnemies)
+    i.DrawEnemyLasers                        0x00000a58   Section        0  spaceinvaders.o(i.DrawEnemyLasers)
+    i.DrawExplosions                         0x00000aa0   Section        0  spaceinvaders.o(i.DrawExplosions)
+    i.DrawLasers                             0x00000af8   Section        0  spaceinvaders.o(i.DrawLasers)
+    i.DrawMissiles                           0x00000b40   Section        0  spaceinvaders.o(i.DrawMissiles)
+    i.DrawPlayer                             0x00000b88   Section        0  spaceinvaders.o(i.DrawPlayer)
+    i.FireEnemyLaser                         0x00000ba0   Section        0  spaceinvaders.o(i.FireEnemyLaser)
+    i.GetRandomNumber                        0x00000bc4   Section        0  spaceinvaders.o(i.GetRandomNumber)
+    i.InitBunkerObjects                      0x00000bdc   Section        0  spaceinvaders.o(i.InitBunkerObjects)
+    i.InitEnemies                            0x00000d70   Section        0  spaceinvaders.o(i.InitEnemies)
+    i.InitPlayer                             0x00000dd4   Section        0  spaceinvaders.o(i.InitPlayer)
+    i.InitProjectiles                        0x00000df8   Section        0  spaceinvaders.o(i.InitProjectiles)
+    i.LED1_Off                               0x00000e84   Section        0  spaceinvaders.o(i.LED1_Off)
+    i.LED1_On                                0x00000e9c   Section        0  spaceinvaders.o(i.LED1_On)
+    i.LED2_Off                               0x00000eb4   Section        0  spaceinvaders.o(i.LED2_Off)
+    i.LED2_On                                0x00000ecc   Section        0  spaceinvaders.o(i.LED2_On)
+    i.LEDs_Init                              0x00000ee4   Section        0  spaceinvaders.o(i.LEDs_Init)
+    i.LifeCheck                              0x00000f4c   Section        0  spaceinvaders.o(i.LifeCheck)
+    i.MoveInvaderAdvance                     0x00000fd0   Section        0  spaceinvaders.o(i.MoveInvaderAdvance)
+    i.MoveInvaderShuffle                     0x00001038   Section        0  spaceinvaders.o(i.MoveInvaderShuffle)
+    i.MoveLaserDown                          0x00001050   Section        0  spaceinvaders.o(i.MoveLaserDown)
+    i.MoveLaserUp                            0x000010d8   Section        0  spaceinvaders.o(i.MoveLaserUp)
+    i.MoveLeft                               0x00001164   Section        0  spaceinvaders.o(i.MoveLeft)
+    i.MoveMissile                            0x000011d8   Section        0  spaceinvaders.o(i.MoveMissile)
+    i.MovePlayer                             0x00001264   Section        0  spaceinvaders.o(i.MovePlayer)
+    i.MoveRight                              0x000012a4   Section        0  spaceinvaders.o(i.MoveRight)
+    i.Nokia5110_Clear                        0x00001318   Section        0  nokia5110.o(i.Nokia5110_Clear)
+    i.Nokia5110_ClearBuffer                  0x00001338   Section        0  nokia5110.o(i.Nokia5110_ClearBuffer)
+    i.Nokia5110_DisplayBuffer                0x00001350   Section        0  nokia5110.o(i.Nokia5110_DisplayBuffer)
+    i.Nokia5110_DrawFullImage                0x00001360   Section        0  nokia5110.o(i.Nokia5110_DrawFullImage)
+    i.Nokia5110_Init                         0x00001384   Section        0  nokia5110.o(i.Nokia5110_Init)
+    i.Nokia5110_OutChar                      0x000014f0   Section        0  nokia5110.o(i.Nokia5110_OutChar)
+    i.Nokia5110_OutString                    0x00001528   Section        0  nokia5110.o(i.Nokia5110_OutString)
+    i.Nokia5110_PrintBMP                     0x00001540   Section        0  nokia5110.o(i.Nokia5110_PrintBMP)
+    i.Nokia5110_SetCursor                    0x000016e8   Section        0  nokia5110.o(i.Nokia5110_SetCursor)
+    i.PLL_Init                               0x00001718   Section        0  texas.o(i.PLL_Init)
+    i.PlaySoundExplosion                     0x00001794   Section        0  spaceinvaders.o(i.PlaySoundExplosion)
+    i.PlaySoundFastInvader1                  0x000017ac   Section        0  spaceinvaders.o(i.PlaySoundFastInvader1)
+    i.PlaySoundInvaderKilled                 0x000017c4   Section        0  spaceinvaders.o(i.PlaySoundInvaderKilled)
+    i.PlaySoundShoot                         0x000017dc   Section        0  spaceinvaders.o(i.PlaySoundShoot)
+    i.PlayerLifeDisplay                      0x000017f4   Section        0  spaceinvaders.o(i.PlayerLifeDisplay)
+    i.RandomInvaderFire                      0x00001828   Section        0  spaceinvaders.o(i.RandomInvaderFire)
+    i.RandomInvaderShuffle                   0x00001860   Section        0  spaceinvaders.o(i.RandomInvaderShuffle)
+    i.Read_Buttons                           0x00001870   Section        0  spaceinvaders.o(i.Read_Buttons)
+    i.SetCode                                0x000018a0   Section        0  texas.o(i.SetCode)
+    i.SetCourse                              0x000018b8   Section        0  texas.o(i.SetCourse)
+    i.Sound_Play                             0x000018d0   Section        0  spaceinvaders.o(i.Sound_Play)
+    i.Start_Screen                           0x000018f8   Section        0  spaceinvaders.o(i.Start_Screen)
+    i.SysTick_Handler                        0x0000195c   Section        0  spaceinvaders.o(i.SysTick_Handler)
+    i.SystickInit                            0x00001978   Section        0  spaceinvaders.o(i.SystickInit)
+    i.TExaS_Init                             0x000019ac   Section        0  texas.o(i.TExaS_Init)
+    i.Timer2A_Handler                        0x00001b70   Section        0  spaceinvaders.o(i.Timer2A_Handler)
+    i.Timer2A_Start                          0x00001bcc   Section        0  spaceinvaders.o(i.Timer2A_Start)
+    i.Timer2A_Stop                           0x00001bdc   Section        0  spaceinvaders.o(i.Timer2A_Stop)
+    i.Timer2_Init                            0x00001c00   Section        0  spaceinvaders.o(i.Timer2_Init)
+    i.Timer4A_Handler                        0x00001c70   Section        0  texas.o(i.Timer4A_Handler)
+    i.Timer5A_Handler                        0x00001c90   Section        0  texas.o(i.Timer5A_Handler)
+    i.UART0_Init                             0x00001cc0   Section        0  texas.o(i.UART0_Init)
+    i.UpdateFrame                            0x00001d80   Section        0  spaceinvaders.o(i.UpdateFrame)
+    i.UpdateSettings                         0x00002418   Section        0  spaceinvaders.o(i.UpdateSettings)
+    i.fireLaserEnemy                         0x00002480   Section        0  spaceinvaders.o(i.fireLaserEnemy)
+    i.firePlayerLaser                        0x0000257c   Section        0  spaceinvaders.o(i.firePlayerLaser)
+    i.firePlayerMissile                      0x00002654   Section        0  spaceinvaders.o(i.firePlayerMissile)
+    i.lcdwrite                               0x0000272c   Section        0  nokia5110.o(i.lcdwrite)
+    lcdwrite                                 0x0000272d   Thumb Code    66  nokia5110.o(i.lcdwrite)
+    i.main                                   0x00002778   Section        0  spaceinvaders.o(i.main)
+    x$fpl$ddiv                               0x000027d8   Section      688  ddiv.o(x$fpl$ddiv)
+    ddiv_entry                               0x000027df   Thumb Code     0  ddiv.o(x$fpl$ddiv)
+    x$fpl$dfixu                              0x00002a88   Section       90  dfixu.o(x$fpl$dfixu)
+    x$fpl$dnaninf                            0x00002ae2   Section      156  dnaninf.o(x$fpl$dnaninf)
+    x$fpl$dretinf                            0x00002b7e   Section       12  dretinf.o(x$fpl$dretinf)
+    x$fpl$f2d                                0x00002b8c   Section       86  f2d.o(x$fpl$f2d)
+    x$fpl$ffltu                              0x00002be4   Section       38  fflt_clz.o(x$fpl$ffltu)
+    x$fpl$fnaninf                            0x00002c0a   Section      140  fnaninf.o(x$fpl$fnaninf)
+    .constdata                               0x00002c96   Section      480  nokia5110.o(.constdata)
+    x$fpl$usenofp                            0x00002c96   Section        0  usenofp.o(x$fpl$usenofp)
+    ASCII                                    0x00002c96   Data         480  nokia5110.o(.constdata)
+    .constdata                               0x00002e76   Section    19925  spaceinvaders.o(.constdata)
+    ASCII                                    0x00002e76   Data         480  spaceinvaders.o(.constdata)
+    .constdata                               0x00007c4b   Section      360  texas.o(.constdata)
+    .data                                    0x20000000   Section      144  spaceinvaders.o(.data)
+    semaphoreCount_IL                        0x20000044   Data           4  spaceinvaders.o(.data)
+    semaphoreCount_IL                        0x20000048   Data           4  spaceinvaders.o(.data)
+    semaphoreCount_IL                        0x2000004c   Data           4  spaceinvaders.o(.data)
     semaphoreCount                           0x20000050   Data           4  spaceinvaders.o(.data)
     semaphoreCount                           0x20000054   Data           4  spaceinvaders.o(.data)
-    semaphoreCount                           0x20000058   Data           4  spaceinvaders.o(.data)
+    frameCount                               0x20000058   Data           4  spaceinvaders.o(.data)
     semaphoreCount                           0x2000005c   Data           4  spaceinvaders.o(.data)
-    damageCounter                            0x20000060   Data           4  spaceinvaders.o(.data)
+    semaphoreWait                            0x20000060   Data           4  spaceinvaders.o(.data)
     semaphoreCount                           0x20000064   Data           4  spaceinvaders.o(.data)
-    .data                                    0x2000007c   Section       52  texas.o(.data)
-    .bss                                     0x200000b0   Section      504  nokia5110.o(.bss)
-    .bss                                     0x200002a8   Section      790  spaceinvaders.o(.bss)
-    .bss                                     0x200005c0   Section       56  texas.o(.bss)
-    .bss                                     0x200005f8   Section      228  rand.o(.bss)
-    .bss                                     0x200006dc   Section       96  libspace.o(.bss)
-    HEAP                                     0x20000740   Section        0  startup.o(HEAP)
-    STACK                                    0x20000740   Section     1024  startup.o(STACK)
-    HeapMem                                  0x20000740   Data           0  startup.o(HEAP)
-    StackMem                                 0x20000740   Data           0  startup.o(STACK)
+    semaphoreCount                           0x20000068   Data           4  spaceinvaders.o(.data)
+    semaphoreCount                           0x2000006c   Data           4  spaceinvaders.o(.data)
+    semaphoreCount                           0x20000070   Data           4  spaceinvaders.o(.data)
+    semaphoreCount                           0x20000074   Data           4  spaceinvaders.o(.data)
+    semaphoreCount                           0x20000078   Data           4  spaceinvaders.o(.data)
+    .data                                    0x20000090   Section       52  texas.o(.data)
+    .bss                                     0x200000c4   Section      504  nokia5110.o(.bss)
+    .bss                                     0x200002bc   Section      832  spaceinvaders.o(.bss)
+    .bss                                     0x20000600   Section       56  texas.o(.bss)
+    .bss                                     0x20000638   Section      228  rand.o(.bss)
+    .bss                                     0x2000071c   Section       96  libspace.o(.bss)
+    HEAP                                     0x20000780   Section        0  startup.o(HEAP)
+    STACK                                    0x20000780   Section     1024  startup.o(STACK)
+    HeapMem                                  0x20000780   Data           0  startup.o(HEAP)
+    StackMem                                 0x20000780   Data           0  startup.o(STACK)
 
     Global Symbols
 
@@ -804,161 +833,174 @@ Image Symbol Table
     Backlight_Init                           0x0000064d   Thumb Code    80  spaceinvaders.o(i.Backlight_Init)
     Backlight_On                             0x000006b5   Thumb Code    16  spaceinvaders.o(i.Backlight_On)
     Buttons_Init                             0x000006cd   Thumb Code    54  spaceinvaders.o(i.Buttons_Init)
-    CountLasers                              0x0000071d   Thumb Code    38  spaceinvaders.o(i.CountLasers)
-    CrashCheck                               0x0000074d   Thumb Code   292  spaceinvaders.o(i.CrashCheck)
-    DAC_Init                                 0x00000875   Thumb Code   100  spaceinvaders.o(i.DAC_Init)
-    DAC_Out                                  0x000008f5   Thumb Code     6  spaceinvaders.o(i.DAC_Out)
-    Draw                                     0x00000901   Thumb Code    66  spaceinvaders.o(i.Draw)
-    DrawArea                                 0x00000945   Thumb Code    64  spaceinvaders.o(i.DrawArea)
-    DrawEnemies                              0x0000098d   Thumb Code    72  spaceinvaders.o(i.DrawEnemies)
-    DrawEnemyLasers                          0x000009d9   Thumb Code    66  spaceinvaders.o(i.DrawEnemyLasers)
-    DrawExplosions                           0x00000a21   Thumb Code    78  spaceinvaders.o(i.DrawExplosions)
-    DrawLasers                               0x00000a79   Thumb Code    66  spaceinvaders.o(i.DrawLasers)
-    DrawPlayer                               0x00000ac1   Thumb Code    20  spaceinvaders.o(i.DrawPlayer)
-    FireEnemyLaser                           0x00000ad9   Thumb Code    32  spaceinvaders.o(i.FireEnemyLaser)
-    GetRandomNumber                          0x00000afd   Thumb Code    22  spaceinvaders.o(i.GetRandomNumber)
-    InitBunkerObjects                        0x00000b15   Thumb Code   120  spaceinvaders.o(i.InitBunkerObjects)
-    InitEnemies                              0x00000ba5   Thumb Code    88  spaceinvaders.o(i.InitEnemies)
-    InitLaserEnemy                           0x00000c09   Thumb Code   218  spaceinvaders.o(i.InitLaserEnemy)
-    InitPlayer                               0x00000d05   Thumb Code    28  spaceinvaders.o(i.InitPlayer)
-    InitPlayerLaser                          0x00000d29   Thumb Code   192  spaceinvaders.o(i.InitPlayerLaser)
-    InvaderShuffle                           0x00000e01   Thumb Code    24  spaceinvaders.o(i.InvaderShuffle)
-    LED1_Off                                 0x00000e19   Thumb Code    16  spaceinvaders.o(i.LED1_Off)
-    LED1_On                                  0x00000e31   Thumb Code    16  spaceinvaders.o(i.LED1_On)
-    LED2_Off                                 0x00000e49   Thumb Code    16  spaceinvaders.o(i.LED2_Off)
-    LED2_On                                  0x00000e61   Thumb Code    16  spaceinvaders.o(i.LED2_On)
-    LEDs_Init                                0x00000e79   Thumb Code    80  spaceinvaders.o(i.LEDs_Init)
-    LifeCheck                                0x00000ee1   Thumb Code   102  spaceinvaders.o(i.LifeCheck)
-    MoveLaserDown                            0x00000f59   Thumb Code   120  spaceinvaders.o(i.MoveLaserDown)
-    MoveLaserUp                              0x00000fe1   Thumb Code   124  spaceinvaders.o(i.MoveLaserUp)
-    MoveLeft                                 0x0000106d   Thumb Code    90  spaceinvaders.o(i.MoveLeft)
-    MovePlayer                               0x000010d1   Thumb Code    48  spaceinvaders.o(i.MovePlayer)
-    MoveRight                                0x00001111   Thumb Code    92  spaceinvaders.o(i.MoveRight)
-    Nokia5110_Clear                          0x00001175   Thumb Code    32  nokia5110.o(i.Nokia5110_Clear)
-    Nokia5110_ClearBuffer                    0x00001195   Thumb Code    20  nokia5110.o(i.Nokia5110_ClearBuffer)
-    Nokia5110_DisplayBuffer                  0x000011ad   Thumb Code    10  nokia5110.o(i.Nokia5110_DisplayBuffer)
-    Nokia5110_DrawFullImage                  0x000011bd   Thumb Code    34  nokia5110.o(i.Nokia5110_DrawFullImage)
-    Nokia5110_Init                           0x000011e1   Thumb Code   316  nokia5110.o(i.Nokia5110_Init)
-    Nokia5110_OutChar                        0x0000134d   Thumb Code    52  nokia5110.o(i.Nokia5110_OutChar)
-    Nokia5110_OutString                      0x00001385   Thumb Code    22  nokia5110.o(i.Nokia5110_OutString)
-    Nokia5110_OutUDec                        0x0000139d   Thumb Code   394  nokia5110.o(i.Nokia5110_OutUDec)
-    Nokia5110_PrintBMP                       0x00001539   Thumb Code   420  nokia5110.o(i.Nokia5110_PrintBMP)
-    Nokia5110_SetCursor                      0x000016e1   Thumb Code    48  nokia5110.o(i.Nokia5110_SetCursor)
-    PLL_Init                                 0x00001711   Thumb Code   118  texas.o(i.PLL_Init)
-    PlaySoundExplosion                       0x0000178d   Thumb Code    18  spaceinvaders.o(i.PlaySoundExplosion)
-    PlaySoundInvaderKilled                   0x000017a5   Thumb Code    18  spaceinvaders.o(i.PlaySoundInvaderKilled)
-    PlaySoundShoot                           0x000017bd   Thumb Code    18  spaceinvaders.o(i.PlaySoundShoot)
-    PlayerLifeDisplay                        0x000017d5   Thumb Code    48  spaceinvaders.o(i.PlayerLifeDisplay)
-    RandomInvaderFire                        0x00001809   Thumb Code    36  spaceinvaders.o(i.RandomInvaderFire)
-    RandomInvaderShuffle                     0x00001831   Thumb Code    14  spaceinvaders.o(i.RandomInvaderShuffle)
-    Read_Buttons                             0x00001841   Thumb Code    38  spaceinvaders.o(i.Read_Buttons)
-    SetCode                                  0x00001871   Thumb Code    20  texas.o(i.SetCode)
-    SetCourse                                0x00001889   Thumb Code    20  texas.o(i.SetCourse)
-    Sound_Play                               0x000018a1   Thumb Code    26  spaceinvaders.o(i.Sound_Play)
-    Start_Screen                             0x000018c9   Thumb Code    84  spaceinvaders.o(i.Start_Screen)
-    SysTick_Handler                          0x00001921   Thumb Code    18  spaceinvaders.o(i.SysTick_Handler)
-    SystickInit                              0x0000193d   Thumb Code    42  spaceinvaders.o(i.SystickInit)
-    TExaS_Init                               0x00001971   Thumb Code   324  texas.o(i.TExaS_Init)
-    Timer2A_Handler                          0x00001b35   Thumb Code    70  spaceinvaders.o(i.Timer2A_Handler)
-    Timer2A_Start                            0x00001b91   Thumb Code    10  spaceinvaders.o(i.Timer2A_Start)
-    Timer2A_Stop                             0x00001ba1   Thumb Code    30  spaceinvaders.o(i.Timer2A_Stop)
-    Timer2_Init                              0x00001bc5   Thumb Code    88  spaceinvaders.o(i.Timer2_Init)
-    Timer4A_Handler                          0x00001c35   Thumb Code    20  texas.o(i.Timer4A_Handler)
-    Timer5A_Handler                          0x00001c55   Thumb Code    34  texas.o(i.Timer5A_Handler)
-    UART0_Init                               0x00001c85   Thumb Code   160  texas.o(i.UART0_Init)
-    UpdateFrame                              0x00001d45   Thumb Code   594  spaceinvaders.o(i.UpdateFrame)
-    main                                     0x00002049   Thumb Code    88  spaceinvaders.o(i.main)
-    __aeabi_ddiv                             0x000020a9   Thumb Code     0  ddiv.o(x$fpl$ddiv)
-    _ddiv                                    0x000020a9   Thumb Code   552  ddiv.o(x$fpl$ddiv)
-    __aeabi_d2uiz                            0x00002359   Thumb Code     0  dfixu.o(x$fpl$dfixu)
-    _dfixu                                   0x00002359   Thumb Code    90  dfixu.o(x$fpl$dfixu)
-    __fpl_dnaninf                            0x000023b3   Thumb Code   156  dnaninf.o(x$fpl$dnaninf)
-    __fpl_dretinf                            0x0000244f   Thumb Code    12  dretinf.o(x$fpl$dretinf)
-    __aeabi_f2d                              0x0000245d   Thumb Code     0  f2d.o(x$fpl$f2d)
-    _f2d                                     0x0000245d   Thumb Code    86  f2d.o(x$fpl$f2d)
-    __aeabi_ui2f                             0x000024b5   Thumb Code     0  fflt_clz.o(x$fpl$ffltu)
-    _ffltu                                   0x000024b5   Thumb Code    38  fflt_clz.o(x$fpl$ffltu)
-    __fpl_fnaninf                            0x000024db   Thumb Code   140  fnaninf.o(x$fpl$fnaninf)
-    __I$use$fp                               0x00002566   Number         0  usenofp.o(x$fpl$usenofp)
-    SmallEnemy30PointA                       0x00002926   Data         199  spaceinvaders.o(.constdata)
-    SmallEnemy30PointB                       0x000029ed   Data         199  spaceinvaders.o(.constdata)
-    SmallEnemy20PointA                       0x00002ab4   Data         199  spaceinvaders.o(.constdata)
-    SmallEnemy20PointB                       0x00002b7b   Data         199  spaceinvaders.o(.constdata)
-    SmallEnemy10PointA                       0x00002c42   Data         199  spaceinvaders.o(.constdata)
-    SmallEnemy10PointB                       0x00002d09   Data         199  spaceinvaders.o(.constdata)
-    PlayerShip0                              0x00002dd0   Data         215  spaceinvaders.o(.constdata)
-    SmallEnemyBonus0                         0x00002ea7   Data         203  spaceinvaders.o(.constdata)
-    Bunker0                                  0x00002f72   Data         179  spaceinvaders.o(.constdata)
-    Bunker1                                  0x00003025   Data         179  spaceinvaders.o(.constdata)
-    Bunker2                                  0x000030d8   Data         179  spaceinvaders.o(.constdata)
-    Bunker3                                  0x0000318b   Data         179  spaceinvaders.o(.constdata)
-    BigExplosion0                            0x0000323e   Data         215  spaceinvaders.o(.constdata)
-    BigExplosion1                            0x00003315   Data         215  spaceinvaders.o(.constdata)
-    SmallExplosion0                          0x000033ec   Data         199  spaceinvaders.o(.constdata)
-    SmallExplosion1                          0x000034b3   Data         199  spaceinvaders.o(.constdata)
-    Missile0                                 0x0000357a   Data         155  spaceinvaders.o(.constdata)
-    Missile1                                 0x00003615   Data         155  spaceinvaders.o(.constdata)
-    Missile2                                 0x000036b0   Data         155  spaceinvaders.o(.constdata)
-    Laser0                                   0x0000374b   Data         155  spaceinvaders.o(.constdata)
-    Laser1                                   0x000037e6   Data         155  spaceinvaders.o(.constdata)
-    titlescreennew                           0x00003881   Data        2231  spaceinvaders.o(.constdata)
-    explosion                                0x00004138   Data        2000  spaceinvaders.o(.constdata)
-    shoot                                    0x00004908   Data        4080  spaceinvaders.o(.constdata)
-    invaderkilled                            0x000058f8   Data        3377  spaceinvaders.o(.constdata)
-    highpitch                                0x00006629   Data        1802  spaceinvaders.o(.constdata)
-    NoInputMsg                               0x00006d33   Data          40  texas.o(.constdata)
-    OutputPortMsg0                           0x00006d5b   Data          40  texas.o(.constdata)
-    OutputPortMsg1                           0x00006d83   Data          40  texas.o(.constdata)
-    OutputPortMsg2                           0x00006dab   Data          40  texas.o(.constdata)
-    OutputPortMsg3                           0x00006dd3   Data          40  texas.o(.constdata)
-    BlankMsg                                 0x00006dfb   Data          40  texas.o(.constdata)
-    InitializedMsg                           0x00006e23   Data          40  texas.o(.constdata)
-    IntroMsg                                 0x00006e4b   Data          40  texas.o(.constdata)
-    DoneMsg                                  0x00006e73   Data          40  texas.o(.constdata)
-    Region$$Table$$Base                      0x00006e9c   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x00006ebc   Number         0  anon$$obj.o(Region$$Table)
+    ClearAllObjects                          0x0000071d   Thumb Code   104  spaceinvaders.o(i.ClearAllObjects)
+    CountLasers                              0x00000799   Thumb Code    58  spaceinvaders.o(i.CountLasers)
+    CrashCheck                               0x000007e1   Thumb Code   292  spaceinvaders.o(i.CrashCheck)
+    DAC_Init                                 0x00000909   Thumb Code   100  spaceinvaders.o(i.DAC_Init)
+    DAC_Out                                  0x00000989   Thumb Code     6  spaceinvaders.o(i.DAC_Out)
+    Draw                                     0x00000995   Thumb Code    76  spaceinvaders.o(i.Draw)
+    DrawArea                                 0x000009e1   Thumb Code    40  spaceinvaders.o(i.DrawArea)
+    DrawEnemies                              0x00000a0d   Thumb Code    72  spaceinvaders.o(i.DrawEnemies)
+    DrawEnemyLasers                          0x00000a59   Thumb Code    66  spaceinvaders.o(i.DrawEnemyLasers)
+    DrawExplosions                           0x00000aa1   Thumb Code    78  spaceinvaders.o(i.DrawExplosions)
+    DrawLasers                               0x00000af9   Thumb Code    66  spaceinvaders.o(i.DrawLasers)
+    DrawMissiles                             0x00000b41   Thumb Code    66  spaceinvaders.o(i.DrawMissiles)
+    DrawPlayer                               0x00000b89   Thumb Code    20  spaceinvaders.o(i.DrawPlayer)
+    FireEnemyLaser                           0x00000ba1   Thumb Code    32  spaceinvaders.o(i.FireEnemyLaser)
+    GetRandomNumber                          0x00000bc5   Thumb Code    22  spaceinvaders.o(i.GetRandomNumber)
+    InitBunkerObjects                        0x00000bdd   Thumb Code   380  spaceinvaders.o(i.InitBunkerObjects)
+    InitEnemies                              0x00000d71   Thumb Code    88  spaceinvaders.o(i.InitEnemies)
+    InitPlayer                               0x00000dd5   Thumb Code    28  spaceinvaders.o(i.InitPlayer)
+    InitProjectiles                          0x00000df9   Thumb Code   102  spaceinvaders.o(i.InitProjectiles)
+    LED1_Off                                 0x00000e85   Thumb Code    16  spaceinvaders.o(i.LED1_Off)
+    LED1_On                                  0x00000e9d   Thumb Code    16  spaceinvaders.o(i.LED1_On)
+    LED2_Off                                 0x00000eb5   Thumb Code    16  spaceinvaders.o(i.LED2_Off)
+    LED2_On                                  0x00000ecd   Thumb Code    16  spaceinvaders.o(i.LED2_On)
+    LEDs_Init                                0x00000ee5   Thumb Code    80  spaceinvaders.o(i.LEDs_Init)
+    LifeCheck                                0x00000f4d   Thumb Code   114  spaceinvaders.o(i.LifeCheck)
+    MoveInvaderAdvance                       0x00000fd1   Thumb Code    96  spaceinvaders.o(i.MoveInvaderAdvance)
+    MoveInvaderShuffle                       0x00001039   Thumb Code    24  spaceinvaders.o(i.MoveInvaderShuffle)
+    MoveLaserDown                            0x00001051   Thumb Code   120  spaceinvaders.o(i.MoveLaserDown)
+    MoveLaserUp                              0x000010d9   Thumb Code   124  spaceinvaders.o(i.MoveLaserUp)
+    MoveLeft                                 0x00001165   Thumb Code   106  spaceinvaders.o(i.MoveLeft)
+    MoveMissile                              0x000011d9   Thumb Code   124  spaceinvaders.o(i.MoveMissile)
+    MovePlayer                               0x00001265   Thumb Code    48  spaceinvaders.o(i.MovePlayer)
+    MoveRight                                0x000012a5   Thumb Code   106  spaceinvaders.o(i.MoveRight)
+    Nokia5110_Clear                          0x00001319   Thumb Code    32  nokia5110.o(i.Nokia5110_Clear)
+    Nokia5110_ClearBuffer                    0x00001339   Thumb Code    20  nokia5110.o(i.Nokia5110_ClearBuffer)
+    Nokia5110_DisplayBuffer                  0x00001351   Thumb Code    10  nokia5110.o(i.Nokia5110_DisplayBuffer)
+    Nokia5110_DrawFullImage                  0x00001361   Thumb Code    34  nokia5110.o(i.Nokia5110_DrawFullImage)
+    Nokia5110_Init                           0x00001385   Thumb Code   316  nokia5110.o(i.Nokia5110_Init)
+    Nokia5110_OutChar                        0x000014f1   Thumb Code    52  nokia5110.o(i.Nokia5110_OutChar)
+    Nokia5110_OutString                      0x00001529   Thumb Code    22  nokia5110.o(i.Nokia5110_OutString)
+    Nokia5110_PrintBMP                       0x00001541   Thumb Code   420  nokia5110.o(i.Nokia5110_PrintBMP)
+    Nokia5110_SetCursor                      0x000016e9   Thumb Code    48  nokia5110.o(i.Nokia5110_SetCursor)
+    PLL_Init                                 0x00001719   Thumb Code   118  texas.o(i.PLL_Init)
+    PlaySoundExplosion                       0x00001795   Thumb Code    18  spaceinvaders.o(i.PlaySoundExplosion)
+    PlaySoundFastInvader1                    0x000017ad   Thumb Code    18  spaceinvaders.o(i.PlaySoundFastInvader1)
+    PlaySoundInvaderKilled                   0x000017c5   Thumb Code    18  spaceinvaders.o(i.PlaySoundInvaderKilled)
+    PlaySoundShoot                           0x000017dd   Thumb Code    18  spaceinvaders.o(i.PlaySoundShoot)
+    PlayerLifeDisplay                        0x000017f5   Thumb Code    48  spaceinvaders.o(i.PlayerLifeDisplay)
+    RandomInvaderFire                        0x00001829   Thumb Code    50  spaceinvaders.o(i.RandomInvaderFire)
+    RandomInvaderShuffle                     0x00001861   Thumb Code    14  spaceinvaders.o(i.RandomInvaderShuffle)
+    Read_Buttons                             0x00001871   Thumb Code    38  spaceinvaders.o(i.Read_Buttons)
+    SetCode                                  0x000018a1   Thumb Code    20  texas.o(i.SetCode)
+    SetCourse                                0x000018b9   Thumb Code    20  texas.o(i.SetCourse)
+    Sound_Play                               0x000018d1   Thumb Code    26  spaceinvaders.o(i.Sound_Play)
+    Start_Screen                             0x000018f9   Thumb Code    96  spaceinvaders.o(i.Start_Screen)
+    SysTick_Handler                          0x0000195d   Thumb Code    18  spaceinvaders.o(i.SysTick_Handler)
+    SystickInit                              0x00001979   Thumb Code    42  spaceinvaders.o(i.SystickInit)
+    TExaS_Init                               0x000019ad   Thumb Code   324  texas.o(i.TExaS_Init)
+    Timer2A_Handler                          0x00001b71   Thumb Code    70  spaceinvaders.o(i.Timer2A_Handler)
+    Timer2A_Start                            0x00001bcd   Thumb Code    10  spaceinvaders.o(i.Timer2A_Start)
+    Timer2A_Stop                             0x00001bdd   Thumb Code    30  spaceinvaders.o(i.Timer2A_Stop)
+    Timer2_Init                              0x00001c01   Thumb Code    88  spaceinvaders.o(i.Timer2_Init)
+    Timer4A_Handler                          0x00001c71   Thumb Code    20  texas.o(i.Timer4A_Handler)
+    Timer5A_Handler                          0x00001c91   Thumb Code    34  texas.o(i.Timer5A_Handler)
+    UART0_Init                               0x00001cc1   Thumb Code   160  texas.o(i.UART0_Init)
+    UpdateFrame                              0x00001d81   Thumb Code  1592  spaceinvaders.o(i.UpdateFrame)
+    UpdateSettings                           0x00002419   Thumb Code    86  spaceinvaders.o(i.UpdateSettings)
+    fireLaserEnemy                           0x00002481   Thumb Code   218  spaceinvaders.o(i.fireLaserEnemy)
+    firePlayerLaser                          0x0000257d   Thumb Code   192  spaceinvaders.o(i.firePlayerLaser)
+    firePlayerMissile                        0x00002655   Thumb Code   192  spaceinvaders.o(i.firePlayerMissile)
+    main                                     0x00002779   Thumb Code    88  spaceinvaders.o(i.main)
+    __aeabi_ddiv                             0x000027d9   Thumb Code     0  ddiv.o(x$fpl$ddiv)
+    _ddiv                                    0x000027d9   Thumb Code   552  ddiv.o(x$fpl$ddiv)
+    __aeabi_d2uiz                            0x00002a89   Thumb Code     0  dfixu.o(x$fpl$dfixu)
+    _dfixu                                   0x00002a89   Thumb Code    90  dfixu.o(x$fpl$dfixu)
+    __fpl_dnaninf                            0x00002ae3   Thumb Code   156  dnaninf.o(x$fpl$dnaninf)
+    __fpl_dretinf                            0x00002b7f   Thumb Code    12  dretinf.o(x$fpl$dretinf)
+    __aeabi_f2d                              0x00002b8d   Thumb Code     0  f2d.o(x$fpl$f2d)
+    _f2d                                     0x00002b8d   Thumb Code    86  f2d.o(x$fpl$f2d)
+    __aeabi_ui2f                             0x00002be5   Thumb Code     0  fflt_clz.o(x$fpl$ffltu)
+    _ffltu                                   0x00002be5   Thumb Code    38  fflt_clz.o(x$fpl$ffltu)
+    __fpl_fnaninf                            0x00002c0b   Thumb Code   140  fnaninf.o(x$fpl$fnaninf)
+    __I$use$fp                               0x00002c96   Number         0  usenofp.o(x$fpl$usenofp)
+    SmallEnemy30PointA                       0x00003056   Data         199  spaceinvaders.o(.constdata)
+    SmallEnemy30PointB                       0x0000311d   Data         199  spaceinvaders.o(.constdata)
+    SmallEnemy20PointA                       0x000031e4   Data         199  spaceinvaders.o(.constdata)
+    SmallEnemy20PointB                       0x000032ab   Data         199  spaceinvaders.o(.constdata)
+    SmallEnemy10PointA                       0x00003372   Data         199  spaceinvaders.o(.constdata)
+    SmallEnemy10PointB                       0x00003439   Data         199  spaceinvaders.o(.constdata)
+    PlayerShip0                              0x00003500   Data         215  spaceinvaders.o(.constdata)
+    SmallEnemyBonus0                         0x000035d7   Data         203  spaceinvaders.o(.constdata)
+    Bunker0                                  0x000036a2   Data         179  spaceinvaders.o(.constdata)
+    Bunker1                                  0x00003755   Data         179  spaceinvaders.o(.constdata)
+    Bunker2                                  0x00003808   Data         179  spaceinvaders.o(.constdata)
+    Bunker3                                  0x000038bb   Data         179  spaceinvaders.o(.constdata)
+    BigExplosion0                            0x0000396e   Data         215  spaceinvaders.o(.constdata)
+    BigExplosion1                            0x00003a45   Data         215  spaceinvaders.o(.constdata)
+    SmallExplosion0                          0x00003b1c   Data         199  spaceinvaders.o(.constdata)
+    SmallExplosion1                          0x00003be3   Data         199  spaceinvaders.o(.constdata)
+    Missile0                                 0x00003caa   Data         155  spaceinvaders.o(.constdata)
+    Missile1                                 0x00003d45   Data         155  spaceinvaders.o(.constdata)
+    Missile2                                 0x00003de0   Data         155  spaceinvaders.o(.constdata)
+    Laser0                                   0x00003e7b   Data         155  spaceinvaders.o(.constdata)
+    Laser1                                   0x00003f16   Data         155  spaceinvaders.o(.constdata)
+    titlescreennew                           0x00003fb1   Data        2231  spaceinvaders.o(.constdata)
+    explosion                                0x00004868   Data        2000  spaceinvaders.o(.constdata)
+    shoot                                    0x00005038   Data        4080  spaceinvaders.o(.constdata)
+    invaderkilled                            0x00006028   Data        3377  spaceinvaders.o(.constdata)
+    highpitch                                0x00006d59   Data        1802  spaceinvaders.o(.constdata)
+    fastinvader1                             0x00007463   Data         982  spaceinvaders.o(.constdata)
+    fastinvader2                             0x00007839   Data        1042  spaceinvaders.o(.constdata)
+    NoInputMsg                               0x00007c4b   Data          40  texas.o(.constdata)
+    OutputPortMsg0                           0x00007c73   Data          40  texas.o(.constdata)
+    OutputPortMsg1                           0x00007c9b   Data          40  texas.o(.constdata)
+    OutputPortMsg2                           0x00007cc3   Data          40  texas.o(.constdata)
+    OutputPortMsg3                           0x00007ceb   Data          40  texas.o(.constdata)
+    BlankMsg                                 0x00007d13   Data          40  texas.o(.constdata)
+    InitializedMsg                           0x00007d3b   Data          40  texas.o(.constdata)
+    IntroMsg                                 0x00007d63   Data          40  texas.o(.constdata)
+    DoneMsg                                  0x00007d8b   Data          40  texas.o(.constdata)
+    Region$$Table$$Base                      0x00007db4   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x00007dd4   Number         0  anon$$obj.o(Region$$Table)
     soundIndex                               0x20000000   Data           4  spaceinvaders.o(.data)
     arrayCount                               0x20000004   Data           4  spaceinvaders.o(.data)
     adc                                      0x20000008   Data           4  spaceinvaders.o(.data)
     playerLaserCount                         0x2000000c   Data           4  spaceinvaders.o(.data)
-    enemyLaserCount                          0x20000010   Data           4  spaceinvaders.o(.data)
-    playerLaserIndex                         0x20000014   Data           4  spaceinvaders.o(.data)
-    enemyLaserIndex                          0x20000018   Data           4  spaceinvaders.o(.data)
-    EnemyTypes1                              0x2000001c   Data          16  spaceinvaders.o(.data)
-    EnemyTypes2                              0x2000002c   Data          16  spaceinvaders.o(.data)
-    DisplayMode                              0x20000068   Data           1  spaceinvaders.o(.data)
-    LaserFire                                0x20000069   Data           1  spaceinvaders.o(.data)
-    LaserSpeed                               0x2000006a   Data           1  spaceinvaders.o(.data)
-    timerCount                               0x2000006c   Data           4  spaceinvaders.o(.data)
-    semaphore                                0x20000070   Data           4  spaceinvaders.o(.data)
-    Wave                                     0x20000074   Data           4  spaceinvaders.o(.data)
-    ADCdata                                  0x20000078   Data           4  spaceinvaders.o(.data)
-    TExaS_Period                             0x2000007c   Data           4  texas.o(.data)
-    TExaS_Ports                              0x20000080   Data           8  texas.o(.data)
-    Display                                  0x20000088   Data           1  texas.o(.data)
-    TExaS_Meter                              0x2000008c   Data           4  texas.o(.data)
-    ADCnum                                   0x20000090   Data           4  texas.o(.data)
-    LastMode                                 0x20000094   Data           4  texas.o(.data)
-    bFlag                                    0x20000098   Data           4  texas.o(.data)
-    Count                                    0x2000009c   Data           4  texas.o(.data)
-    DelayBetweenTests                        0x200000a0   Data           4  texas.o(.data)
-    TExaS_Test                               0x200000a4   Data           4  texas.o(.data)
-    ScopeMode                                0x200000a8   Data           4  texas.o(.data)
-    ScopeCount                               0x200000ac   Data           4  texas.o(.data)
-    Screen                                   0x200000b0   Data         504  nokia5110.o(.bss)
-    Player                                   0x200002a8   Data          28  spaceinvaders.o(.bss)
-    LaserParamsPlayer                        0x200002c4   Data          12  spaceinvaders.o(.bss)
-    LaserParamsEnemy                         0x200002d0   Data          12  spaceinvaders.o(.bss)
-    ExplosionObject                          0x200002dc   Data         112  spaceinvaders.o(.bss)
-    Bunker                                   0x2000034c   Data          84  spaceinvaders.o(.bss)
-    LaserImageEnemy                          0x200003a0   Data         280  spaceinvaders.o(.bss)
-    Enemy                                    0x200004b8   Data         112  spaceinvaders.o(.bss)
-    LaserImagePlayer                         0x20000528   Data         140  spaceinvaders.o(.bss)
-    String                                   0x200005b4   Data          10  spaceinvaders.o(.bss)
-    TExaS                                    0x200005c0   Data          56  texas.o(.bss)
-    _random_number_data                      0x200005f8   Data         228  rand.o(.bss)
-    __libspace_start                         0x200006dc   Data          96  libspace.o(.bss)
-    __temporary_stack_top$libspace           0x2000073c   Data           0  libspace.o(.bss)
+    playerMissileCount                       0x20000010   Data           4  spaceinvaders.o(.data)
+    enemyLaserCount                          0x20000014   Data           4  spaceinvaders.o(.data)
+    playerLaserIndex                         0x20000018   Data           4  spaceinvaders.o(.data)
+    playerMissileIndex                       0x2000001c   Data           4  spaceinvaders.o(.data)
+    enemyLaserIndex                          0x20000020   Data           4  spaceinvaders.o(.data)
+    EnemyTypes1                              0x20000024   Data          16  spaceinvaders.o(.data)
+    EnemyTypes2                              0x20000034   Data          16  spaceinvaders.o(.data)
+    DisplayMode                              0x2000007c   Data           1  spaceinvaders.o(.data)
+    LaserFire                                0x2000007d   Data           1  spaceinvaders.o(.data)
+    LaserSpeed                               0x2000007e   Data           1  spaceinvaders.o(.data)
+    timerCount                               0x20000080   Data           4  spaceinvaders.o(.data)
+    semaphore                                0x20000084   Data           4  spaceinvaders.o(.data)
+    Wave                                     0x20000088   Data           4  spaceinvaders.o(.data)
+    ADCdata                                  0x2000008c   Data           4  spaceinvaders.o(.data)
+    TExaS_Period                             0x20000090   Data           4  texas.o(.data)
+    TExaS_Ports                              0x20000094   Data           8  texas.o(.data)
+    Display                                  0x2000009c   Data           1  texas.o(.data)
+    TExaS_Meter                              0x200000a0   Data           4  texas.o(.data)
+    ADCnum                                   0x200000a4   Data           4  texas.o(.data)
+    LastMode                                 0x200000a8   Data           4  texas.o(.data)
+    bFlag                                    0x200000ac   Data           4  texas.o(.data)
+    Count                                    0x200000b0   Data           4  texas.o(.data)
+    DelayBetweenTests                        0x200000b4   Data           4  texas.o(.data)
+    TExaS_Test                               0x200000b8   Data           4  texas.o(.data)
+    ScopeMode                                0x200000bc   Data           4  texas.o(.data)
+    ScopeCount                               0x200000c0   Data           4  texas.o(.data)
+    Screen                                   0x200000c4   Data         504  nokia5110.o(.bss)
+    String                                   0x200002bc   Data          10  spaceinvaders.o(.bss)
+    Player                                   0x200002c8   Data          28  spaceinvaders.o(.bss)
+    Enemy                                    0x200002e4   Data         112  spaceinvaders.o(.bss)
+    LaserImageEnemy                          0x20000354   Data         280  spaceinvaders.o(.bss)
+    LaserImagePlayer                         0x2000046c   Data         140  spaceinvaders.o(.bss)
+    MissileImagePlayer                       0x200004f8   Data          28  spaceinvaders.o(.bss)
+    Bunker                                   0x20000514   Data          84  spaceinvaders.o(.bss)
+    ExplosionObject                          0x20000568   Data         112  spaceinvaders.o(.bss)
+    LaserParamsPlayer                        0x200005d8   Data          12  spaceinvaders.o(.bss)
+    MissileParamsPlayer                      0x200005e4   Data          12  spaceinvaders.o(.bss)
+    LaserParamsEnemy                         0x200005f0   Data          12  spaceinvaders.o(.bss)
+    TExaS                                    0x20000600   Data          56  texas.o(.bss)
+    _random_number_data                      0x20000638   Data         228  rand.o(.bss)
+    __libspace_start                         0x2000071c   Data          96  libspace.o(.bss)
+    __temporary_stack_top$libspace           0x2000077c   Data           0  libspace.o(.bss)
 
 
 
@@ -968,186 +1010,192 @@ Memory Map of the image
 
   Image Entry point : 0x0000026d
 
-  Load Region LR_1 (Base: 0x00000000, Size: 0x00006f6c, Max: 0xffffffff, ABSOLUTE)
+  Load Region LR_1 (Base: 0x00000000, Size: 0x00007e98, Max: 0xffffffff, ABSOLUTE)
 
-    Execution Region ER_RO (Base: 0x00000000, Size: 0x00006ebc, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_RO (Base: 0x00000000, Size: 0x00007dd4, Max: 0xffffffff, ABSOLUTE)
 
     Base Addr    Size         Type   Attr      Idx    E Section Name        Object
 
     0x00000000   0x00000284   Code   RO            3  * RESET               startup.o
-    0x00000284   0x00000008   Code   RO          581  * !!!main             c_w.l(__main.o)
-    0x0000028c   0x00000034   Code   RO          758    !!!scatter          c_w.l(__scatter.o)
-    0x000002c0   0x0000001a   Code   RO          760    !!handler_copy      c_w.l(__scatter_copy.o)
+    0x00000284   0x00000008   Code   RO          629  * !!!main             c_w.l(__main.o)
+    0x0000028c   0x00000034   Code   RO          806    !!!scatter          c_w.l(__scatter.o)
+    0x000002c0   0x0000001a   Code   RO          808    !!handler_copy      c_w.l(__scatter_copy.o)
     0x000002da   0x00000002   PAD
-    0x000002dc   0x0000001c   Code   RO          762    !!handler_zi        c_w.l(__scatter_zi.o)
-    0x000002f8   0x00000002   Code   RO          682    .ARM.Collect$$libinit$$00000000  c_w.l(libinit.o)
-    0x000002fa   0x00000000   Code   RO          601    .ARM.Collect$$libinit$$00000002  c_w.l(libinit2.o)
-    0x000002fa   0x00000000   Code   RO          604    .ARM.Collect$$libinit$$00000008  c_w.l(libinit2.o)
-    0x000002fa   0x00000000   Code   RO          606    .ARM.Collect$$libinit$$0000000A  c_w.l(libinit2.o)
-    0x000002fa   0x00000004   Code   RO          607    .ARM.Collect$$libinit$$0000000B  c_w.l(libinit2.o)
-    0x000002fe   0x00000000   Code   RO          608    .ARM.Collect$$libinit$$0000000C  c_w.l(libinit2.o)
-    0x000002fe   0x00000000   Code   RO          611    .ARM.Collect$$libinit$$0000000F  c_w.l(libinit2.o)
-    0x000002fe   0x00000000   Code   RO          613    .ARM.Collect$$libinit$$00000011  c_w.l(libinit2.o)
-    0x000002fe   0x00000000   Code   RO          615    .ARM.Collect$$libinit$$00000013  c_w.l(libinit2.o)
-    0x000002fe   0x00000000   Code   RO          617    .ARM.Collect$$libinit$$00000015  c_w.l(libinit2.o)
-    0x000002fe   0x00000000   Code   RO          619    .ARM.Collect$$libinit$$00000017  c_w.l(libinit2.o)
-    0x000002fe   0x00000000   Code   RO          621    .ARM.Collect$$libinit$$00000019  c_w.l(libinit2.o)
-    0x000002fe   0x00000000   Code   RO          623    .ARM.Collect$$libinit$$0000001B  c_w.l(libinit2.o)
-    0x000002fe   0x00000000   Code   RO          625    .ARM.Collect$$libinit$$0000001D  c_w.l(libinit2.o)
-    0x000002fe   0x00000000   Code   RO          627    .ARM.Collect$$libinit$$0000001F  c_w.l(libinit2.o)
-    0x000002fe   0x00000000   Code   RO          629    .ARM.Collect$$libinit$$00000021  c_w.l(libinit2.o)
-    0x000002fe   0x00000000   Code   RO          631    .ARM.Collect$$libinit$$00000023  c_w.l(libinit2.o)
-    0x000002fe   0x00000000   Code   RO          635    .ARM.Collect$$libinit$$0000002A  c_w.l(libinit2.o)
-    0x000002fe   0x00000000   Code   RO          637    .ARM.Collect$$libinit$$0000002C  c_w.l(libinit2.o)
-    0x000002fe   0x00000000   Code   RO          639    .ARM.Collect$$libinit$$0000002E  c_w.l(libinit2.o)
-    0x000002fe   0x00000000   Code   RO          641    .ARM.Collect$$libinit$$00000030  c_w.l(libinit2.o)
-    0x000002fe   0x00000002   Code   RO          642    .ARM.Collect$$libinit$$00000031  c_w.l(libinit2.o)
-    0x00000300   0x00000002   Code   RO          720    .ARM.Collect$$libshutdown$$00000000  c_w.l(libshutdown.o)
-    0x00000302   0x00000000   Code   RO          727    .ARM.Collect$$libshutdown$$00000003  c_w.l(libshutdown2.o)
-    0x00000302   0x00000000   Code   RO          730    .ARM.Collect$$libshutdown$$00000006  c_w.l(libshutdown2.o)
-    0x00000302   0x00000000   Code   RO          733    .ARM.Collect$$libshutdown$$00000009  c_w.l(libshutdown2.o)
-    0x00000302   0x00000000   Code   RO          735    .ARM.Collect$$libshutdown$$0000000B  c_w.l(libshutdown2.o)
-    0x00000302   0x00000000   Code   RO          738    .ARM.Collect$$libshutdown$$0000000E  c_w.l(libshutdown2.o)
-    0x00000302   0x00000002   Code   RO          739    .ARM.Collect$$libshutdown$$0000000F  c_w.l(libshutdown2.o)
-    0x00000304   0x00000000   Code   RO          599    .ARM.Collect$$rtentry$$00000000  c_w.l(rtentry.o)
-    0x00000304   0x00000000   Code   RO          651    .ARM.Collect$$rtentry$$00000002  c_w.l(rtentry2.o)
-    0x00000304   0x00000006   Code   RO          663    .ARM.Collect$$rtentry$$00000004  c_w.l(rtentry4.o)
-    0x0000030a   0x00000000   Code   RO          653    .ARM.Collect$$rtentry$$00000009  c_w.l(rtentry2.o)
-    0x0000030a   0x00000004   Code   RO          654    .ARM.Collect$$rtentry$$0000000A  c_w.l(rtentry2.o)
-    0x0000030e   0x00000000   Code   RO          656    .ARM.Collect$$rtentry$$0000000C  c_w.l(rtentry2.o)
-    0x0000030e   0x00000008   Code   RO          657    .ARM.Collect$$rtentry$$0000000D  c_w.l(rtentry2.o)
-    0x00000316   0x00000002   Code   RO          688    .ARM.Collect$$rtexit$$00000000  c_w.l(rtexit.o)
-    0x00000318   0x00000000   Code   RO          700    .ARM.Collect$$rtexit$$00000002  c_w.l(rtexit2.o)
-    0x00000318   0x00000004   Code   RO          701    .ARM.Collect$$rtexit$$00000003  c_w.l(rtexit2.o)
-    0x0000031c   0x00000006   Code   RO          702    .ARM.Collect$$rtexit$$00000004  c_w.l(rtexit2.o)
+    0x000002dc   0x0000001c   Code   RO          810    !!handler_zi        c_w.l(__scatter_zi.o)
+    0x000002f8   0x00000002   Code   RO          730    .ARM.Collect$$libinit$$00000000  c_w.l(libinit.o)
+    0x000002fa   0x00000000   Code   RO          649    .ARM.Collect$$libinit$$00000002  c_w.l(libinit2.o)
+    0x000002fa   0x00000000   Code   RO          652    .ARM.Collect$$libinit$$00000008  c_w.l(libinit2.o)
+    0x000002fa   0x00000000   Code   RO          654    .ARM.Collect$$libinit$$0000000A  c_w.l(libinit2.o)
+    0x000002fa   0x00000004   Code   RO          655    .ARM.Collect$$libinit$$0000000B  c_w.l(libinit2.o)
+    0x000002fe   0x00000000   Code   RO          656    .ARM.Collect$$libinit$$0000000C  c_w.l(libinit2.o)
+    0x000002fe   0x00000000   Code   RO          659    .ARM.Collect$$libinit$$0000000F  c_w.l(libinit2.o)
+    0x000002fe   0x00000000   Code   RO          661    .ARM.Collect$$libinit$$00000011  c_w.l(libinit2.o)
+    0x000002fe   0x00000000   Code   RO          663    .ARM.Collect$$libinit$$00000013  c_w.l(libinit2.o)
+    0x000002fe   0x00000000   Code   RO          665    .ARM.Collect$$libinit$$00000015  c_w.l(libinit2.o)
+    0x000002fe   0x00000000   Code   RO          667    .ARM.Collect$$libinit$$00000017  c_w.l(libinit2.o)
+    0x000002fe   0x00000000   Code   RO          669    .ARM.Collect$$libinit$$00000019  c_w.l(libinit2.o)
+    0x000002fe   0x00000000   Code   RO          671    .ARM.Collect$$libinit$$0000001B  c_w.l(libinit2.o)
+    0x000002fe   0x00000000   Code   RO          673    .ARM.Collect$$libinit$$0000001D  c_w.l(libinit2.o)
+    0x000002fe   0x00000000   Code   RO          675    .ARM.Collect$$libinit$$0000001F  c_w.l(libinit2.o)
+    0x000002fe   0x00000000   Code   RO          677    .ARM.Collect$$libinit$$00000021  c_w.l(libinit2.o)
+    0x000002fe   0x00000000   Code   RO          679    .ARM.Collect$$libinit$$00000023  c_w.l(libinit2.o)
+    0x000002fe   0x00000000   Code   RO          683    .ARM.Collect$$libinit$$0000002A  c_w.l(libinit2.o)
+    0x000002fe   0x00000000   Code   RO          685    .ARM.Collect$$libinit$$0000002C  c_w.l(libinit2.o)
+    0x000002fe   0x00000000   Code   RO          687    .ARM.Collect$$libinit$$0000002E  c_w.l(libinit2.o)
+    0x000002fe   0x00000000   Code   RO          689    .ARM.Collect$$libinit$$00000030  c_w.l(libinit2.o)
+    0x000002fe   0x00000002   Code   RO          690    .ARM.Collect$$libinit$$00000031  c_w.l(libinit2.o)
+    0x00000300   0x00000002   Code   RO          768    .ARM.Collect$$libshutdown$$00000000  c_w.l(libshutdown.o)
+    0x00000302   0x00000000   Code   RO          775    .ARM.Collect$$libshutdown$$00000003  c_w.l(libshutdown2.o)
+    0x00000302   0x00000000   Code   RO          778    .ARM.Collect$$libshutdown$$00000006  c_w.l(libshutdown2.o)
+    0x00000302   0x00000000   Code   RO          781    .ARM.Collect$$libshutdown$$00000009  c_w.l(libshutdown2.o)
+    0x00000302   0x00000000   Code   RO          783    .ARM.Collect$$libshutdown$$0000000B  c_w.l(libshutdown2.o)
+    0x00000302   0x00000000   Code   RO          786    .ARM.Collect$$libshutdown$$0000000E  c_w.l(libshutdown2.o)
+    0x00000302   0x00000002   Code   RO          787    .ARM.Collect$$libshutdown$$0000000F  c_w.l(libshutdown2.o)
+    0x00000304   0x00000000   Code   RO          647    .ARM.Collect$$rtentry$$00000000  c_w.l(rtentry.o)
+    0x00000304   0x00000000   Code   RO          699    .ARM.Collect$$rtentry$$00000002  c_w.l(rtentry2.o)
+    0x00000304   0x00000006   Code   RO          711    .ARM.Collect$$rtentry$$00000004  c_w.l(rtentry4.o)
+    0x0000030a   0x00000000   Code   RO          701    .ARM.Collect$$rtentry$$00000009  c_w.l(rtentry2.o)
+    0x0000030a   0x00000004   Code   RO          702    .ARM.Collect$$rtentry$$0000000A  c_w.l(rtentry2.o)
+    0x0000030e   0x00000000   Code   RO          704    .ARM.Collect$$rtentry$$0000000C  c_w.l(rtentry2.o)
+    0x0000030e   0x00000008   Code   RO          705    .ARM.Collect$$rtentry$$0000000D  c_w.l(rtentry2.o)
+    0x00000316   0x00000002   Code   RO          736    .ARM.Collect$$rtexit$$00000000  c_w.l(rtexit.o)
+    0x00000318   0x00000000   Code   RO          748    .ARM.Collect$$rtexit$$00000002  c_w.l(rtexit2.o)
+    0x00000318   0x00000004   Code   RO          749    .ARM.Collect$$rtexit$$00000003  c_w.l(rtexit2.o)
+    0x0000031c   0x00000006   Code   RO          750    .ARM.Collect$$rtexit$$00000004  c_w.l(rtexit2.o)
     0x00000322   0x00000002   PAD
-    0x00000324   0x00000034   Code   RO          574    .emb_text           c_w.l(rand.o)
+    0x00000324   0x00000034   Code   RO          622    .emb_text           c_w.l(rand.o)
     0x00000358   0x00000030   Code   RO            4    .text               startup.o
-    0x00000388   0x0000003c   Code   RO          575    .text               c_w.l(rand.o)
-    0x000003c4   0x00000006   Code   RO          579    .text               c_w.l(heapauxi.o)
-    0x000003ca   0x0000004a   Code   RO          669    .text               c_w.l(sys_stackheap_outer.o)
-    0x00000414   0x0000000c   Code   RO          671    .text               c_w.l(exit.o)
-    0x00000420   0x00000008   Code   RO          685    .text               c_w.l(libspace.o)
-    0x00000428   0x00000002   Code   RO          696    .text               c_w.l(use_no_semi.o)
-    0x0000042a   0x00000000   Code   RO          698    .text               c_w.l(indicate_semi.o)
+    0x00000388   0x0000003c   Code   RO          623    .text               c_w.l(rand.o)
+    0x000003c4   0x00000006   Code   RO          627    .text               c_w.l(heapauxi.o)
+    0x000003ca   0x0000004a   Code   RO          717    .text               c_w.l(sys_stackheap_outer.o)
+    0x00000414   0x0000000c   Code   RO          719    .text               c_w.l(exit.o)
+    0x00000420   0x00000008   Code   RO          733    .text               c_w.l(libspace.o)
+    0x00000428   0x00000002   Code   RO          744    .text               c_w.l(use_no_semi.o)
+    0x0000042a   0x00000000   Code   RO          746    .text               c_w.l(indicate_semi.o)
     0x0000042a   0x00000002   PAD
-    0x0000042c   0x0000000c   Code   RO          712    .text               c_w.l(sys_exit.o)
+    0x0000042c   0x0000000c   Code   RO          760    .text               c_w.l(sys_exit.o)
     0x00000438   0x0000002c   Code   RO           95    i.ADC0_In           spaceinvaders.o
     0x00000464   0x000000d0   Code   RO           96    i.ADC0_Init         spaceinvaders.o
-    0x00000534   0x0000000c   Code   RO          453    i.ADC1_In           texas.o
-    0x00000540   0x000000d4   Code   RO          454    i.ADC1_Init         texas.o
+    0x00000534   0x0000000c   Code   RO          501    i.ADC1_In           texas.o
+    0x00000540   0x000000d4   Code   RO          502    i.ADC1_Init         texas.o
     0x00000614   0x00000038   Code   RO           97    i.AnimateEnemies    spaceinvaders.o
     0x0000064c   0x00000068   Code   RO           98    i.Backlight_Init    spaceinvaders.o
     0x000006b4   0x00000018   Code   RO          100    i.Backlight_On      spaceinvaders.o
     0x000006cc   0x00000050   Code   RO          101    i.Buttons_Init      spaceinvaders.o
-    0x0000071c   0x00000030   Code   RO          102    i.CountLasers       spaceinvaders.o
-    0x0000074c   0x00000128   Code   RO          103    i.CrashCheck        spaceinvaders.o
-    0x00000874   0x00000080   Code   RO          104    i.DAC_Init          spaceinvaders.o
-    0x000008f4   0x0000000c   Code   RO          105    i.DAC_Out           spaceinvaders.o
-    0x00000900   0x00000042   Code   RO          107    i.Draw              spaceinvaders.o
-    0x00000942   0x00000002   PAD
-    0x00000944   0x00000048   Code   RO          108    i.DrawArea          spaceinvaders.o
-    0x0000098c   0x0000004c   Code   RO          109    i.DrawEnemies       spaceinvaders.o
-    0x000009d8   0x00000048   Code   RO          110    i.DrawEnemyLasers   spaceinvaders.o
-    0x00000a20   0x00000058   Code   RO          111    i.DrawExplosions    spaceinvaders.o
-    0x00000a78   0x00000048   Code   RO          112    i.DrawLasers        spaceinvaders.o
-    0x00000ac0   0x00000018   Code   RO          113    i.DrawPlayer        spaceinvaders.o
-    0x00000ad8   0x00000024   Code   RO          114    i.FireEnemyLaser    spaceinvaders.o
-    0x00000afc   0x00000016   Code   RO          115    i.GetRandomNumber   spaceinvaders.o
-    0x00000b12   0x00000002   PAD
-    0x00000b14   0x00000090   Code   RO          116    i.InitBunkerObjects  spaceinvaders.o
-    0x00000ba4   0x00000064   Code   RO          117    i.InitEnemies       spaceinvaders.o
-    0x00000c08   0x000000fc   Code   RO          118    i.InitLaserEnemy    spaceinvaders.o
-    0x00000d04   0x00000024   Code   RO          119    i.InitPlayer        spaceinvaders.o
-    0x00000d28   0x000000d8   Code   RO          120    i.InitPlayerLaser   spaceinvaders.o
-    0x00000e00   0x00000018   Code   RO          121    i.InvaderShuffle    spaceinvaders.o
-    0x00000e18   0x00000018   Code   RO          122    i.LED1_Off          spaceinvaders.o
-    0x00000e30   0x00000018   Code   RO          123    i.LED1_On           spaceinvaders.o
-    0x00000e48   0x00000018   Code   RO          124    i.LED2_Off          spaceinvaders.o
-    0x00000e60   0x00000018   Code   RO          125    i.LED2_On           spaceinvaders.o
-    0x00000e78   0x00000068   Code   RO          126    i.LEDs_Init         spaceinvaders.o
-    0x00000ee0   0x00000078   Code   RO          127    i.LifeCheck         spaceinvaders.o
-    0x00000f58   0x00000088   Code   RO          129    i.MoveLaserDown     spaceinvaders.o
-    0x00000fe0   0x0000008c   Code   RO          130    i.MoveLaserUp       spaceinvaders.o
-    0x0000106c   0x00000064   Code   RO          131    i.MoveLeft          spaceinvaders.o
-    0x000010d0   0x00000040   Code   RO          132    i.MovePlayer        spaceinvaders.o
-    0x00001110   0x00000064   Code   RO          133    i.MoveRight         spaceinvaders.o
-    0x00001174   0x00000020   Code   RO           12    i.Nokia5110_Clear   nokia5110.o
-    0x00001194   0x00000018   Code   RO           13    i.Nokia5110_ClearBuffer  nokia5110.o
-    0x000011ac   0x00000010   Code   RO           14    i.Nokia5110_DisplayBuffer  nokia5110.o
-    0x000011bc   0x00000022   Code   RO           15    i.Nokia5110_DrawFullImage  nokia5110.o
-    0x000011de   0x00000002   PAD
-    0x000011e0   0x0000016c   Code   RO           16    i.Nokia5110_Init    nokia5110.o
-    0x0000134c   0x00000038   Code   RO           17    i.Nokia5110_OutChar  nokia5110.o
-    0x00001384   0x00000016   Code   RO           18    i.Nokia5110_OutString  nokia5110.o
-    0x0000139a   0x00000002   PAD
-    0x0000139c   0x0000019c   Code   RO           19    i.Nokia5110_OutUDec  nokia5110.o
-    0x00001538   0x000001a8   Code   RO           20    i.Nokia5110_PrintBMP  nokia5110.o
-    0x000016e0   0x00000030   Code   RO           21    i.Nokia5110_SetCursor  nokia5110.o
-    0x00001710   0x0000007c   Code   RO          455    i.PLL_Init          texas.o
-    0x0000178c   0x00000018   Code   RO          134    i.PlaySoundExplosion  spaceinvaders.o
-    0x000017a4   0x00000018   Code   RO          135    i.PlaySoundInvaderKilled  spaceinvaders.o
-    0x000017bc   0x00000018   Code   RO          136    i.PlaySoundShoot    spaceinvaders.o
-    0x000017d4   0x00000034   Code   RO          137    i.PlayerLifeDisplay  spaceinvaders.o
-    0x00001808   0x00000028   Code   RO          138    i.RandomInvaderFire  spaceinvaders.o
-    0x00001830   0x0000000e   Code   RO          139    i.RandomInvaderShuffle  spaceinvaders.o
-    0x0000183e   0x00000002   PAD
-    0x00001840   0x00000030   Code   RO          140    i.Read_Buttons      spaceinvaders.o
-    0x00001870   0x00000018   Code   RO          456    i.SetCode           texas.o
-    0x00001888   0x00000018   Code   RO          457    i.SetCourse         texas.o
-    0x000018a0   0x00000028   Code   RO          141    i.Sound_Play        spaceinvaders.o
-    0x000018c8   0x00000058   Code   RO          142    i.Start_Screen      spaceinvaders.o
-    0x00001920   0x0000001c   Code   RO          143    i.SysTick_Handler   spaceinvaders.o
-    0x0000193c   0x00000034   Code   RO          144    i.SystickInit       spaceinvaders.o
-    0x00001970   0x000001c4   Code   RO          461    i.TExaS_Init        texas.o
-    0x00001b34   0x0000005c   Code   RO          145    i.Timer2A_Handler   spaceinvaders.o
-    0x00001b90   0x00000010   Code   RO          146    i.Timer2A_Start     spaceinvaders.o
-    0x00001ba0   0x00000024   Code   RO          147    i.Timer2A_Stop      spaceinvaders.o
-    0x00001bc4   0x00000070   Code   RO          148    i.Timer2_Init       spaceinvaders.o
-    0x00001c34   0x00000020   Code   RO          463    i.Timer4A_Handler   texas.o
-    0x00001c54   0x00000030   Code   RO          464    i.Timer5A_Handler   texas.o
-    0x00001c84   0x000000c0   Code   RO          467    i.UART0_Init        texas.o
-    0x00001d44   0x000002b8   Code   RO          149    i.UpdateFrame       spaceinvaders.o
-    0x00001ffc   0x0000004c   Code   RO           22    i.lcdwrite          nokia5110.o
-    0x00002048   0x00000060   Code   RO          150    i.main              spaceinvaders.o
-    0x000020a8   0x000002b0   Code   RO          584    x$fpl$ddiv          fz_ws.l(ddiv.o)
-    0x00002358   0x0000005a   Code   RO          587    x$fpl$dfixu         fz_ws.l(dfixu.o)
-    0x000023b2   0x0000009c   Code   RO          643    x$fpl$dnaninf       fz_ws.l(dnaninf.o)
-    0x0000244e   0x0000000c   Code   RO          645    x$fpl$dretinf       fz_ws.l(dretinf.o)
-    0x0000245a   0x00000002   PAD
-    0x0000245c   0x00000056   Code   RO          591    x$fpl$f2d           fz_ws.l(f2d.o)
-    0x000024b2   0x00000002   PAD
-    0x000024b4   0x00000026   Code   RO          593    x$fpl$ffltu         fz_ws.l(fflt_clz.o)
-    0x000024da   0x0000008c   Code   RO          647    x$fpl$fnaninf       fz_ws.l(fnaninf.o)
-    0x00002566   0x00000000   Code   RO          649    x$fpl$usenofp       fz_ws.l(usenofp.o)
-    0x00002566   0x000001e0   Data   RO           24    .constdata          nokia5110.o
-    0x00002746   0x000045ed   Data   RO          152    .constdata          spaceinvaders.o
-    0x00006d33   0x00000168   Data   RO          472    .constdata          texas.o
-    0x00006e9b   0x00000001   PAD
-    0x00006e9c   0x00000020   Data   RO          756    Region$$Table       anon$$obj.o
+    0x0000071c   0x0000007c   Code   RO          102    i.ClearAllObjects   spaceinvaders.o
+    0x00000798   0x00000048   Code   RO          103    i.CountLasers       spaceinvaders.o
+    0x000007e0   0x00000128   Code   RO          104    i.CrashCheck        spaceinvaders.o
+    0x00000908   0x00000080   Code   RO          105    i.DAC_Init          spaceinvaders.o
+    0x00000988   0x0000000c   Code   RO          106    i.DAC_Out           spaceinvaders.o
+    0x00000994   0x0000004c   Code   RO          108    i.Draw              spaceinvaders.o
+    0x000009e0   0x0000002c   Code   RO          109    i.DrawArea          spaceinvaders.o
+    0x00000a0c   0x0000004c   Code   RO          110    i.DrawEnemies       spaceinvaders.o
+    0x00000a58   0x00000048   Code   RO          111    i.DrawEnemyLasers   spaceinvaders.o
+    0x00000aa0   0x00000058   Code   RO          112    i.DrawExplosions    spaceinvaders.o
+    0x00000af8   0x00000048   Code   RO          113    i.DrawLasers        spaceinvaders.o
+    0x00000b40   0x00000048   Code   RO          114    i.DrawMissiles      spaceinvaders.o
+    0x00000b88   0x00000018   Code   RO          115    i.DrawPlayer        spaceinvaders.o
+    0x00000ba0   0x00000024   Code   RO          116    i.FireEnemyLaser    spaceinvaders.o
+    0x00000bc4   0x00000016   Code   RO          117    i.GetRandomNumber   spaceinvaders.o
+    0x00000bda   0x00000002   PAD
+    0x00000bdc   0x00000194   Code   RO          118    i.InitBunkerObjects  spaceinvaders.o
+    0x00000d70   0x00000064   Code   RO          119    i.InitEnemies       spaceinvaders.o
+    0x00000dd4   0x00000024   Code   RO          120    i.InitPlayer        spaceinvaders.o
+    0x00000df8   0x0000008c   Code   RO          121    i.InitProjectiles   spaceinvaders.o
+    0x00000e84   0x00000018   Code   RO          122    i.LED1_Off          spaceinvaders.o
+    0x00000e9c   0x00000018   Code   RO          123    i.LED1_On           spaceinvaders.o
+    0x00000eb4   0x00000018   Code   RO          124    i.LED2_Off          spaceinvaders.o
+    0x00000ecc   0x00000018   Code   RO          125    i.LED2_On           spaceinvaders.o
+    0x00000ee4   0x00000068   Code   RO          126    i.LEDs_Init         spaceinvaders.o
+    0x00000f4c   0x00000084   Code   RO          127    i.LifeCheck         spaceinvaders.o
+    0x00000fd0   0x00000068   Code   RO          128    i.MoveInvaderAdvance  spaceinvaders.o
+    0x00001038   0x00000018   Code   RO          129    i.MoveInvaderShuffle  spaceinvaders.o
+    0x00001050   0x00000088   Code   RO          130    i.MoveLaserDown     spaceinvaders.o
+    0x000010d8   0x0000008c   Code   RO          131    i.MoveLaserUp       spaceinvaders.o
+    0x00001164   0x00000074   Code   RO          132    i.MoveLeft          spaceinvaders.o
+    0x000011d8   0x0000008c   Code   RO          133    i.MoveMissile       spaceinvaders.o
+    0x00001264   0x00000040   Code   RO          134    i.MovePlayer        spaceinvaders.o
+    0x000012a4   0x00000074   Code   RO          135    i.MoveRight         spaceinvaders.o
+    0x00001318   0x00000020   Code   RO           12    i.Nokia5110_Clear   nokia5110.o
+    0x00001338   0x00000018   Code   RO           13    i.Nokia5110_ClearBuffer  nokia5110.o
+    0x00001350   0x00000010   Code   RO           14    i.Nokia5110_DisplayBuffer  nokia5110.o
+    0x00001360   0x00000022   Code   RO           15    i.Nokia5110_DrawFullImage  nokia5110.o
+    0x00001382   0x00000002   PAD
+    0x00001384   0x0000016c   Code   RO           16    i.Nokia5110_Init    nokia5110.o
+    0x000014f0   0x00000038   Code   RO           17    i.Nokia5110_OutChar  nokia5110.o
+    0x00001528   0x00000016   Code   RO           18    i.Nokia5110_OutString  nokia5110.o
+    0x0000153e   0x00000002   PAD
+    0x00001540   0x000001a8   Code   RO           20    i.Nokia5110_PrintBMP  nokia5110.o
+    0x000016e8   0x00000030   Code   RO           21    i.Nokia5110_SetCursor  nokia5110.o
+    0x00001718   0x0000007c   Code   RO          503    i.PLL_Init          texas.o
+    0x00001794   0x00000018   Code   RO          136    i.PlaySoundExplosion  spaceinvaders.o
+    0x000017ac   0x00000018   Code   RO          137    i.PlaySoundFastInvader1  spaceinvaders.o
+    0x000017c4   0x00000018   Code   RO          139    i.PlaySoundInvaderKilled  spaceinvaders.o
+    0x000017dc   0x00000018   Code   RO          140    i.PlaySoundShoot    spaceinvaders.o
+    0x000017f4   0x00000034   Code   RO          141    i.PlayerLifeDisplay  spaceinvaders.o
+    0x00001828   0x00000038   Code   RO          142    i.RandomInvaderFire  spaceinvaders.o
+    0x00001860   0x0000000e   Code   RO          143    i.RandomInvaderShuffle  spaceinvaders.o
+    0x0000186e   0x00000002   PAD
+    0x00001870   0x00000030   Code   RO          144    i.Read_Buttons      spaceinvaders.o
+    0x000018a0   0x00000018   Code   RO          504    i.SetCode           texas.o
+    0x000018b8   0x00000018   Code   RO          505    i.SetCourse         texas.o
+    0x000018d0   0x00000028   Code   RO          145    i.Sound_Play        spaceinvaders.o
+    0x000018f8   0x00000064   Code   RO          146    i.Start_Screen      spaceinvaders.o
+    0x0000195c   0x0000001c   Code   RO          147    i.SysTick_Handler   spaceinvaders.o
+    0x00001978   0x00000034   Code   RO          148    i.SystickInit       spaceinvaders.o
+    0x000019ac   0x000001c4   Code   RO          509    i.TExaS_Init        texas.o
+    0x00001b70   0x0000005c   Code   RO          149    i.Timer2A_Handler   spaceinvaders.o
+    0x00001bcc   0x00000010   Code   RO          150    i.Timer2A_Start     spaceinvaders.o
+    0x00001bdc   0x00000024   Code   RO          151    i.Timer2A_Stop      spaceinvaders.o
+    0x00001c00   0x00000070   Code   RO          152    i.Timer2_Init       spaceinvaders.o
+    0x00001c70   0x00000020   Code   RO          511    i.Timer4A_Handler   texas.o
+    0x00001c90   0x00000030   Code   RO          512    i.Timer5A_Handler   texas.o
+    0x00001cc0   0x000000c0   Code   RO          515    i.UART0_Init        texas.o
+    0x00001d80   0x00000698   Code   RO          153    i.UpdateFrame       spaceinvaders.o
+    0x00002418   0x00000068   Code   RO          154    i.UpdateSettings    spaceinvaders.o
+    0x00002480   0x000000fc   Code   RO          155    i.fireLaserEnemy    spaceinvaders.o
+    0x0000257c   0x000000d8   Code   RO          156    i.firePlayerLaser   spaceinvaders.o
+    0x00002654   0x000000d8   Code   RO          157    i.firePlayerMissile  spaceinvaders.o
+    0x0000272c   0x0000004c   Code   RO           22    i.lcdwrite          nokia5110.o
+    0x00002778   0x00000060   Code   RO          158    i.main              spaceinvaders.o
+    0x000027d8   0x000002b0   Code   RO          632    x$fpl$ddiv          fz_ws.l(ddiv.o)
+    0x00002a88   0x0000005a   Code   RO          635    x$fpl$dfixu         fz_ws.l(dfixu.o)
+    0x00002ae2   0x0000009c   Code   RO          691    x$fpl$dnaninf       fz_ws.l(dnaninf.o)
+    0x00002b7e   0x0000000c   Code   RO          693    x$fpl$dretinf       fz_ws.l(dretinf.o)
+    0x00002b8a   0x00000002   PAD
+    0x00002b8c   0x00000056   Code   RO          639    x$fpl$f2d           fz_ws.l(f2d.o)
+    0x00002be2   0x00000002   PAD
+    0x00002be4   0x00000026   Code   RO          641    x$fpl$ffltu         fz_ws.l(fflt_clz.o)
+    0x00002c0a   0x0000008c   Code   RO          695    x$fpl$fnaninf       fz_ws.l(fnaninf.o)
+    0x00002c96   0x00000000   Code   RO          697    x$fpl$usenofp       fz_ws.l(usenofp.o)
+    0x00002c96   0x000001e0   Data   RO           24    .constdata          nokia5110.o
+    0x00002e76   0x00004dd5   Data   RO          160    .constdata          spaceinvaders.o
+    0x00007c4b   0x00000168   Data   RO          520    .constdata          texas.o
+    0x00007db3   0x00000001   PAD
+    0x00007db4   0x00000020   Data   RO          804    Region$$Table       anon$$obj.o
 
 
-    Execution Region ER_RW (Base: 0x20000000, Size: 0x000000b0, Max: 0xffffffff, ABSOLUTE)
-
-    Base Addr    Size         Type   Attr      Idx    E Section Name        Object
-
-    0x20000000   0x0000007c   Data   RW          153    .data               spaceinvaders.o
-    0x2000007c   0x00000034   Data   RW          473    .data               texas.o
-
-
-    Execution Region ER_ZI (Base: 0x200000b0, Size: 0x00000a90, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_RW (Base: 0x20000000, Size: 0x000000c4, Max: 0xffffffff, ABSOLUTE)
 
     Base Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x200000b0   0x000001f8   Zero   RW           23    .bss                nokia5110.o
-    0x200002a8   0x00000316   Zero   RW          151    .bss                spaceinvaders.o
-    0x200005be   0x00000002   PAD
-    0x200005c0   0x00000038   Zero   RW          471    .bss                texas.o
-    0x200005f8   0x000000e4   Zero   RW          576    .bss                c_w.l(rand.o)
-    0x200006dc   0x00000060   Zero   RW          686    .bss                c_w.l(libspace.o)
-    0x2000073c   0x00000004   PAD
-    0x20000740   0x00000000   Zero   RW            2    HEAP                startup.o
-    0x20000740   0x00000400   Zero   RW            1    STACK               startup.o
+    0x20000000   0x00000090   Data   RW          161    .data               spaceinvaders.o
+    0x20000090   0x00000034   Data   RW          521    .data               texas.o
+
+
+    Execution Region ER_ZI (Base: 0x200000c4, Size: 0x00000abc, Max: 0xffffffff, ABSOLUTE)
+
+    Base Addr    Size         Type   Attr      Idx    E Section Name        Object
+
+    0x200000c4   0x000001f8   Zero   RW           23    .bss                nokia5110.o
+    0x200002bc   0x00000340   Zero   RW          159    .bss                spaceinvaders.o
+    0x200005fc   0x00000004   PAD
+    0x20000600   0x00000038   Zero   RW          519    .bss                texas.o
+    0x20000638   0x000000e4   Zero   RW          624    .bss                c_w.l(rand.o)
+    0x2000071c   0x00000060   Zero   RW          734    .bss                c_w.l(libspace.o)
+    0x2000077c   0x00000004   PAD
+    0x20000780   0x00000000   Zero   RW            2    HEAP                startup.o
+    0x20000780   0x00000400   Zero   RW            1    STACK               startup.o
 
 
 ==============================================================================
@@ -1157,15 +1205,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
-      1508         94        480          0        504       9289   nokia5110.o
-      4642        686      17901        124        790      30589   spaceinvaders.o
+      1096         76        480          0        504       8721   nokia5110.o
+      6896        884      19925        144        832      36355   spaceinvaders.o
        692        632          0          0       1024        900   startup.o
       1120        244        360         52         56      15564   texas.o
 
     ----------------------------------------------------------------------
-      7972       1656      18774        176       2376      56342   Object Totals
+      9812       1836      20798        196       2420      61540   Object Totals
          0          0         32          0          0          0   (incl. Generated)
-        10          0          1          0          2          0   (incl. Padding)
+         8          0          1          0          4          0   (incl. Padding)
 
     ----------------------------------------------------------------------
 
@@ -1222,15 +1270,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-      9574       1846      18774        176       2704      53406   Grand Totals
-      9574       1846      18774        176       2704      53406   ELF Image Totals
-      9574       1846      18774        176          0          0   ROM Totals
+     11414       2026      20798        196       2748      58240   Grand Totals
+     11414       2026      20798        196       2748      58240   ELF Image Totals
+     11414       2026      20798        196          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                28348 (  27.68kB)
-    Total RW  Size (RW Data + ZI Data)              2880 (   2.81kB)
-    Total ROM Size (Code + RO Data + RW Data)      28524 (  27.86kB)
+    Total RO  Size (Code + RO Data)                32212 (  31.46kB)
+    Total RW  Size (RW Data + ZI Data)              2944 (   2.88kB)
+    Total ROM Size (Code + RO Data + RW Data)      32408 (  31.65kB)
 
 ==============================================================================
 

@@ -1,1 +1,5 @@
+#Ignore object files
 *.o
+
+#Ignore htm files
+*.htm
