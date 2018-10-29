@@ -1082,8 +1082,6 @@ const unsigned char fastinvader2[1042] = {
 #define MAX_FIRST_OBJECT    3
 #define MAX_SECOND_OBJECT   4
 #define MAX_ENEMIES         4
-#define OFFSET_COLLISION_ENEMY_X    15
-#define OFFSET_COLLISION_ENEMY_Y    8
 #define OFFSET_COLLISION_PLAYER_X   16
 #define OFFSET_COLLISION_PLAYER_Y   3
 
@@ -1152,13 +1150,6 @@ unsigned long arrayCount = 0;
 unsigned char String[10]; // null-terminated ASCII String1
 unsigned long ADCdata;    // 12-bit 0 to 4095 sample
 int adc = 0;
-//int playerLaserCount   = 0;
-//int playerMissileCount = 0;
-//int enemyLaserCount    = 0;
-//int playerLaserIndex   = 0;
-//int playerMissileIndex = 0;
-//int enemyLaserIndex    = 0;
-
 
 const unsigned char *EnemyTypes1[4] = {SmallEnemy10PointA,SmallEnemy20PointA, SmallEnemy30PointA,SmallEnemy20PointA};
 const unsigned char *EnemyTypes2[4] = {SmallEnemy10PointB,SmallEnemy20PointB, SmallEnemy30PointB,SmallEnemy20PointB};
@@ -1219,7 +1210,7 @@ void PlayerLifeDisplay(void);
 void Draw(unsigned long, int, int, int, int, int);
 int CrashCheck(STyp*, STyp*, STyp*, int, int, int);
 void CountLasers(int, int);
-void UpdateSettings(void);
+void UpdateSettings(LTyp*, LTyp*, LTyp*);
 void PlaySoundShoot(int);
 void PlaySoundInvaderKilled(int);
 void PlaySoundExplosion(int);
@@ -1407,8 +1398,8 @@ void InitPlayer(void)
   Player[0].y = 47;
   Player[0].image[0] = PlayerShip0;
   Player[0].image[1] = PlayerShip0;
-  Player[0].height = OFFSET_COLLISION_PLAYER_Y;
-  Player[0].width = OFFSET_COLLISION_PLAYER_X;
+  Player[0].height = PLAYERH-4;
+  Player[0].width = PLAYERW-2;
   Player[0].life = 2;
 }
 
@@ -1543,7 +1534,7 @@ void fireLaserEnemy(int laserFlag, int enemyIndex)
     LaserImageEnemy[LaserParamsEnemy.Index].x = Enemy[enemyIndex].x+7;
     LaserImageEnemy[LaserParamsEnemy.Index].y = Enemy[enemyIndex].y+7;
     LaserImageEnemy[LaserParamsEnemy.Index].height = LASERH-4;
-    LaserImageEnemy[LaserParamsEnemy.Index].width = LASERW;
+    LaserImageEnemy[LaserParamsEnemy.Index].width = LASERW-3;
     LaserImageEnemy[LaserParamsEnemy.Index].image[0] = Laser0;
     LaserImageEnemy[LaserParamsEnemy.Index].image[1] = Laser1;
     LaserImageEnemy[LaserParamsEnemy.Index].life = 1;
@@ -1974,27 +1965,30 @@ void CountLasers(int laserOrigin, int explodedLaser)
 }
 
 // **************UpdateSettings*********************************
-// Make sure the global variables representing the settings are
-// in order. Also change the settings if need be
-// Input: None
+// Make sure the projectile motion settings are
+// correct. Also change the settings if need be
+// Input: 3 LTyp structure pointers for the 3 kinds of 
+//        projectiles in the field
 // Output: None
-void UpdateSettings(void)
+void UpdateSettings(LTyp *normalFireUp, LTyp *normalFireDown, LTyp *specialFire)
 {
   int i;
   int enemyCount = 4;
-  LaserParamsEnemy.MaxLasers = 5;
+
+  //Condiitonal settings
+  normalFireDown->MaxLasers = 5;
   //Non-Condiitonal settings
-  LaserParamsEnemy.Speed = SLOW_MOVE;
-  LaserParamsEnemy.FireRate = SLOW_RATE;
-  LaserParamsPlayer.Speed = SLOW_MOVE;
-  LaserParamsPlayer.FireRate = SLOW_RATE;
-  LaserParamsPlayer.MaxLasers = 2;
-  MissileParamsPlayer.Speed = MEDIUM_MOVE;
-  MissileParamsPlayer.FireRate = SLOW_RATE;
-  MissileParamsPlayer.MaxLasers = 1;
+  normalFireDown->Speed = SLOW_MOVE;
+  normalFireDown->FireRate = SLOW_RATE;
+  normalFireUp->Speed = SLOW_MOVE;
+  normalFireUp->FireRate = SLOW_RATE;
+  normalFireUp->MaxLasers = 2;
+  specialFire->Speed = MEDIUM_MOVE;
+  specialFire->FireRate = SLOW_RATE;
+  specialFire->MaxLasers = 1;
   
 
-  //Conditional Settings
+  //Conditional Settings Configure
   for(i=0;i<MAX_ENEMIES;i++)
   {
     if(Enemy[i].life==0)
@@ -2002,7 +1996,7 @@ void UpdateSettings(void)
       enemyCount--;
     }
   }
-  LaserParamsEnemy.MaxLasers = LaserParamsEnemy.MaxLasers-(4-enemyCount);
+  normalFireDown->MaxLasers = normalFireDown->MaxLasers-(4-enemyCount);
 }
 
 void PlaySoundShoot(int shotsFired)
@@ -2190,14 +2184,15 @@ void UpdateFrame(void)
 
       //Settings for this round
       //Update Laser Settings
-      UpdateSettings();
+      UpdateSettings(&LaserParamsPlayer, &LaserParamsEnemy, &MissileParamsPlayer);
 
       //Input data and random numbers to work with
       //Random_Init(3);
       buttonCode = Read_Buttons();
       shuffleDirection = RandomInvaderShuffle();
       enemyIndexFire = RandomInvaderFire();            //Which enemy should fire?
-      enemyFireFlag  = 0;//FireEnemyLaser(enemyIndexFire);          //Should that chosen enemy fire?
+      //enemyFireFlag  = 0;//
+      enemyFireFlag = FireEnemyLaser(enemyIndexFire);          //Should that chosen enemy fire?
       
       //Create or dissipate Image Objects
       //Move existing objects
@@ -2280,8 +2275,7 @@ void UpdateFrame(void)
       //static int LaserParamsPlayer.Index = 0;
 
       //Settings for this round
-      //Update Laser Settings
-      UpdateSettings();
+      UpdateSettings(&LaserParamsPlayer, &LaserParamsEnemy, &MissileParamsPlayer);
 
       //Input data and random numbers to work with
       //Random_Init(3);
@@ -2373,7 +2367,7 @@ void UpdateFrame(void)
 
       //Settings for this round
       //Update Laser Settings
-      UpdateSettings();
+      UpdateSettings(&LaserParamsPlayer, &LaserParamsEnemy, &MissileParamsPlayer);
 
       //Input data and random numbers to work with
       //Random_Init(3);
