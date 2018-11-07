@@ -1078,6 +1078,7 @@ const unsigned char fastinvader2[1042] = {
 #define RANDOM_ENEMY_MOVES  3
 #define MAX_LASERS          5
 #define MAX_MISSILES        1
+#define MAX_BUNKERS         2
 #define FULL_ENEMY_LASER_INDEX  10
 #define MAX_FIRST_OBJECT    3
 #define MAX_SECOND_OBJECT   4
@@ -1105,8 +1106,8 @@ enum FireRate{
 }LaserFire;
 
 enum ProjectileSpeed{
-  SLOW_MOVE   = 4,
-  MEDIUM_MOVE = 3,
+  SLOW_MOVE   = 10,
+  MEDIUM_MOVE = 5,
   FAST_MOVE   = 1
 }LaserSpeed;
 
@@ -1161,7 +1162,7 @@ STyp Enemy[MAX_ENEMIES];
 STyp LaserImageEnemy[FULL_ENEMY_LASER_INDEX];
 STyp LaserImagePlayer[MAX_LASERS];
 STyp MissileImagePlayer[MAX_MISSILES];
-STyp Bunker[3];
+STyp Bunker[MAX_BUNKERS];
 STyp ExplosionObject[4];
 //Variables for rules
 LTyp LaserParamsPlayer;
@@ -1321,10 +1322,10 @@ void InitBunkerObjects(enum ScreenType displayMode)
   {
     case START:
     {
-      for(i=0;i<3;i++)
+      for(i=0;i<MAX_BUNKERS;i++)
       {
-        Bunker[i].x = 32;
-        //Bunker[i].y = 25;
+        //Two bunkers a 55 pixels apart
+        Bunker[i].x = 5+i*55;
         Bunker[i].y = 47-PLAYERH;
         Bunker[i].height = 5;
         Bunker[i].width = 19;
@@ -1333,16 +1334,12 @@ void InitBunkerObjects(enum ScreenType displayMode)
         Bunker[i].image[2] = Bunker1;
         Bunker[i].image[3] = Bunker0;
         Bunker[i].life = 3;
-        if(i>0)
-        {
-          Bunker[i].life = 0;
-        }
       }
     }
     break;
     case TRANSITION_ROUND2:
     {
-      for(i=0;i<3;i++)
+      for(i=0;i<MAX_BUNKERS;i++)
       {
         Bunker[i].x = 50;
         Bunker[i].y = 47-PLAYERH;
@@ -1362,7 +1359,7 @@ void InitBunkerObjects(enum ScreenType displayMode)
     break;
     case TRANSITION_ROUND3:
     {
-      for(i=0;i<3;i++)
+      for(i=0;i<MAX_BUNKERS;i++)
       {
         Bunker[i].x = 5;
         Bunker[i].y = 47-PLAYERH;
@@ -1852,17 +1849,17 @@ void DrawExplosions(int explosionDraw)
 void DrawArea(int drawBunkerDamage)
 {
   int damageState = 0;
+  int bunkerIndex = 0;
   //Check if the Bunker is active/live
-  if(Bunker[0].life>0)
+  for(bunkerIndex=0;bunkerIndex<MAX_BUNKERS;bunkerIndex++)
   {
-    //Read the bunker life count
-    damageState = Bunker[0].life;
-    Nokia5110_PrintBMP(Bunker[0].x, Bunker[0].y, Bunker[0].image[damageState], 0);
+    if(Bunker[bunkerIndex].life>0)
+    {
+      //Read the bunker life count
+      damageState = Bunker[bunkerIndex].life;
+      Nokia5110_PrintBMP(Bunker[bunkerIndex].x, Bunker[bunkerIndex].y, Bunker[bunkerIndex].image[damageState], 0);
+    }
   }
-  //if(damageCounter>4)   //Reset the damage counter
-  //{
-    //damageCounter = 0;
-  //}
 }
 
 void DrawPlayer(int playerShot)
@@ -2398,13 +2395,13 @@ void UpdateFrame(void)
       lasersCollide = CrashCheck(LaserImagePlayer, LaserImageEnemy, ExplosionObject, 0, MAX_LASERS, FULL_ENEMY_LASER_INDEX);
 
       //Adjust the laser object numbers
-      CountLasers(0, enemyHitL);
-      CountLasers(2, enemyHitM);
-      CountLasers(0, bunkerDamage);
-      CountLasers(0, lasersCollide);
-      CountLasers(1, playerHit);
-      CountLasers(1, bunkerDamage1);
-      CountLasers(1, lasersCollide);
+      //CountLasers(0, enemyHitL);
+      //CountLasers(2, enemyHitM);
+      //CountLasers(0, bunkerDamage);
+      //CountLasers(0, lasersCollide);
+      //CountLasers(1, playerHit);
+      //CountLasers(1, bunkerDamage1);
+      //CountLasers(1, lasersCollide);
 
       PlaySoundShoot(shootSound);
       PlaySoundInvaderKilled(enemyHitL);
