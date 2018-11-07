@@ -1944,10 +1944,10 @@ int CrashCheck(STyp *ProjectileObject, STyp *TargetObject, STyp *CollisionIndica
         if(TargetObject[secondObjectIndex].life>0)
         {
           //Now check collision
-          if(ProjectileObject[firstObjectIndex].y-ProjectileObject[firstObjectIndex].height <= TargetObject[secondObjectIndex].y
-          && ProjectileObject[firstObjectIndex].y >= TargetObject[secondObjectIndex].y-TargetObject[secondObjectIndex].height
-          && ProjectileObject[firstObjectIndex].x+ProjectileObject[firstObjectIndex].width >= TargetObject[secondObjectIndex].x 
-          && ProjectileObject[firstObjectIndex].x <= TargetObject[secondObjectIndex].x+TargetObject[secondObjectIndex].width)
+          if(ProjectileObject[firstObjectIndex].y-pOffsetY < TargetObject[secondObjectIndex].y
+          && ProjectileObject[firstObjectIndex].y >= TargetObject[secondObjectIndex].y-tOffsetY
+          && ProjectileObject[firstObjectIndex].x >= TargetObject[secondObjectIndex].x 
+          && ProjectileObject[firstObjectIndex].x+pOffsetX <= TargetObject[secondObjectIndex].x+tOffsetX)
           {
             TargetObject[secondObjectIndex].life--;
             ProjectileObject[firstObjectIndex].life=0;
@@ -2200,103 +2200,9 @@ void UpdateFrame(void)
     break;
     case ROUND1:
     {
-      int buttonCode;
-      int shuffleDirection;
-      int enemyIndexFire, enemyFireFlag, enemyAdvanceFlag;
-      int collisionLasers, collisionBunkDamE, collisionBunkDamP, collisionEnemyHitL, collisionEnemyHitM, collisionPlayerHit;
-      int flagSoundShootL, flagSoundShootM;
-      int enemyFrame;
-
-      //Settings for this round
-      //Update Laser Settings
-      UpdateSettings(&LaserParamsPlayer, &LaserParamsEnemy, &MissileParamsPlayer);
-
-      //Input data and random numbers to work with
-      //Random_Init(3);
-      buttonCode = Read_Buttons();
-      shuffleDirection = RandomInvaderShuffle();
-      enemyIndexFire = RandomInvaderFire();            //Which enemy should fire?
-      enemyFireFlag = FireEnemyLaser(enemyIndexFire);          //Should that chosen enemy fire?
-      
-      //Create or dissipate Image Objects
-      //Move existing objects
-      enemyFrame = AnimateEnemies();
-      enemyAdvanceFlag = MoveInvaderAdvance();
-      MoveInvaderShuffle(shuffleDirection);
-      MovePlayer();
-      flagSoundShootL = firePlayerLaser(buttonCode, LaserImagePlayer, Player, &LaserParamsPlayer);
-      flagSoundShootM = firePlayerMissile(buttonCode, MissileImagePlayer, Player, &MissileParamsPlayer);
-      //Fire enemy laser if active
-      fireLaserEnemy(enemyFireFlag, enemyIndexFire, LaserImageEnemy, &LaserParamsEnemy);
-      //Move Lasers
-      MoveMissile();      //Move and animate the Missile
-      MoveProjectileUp(LaserImagePlayer, &LaserParamsPlayer);
-      MoveProjectileDown(LaserImageEnemy, &LaserParamsEnemy);
-
-      //Collision Detection
-      collisionEnemyHitL  = CrashCheck(LaserImagePlayer, Enemy, ExplosionObject, &LaserParamsPlayer, 1, MAX_LASERS, MAX_ENEMIES);
-      collisionEnemyHitM  = CrashCheck(MissileImagePlayer, Enemy, ExplosionObject,&MissileParamsPlayer, 1, MAX_LASERS, MAX_ENEMIES);
-      collisionBunkDamE   = CrashCheck(LaserImagePlayer, Bunker, ExplosionObject,&LaserParamsPlayer, 0, MAX_LASERS, 3);
-      collisionBunkDamP   = CrashCheck(LaserImageEnemy, Bunker, ExplosionObject,&LaserParamsEnemy, 0, FULL_ENEMY_LASER_INDEX, 3);
-      collisionPlayerHit  = CrashCheck(LaserImageEnemy, Player, ExplosionObject,&LaserParamsEnemy, 1, FULL_ENEMY_LASER_INDEX, MAX_ENEMIES);
-      collisionLasers     = CrashCheck(LaserImagePlayer, LaserImageEnemy, ExplosionObject,&LaserParamsPlayer, 0, MAX_LASERS, FULL_ENEMY_LASER_INDEX);
-
-      //Adjust the laser object numbers
-      //CountLasers(0, collisionEnemyHitL);
-      //CountLasers(2, collisionEnemyHitM);
-      //CountLasers(0, collisionBunkDamE);
-      //CountLasers(0, collisionLasers);
-      //CountLasers(1, collisionPlayerHit);
-      //CountLasers(1, collisionBunkDamP);
-      //CountLasers(1, collisionLasers);
-
-      //Play Sounds
-      PlaySoundShoot(flagSoundShootL);
-      PlaySoundShoot(flagSoundShootM);
-      PlaySoundInvaderKilled(collisionEnemyHitL);
-      PlaySoundInvaderKilled(collisionEnemyHitM);
-      PlaySoundExplosion(collisionBunkDamP);
-      PlaySoundFastInvader1(enemyAdvanceFlag);
-      //PlaySoundHighPitch(enemyAdvanceFlag);
-      
-      //LED Life display
-      PlayerLifeDisplay();
-
-      //Print Bitmaps
-      Draw(enemyFrame, collisionEnemyHitL, collisionEnemyHitM, collisionBunkDamE, collisionBunkDamP,collisionPlayerHit);
-      DisplayMode = LifeCheck();
-    }
-    break;
-    case TRANSITION_ROUND2:
-    {
-      //static int semaphoreCount=0;
-      int buttonCode;
-      int randomEnemiesFormation = 0;
-      //Clear all the objects and variables
-      Nokia5110_Clear();
-      ClearAllObjects();
-      Nokia5110_SetCursor(1, 2);
-      Nokia5110_OutString("Round 2");
-      //Refresh if the button is pressed
-      buttonCode = Read_Buttons();
-      if(buttonCode!=0)
-      {
-        //semaphoreCount = 0;
-        randomEnemiesFormation = GetRandomNumber(RANDOM_FORMATIONS);
-        InitEnemies(randomEnemiesFormation);
-        InitBunkerObjects(DisplayMode);
-        InitPlayer();
-        InitProjectiles();
-        DisplayMode = ROUND2;
-      }
-    }
-    break;
-    case ROUND2:
-    {
-      //int buttonCode, shuffleDirection, enemyIndexFire, enemyFireFlag;
-      //int collisionLasers, collisionBunkDamE, collisionBunkDamP, collisionEnemyHitL, collisionEnemyHitM, flagSoundShootL, collisionPlayerHit;
-      //int enemyFrame;
-      //static int LaserParamsPlayer.Index = 0;
+      int buttonCode, shuffleDirection, enemyIndexFire, enemyFireFlag, bunkerDamage, bunkerDamage1, enemyHit, shootSound, playerHit;
+      unsigned long enemyFrame;
+      //static int playerLaserIndex = 0;
 
       //Settings for this round
       //UpdateSettings(&LaserParamsPlayer, &LaserParamsEnemy, &MissileParamsPlayer);
@@ -2414,26 +2320,20 @@ void UpdateFrame(void)
       MoveProjectileDown(LaserImageEnemy, &LaserParamsEnemy);
 
       //Collision Detection
-      collisionEnemyHitL      = CrashCheck(LaserImagePlayer, Enemy, ExplosionObject,&LaserParamsPlayer, 1, MAX_LASERS, MAX_ENEMIES);
-      collisionEnemyHitM      = CrashCheck(MissileImagePlayer, Enemy, ExplosionObject,&MissileParamsPlayer, 1, MAX_LASERS, MAX_ENEMIES);
-      collisionBunkDamE  = CrashCheck(LaserImagePlayer, Bunker, ExplosionObject,&LaserParamsPlayer, 0, MAX_LASERS, 3);
-      collisionBunkDamP = CrashCheck(LaserImageEnemy, Bunker, ExplosionObject,&LaserParamsEnemy, 0, FULL_ENEMY_LASER_INDEX, 3);
-      collisionPlayerHit     = CrashCheck(LaserImageEnemy, Player, ExplosionObject,&LaserParamsEnemy, 1, FULL_ENEMY_LASER_INDEX, MAX_ENEMIES);
-      collisionLasers = CrashCheck(LaserImagePlayer, LaserImageEnemy, ExplosionObject,&LaserParamsPlayer, 0, MAX_LASERS, FULL_ENEMY_LASER_INDEX);
+      enemyHit = CrashCheck(LaserImagePlayer, Enemy, ExplosionObject, 1, OFFSET_COLLISION_LASER_X, OFFSET_COLLISION_LASER_Y, OFFSET_COLLISION_ENEMY_X, OFFSET_COLLISION_ENEMY_Y, MAX_LASERS, MAX_ENEMIES);
+      bunkerDamage = CrashCheck(LaserImagePlayer, Bunker, ExplosionObject, 0, OFFSET_COLLISION_LASER_X, OFFSET_COLLISION_LASER_Y, 19, 5, MAX_LASERS, 3);
+      bunkerDamage1 = CrashCheck(LaserImageEnemy, Bunker, ExplosionObject, 0, OFFSET_COLLISION_LASER_X, OFFSET_COLLISION_LASER_Y, 19, 3, MAX_LASERS, 3);
+      playerHit = CrashCheck(LaserImageEnemy, Player, ExplosionObject, 1, OFFSET_COLLISION_LASER_X, OFFSET_COLLISION_LASER_Y, OFFSET_COLLISION_PLAYER_X, OFFSET_COLLISION_PLAYER_Y, FULL_ENEMY_LASER_INDEX, MAX_ENEMIES);
 
       //Adjust the laser object numbers
-      //CountLasers(0, collisionEnemyHitL);
-      //CountLasers(2, collisionEnemyHitM);
-      //CountLasers(0, collisionBunkDamE);
-      //CountLasers(0, collisionLasers);
-      //CountLasers(1, collisionPlayerHit);
-      //CountLasers(1, collisionBunkDamP);
-      //CountLasers(1, collisionLasers);
+      CountLasers(0, enemyHit);
+      CountLasers(0, bunkerDamage);
+      CountLasers(1, playerHit);
+      CountLasers(1, bunkerDamage1);
 
-      PlaySoundShoot(flagSoundShootL);
-      PlaySoundInvaderKilled(collisionEnemyHitL);
-      PlaySoundInvaderKilled(collisionEnemyHitM);
-      PlaySoundExplosion(collisionBunkDamP);
+      PlaySoundShoot(shootSound);
+      PlaySoundInvaderKilled(enemyHit);
+      PlaySoundExplosion(bunkerDamage1);
       
       //LED Life
       PlayerLifeDisplay();
