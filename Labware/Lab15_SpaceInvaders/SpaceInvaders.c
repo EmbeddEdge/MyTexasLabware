@@ -1100,7 +1100,7 @@ enum ScreenType{
 }DisplayMode;
 
 enum FireRate{
-  SLOW_RATE   = 15,
+  SLOW_RATE   = 50,
   MEDIUM_RATE = 10,
   FAST_RATE   = 5
 }LaserFire;
@@ -1181,9 +1181,9 @@ void InitEnemies(int);
 void InitBunkerObjects(enum ScreenType);
 void InitPlayer(void);
 void InitProjectiles(void);
-int firePlayerLaser(int, STyp*, STyp*);
+int firePlayerLaser(int, STyp*, STyp*, LTyp*);
 int firePlayerMissile(int, STyp*, STyp*);
-void fireLaserEnemy(int, int);
+void fireLaserEnemy(STyp*, STyp*, LTyp*, int, int);
 void ClearAllObjects(void);
 unsigned long GetRandomNumber(unsigned long);
 unsigned long RandomInvaderShuffle(void);
@@ -1195,8 +1195,8 @@ void MoveInvaderShuffle(int);
 unsigned long AnimateEnemies(void);
 void MovePlayer(void);
 int MoveInvaderAdvance(void);
-void MoveLaserUp(void);
-void MoveLaserDown(void);
+void MoveLaserUp(STyp*, LTyp*);
+void MoveLaserDown(STyp*, LTyp*);
 void MoveMissile(void);
 void DrawEnemies(unsigned long);
 void DrawExplosions(int);
@@ -1209,7 +1209,7 @@ enum ScreenType Start_Screen(int);
 enum ScreenType LifeCheck(void);
 void PlayerLifeDisplay(void);
 void Draw(unsigned long, int, int, int, int, int);
-int CrashCheck(STyp*, STyp*, STyp*, int, int, int);
+int CrashCheck(STyp*, STyp*, STyp*, int, int, int, LTyp*);
 void CountLasers(int, int);
 void UpdateSettings(LTyp*, LTyp*, LTyp*);
 void PlaySoundShoot(int);
@@ -1423,6 +1423,7 @@ void InitProjectiles(void)
   {
     MissileImagePlayer[index].life = 0;
   }
+
   LaserParamsPlayer.Count   = 0;
   LaserParamsEnemy.Count    = 0;
   MissileParamsPlayer.Count = 0;
@@ -1438,31 +1439,30 @@ void InitProjectiles(void)
 // Input: The button code, the Laser object structure, 
 //        The firing object structure
 // Output: none
-int firePlayerLaser(int codeFromButton, STyp *Projectile, STyp *FiringObject)
+int firePlayerLaser(int codeFromButton, STyp *ProjectileP, STyp *FiringObject, LTyp *LaserSetts)
 {
   //static int laserCount = 0;
   static int semaphoreCount_IL = 0;
   int SoundFlag = 0;
-  //static int LaserParamsPlayer.Index = 0;
   
-  if(LaserParamsPlayer.Index>LaserParamsPlayer.MaxLasers-1)
+  if(LaserSetts->Index>LaserSetts->MaxLasers-1)
   {
-    LaserParamsPlayer.Index=0;
+    LaserSetts->Index=0;
   }
-  if(codeFromButton == 1 && LaserParamsPlayer.Count<LaserParamsPlayer.MaxLasers && semaphoreCount_IL >= LaserParamsPlayer.FireRate)            //Was the button pressed to fire and max amount of lasers not exceeded?
+  if(codeFromButton == 1 && LaserSetts->Count<LaserSetts->MaxLasers && semaphoreCount_IL >= LaserSetts->FireRate)            //Was the button pressed to fire and max amount of lasers not exceeded?
   {
-    if(Projectile[LaserParamsPlayer.Index].life==0)
+    if(ProjectileP[LaserSetts->Index].life==0)
     {
-      Projectile[LaserParamsPlayer.Index].x = FiringObject[0].x+8;
-      Projectile[LaserParamsPlayer.Index].y = FiringObject[0].y-8;
-      Projectile[LaserParamsPlayer.Index].height = LASERH-4;
-      Projectile[LaserParamsPlayer.Index].width = LASERW;
-      Projectile[LaserParamsPlayer.Index].image[0] = Laser0;
-      Projectile[LaserParamsPlayer.Index].image[1] = Laser1;
-      Projectile[LaserParamsPlayer.Index].life = 1;
+      ProjectileP[LaserSetts->Index].x = FiringObject[0].x+8;
+      ProjectileP[LaserSetts->Index].y = FiringObject[0].y-8;
+      ProjectileP[LaserSetts->Index].height = LASERH-4;
+      ProjectileP[LaserSetts->Index].width = LASERW;
+      ProjectileP[LaserSetts->Index].image[0] = Laser0;
+      ProjectileP[LaserSetts->Index].image[1] = Laser1;
+      ProjectileP[LaserSetts->Index].life = 1;
       SoundFlag = 1;
-      LaserParamsPlayer.Index++;
-      LaserParamsPlayer.Count++;                     //Increase the laser count so that when the button is pressed again a new object is created instead of overwriting
+      LaserSetts->Index++;
+      LaserSetts->Count++;                     //Increase the laser count so that when the button is pressed again a new object is created instead of overwriting
       semaphoreCount_IL=0;
     }
   }
@@ -1506,38 +1506,40 @@ int firePlayerMissile(int codeFromButton, STyp *Projectile, STyp *FiringObject)
   return SoundFlag;
 }
 
-// **************fireLaserEnemy*********************************
+// **************fireLaserEnemy************************************
 // Initializes a laser object at the postion in front 
 // of the firing object
-// Input: The flag for whether the laser should be fired 
-//        the index for which enemy will fire
+// Input: 1.The Projectile data structure 
+//        2.The Firing object struct
+//        3.The Projectile settings struct
+//        4.The flag for whether the laser should be fired
+//        5.The index for which enemy will fire
 // Output: none
-void fireLaserEnemy(int laserFlag, int enemyIndex)
+void fireLaserEnemy(STyp* ProjectileE, STyp *FiringObject, LTyp *LaserSetts, int laserFlag, int enemyIndex) 
 {
   //static int laserCount = 0;
   static int semaphoreCount_IL = 0;
-  //static int LaserParamsEnemy.Index = 0;
   
-  if(LaserParamsEnemy.Index>LaserParamsEnemy.MaxLasers-1)
+  if(LaserSetts->Index>LaserSetts->MaxLasers-1)
   {
-    LaserParamsEnemy.Index=0;
+    LaserSetts->Index=0;
   }
-  if(laserFlag == 1 && LaserParamsEnemy.Count<LaserParamsEnemy.MaxLasers && semaphoreCount_IL >= 10)            //Was the button pressed to fire and max amount of lasers not exceeded?
+  if(laserFlag == 1 && LaserSetts->Count<LaserSetts->MaxLasers && semaphoreCount_IL >= 10)            //Was the button pressed to fire and max amount of lasers not exceeded?
   {
-    while(LaserImageEnemy[LaserParamsEnemy.Index].life==1)
+    while(ProjectileE[LaserSetts->Index].life==1)
     {
-      LaserParamsEnemy.Index++;
+      LaserSetts->Index++;
     }
-    LaserImageEnemy[LaserParamsEnemy.Index].x = Enemy[enemyIndex].x+7;
-    LaserImageEnemy[LaserParamsEnemy.Index].y = Enemy[enemyIndex].y+7;
-    LaserImageEnemy[LaserParamsEnemy.Index].height = LASERH-4;
-    LaserImageEnemy[LaserParamsEnemy.Index].width = LASERW-3;
-    LaserImageEnemy[LaserParamsEnemy.Index].image[0] = Laser0;
-    LaserImageEnemy[LaserParamsEnemy.Index].image[1] = Laser1;
-    LaserImageEnemy[LaserParamsEnemy.Index].life = 1;
+    ProjectileE[LaserSetts->Index].x = FiringObject[enemyIndex].x+7;
+    ProjectileE[LaserSetts->Index].y = FiringObject[enemyIndex].y+7;
+    ProjectileE[LaserSetts->Index].height = LASERH-4;
+    ProjectileE[LaserSetts->Index].width = LASERW-3;
+    ProjectileE[LaserSetts->Index].image[0] = Laser0;
+    ProjectileE[LaserSetts->Index].image[1] = Laser1;
+    ProjectileE[LaserSetts->Index].life = 1;
 
-    LaserParamsEnemy.Index++;
-    LaserParamsEnemy.Count++;                     //Increase the laser count so that when the button is pressed again a new object is created instead of overwriting
+    LaserSetts->Index++;
+    LaserSetts->Count++;                     //Increase the laser count so that when the button is pressed again a new object is created instead of overwriting
     semaphoreCount_IL=0;
   }
   semaphoreCount_IL++;
@@ -1741,23 +1743,23 @@ int MoveInvaderAdvance(void)
   return soundFlag;
 }
 
-void MoveLaserUp(void)
+void MoveLaserUp(STyp *ProjectileP, LTyp *LaserSetts)
 {
   static int semaphoreCount = 0;
   int laserIndex;
 
-  if(semaphoreCount == LaserParamsPlayer.Speed)                        //Is it time for laser to move?
+  if(semaphoreCount == LaserSetts->Speed)                        //Is it time for laser to move?
   {
-    for(laserIndex=0;laserIndex<LaserParamsPlayer.MaxLasers;laserIndex++)    //For all laser objects
+    for(laserIndex=0;laserIndex<LaserSetts->MaxLasers;laserIndex++)    //For all laser objects
     {
-      if(LaserImagePlayer[laserIndex].life==1)                               //Is the laser active?
+      if(ProjectileP[laserIndex].life==1)                               //Is the laser active?
       {
-        if(LaserImagePlayer[laserIndex].y == 9)                            //Has the laser reached the end of the screen?
+        if(ProjectileP[laserIndex].y == 9)                            //Has the laser reached the end of the screen?
         {
-          LaserImagePlayer[laserIndex].life=0;                             //Deactivate laser pbject
-          LaserParamsPlayer.Count--;
+          ProjectileP[laserIndex].life=0;                             //Deactivate laser pbject
+          LaserSetts->Count--;
         }
-        LaserImagePlayer[laserIndex].y = LaserImagePlayer[laserIndex].y-1;    //Move the laser up one bit
+        ProjectileP[laserIndex].y = ProjectileP[laserIndex].y-1;    //Move the laser up one bit
       }
     }
     semaphoreCount=0;
@@ -1765,23 +1767,23 @@ void MoveLaserUp(void)
   semaphoreCount++;
 }
 
-void MoveLaserDown(void)
+void MoveLaserDown(STyp *ProjectileE, LTyp* LaserSetts)
 {
   static int semaphoreCount = 0;
   int laserIndex;
 
-  if(semaphoreCount == LaserParamsEnemy.Speed)                        //Is it time for laser to move?
+  if(semaphoreCount == LaserSetts->Speed)                               //Is it time for laser to move?
   {
     for(laserIndex=0;laserIndex<FULL_ENEMY_LASER_INDEX;laserIndex++)    //For all laser objects
     {
-      if(LaserImageEnemy[laserIndex].life==1)                               //Is the laser active?
+      if(ProjectileE[laserIndex].life==1)                               //Is the laser active?
       {
-        if(LaserImageEnemy[laserIndex].y == 47)                            //Has the laser reached the end of the screen?
+        if(ProjectileE[laserIndex].y == 47)                             //Has the laser reached the end of the screen?
         {
-          LaserImageEnemy[laserIndex].life=0;                             //Deactivate laser pbject
-          LaserParamsEnemy.Count--;
+          ProjectileE[laserIndex].life=0;                               //Deactivate laser pbject
+          LaserSetts->Count--;
         }
-        LaserImageEnemy[laserIndex].y = LaserImageEnemy[laserIndex].y+1;    //Move the laser down one bit
+        ProjectileE[laserIndex].y = ProjectileE[laserIndex].y+1;        //Move the laser down one bit
       }
     }
     semaphoreCount=0;
@@ -1903,7 +1905,7 @@ void DrawEnemyLasers(void)
   }
 }
 
-int CrashCheck(STyp *ProjectileObject, STyp *TargetObject, STyp *CollisionIndicator, int collideFlag, int maxFirstObject, int maxSecondObject)
+int CrashCheck(STyp *ProjectileObject, STyp *TargetObject, STyp *CollisionIndicator, int collideFlag, int maxFirstObject, int maxSecondObject, LTyp *POSetts)
 {
   //Find the objects we want to compare for collisions
   int firstObjectIndex = 0;
@@ -1936,6 +1938,8 @@ int CrashCheck(STyp *ProjectileObject, STyp *TargetObject, STyp *CollisionIndica
               CollisionIndicator[0].y = TargetObject[secondObjectIndex].y;
               CollisionIndicator[0].image[0] = SmallExplosion0;
             }
+            POSetts->Count--;
+            POSetts->Index--;
             crashFlag = 1;
           }   
         }
@@ -1977,7 +1981,7 @@ void UpdateSettings(LTyp *normalFireUp, LTyp *normalFireDown, LTyp *specialFire)
   //Non-Condiitonal settings
   normalFireDown->Speed = SLOW_MOVE;
   normalFireDown->FireRate = SLOW_RATE;
-  normalFireUp->Speed = SLOW_MOVE;
+  normalFireUp->Speed = MEDIUM_MOVE;
   normalFireUp->FireRate = SLOW_RATE;
   normalFireUp->MaxLasers = 2;
   specialFire->Speed = MEDIUM_MOVE;
@@ -2177,51 +2181,50 @@ void UpdateFrame(void)
       int buttonCode, shuffleDirection, enemyIndexFire, enemyFireFlag;
       int lasersCollide, bunkerDamage, bunkerDamage1, enemyHitL, enemyHitM, shootSound, shootSound1, playerHit, enemyAdvanceFlag;
       unsigned long enemyFrame;
-      //static int LaserParamsPlayer.Index = 0;
 
       //Settings for this round
       //Update Laser Settings
       UpdateSettings(&LaserParamsPlayer, &LaserParamsEnemy, &MissileParamsPlayer);
 
       //Input data and random numbers to work with
-      //Random_Init(3);
       buttonCode = Read_Buttons();
-      shuffleDirection = RandomInvaderShuffle();
+      shuffleDirection = RandomInvaderShuffle();       //Should the Enemies move left or right or stay still
       enemyIndexFire = RandomInvaderFire();            //Which enemy should fire?
-      //enemyFireFlag  = 0;//
-      enemyFireFlag = FireEnemyLaser(enemyIndexFire);          //Should that chosen enemy fire?
+      enemyFireFlag = FireEnemyLaser(enemyIndexFire);  //Should that chosen enemy fire?
       
       //Create or dissipate Image Objects
       //Move existing objects
-      enemyFrame = AnimateEnemies();
-      MoveInvaderShuffle(shuffleDirection);
-      MovePlayer();
-      enemyAdvanceFlag = MoveInvaderAdvance();
-      shootSound = firePlayerLaser(buttonCode, LaserImagePlayer, Player);
-      shootSound1 = firePlayerMissile(buttonCode, MissileImagePlayer, Player);
+      enemyFrame = AnimateEnemies();                    //Animate Enemy by swapping with second image to look alive
+      MoveInvaderShuffle(shuffleDirection);             //Move the Enemies in the random seeded direction
+      enemyAdvanceFlag = MoveInvaderAdvance();          //Advance/Move forward if an alloted time has been reached
+      MovePlayer();                                     //Move Player based on ADC      
+      shootSound = firePlayerLaser(buttonCode, LaserImagePlayer, Player, &LaserParamsPlayer); //Fire the Players laser, Include settings
+      shootSound1 = firePlayerMissile(buttonCode, MissileImagePlayer, Player);                //Fire the Players Missile
       //Fire enemy laser if active
-      fireLaserEnemy(enemyFireFlag, enemyIndexFire);
+      fireLaserEnemy(LaserImageEnemy, Enemy, &LaserParamsEnemy, enemyFireFlag, enemyIndexFire);
+
       //Move Lasers
-      MoveMissile();      //Move and animate the Missile
-      MoveLaserUp();      //Player Laser
-      MoveLaserDown();    //Enemy Lasers
+      MoveMissile();                                          //Move and animate the Missile
+      MoveLaserUp(LaserImagePlayer, &LaserParamsPlayer);      //Move the Players Laser
+      MoveLaserDown(LaserImageEnemy, &LaserParamsEnemy);      //Move the Enemy Lasers
 
       //Collision Detection
-      enemyHitL      = CrashCheck(LaserImagePlayer, Enemy, ExplosionObject, 1, MAX_LASERS, MAX_ENEMIES);
-      enemyHitM      = CrashCheck(MissileImagePlayer, Enemy, ExplosionObject, 1, MAX_LASERS, MAX_ENEMIES);
-      bunkerDamage  = CrashCheck(LaserImagePlayer, Bunker, ExplosionObject, 0, MAX_LASERS, 3);
-      bunkerDamage1 = CrashCheck(LaserImageEnemy, Bunker, ExplosionObject, 0, FULL_ENEMY_LASER_INDEX, 3);
-      playerHit     = CrashCheck(LaserImageEnemy, Player, ExplosionObject, 1, FULL_ENEMY_LASER_INDEX, MAX_ENEMIES);
-      lasersCollide = CrashCheck(LaserImagePlayer, LaserImageEnemy, ExplosionObject, 0, MAX_LASERS, FULL_ENEMY_LASER_INDEX);
+      enemyHitL      = CrashCheck(LaserImagePlayer, Enemy, ExplosionObject, 1, MAX_LASERS, MAX_ENEMIES, &LaserParamsPlayer);
+      enemyHitM      = CrashCheck(MissileImagePlayer, Enemy, ExplosionObject, 1, MAX_LASERS, MAX_ENEMIES, &MissileParamsPlayer);
+      bunkerDamage  = CrashCheck(LaserImagePlayer, Bunker, ExplosionObject, 0, MAX_LASERS, 3, &LaserParamsPlayer);
+      bunkerDamage1 = CrashCheck(LaserImageEnemy, Bunker, ExplosionObject, 0, FULL_ENEMY_LASER_INDEX, 3, &LaserParamsEnemy);
+      playerHit     = CrashCheck(LaserImageEnemy, Player, ExplosionObject, 1, FULL_ENEMY_LASER_INDEX, MAX_ENEMIES, &LaserParamsEnemy);
+      lasersCollide = CrashCheck(LaserImagePlayer, LaserImageEnemy, ExplosionObject, 0, MAX_LASERS, FULL_ENEMY_LASER_INDEX, &LaserParamsPlayer);
+      lasersCollide = CrashCheck(LaserImagePlayer, LaserImageEnemy, ExplosionObject, 0, MAX_LASERS, FULL_ENEMY_LASER_INDEX, &LaserParamsEnemy);
 
       //Adjust the laser object numbers
-      CountLasers(0, enemyHitL);
-      CountLasers(2, enemyHitM);
-      CountLasers(0, bunkerDamage);
-      CountLasers(0, lasersCollide);
-      CountLasers(1, playerHit);
-      CountLasers(1, bunkerDamage1);
-      CountLasers(1, lasersCollide);
+      //CountLasers(0, enemyHitL);
+      //CountLasers(2, enemyHitM);
+      //CountLasers(0, bunkerDamage);
+      //CountLasers(0, lasersCollide);
+      //CountLasers(1, playerHit);
+      //CountLasers(1, bunkerDamage1);
+      //CountLasers(1, lasersCollide);
 
       //Play Sounds
       PlaySoundShoot(shootSound);
@@ -2269,7 +2272,6 @@ void UpdateFrame(void)
       int buttonCode, shuffleDirection, enemyIndexFire, enemyFireFlag;
       int lasersCollide, bunkerDamage, bunkerDamage1, enemyHitL, enemyHitM, shootSound, playerHit;
       unsigned long enemyFrame;
-      //static int LaserParamsPlayer.Index = 0;
 
       //Settings for this round
       UpdateSettings(&LaserParamsPlayer, &LaserParamsEnemy, &MissileParamsPlayer);
@@ -2287,21 +2289,21 @@ void UpdateFrame(void)
       MoveInvaderShuffle(shuffleDirection);
       MovePlayer();
 
-      shootSound = firePlayerLaser(buttonCode, LaserImagePlayer, Player);
+      shootSound = firePlayerLaser(buttonCode, LaserImagePlayer, Player, &LaserParamsPlayer);
       //Fire enemy laser if active
-      fireLaserEnemy(enemyFireFlag, enemyIndexFire);
+      fireLaserEnemy(LaserImageEnemy, Enemy, &LaserParamsEnemy, enemyFireFlag, enemyIndexFire);
       
       //Move Lasers
-      MoveLaserUp();      //Player Laser
-      MoveLaserDown();    //Enemy Lasers
+      MoveLaserUp(LaserImagePlayer, &LaserParamsPlayer);      //Move the Players Laser
+      MoveLaserDown(LaserImageEnemy, &LaserParamsEnemy);      //Move the Enemy Lasers
 
       //Collision Detection
-      enemyHitL      = CrashCheck(LaserImagePlayer, Enemy, ExplosionObject, 1, MAX_LASERS, MAX_ENEMIES);
-      enemyHitM      = CrashCheck(MissileImagePlayer, Enemy, ExplosionObject, 1, MAX_LASERS, MAX_ENEMIES);
-      bunkerDamage  = CrashCheck(LaserImagePlayer, Bunker, ExplosionObject, 0, MAX_LASERS, 3);
-      bunkerDamage1 = CrashCheck(LaserImageEnemy, Bunker, ExplosionObject, 0, FULL_ENEMY_LASER_INDEX, 3);
-      playerHit     = CrashCheck(LaserImageEnemy, Player, ExplosionObject, 1, FULL_ENEMY_LASER_INDEX, MAX_ENEMIES);
-      lasersCollide = CrashCheck(LaserImagePlayer, LaserImageEnemy, ExplosionObject, 0, MAX_LASERS, FULL_ENEMY_LASER_INDEX);
+      enemyHitL      = CrashCheck(LaserImagePlayer, Enemy, ExplosionObject, 1, MAX_LASERS, MAX_ENEMIES, &LaserParamsPlayer);
+      enemyHitM      = CrashCheck(MissileImagePlayer, Enemy, ExplosionObject, 1, MAX_LASERS, MAX_ENEMIES, &MissileParamsPlayer);
+      bunkerDamage  = CrashCheck(LaserImagePlayer, Bunker, ExplosionObject, 0, MAX_LASERS, 3, &LaserParamsPlayer);
+      bunkerDamage1 = CrashCheck(LaserImageEnemy, Bunker, ExplosionObject, 0, FULL_ENEMY_LASER_INDEX, 3, &LaserParamsEnemy);
+      playerHit     = CrashCheck(LaserImageEnemy, Player, ExplosionObject, 1, FULL_ENEMY_LASER_INDEX, MAX_ENEMIES, &LaserParamsEnemy);
+      lasersCollide = CrashCheck(LaserImagePlayer, LaserImageEnemy, ExplosionObject, 0, MAX_LASERS, FULL_ENEMY_LASER_INDEX, &LaserParamsPlayer);
 
       //Adjust the laser object numbers
       CountLasers(0, enemyHitL);
@@ -2360,7 +2362,6 @@ void UpdateFrame(void)
       int buttonCode, shuffleDirection, enemyIndexFire, enemyFireFlag;
       int lasersCollide, bunkerDamage, bunkerDamage1, enemyHitL, enemyHitM, shootSound, playerHit;
       unsigned long enemyFrame;
-      //static int LaserParamsPlayer.Index = 0;
 
       //Settings for this round
       //Update Laser Settings
@@ -2378,21 +2379,21 @@ void UpdateFrame(void)
       enemyFrame = AnimateEnemies();
       MoveInvaderShuffle(shuffleDirection);
       MovePlayer();
-      shootSound = firePlayerLaser(buttonCode, LaserImagePlayer, Player);
+      shootSound = firePlayerLaser(buttonCode, LaserImagePlayer, Player, &LaserParamsPlayer);
       //Fire enemy laser if active
-      fireLaserEnemy(enemyFireFlag, enemyIndexFire);
+      fireLaserEnemy(LaserImageEnemy, Enemy, &LaserParamsEnemy, enemyFireFlag, enemyIndexFire);
       
       //Move Lasers
-      MoveLaserUp();      //Player Laser
-      MoveLaserDown();    //Enemy Lasers
+      MoveLaserUp(LaserImagePlayer, &LaserParamsPlayer);      //Move the Players Laser
+      MoveLaserDown(LaserImageEnemy, &LaserParamsEnemy);      //Move the Enemy Lasers
 
       //Collision Detection
-      enemyHitL      = CrashCheck(LaserImagePlayer, Enemy, ExplosionObject, 1, MAX_LASERS, MAX_ENEMIES);
-      enemyHitM      = CrashCheck(MissileImagePlayer, Enemy, ExplosionObject, 1, MAX_LASERS, MAX_ENEMIES);
-      bunkerDamage  = CrashCheck(LaserImagePlayer, Bunker, ExplosionObject, 0, MAX_LASERS, 3);
-      bunkerDamage1 = CrashCheck(LaserImageEnemy, Bunker, ExplosionObject, 0, FULL_ENEMY_LASER_INDEX, 3);
-      playerHit     = CrashCheck(LaserImageEnemy, Player, ExplosionObject, 1, FULL_ENEMY_LASER_INDEX, MAX_ENEMIES);
-      lasersCollide = CrashCheck(LaserImagePlayer, LaserImageEnemy, ExplosionObject, 0, MAX_LASERS, FULL_ENEMY_LASER_INDEX);
+      enemyHitL      = CrashCheck(LaserImagePlayer, Enemy, ExplosionObject, 1, MAX_LASERS, MAX_ENEMIES, &LaserParamsPlayer);
+      enemyHitM      = CrashCheck(MissileImagePlayer, Enemy, ExplosionObject, 1, MAX_LASERS, MAX_ENEMIES, &MissileParamsPlayer);
+      bunkerDamage  = CrashCheck(LaserImagePlayer, Bunker, ExplosionObject, 0, MAX_LASERS, 3, &LaserParamsPlayer);
+      bunkerDamage1 = CrashCheck(LaserImageEnemy, Bunker, ExplosionObject, 0, FULL_ENEMY_LASER_INDEX, 3, &LaserParamsEnemy);
+      playerHit     = CrashCheck(LaserImageEnemy, Player, ExplosionObject, 1, FULL_ENEMY_LASER_INDEX, MAX_ENEMIES, &LaserParamsEnemy);
+      lasersCollide = CrashCheck(LaserImagePlayer, LaserImageEnemy, ExplosionObject, 0, MAX_LASERS, FULL_ENEMY_LASER_INDEX, &LaserParamsPlayer);
 
       //Adjust the laser object numbers
       //CountLasers(0, enemyHitL);
