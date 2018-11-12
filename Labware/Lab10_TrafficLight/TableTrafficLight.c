@@ -268,6 +268,21 @@ void ConfigureOutput()
 				PEDESTRIANLIGHTS = stopman;
 				SysTick_Wait10ms(60);
 			}
+			else if(PEDESTRIANLIGHTSMASK==walkman)
+			{
+				int i;
+				for(i=0;i<3;i++)
+				{
+					PEDESTRIANLIGHTS = stopman;
+					SysTick_Wait10ms(30);
+					PEDESTRIANLIGHTS = offman;
+					SysTick_Wait10ms(30);
+				}
+				PEDESTRIANLIGHTS = stopman;
+				SysTick_Wait10ms(60);
+				ROADLIGHTS = goWest;
+				SysTick_Wait10ms(60);
+			}
 			else
 			{
 				ROADLIGHTS = goWest;
@@ -286,6 +301,21 @@ void ConfigureOutput()
 				SysTick_Wait10ms(50);
 				ROADLIGHTS = goSouth;
 				PEDESTRIANLIGHTS = stopman;
+				SysTick_Wait10ms(60);
+			}
+			else if(PEDESTRIANLIGHTSMASK==walkman)
+			{
+				int i;
+				for(i=0;i<3;i++)
+				{
+					PEDESTRIANLIGHTS = stopman;
+					SysTick_Wait10ms(30);
+					PEDESTRIANLIGHTS = offman;
+					SysTick_Wait10ms(30);
+				}
+				PEDESTRIANLIGHTS = stopman;
+				SysTick_Wait10ms(60);
+				ROADLIGHTS = goSouth;
 				SysTick_Wait10ms(60);
 			}
 			else
@@ -308,9 +338,24 @@ void ConfigureOutput()
 				PEDESTRIANLIGHTS = stopman;
 				SysTick_Wait10ms(60);
 			}
+			else if(PEDESTRIANLIGHTSMASK==walkman)
+			{
+				int i;
+				for(i=0;i<3;i++)
+				{
+					PEDESTRIANLIGHTS = stopman;
+					SysTick_Wait10ms(30);
+					PEDESTRIANLIGHTS = offman;
+					SysTick_Wait10ms(30);
+				}
+				PEDESTRIANLIGHTS = stopman;
+				SysTick_Wait10ms(60);
+				ROADLIGHTS = goWest;
+				SysTick_Wait10ms(60);
+			}
 			else
 			{
-				ROADLIGHTS = waitSouth;
+				ROADLIGHTS = waitWest;
 				PEDESTRIANLIGHTS = stopman;
 				SysTick_Wait10ms(40);
 				ROADLIGHTS = stopBoth;
@@ -354,7 +399,7 @@ void ConfigureOutput()
 			} 
 		break; /* optional */
 		case WalkandWest:
-			if(ROADLIGHTS!=goWest)
+			if(ROADLIGHTS!=goWest && PEDESTRIANLIGHTSMASK!=walkman)
 			{
 				ROADLIGHTS = waitSouth;
 				PEDESTRIANLIGHTS = stopman;
@@ -366,7 +411,20 @@ void ConfigureOutput()
 				PEDESTRIANLIGHTS = walkman;
 				SysTick_Wait10ms(60);
 			}
-			//else if()
+			else if(PEDESTRIANLIGHTSMASK==walkman)
+			{
+				int i;
+				for(i=0;i<3;i++)
+				{
+					PEDESTRIANLIGHTS = stopman;
+					SysTick_Wait10ms(30);
+					PEDESTRIANLIGHTS = offman;
+					SysTick_Wait10ms(30);
+				}
+				PEDESTRIANLIGHTS = stopman;
+				SysTick_Wait10ms(60);
+			}
+			else
 			{
 				ROADLIGHTS = stopBoth;
 				PEDESTRIANLIGHTS = walkman;
