@@ -241,6 +241,7 @@ const unsigned char SmallExplosion0[] = {
 
 // blank space following the small explosion for the demise of an enemy
 // width=16 x height=10
+/*
 const unsigned char SmallExplosion1[] = {
  0x42, 0x4D, 0xC6, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x76, 0x00, 0x00, 0x00, 0x28, 0x00, 0x00, 0x00, 0x10, 0x00, 0x00, 0x00, 0x0A, 0x00, 0x00, 0x00, 0x01, 0x00, 0x04, 0x00, 0x00, 0x00,
  0x00, 0x00, 0x50, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80, 0x00, 0x00, 0x80,
@@ -253,6 +254,7 @@ const unsigned char SmallExplosion1[] = {
 // a missile in flight
 // includes one blacked out row on the top, bottom, and right of the image to prevent smearing when moved 1 pixel down, up, or left
 // width=4 x height=9
+*/
 const unsigned char Missile0[] = {
  0x42, 0x4D, 0x9A, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x76, 0x00, 0x00, 0x00, 0x28, 0x00, 0x00, 0x00, 0x04, 0x00, 0x00, 0x00, 0x09, 0x00, 0x00, 0x00, 0x01, 0x00, 0x04, 0x00, 0x00, 0x00,
  0x00, 0x00, 0x24, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80, 0x00, 0x00, 0x80,
@@ -272,6 +274,7 @@ const unsigned char Missile1[] = {
 
 // blank space to cover a missile after it hits something
 // width=4 x height=9
+/*
 const unsigned char Missile2[] = {
  0x42, 0x4D, 0x9A, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x76, 0x00, 0x00, 0x00, 0x28, 0x00, 0x00, 0x00, 0x04, 0x00, 0x00, 0x00, 0x09, 0x00, 0x00, 0x00, 0x01, 0x00, 0x04, 0x00, 0x00, 0x00,
  0x00, 0x00, 0x24, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80, 0x00, 0x00, 0x80,
@@ -282,6 +285,7 @@ const unsigned char Missile2[] = {
 // a laser burst in flight
 // includes one blacked out row on the top and bottom of the image to prevent smearing when moved 1 pixel up or down
 // width=2 x height=9
+*/
 const unsigned char Laser0[] = {
  0x42, 0x4D, 0x9A, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x76, 0x00, 0x00, 0x00, 0x28, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0x09, 0x00, 0x00, 0x00, 0x01, 0x00, 0x04, 0x00, 0x00, 0x00,
  0x00, 0x00, 0x24, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80, 0x00, 0x00, 0x80,
@@ -994,60 +998,7 @@ const unsigned char fastinvader1[982] = {
   116, 116, 111, 111, 116, 111, 116, 111, 116, 111, 111, 116, 111, 116, 111, 111, 116, 111, 116, 111, 
   111, 111};
 
-const unsigned char fastinvader2[1042] = {
-  128, 128, 116, 94, 71, 54, 31, 20, 9, 20, 31, 48, 65, 88, 105, 128, 139, 161, 178, 190, 
-  207, 218, 229, 240, 252, 252, 252, 255, 255, 252, 252, 252, 240, 240, 229, 224, 212, 207, 201, 184, 
-  184, 173, 161, 150, 144, 128, 128, 122, 111, 99, 94, 82, 77, 65, 60, 54, 54, 71, 71, 82, 
-  88, 94, 94, 94, 82, 77, 65, 60, 37, 31, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
-  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 9, 20, 26, 43, 54, 65, 71, 88, 
-  99, 116, 122, 133, 144, 156, 167, 178, 184, 195, 207, 218, 229, 235, 246, 252, 255, 255, 255, 255, 
-  255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 
-  255, 255, 255, 255, 255, 255, 255, 255, 255, 252, 246, 240, 235, 224, 218, 218, 207, 201, 195, 190, 
-  184, 178, 173, 167, 161, 156, 144, 139, 144, 133, 128, 128, 122, 116, 116, 105, 105, 94, 94, 88, 
-  82, 77, 77, 65, 65, 60, 60, 54, 54, 48, 43, 43, 37, 37, 31, 31, 26, 26, 15, 3, 
-  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 37, 54, 71, 82, 94, 105, 
-  111, 122, 128, 133, 133, 139, 133, 139, 139, 139, 133, 139, 128, 128, 128, 116, 116, 111, 111, 99, 
-  88, 94, 82, 77, 71, 65, 60, 60, 48, 43, 37, 31, 37, 43, 54, 71, 77, 88, 94, 94, 
-  88, 88, 77, 71, 60, 54, 43, 31, 20, 15, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
-  0, 3, 3, 15, 20, 31, 43, 48, 60, 71, 82, 99, 111, 122, 128, 139, 150, 167, 178, 190, 
-  201, 212, 224, 235, 246, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 
-  255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 
-  255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 252, 240, 235, 224, 218, 218, 207, 
-  201, 195, 190, 178, 178, 167, 156, 150, 144, 139, 133, 128, 122, 116, 116, 105, 99, 94, 94, 82, 
-  71, 77, 71, 60, 54, 54, 48, 43, 37, 31, 26, 26, 26, 20, 15, 3, 0, 0, 0, 0, 
-  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 31, 48, 60, 77, 88, 94, 99, 105, 116, 
-  116, 122, 122, 128, 122, 122, 116, 116, 111, 105, 99, 94, 88, 82, 77, 65, 60, 54, 48, 48, 
-  37, 31, 26, 20, 15, 9, 3, 0, 3, 0, 9, 26, 31, 43, 48, 54, 48, 48, 43, 31, 
-  26, 15, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
-  0, 0, 0, 15, 20, 31, 43, 54, 65, 82, 94, 105, 122, 128, 144, 156, 167, 184, 190, 207, 
-  218, 229, 240, 252, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 
-  255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 
-  255, 255, 255, 255, 255, 255, 255, 255, 255, 252, 240, 235, 229, 224, 218, 207, 201, 195, 190, 184, 
-  178, 178, 167, 161, 156, 144, 139, 133, 128, 133, 128, 116, 111, 111, 105, 94, 88, 77, 71, 65, 
-  60, 60, 54, 54, 48, 48, 43, 43, 37, 31, 26, 20, 3, 0, 0, 0, 0, 0, 0, 0, 
-  0, 0, 0, 0, 0, 15, 26, 48, 65, 82, 94, 111, 122, 128, 128, 133, 133, 139, 139, 144, 
-  139, 144, 139, 139, 133, 128, 128, 116, 116, 111, 99, 94, 88, 82, 82, 71, 60, 54, 48, 43, 
-  37, 31, 26, 20, 26, 20, 26, 43, 48, 60, 65, 65, 65, 71, 65, 54, 48, 43, 31, 20, 
-  9, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 20, 
-  26, 43, 48, 60, 77, 88, 105, 116, 128, 133, 144, 161, 173, 190, 201, 212, 218, 229, 240, 252, 
-  255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 
-  255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 
-  255, 255, 255, 252, 246, 240, 235, 224, 218, 212, 201, 195, 184, 184, 178, 167, 161, 156, 150, 144, 
-  139, 128, 128, 128, 116, 116, 111, 99, 99, 94, 88, 82, 82, 77, 77, 65, 60, 54, 54, 48, 
-  43, 43, 37, 31, 31, 26, 20, 26, 20, 15, 15, 20, 15, 15, 15, 15, 9, 9, 9, 9, 
-  15, 9, 9, 15, 9, 3, 9, 15, 15, 9, 15, 9, 15, 15, 20, 15, 20, 26, 26, 20, 
-  31, 31, 31, 37, 31, 37, 37, 43, 43, 48, 54, 48, 54, 54, 60, 60, 65, 65, 71, 71, 
-  77, 77, 82, 82, 88, 88, 94, 99, 94, 99, 105, 105, 111, 116, 111, 116, 116, 122, 122, 128, 
-  128, 128, 133, 128, 133, 139, 133, 139, 144, 139, 144, 144, 150, 156, 156, 156, 150, 156, 161, 156, 
-  161, 156, 161, 161, 167, 167, 173, 167, 167, 173, 167, 173, 173, 167, 167, 173, 173, 178, 173, 178, 
-  173, 178, 178, 173, 178, 178, 173, 178, 173, 178, 178, 173, 173, 178, 173, 178, 184, 178, 184, 178, 
-  173, 178, 178, 173, 178, 173, 178, 178, 173, 173, 178, 178, 173, 167, 173, 178, 173, 167, 167, 173, 
-  167, 173, 167, 161, 167, 161, 161, 156, 150, 150, 156, 150, 144, 144, 150, 144, 144, 150, 144, 139, 
-  139, 144, 139, 144, 139, 144, 139, 133, 133, 133, 139, 133, 139, 133, 128, 133, 133, 128, 128, 133, 
-  128, 133, 128, 133, 128, 133, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 122, 
-  128, 122, 128, 122, 122, 122, 116, 122, 116, 116, 122, 122, 116, 122, 116, 111, 116, 116, 111, 111, 
-  116, 111, 116, 111, 116, 111, 111, 111, 116, 111, 116, 111, 116, 111, 111, 116, 111, 111, 111, 111, 
-  111, 116};
+
 
 
 
@@ -1069,22 +1020,19 @@ const unsigned char fastinvader2[1042] = {
 #define PLAYERW     ((unsigned char)PlayerShip0[18])
 #define PLAYERH     ((unsigned char)PlayerShip0[22])
 #define START_SCREEN        0
-#define GAME_SCREEN         1
 #define SHUFFLE_WAIT        30
 #define SHUFFLE_WAIT_DEBUG  20
 #define ANIMATE_WAIT        25
 #define ANIMATE_WAIT_DEBUG  10
 #define RANDOM_FORMATIONS   5
 #define RANDOM_ENEMY_MOVES  3
-#define MAX_LASERS          5
+#define MAX_LASERS_PLAYER   5
 #define MAX_MISSILES        1
 #define MAX_BUNKERS         2
-#define FULL_ENEMY_LASER_INDEX  10
+#define MAX_LASERS_ENEMIES  10
 #define MAX_FIRST_OBJECT    3
 #define MAX_SECOND_OBJECT   4
 #define MAX_ENEMIES         4
-#define OFFSET_COLLISION_PLAYER_X   16
-#define OFFSET_COLLISION_PLAYER_Y   3
 
 // *************************** Enums****************
 
@@ -1101,16 +1049,28 @@ enum ScreenType{
 
 enum FireRate{
   SLOW_RATE   = 50,
-  MEDIUM_RATE = 10,
-  FAST_RATE   = 5
+  MEDIUM_RATE = 30,
+  FAST_RATE   = 10
 }LaserFire;
 
 enum ProjectileSpeed{
-  SLOW_MOVE   = 10,
-  MEDIUM_MOVE = 5,
-  FAST_MOVE   = 1
+  SLOW_MOVE   = 6,
+  MEDIUM_MOVE = 4,
+  FAST_MOVE   = 2
 }LaserSpeed;
 
+enum CollisionObjects{
+  p_laserVenemy,
+  E_laserVplayer,
+  E_laserVbunker,
+  P_laserVbunker,
+  P_laserVe_laser
+}CrashObjects;
+
+enum ShowExplosion{
+  NO_EXPLODE,
+  EXPLODE
+}ExplosionShow;
 // *************************************************
 
 // *************************** Structures**********
@@ -1118,26 +1078,20 @@ struct imageState {
   unsigned long x;                // x coordinate
   unsigned long y;                // y coordinate
   const unsigned char *image[4];  // ptr->image
+  long immunity;                  // 0=vulnerable 1=immune
   long life;                      // 0=dead, 1=alive
   long height;                    //Offset for object height
   long width;                     //Offset for object width
 };          
 typedef struct imageState STyp;
 
-struct imageStateB {
-  unsigned long x;               // x coordinate
-  unsigned long y;               // y coordinate
-  const unsigned char *image[4]; // ptr->image
-  long life;                     // 0=dead, 1=alive
-};          
-typedef struct imageStateB BTyp;
-
 struct ProjectileParameters {
   int Speed;      // speed limit of the laser
   int FireRate;   // Speed at which lasers can be generated
   int MaxLasers;  // maximum amount of lasers on screen
-  int Count;
-  int Index;
+  int Count;      //Laser Count
+  int Index;      //Index of Current Lasers
+  int leftRight;
 };          
 typedef struct ProjectileParameters LTyp;
 // *************************************************
@@ -1154,20 +1108,28 @@ int adc = 0;
 
 const unsigned char *EnemyTypes1[4] = {SmallEnemy10PointA,SmallEnemy20PointA, SmallEnemy30PointA,SmallEnemy20PointA};
 const unsigned char *EnemyTypes2[4] = {SmallEnemy10PointB,SmallEnemy20PointB, SmallEnemy30PointB,SmallEnemy20PointB};
+const unsigned char *EnemyTypes3[4] = {SmallEnemy10PointA,SmallEnemyBonus0, SmallEnemy30PointA,SmallEnemyBonus0};
+const unsigned char *EnemyTypes4[4] = {SmallEnemy10PointB,SmallEnemyBonus0, SmallEnemy30PointB,SmallEnemyBonus0};
 
 // **************** Structure Instances*************
 
+//Moving All this to be local variables in UpdateFrame function
+
 STyp Player[1];
 STyp Enemy[MAX_ENEMIES];
-STyp LaserImageEnemy[FULL_ENEMY_LASER_INDEX];
-STyp LaserImagePlayer[MAX_LASERS];
+STyp LaserImageEnemy[MAX_LASERS_ENEMIES];
+STyp LaserImagePlayer[MAX_LASERS_PLAYER];
 STyp MissileImagePlayer[MAX_MISSILES];
 STyp Bunker[MAX_BUNKERS];
 STyp ExplosionObject[4];
+
+
+//Moving All this to be local variables in UpdateFrame function
 //Variables for rules
 LTyp LaserParamsPlayer;
 LTyp MissileParamsPlayer;
 LTyp LaserParamsEnemy;
+
 
 // *************************************************
 
@@ -1176,68 +1138,79 @@ LTyp LaserParamsEnemy;
 // ******************* Funsction Prototypes *****************************
 void DisableInterrupts(void); // Disable interrupts
 void EnableInterrupts(void);  // Enable interrupts
-void MainLoop1(void);
-void InitEnemies(int);
-void InitBunkerObjects(enum ScreenType);
+//Initialize Display Object Data
 void InitPlayer(void);
+void InitEnemies(int, enum ScreenType);
+void InitBunkerObjects(enum ScreenType);
 void InitProjectiles(void);
-int firePlayerLaser(int, STyp*, STyp*, LTyp*);
-int firePlayerMissile(int, STyp*, STyp*);
-void fireLaserEnemy(STyp*, STyp*, LTyp*, int, int);
+void InitProjectileSettings(enum ScreenType);
 void ClearAllObjects(void);
+enum ScreenType Start_Screen(int);
+//Initialize peripherals
+//Get Random Numbers
 unsigned long GetRandomNumber(unsigned long);
 unsigned long RandomInvaderShuffle(void);
 unsigned long RandomInvaderFire(void);
 unsigned long FireEnemyLaser(int);
+//Modify Display Object Data
+int firePlayerLaser(int, STyp*, STyp*, LTyp*);
+int firePlayerMissile(int, STyp*, STyp*, LTyp*);
+void fireLaserEnemy(STyp*, STyp*, LTyp*, int, int);
 void MoveLeft(void);
 void MoveRight(void);
 void MoveInvaderShuffle(int);
 unsigned long AnimateEnemies(void);
-void MovePlayer(void);
+void MovePlayer(int);
 int MoveInvaderAdvance(void);
 void MoveLaserUp(STyp*, LTyp*);
 void MoveLaserDown(STyp*, LTyp*);
-void MoveMissile(void);
+int MoveMissile(STyp*, LTyp*);
+int CrashCheck(STyp*, STyp*, STyp*, int, int, int);
+void UpdateSettings(LTyp*, LTyp*, LTyp*, int, int, int);
+//Check Settings or status
+enum ScreenType LifeCheck(void);
+//Display Objects
 void DrawEnemies(unsigned long);
 void DrawExplosions(int);
 void DrawArea(int);
 void DrawPlayer(int);
 void DrawLasers(void);
-void DrawMissiles(void);
+void DrawMissiles(int);
 void DrawEnemyLasers(void);
-enum ScreenType Start_Screen(int);
-enum ScreenType LifeCheck(void);
-void PlayerLifeDisplay(void);
-void Draw(unsigned long, int, int, int, int, int);
-int CrashCheck(STyp*, STyp*, STyp*, int, int, int, LTyp*);
-void CountLasers(int, int);
-void UpdateSettings(LTyp*, LTyp*, LTyp*);
-void PlaySoundShoot(int);
-void PlaySoundInvaderKilled(int);
-void PlaySoundExplosion(int);
-void PlaySoundHighPitch(int);
-void PlaySoundFastInvader1(int);
-void UpdateFrame(void);
-void Timer2_Init(unsigned long period);
-void Timer2A_Start(void);
-void Timer2A_Stop(void);
-void Delay100ms(unsigned long count); // time delay in 0.1 seconds
-void DAC_Init(void);
-void DAC_Out(unsigned long);
-void Sound_Play(const unsigned char*,unsigned long);
-void ADC0_Init(void);
-unsigned long ADC0_In(void);
-void SystickInit(void);
+void Draw(unsigned long,  unsigned long, int, int, int, int, int);
+//Display periph
+void Backlight_Init(void);
+void Backlight_On(void);
+void Backlight_Off(void);
+//Button Inputs
 void Buttons_Init(void);
 unsigned long Read_Buttons(void);
+//Display on LEDs
+void PlayerLifeDisplay(void);
 void LEDs_Init(void);
 void LED1_On(void);
 void LED1_Off(void);
 void LED2_On(void);
 void LED2_Off(void);
-void Backlight_Init(void);
-void Backlight_On(void);
-void Backlight_Off(void);
+//Sound Functions
+void Timer2_Init(unsigned long period);
+void Timer2A_Start(void);
+void Timer2A_Stop(void);
+void DAC_Init(void);
+void DAC_Out(unsigned long);
+void Sound_Play(const unsigned char*,unsigned long);
+void PlaySoundShoot(int);
+void PlaySoundInvaderKilled(int);
+void PlaySoundExplosion(int);
+void PlaySoundHighPitch(int);
+void PlaySoundFastInvader1(int);
+//Slide Pot input
+void ADC0_Init(void);
+unsigned long ADC0_In(void);
+void SystickInit(void);
+//Game Engine
+void UpdateFrame(void);
+void Delay100ms(unsigned long count); // time delay in 0.1 seconds
 
 int main(void){
 
@@ -1264,8 +1237,7 @@ int main(void){
   {
     while(semaphore==0)
     {  
-      //Delay100ms(2);
-      //MainLoop1();
+
     }
     //Update the Frame
     UpdateFrame();
@@ -1276,45 +1248,150 @@ int main(void){
 
 //------------Animation Thread section(main thread)------------------------------------------------------------------
 
+// **************InitPlayer*********************************
+// Initializes player ship in start position
+// Input: none
+// Output: none
+void InitPlayer(void)
+{ 
+  Player[0].x = 32;
+  Player[0].y = 47;
+  Player[0].immunity = 0;
+  Player[0].image[0] = PlayerShip0;
+  Player[0].image[1] = BigExplosion0;
+  Player[0].image[2] = BigExplosion1;
+  Player[0].height = PLAYERH-4;
+  Player[0].width = PLAYERW-2;
+  Player[0].life = 2;
+}
+
 // **************InitEnemies*********************************
-// Initializes four enemies in start position
+// Initializes four enemies in a random start postion
 // Input: Random number for enemy start position
 // Output: none
-void InitEnemies(int enemyFormation)
+void InitEnemies(int enemyFormation, enum ScreenType displayMode)
 { 
-  int i;
-  for(i=0;i<4;i++)                  //Initialise all enemies
+  switch(displayMode)
   {
-    Enemy[i].x = 20*i+enemyFormation;
-    Enemy[i].y = 10;
-    Enemy[i].image[0] = EnemyTypes1[i];
-    Enemy[i].image[1] = EnemyTypes2[i];
-    if(EnemyTypes1[i]==SmallEnemy10PointA)
+    case START:
     {
-      Enemy[i].height = ENEMY10H;
-      Enemy[i].width = ENEMY10W;
+      int i;
+      for(i=0;i<MAX_ENEMIES;i++)                  //Initialise all enemies
+      {
+        Enemy[i].x = 20*i+enemyFormation;
+        Enemy[i].y = 10;
+        Enemy[i].immunity = 0;
+        Enemy[i].image[0] = EnemyTypes1[i];
+        Enemy[i].image[1] = EnemyTypes2[i];
+        //Assign enemy width and height according to enemy types
+        if(EnemyTypes1[i]==SmallEnemy10PointA)
+        {
+          Enemy[i].height = ENEMY10H;
+          Enemy[i].width = ENEMY10W;
+        }
+        else if(EnemyTypes1[i]==SmallEnemy20PointA)
+        {
+          Enemy[i].height = ENEMY20H;
+          Enemy[i].width = ENEMY20W;
+        }
+        else if(EnemyTypes1[i]==SmallEnemy30PointA)
+        {
+          Enemy[i].height = ENEMY30H;
+          Enemy[i].width = ENEMY30W;
+        }
+        else if(EnemyTypes1[i]==SmallEnemyBonus0)
+        {
+          Enemy[i].height = ENEMYBONUSH;
+          Enemy[i].width = ENEMYBONUSW;
+        }
+        //Enemy[i].image[0] = SmallEnemy30PointA;
+        //Enemy[i].image[1] = SmallEnemy30PointB;
+        Enemy[i].life = 1;
+      }
     }
-    else if(EnemyTypes1[i]==SmallEnemy20PointA)
+    break;
+    case TRANSITION_ROUND2:
     {
-      Enemy[i].height = ENEMY20H;
-      Enemy[i].width = ENEMY20W;
+      int i;
+      for(i=0;i<MAX_ENEMIES;i++)                  //Initialise all enemies
+      {
+        Enemy[i].x = 20*i+enemyFormation;
+        Enemy[i].y = 10;
+        Enemy[i].immunity = 0;
+        Enemy[i].image[0] = EnemyTypes1[i];
+        Enemy[i].image[1] = EnemyTypes2[i];
+        //Assign enemy width and height according to enemy types
+        if(EnemyTypes1[i]==SmallEnemy10PointA)
+        {
+          Enemy[i].height = ENEMY10H;
+          Enemy[i].width = ENEMY10W;
+        }
+        else if(EnemyTypes1[i]==SmallEnemy20PointA)
+        {
+          Enemy[i].height = ENEMY20H;
+          Enemy[i].width = ENEMY20W;
+        }
+        else if(EnemyTypes1[i]==SmallEnemy30PointA)
+        {
+          Enemy[i].height = ENEMY30H;
+          Enemy[i].width = ENEMY30W;
+        }
+        else if(EnemyTypes1[i]==SmallEnemyBonus0)
+        {
+          Enemy[i].height = ENEMYBONUSH;
+          Enemy[i].width = ENEMYBONUSW;
+        }
+        //Enemy[i].image[0] = SmallEnemy30PointA;
+        //Enemy[i].image[1] = SmallEnemy30PointB;
+        Enemy[i].life = 1;
+      }
     }
-    else if(EnemyTypes1[i]==SmallEnemy30PointA)
+    break;
+    case TRANSITION_ROUND3:
     {
-      Enemy[i].height = ENEMY30H;
-      Enemy[i].width = ENEMY30W;
+      int i;
+      for(i=0;i<MAX_ENEMIES;i++)                  //Initialise all enemies
+      {
+        Enemy[i].x = 20*i+enemyFormation;
+        Enemy[i].y = 10;
+        Enemy[i].immunity = 0;
+        Enemy[i].image[0] = EnemyTypes3[i];
+        Enemy[i].image[1] = EnemyTypes4[i];
+        //Assign enemy width and height according to enemy types
+        if(EnemyTypes3[i]==SmallEnemy10PointA)
+        {
+          Enemy[i].height = ENEMY10H;
+          Enemy[i].width = ENEMY10W;
+        }
+        else if(EnemyTypes3[i]==SmallEnemy20PointA)
+        {
+          Enemy[i].height = ENEMY20H;
+          Enemy[i].width = ENEMY20W;
+        }
+        else if(EnemyTypes3[i]==SmallEnemyBonus0)
+        {
+          Enemy[i].height = ENEMYBONUSH;
+          Enemy[i].width = ENEMYBONUSW;
+        }
+        //Enemy[i].image[0] = SmallEnemy30PointA;
+        //Enemy[i].image[1] = SmallEnemy30PointB;
+        Enemy[i].life = 1;
+      }
     }
-    else if(EnemyTypes1[i]==SmallEnemy20PointA)
+    break;
+    default:
     {
-      Enemy[i].height = ENEMY20H;
-      Enemy[i].width = ENEMY20W;
+
     }
-    //Enemy[i].image[0] = SmallEnemy30PointA;
-    //Enemy[i].image[1] = SmallEnemy30PointB;
-    Enemy[i].life = 1;
+    break;
   }
 }
 
+// **************InitBunkerObjects*********************************
+// Initializes the bunker objects according to the current 
+// game round
+// Input: The current display mode or game round
+// Output: none
 void InitBunkerObjects(enum ScreenType displayMode)
 {
   int i = 0;
@@ -1324,11 +1401,12 @@ void InitBunkerObjects(enum ScreenType displayMode)
     {
       for(i=0;i<MAX_BUNKERS;i++)
       {
-        //Two bunkers a 55 pixels apart
+        //Two bunkers 55 pixels apart
         Bunker[i].x = 5+i*55;
         Bunker[i].y = 47-PLAYERH;
         Bunker[i].height = 5;
         Bunker[i].width = 19;
+        Bunker[i].immunity = 0;
         Bunker[i].image[0] = Bunker3;
         Bunker[i].image[1] = Bunker2;
         Bunker[i].image[2] = Bunker1;
@@ -1341,7 +1419,7 @@ void InitBunkerObjects(enum ScreenType displayMode)
     {
       for(i=0;i<MAX_BUNKERS;i++)
       {
-        Bunker[i].x = 50;
+        Bunker[i].x = 84/2-BUNKERW/2;
         Bunker[i].y = 47-PLAYERH;
         Bunker[i].height = 5;
         Bunker[i].width = 19;
@@ -1370,7 +1448,7 @@ void InitBunkerObjects(enum ScreenType displayMode)
         Bunker[i].image[2] = Bunker1;
         Bunker[i].image[3] = Bunker0;
         Bunker[i].life = 3;
-        if(i>0)
+        if(i>=0)
         {
           Bunker[i].life = 0;
         }
@@ -1385,21 +1463,6 @@ void InitBunkerObjects(enum ScreenType displayMode)
   }
 }
 
-// **************InitPlayer*********************************
-// Initializes player ship in start position
-// Input: none
-// Output: none
-void InitPlayer(void)
-{ 
-  Player[0].x = 32;
-  Player[0].y = 47;
-  Player[0].image[0] = PlayerShip0;
-  Player[0].image[1] = PlayerShip0;
-  Player[0].height = PLAYERH-4;
-  Player[0].width = PLAYERW-2;
-  Player[0].life = 2;
-}
-
 // **************InitProjectiles*********************************
 // Initializes all Projectile objects and sets all related
 // global variables to zero
@@ -1409,28 +1472,221 @@ void InitProjectiles(void)
 { 
   int index = 0;
 
-  for(index=0;index<FULL_ENEMY_LASER_INDEX;index++)
+  for(index=0;index<MAX_LASERS_ENEMIES;index++)
   {
+    LaserImageEnemy[index].immunity = 0;
     LaserImageEnemy[index].life = 0;
   }
 
-  for(index=0;index<MAX_LASERS;index++)
+  for(index=0;index<MAX_LASERS_PLAYER;index++)
   {
+    LaserImagePlayer[index].immunity = 0;
     LaserImagePlayer[index].life = 0;
   }
 
   for(index=0;index<1;index++)
   {
+    MissileImagePlayer[index].immunity = 0;
     MissileImagePlayer[index].life = 0;
   }
 
-  LaserParamsPlayer.Count   = 0;
-  LaserParamsEnemy.Count    = 0;
-  MissileParamsPlayer.Count = 0;
-  LaserParamsPlayer.Index   = 0;
-  LaserParamsEnemy.Index    = 0;
-  MissileParamsPlayer.Index = 0;
+}
 
+// **************InitProjectileSettings*********************************
+// Initializes all Projectile Settings(Global Variables) to zero
+// Input: none
+// Output: none
+void InitProjectileSettings(enum ScreenType displayMode)
+{ 
+  LaserParamsPlayer.Count   = 0;
+  LaserParamsPlayer.Index   = 0;
+
+  LaserParamsEnemy.Count    = 0;
+  LaserParamsEnemy.Index    = 0;
+
+  MissileParamsPlayer.Count = 0;
+  MissileParamsPlayer.Index = 0;
+  MissileParamsPlayer.leftRight = 0;
+
+  switch(displayMode)
+  {
+    case START:
+    {
+      LaserParamsPlayer.FireRate = MEDIUM_RATE;
+      LaserParamsPlayer.MaxLasers = 2;
+      LaserParamsPlayer.Speed = MEDIUM_MOVE;
+
+      LaserParamsEnemy.FireRate = SLOW_RATE;
+      LaserParamsEnemy.MaxLasers = 5;
+      LaserParamsEnemy.Speed = MEDIUM_MOVE;
+
+      MissileParamsPlayer.FireRate = SLOW_RATE;
+      MissileParamsPlayer.MaxLasers = 1;
+      MissileParamsPlayer.Speed = SLOW_MOVE;
+
+    }
+    break;
+    case TRANSITION_ROUND2:
+    {
+      LaserParamsPlayer.FireRate = MEDIUM_RATE;
+      LaserParamsPlayer.MaxLasers = 2;
+      LaserParamsPlayer.Speed = MEDIUM_MOVE;
+
+      LaserParamsEnemy.FireRate = MEDIUM_RATE;
+      LaserParamsEnemy.MaxLasers = 6;
+      LaserParamsEnemy.Speed = MEDIUM_MOVE;
+
+      MissileParamsPlayer.FireRate = SLOW_RATE;
+      MissileParamsPlayer.MaxLasers = 1;
+      MissileParamsPlayer.Speed = SLOW_MOVE;
+
+    }
+    break;
+    case TRANSITION_ROUND3:
+    {
+      LaserParamsPlayer.FireRate = MEDIUM_RATE;
+      LaserParamsPlayer.MaxLasers = 2;
+      LaserParamsPlayer.Speed = MEDIUM_MOVE;
+
+      LaserParamsEnemy.FireRate = FAST_RATE;
+      LaserParamsEnemy.MaxLasers = 6;
+      LaserParamsEnemy.Speed = MEDIUM_MOVE;
+
+      MissileParamsPlayer.FireRate = SLOW_RATE;
+      MissileParamsPlayer.MaxLasers = 1;
+      MissileParamsPlayer.Speed = SLOW_MOVE;
+
+    }
+    break;
+    default:
+    {
+
+    }
+    break;
+  }
+}
+
+// **************ClearAllObjects*********************************
+// Kills all life status in objects
+// Input: none
+// Output: none
+void ClearAllObjects(void)
+{
+  int index;
+  Player[0].life = 0;
+
+  for(index=0;index<MAX_LASERS_ENEMIES;index++)
+  {
+    LaserImageEnemy[index].life = 0;
+  }
+
+  for(index=0;index<MAX_LASERS_PLAYER;index++)
+  {
+    LaserImagePlayer[index].life=0;
+  }
+
+    for(index=0;index<MAX_MISSILES;index++)
+  {
+    MissileImagePlayer[index].life=0;
+  }
+
+  for(index=0;index<3;index++)
+  {
+    Bunker[index].life=0;
+  }
+}
+
+// **************Start_Screen*********************************
+// Clears the screen and initializes all the elements if a 
+// button is pressed, otherwise it returns the current screen 
+// enum.
+// Input: integer input from buttons
+// Output: ScreenType enum to show the next screen
+enum ScreenType Start_Screen(int codeFromButton)
+{
+  int randomEnemiesFormation = 0;
+  //If any button is pressed, Prepare the round and change the display mode
+  if(codeFromButton==1 | codeFromButton==2)
+  {
+    srand(NVIC_ST_CURRENT_R);
+    randomEnemiesFormation = GetRandomNumber(RANDOM_FORMATIONS);
+    Nokia5110_Clear();
+    ClearAllObjects();
+    //Initialize all objects to display
+    InitEnemies(randomEnemiesFormation, DisplayMode);
+    InitBunkerObjects(DisplayMode);
+    InitPlayer();
+    InitProjectiles();
+    InitProjectileSettings(DisplayMode);
+    DisplayMode = ROUND1;
+  }
+  else
+  {
+    DisplayMode = START;
+  }
+  return DisplayMode;
+}
+
+// **************GetRandomNumber*********************************
+// Generates a random number with a configurable range
+// Input: range limits of random number
+// Output: random unsigned long within limits 
+unsigned long GetRandomNumber(unsigned long number)
+{
+  unsigned long randomLong = 0;
+  randomLong = rand()%number;
+  return randomLong;
+}
+
+// **************RandomInvaderShuffle*********************************
+// Genrates a random shuffle direction Left or Right
+// Input: None
+// Output: Random Long from 0-2
+unsigned long RandomInvaderShuffle(void)
+{
+  unsigned long shuffleDirection;
+  shuffleDirection = GetRandomNumber(RANDOM_ENEMY_MOVES); //Returns a number from 0 to parameter-1
+
+  return shuffleDirection;
+}
+
+// **************RandomInvaderFire*********************************
+// Determines which random enemy will fire
+// Input: None
+// Output: Random Long from 0-3
+unsigned long RandomInvaderFire(void)
+{
+  unsigned long randomEnemyFire;
+  int leftOrRight;
+  randomEnemyFire = GetRandomNumber(MAX_ENEMIES); //Returns a number from 0 to 3
+  while(Enemy[randomEnemyFire].life==0)
+  {
+    leftOrRight = GetRandomNumber(2); 
+    if(leftOrRight==1)
+    {
+      randomEnemyFire--;
+    }
+    else
+    {
+      randomEnemyFire++;
+    }
+  }
+  return randomEnemyFire;
+}
+
+// **************FireEnemyLaser*********************************
+// Determines whether a chosen enemy will fire or not
+// Input: Index of chosen enemy to fire
+// Output: fireFlag to allow enemy fire
+unsigned long FireEnemyLaser(int enemyIndex)
+{
+  unsigned long fireFlag;
+  fireFlag = GetRandomNumber(2); //Returns a number from 0 to 1
+  if(Enemy[enemyIndex].life==0)
+  {
+    fireFlag=0;
+  }
+  return fireFlag;
 }
 
 // **************firePlayerLaser*********************************
@@ -1445,11 +1701,11 @@ int firePlayerLaser(int codeFromButton, STyp *ProjectileP, STyp *FiringObject, L
   static int semaphoreCount_IL = 0;
   int SoundFlag = 0;
   
-  if(LaserSetts->Index>LaserSetts->MaxLasers-1)
+  if(LaserSetts->Index > LaserSetts->MaxLasers-1)
   {
     LaserSetts->Index=0;
   }
-  if(codeFromButton == 1 && LaserSetts->Count<LaserSetts->MaxLasers && semaphoreCount_IL >= LaserSetts->FireRate)            //Was the button pressed to fire and max amount of lasers not exceeded?
+  if(codeFromButton == 1 && LaserSetts->Count<LaserSetts->MaxLasers && semaphoreCount_IL >= LaserSetts->FireRate)  //Was the button pressed to fire and max amount of lasers not exceeded?
   {
     if(ProjectileP[LaserSetts->Index].life==0)
     {
@@ -1476,29 +1732,34 @@ int firePlayerLaser(int codeFromButton, STyp *ProjectileP, STyp *FiringObject, L
 // Input: The button code, the Laser object structure, 
 //        The firing object structure
 // Output: none
-int firePlayerMissile(int codeFromButton, STyp *Projectile, STyp *FiringObject)
+int firePlayerMissile(int codeFromButton, STyp *Projectile, STyp *FiringObject, LTyp *MissileSetts)
 {
   static int semaphoreCount_IL = 0;
+  //static int leftRight = 0;
   int SoundFlag = 0;
+
+  //leftRight = RandomInvaderShuffle();            //Move Left or Right?
   
-  if(MissileParamsPlayer.Index>MissileParamsPlayer.MaxLasers-1)
+  if(MissileSetts->Index>MissileSetts->MaxLasers-1)
   {
-    MissileParamsPlayer.Index=0;
+    MissileSetts->Index=0;
   }
-  if(codeFromButton == 2 && MissileParamsPlayer.Count<MissileParamsPlayer.MaxLasers && semaphoreCount_IL >= MissileParamsPlayer.FireRate)            //Was the button pressed to fire and max amount of lasers not exceeded?
+  //Was the button pressed to fire, max amount of lasers not exceeded and fire rate within range?
+  if(codeFromButton == 2 && MissileSetts->Count<MissileSetts->MaxLasers && semaphoreCount_IL >= MissileSetts->FireRate)  
   {
-    if(Projectile[MissileParamsPlayer.Index].life==0)
+    if(Projectile[MissileSetts->Index].life==0)
     {
-      Projectile[MissileParamsPlayer.Index].x = FiringObject[0].x+8;
-      Projectile[MissileParamsPlayer.Index].y = FiringObject[0].y-8;
-      Projectile[MissileParamsPlayer.Index].height = MISSILEH-4;
-      Projectile[MissileParamsPlayer.Index].width = MISSILEW;
-      Projectile[MissileParamsPlayer.Index].image[0] = Missile0;
-      Projectile[MissileParamsPlayer.Index].image[1] = Missile1;
-      Projectile[MissileParamsPlayer.Index].life = 1;
+      Projectile[MissileSetts->Index].x = FiringObject[0].x+8;
+      Projectile[MissileSetts->Index].y = FiringObject[0].y-8;
+      Projectile[MissileSetts->Index].height = MISSILEH-4;
+      Projectile[MissileSetts->Index].width = MISSILEW;
+      Projectile[MissileSetts->Index].image[0] = Missile0;
+      Projectile[MissileSetts->Index].image[1] = Missile1;
+      Projectile[MissileSetts->Index].life = 1;
       SoundFlag = 1;
-      MissileParamsPlayer.Index++;
-      MissileParamsPlayer.Count++;                     //Increase the laser count so that when the button is pressed again a new object is created instead of overwriting
+      MissileSetts->Index++;
+      MissileSetts->Count++;                     //Increase the laser count so that when the button is pressed again a new object is created instead of overwriting
+      MissileSetts->leftRight = GetRandomNumber(2);
       semaphoreCount_IL=0;
     }
   }
@@ -1533,7 +1794,7 @@ void fireLaserEnemy(STyp* ProjectileE, STyp *FiringObject, LTyp *LaserSetts, int
     ProjectileE[LaserSetts->Index].x = FiringObject[enemyIndex].x+7;
     ProjectileE[LaserSetts->Index].y = FiringObject[enemyIndex].y+7;
     ProjectileE[LaserSetts->Index].height = LASERH-4;
-    ProjectileE[LaserSetts->Index].width = LASERW-3;
+    ProjectileE[LaserSetts->Index].width = LASERW;
     ProjectileE[LaserSetts->Index].image[0] = Laser0;
     ProjectileE[LaserSetts->Index].image[1] = Laser1;
     ProjectileE[LaserSetts->Index].life = 1;
@@ -1543,79 +1804,6 @@ void fireLaserEnemy(STyp* ProjectileE, STyp *FiringObject, LTyp *LaserSetts, int
     semaphoreCount_IL=0;
   }
   semaphoreCount_IL++;
-}
-
-void ClearAllObjects(void)
-{
-  int index;
-  Player[0].life = 0;
-
-  for(index=0;index<FULL_ENEMY_LASER_INDEX;index++)
-  {
-    LaserImageEnemy[index].life = 0;
-  }
-
-  for(index=0;index<MAX_LASERS;index++)
-  {
-    LaserImagePlayer[index].life=0;
-  }
-
-    for(index=0;index<MAX_MISSILES;index++)
-  {
-    MissileImagePlayer[index].life=0;
-  }
-
-  for(index=0;index<3;index++)
-  {
-    Bunker[index].life=0;
-  }
-}
-
-unsigned long GetRandomNumber(unsigned long number)
-{
-  unsigned long randomEnemyFormation = 0;
-  randomEnemyFormation = rand()%number;
-  return randomEnemyFormation;
-}
-
-unsigned long RandomInvaderShuffle(void)
-{
-  unsigned long shuffleDirection;
-  shuffleDirection = GetRandomNumber(RANDOM_ENEMY_MOVES); //Returns a number from 0 to parameter-1
-
-  return shuffleDirection;
-}
-
-unsigned long RandomInvaderFire(void)
-{
-  unsigned long randomEnemyFire;
-  int leftOrRight;
-  randomEnemyFire = GetRandomNumber(MAX_ENEMIES); //Returns a number from 0 to 3
-  while(Enemy[randomEnemyFire].life==0)
-  {
-    leftOrRight = GetRandomNumber(2); 
-    if(leftOrRight==1)
-    {
-      randomEnemyFire--;
-    }
-    else
-    {
-      randomEnemyFire++;
-    }
-  }
-  return randomEnemyFire;
-}
-
-unsigned long FireEnemyLaser(int enemyIndex)
-{
-  unsigned long fireFlag;
-  fireFlag = GetRandomNumber(2); //Returns a number from 0 to 1
-  if(Enemy[enemyIndex].life==0)
-  {
-    fireFlag=0;
-  }
-  return fireFlag;
-
 }
 
 void MoveLeft(void)
@@ -1662,7 +1850,7 @@ void MoveRight(void)
     {
       if(Enemy[i].life>0)
       {
-        if(Enemy[i].x < 67)
+        if(Enemy[i].x < 84-Enemy[i].width)
         {
           Enemy[i].x += 2;
         }
@@ -1712,12 +1900,27 @@ unsigned long AnimateEnemies(void)
   return frameCount;
 }
 
-void MovePlayer(void)
+void MovePlayer(int playerHit)
 {
-  Player[0].x = (float)ADCdata/62.04;
-  Player[0].x = (int)Player[0].x;
+  static int semaphoreCount = 0;
+  if(playerHit || semaphoreCount<=40&semaphoreCount!=0)
+  {
+    Player[0].x = Player[0].x;
+    semaphoreCount++;
+  }
+  else
+  {
+    Player[0].x = (float)ADCdata/62.04;
+    Player[0].x = (int)Player[0].x;
+    semaphoreCount=0;
+  }
 }
 
+// **************MoveInvaderAdvance************************************
+// Image Modifier based on time
+// Moves all Enemies down
+// Input:  None
+// Output: None
 int MoveInvaderAdvance(void)
 {
   static int semaphoreWait=0;
@@ -1730,9 +1933,9 @@ int MoveInvaderAdvance(void)
     {
       if(Enemy[index].life!=0)  //All the Invaders that are alive
       {
-        if(Enemy[index].y<25)
+        if(Enemy[index].y<25)   //The enemies are above a certain point
         {
-          Enemy[index].y=Enemy[index].y+1;
+          Enemy[index].y=Enemy[index].y+1;  //Move them down
           soundFlag=1;
         }
       }
@@ -1743,6 +1946,11 @@ int MoveInvaderAdvance(void)
   return soundFlag;
 }
 
+// **************MoveLaserUp************************************
+// Image Modifier as well as image settings
+// Moves an image upwards
+// Input:  Projectile image structure and projectile settings structure
+// Output: N/A
 void MoveLaserUp(STyp *ProjectileP, LTyp *LaserSetts)
 {
   static int semaphoreCount = 0;
@@ -1767,6 +1975,11 @@ void MoveLaserUp(STyp *ProjectileP, LTyp *LaserSetts)
   semaphoreCount++;
 }
 
+// **************MoveLaserDown************************************
+// Image Modifier as well as image settings
+// Moves an image downwards
+// Input:  Projectile image structure and projectile settings structure
+// Output: N/A
 void MoveLaserDown(STyp *ProjectileE, LTyp* LaserSetts)
 {
   static int semaphoreCount = 0;
@@ -1774,7 +1987,7 @@ void MoveLaserDown(STyp *ProjectileE, LTyp* LaserSetts)
 
   if(semaphoreCount == LaserSetts->Speed)                               //Is it time for laser to move?
   {
-    for(laserIndex=0;laserIndex<FULL_ENEMY_LASER_INDEX;laserIndex++)    //For all laser objects
+    for(laserIndex=0;laserIndex<MAX_LASERS_ENEMIES;laserIndex++)    //For all laser objects
     {
       if(ProjectileE[laserIndex].life==1)                               //Is the laser active?
       {
@@ -1791,28 +2004,46 @@ void MoveLaserDown(STyp *ProjectileE, LTyp* LaserSetts)
   semaphoreCount++;
 }
 
-void MoveMissile(void)
+int MoveMissile(STyp *ProjectileP, LTyp* MissileSetts)
 {
   static int semaphoreCount = 0;
+  static int semaphoreCount2 = 0;
+  static int missileFrame = 0;
   int missileIndex;
 
-  if(semaphoreCount == MissileParamsPlayer.Speed)                        //Is it time for laser to move?
+  if(semaphoreCount == MissileSetts->Speed)                        //Is it time for missile to move?
   {
-    for(missileIndex=0;missileIndex<MissileParamsPlayer.MaxLasers;missileIndex++)    //For all laser objects
+    for(missileIndex=0;missileIndex<MissileSetts->MaxLasers;missileIndex++)    //For all missile objects
     {
-      if(MissileImagePlayer[missileIndex].life==1)                               //Is the laser active?
+      if(ProjectileP[missileIndex].life==1)                               //Is the missile active?
       {
-        if(MissileImagePlayer[missileIndex].y == 47)                            //Has the laser reached the end of the screen?
+        ProjectileP[missileIndex].y = ProjectileP[missileIndex].y-1;    //Move the missile up one bit
+
+        if(ProjectileP[missileIndex].y==9 || ProjectileP[missileIndex].x==0 || ProjectileP[missileIndex].x==80)  //Has the missile reached the end of the screen, top or side?
         {
-          MissileImagePlayer[missileIndex].life=0;                             //Deactivate laser pbject
-          MissileParamsPlayer.Count--;
+          ProjectileP[missileIndex].life=0;                             //Deactivate missile pbject
+          MissileSetts->Count--;
         }
-        MissileImagePlayer[missileIndex].y = MissileImagePlayer[missileIndex].y-1;    //Move the laser down one bit
+        if(MissileSetts->leftRight==0)
+        {
+          ProjectileP[missileIndex].x = ProjectileP[missileIndex].x-1;    //Move the missile left one bit
+        }
+        else
+        {
+          ProjectileP[missileIndex].x = ProjectileP[missileIndex].x+1;    //Move the missile right one bit
+        }
+        if(semaphoreCount2 == 4)
+        {
+          missileFrame = !missileFrame;
+          semaphoreCount2=0;
+        }
+        semaphoreCount2++;
       }
     }
     semaphoreCount=0;
   }
   semaphoreCount++;
+  return missileFrame;
 }
 
 
@@ -1866,13 +2097,35 @@ void DrawArea(int drawBunkerDamage)
 
 void DrawPlayer(int playerShot)
 {
-  Nokia5110_PrintBMP(Player[0].x, Player[0].y, Player[0].image[0], 0); // player ship according to ADC value
+  static int semaphoreCount = 0;
+  if(playerShot || semaphoreCount<=20&semaphoreCount!=0)
+  {
+    Player[0].immunity = 1;
+    Nokia5110_PrintBMP(Player[0].x, Player[0].y, Player[0].image[1], 0); 
+    semaphoreCount++;
+  }
+  else if(semaphoreCount>20 && semaphoreCount<40)
+  {
+    Player[0].immunity = 1;
+    Nokia5110_PrintBMP(Player[0].x, Player[0].y, Player[0].image[2], 0);
+    semaphoreCount++;
+  }
+  else
+  {
+    if(Player[0].life>0)
+    {
+      Player[0].immunity = 0;
+      Nokia5110_PrintBMP(Player[0].x, Player[0].y, Player[0].image[0], 0); // player ship according to ADC value
+      semaphoreCount=0;
+    }
+    
+  }
 }
 
 void DrawLasers(void)
 {
   int laserIndex;
-  for(laserIndex=0;laserIndex<MAX_LASERS;laserIndex++)
+  for(laserIndex=0;laserIndex<MAX_LASERS_PLAYER;laserIndex++)
   {
     if(LaserImagePlayer[laserIndex].life==1)
     {
@@ -1881,14 +2134,15 @@ void DrawLasers(void)
   }
 }
 
-void DrawMissiles(void)
+void DrawMissiles(int missileFrame)
 {
+  //static int MissileFrame = 0;
   int laserIndex;
   for(laserIndex=0;laserIndex<MAX_MISSILES;laserIndex++)
   {
     if(MissileImagePlayer[laserIndex].life==1)
     {
-      Nokia5110_PrintBMP(MissileImagePlayer[laserIndex].x, MissileImagePlayer[laserIndex].y, MissileImagePlayer[laserIndex].image[0], 0);
+      Nokia5110_PrintBMP(MissileImagePlayer[laserIndex].x, MissileImagePlayer[laserIndex].y, MissileImagePlayer[laserIndex].image[missileFrame], 0);
     }
   }
 }
@@ -1905,7 +2159,11 @@ void DrawEnemyLasers(void)
   }
 }
 
-int CrashCheck(STyp *ProjectileObject, STyp *TargetObject, STyp *CollisionIndicator, int collideFlag, int maxFirstObject, int maxSecondObject, LTyp *POSetts)
+// **************CrashCheck************************************
+// Collision Detection Function of the game
+// Input:  N/A
+// Output: N/A
+int CrashCheck(STyp *ProjectileObject, STyp *TargetObject, STyp *CollisionIndicator, int collideFlag, int maxFirstObject, int maxSecondObject)
 {
   //Find the objects we want to compare for collisions
   int firstObjectIndex = 0;
@@ -1929,8 +2187,15 @@ int CrashCheck(STyp *ProjectileObject, STyp *TargetObject, STyp *CollisionIndica
           && ProjectileObject[firstObjectIndex].x+ProjectileObject[firstObjectIndex].width >= TargetObject[secondObjectIndex].x 
           && ProjectileObject[firstObjectIndex].x <= TargetObject[secondObjectIndex].x+TargetObject[secondObjectIndex].width)
           {
-            TargetObject[secondObjectIndex].life--;
-            ProjectileObject[firstObjectIndex].life=0;
+            if(TargetObject[secondObjectIndex].immunity==0)
+            {
+              TargetObject[secondObjectIndex].life--;
+              ProjectileObject[firstObjectIndex].life=0;
+            }   
+            else
+            {
+              ProjectileObject[firstObjectIndex].life=0;
+            }       
             if(collideFlag==1)
             {
               CollisionIndicator[0].life = 1;
@@ -1938,8 +2203,6 @@ int CrashCheck(STyp *ProjectileObject, STyp *TargetObject, STyp *CollisionIndica
               CollisionIndicator[0].y = TargetObject[secondObjectIndex].y;
               CollisionIndicator[0].image[0] = SmallExplosion0;
             }
-            POSetts->Count--;
-            POSetts->Index--;
             crashFlag = 1;
           }   
         }
@@ -1949,29 +2212,13 @@ int CrashCheck(STyp *ProjectileObject, STyp *TargetObject, STyp *CollisionIndica
   return crashFlag;
 }
 
-void CountLasers(int laserOrigin, int explodedLaser)
-{
-  if(laserOrigin==0 && explodedLaser==1)
-  {
-    LaserParamsPlayer.Count = LaserParamsPlayer.Count-explodedLaser;
-  }
-  else if(laserOrigin==1 && explodedLaser==1)
-  {
-    LaserParamsEnemy.Count = LaserParamsEnemy.Count-explodedLaser;
-  }
-  else if(laserOrigin==2 && explodedLaser==1)
-  {
-    MissileParamsPlayer.Count = MissileParamsPlayer.Count-explodedLaser;
-  }
-}
-
 // **************UpdateSettings*********************************
 // Make sure the projectile motion settings are
 // correct. Also change the settings if need be
 // Input: 3 LTyp structure pointers for the 3 kinds of 
 //        projectiles in the field
 // Output: None
-void UpdateSettings(LTyp *normalFireUp, LTyp *normalFireDown, LTyp *specialFire)
+void UpdateSettings(LTyp *normalFireUp, LTyp *normalFireDown, LTyp *specialFire, int LaserDownP, int LaserDownE, int MissileDownP)
 {
   int i;
   int enemyCount = 4;
@@ -1979,15 +2226,32 @@ void UpdateSettings(LTyp *normalFireUp, LTyp *normalFireDown, LTyp *specialFire)
   //Condiitonal settings
   normalFireDown->MaxLasers = 5;
   //Non-Condiitonal settings
-  normalFireDown->Speed = SLOW_MOVE;
-  normalFireDown->FireRate = SLOW_RATE;
-  normalFireUp->Speed = MEDIUM_MOVE;
-  normalFireUp->FireRate = SLOW_RATE;
-  normalFireUp->MaxLasers = 2;
-  specialFire->Speed = MEDIUM_MOVE;
-  specialFire->FireRate = SLOW_RATE;
-  specialFire->MaxLasers = 1;
+  //normalFireDown->Speed = SLOW_MOVE;
+  //normalFireDown->FireRate = SLOW_RATE;
+  //normalFireUp->Speed = MEDIUM_MOVE;
+  //normalFireUp->FireRate = SLOW_RATE;
+  //normalFireUp->MaxLasers = 2;
+  //specialFire->Speed = MEDIUM_MOVE;
+  //specialFire->FireRate = SLOW_RATE;
+  //specialFire->MaxLasers = 1;
   
+  //Modify the Player Laser Count
+  if(LaserDownP)
+  {
+    normalFireUp->Count=normalFireUp->Count-LaserDownP;
+  }
+
+  //Modify the Player Laser Count
+  if(LaserDownE)
+  {
+    normalFireDown->Count=normalFireDown->Count-LaserDownE;
+  }
+
+    //Modify the Player Laser Count
+  if(MissileDownP)
+  {
+    specialFire->Count=specialFire->Count-MissileDownP;
+  }
 
   //Conditional Settings Configure
   for(i=0;i<MAX_ENEMIES;i++)
@@ -2007,7 +2271,6 @@ void PlaySoundShoot(int shotsFired)
     Sound_Play(shoot,4080);
   }
 }
-
 
 void PlaySoundInvaderKilled(int invaderKilled)
 {
@@ -2041,37 +2304,9 @@ void PlaySoundFastInvader1(int soundFlag)
   }
 }
 
-// **************Start_Screen*********************************
-// Clears the screen and initializes all the elements if a 
-// button is pressed, otherwise it returns the current screen 
-// enum.
-// Input: integer input from buttons
-// Output: ScreenType enum to show the next screen
-enum ScreenType Start_Screen(int codeFromButton)
-{
-  int randomEnemiesFormation = 0;
-  //If any button is pressed, Prepare the round and change the display mode
-  if(codeFromButton==1 | codeFromButton==2)
-  {
-    srand(NVIC_ST_CURRENT_R);
-    randomEnemiesFormation = GetRandomNumber(RANDOM_FORMATIONS);
-    Nokia5110_Clear();
-    ClearAllObjects();
-    InitEnemies(randomEnemiesFormation);
-    InitBunkerObjects(DisplayMode);
-    InitPlayer();
-    InitProjectiles();
-    DisplayMode = ROUND1;
-  }
-  else
-  {
-    DisplayMode = START;
-  }
-  return DisplayMode;
-}
-
 enum ScreenType LifeCheck(void)
 {
+  static int semaphoreCount = 0;
   int enemyIndex;
   int liveEnemyCount = 0;
   int playerLife = 0;
@@ -2104,10 +2339,14 @@ enum ScreenType LifeCheck(void)
   {
     DisplayMode = DisplayMode++; //Go to next round
   }
-  else if(liveEnemyCount!=0 && playerLife==0)
+  else if(playerLife==0)
   {
-    Sound_Play(highpitch,1802);
-    DisplayMode = LOSE; //Go to end round
+    if(semaphoreCount>40)
+    {
+      Sound_Play(highpitch,1802);
+      DisplayMode = LOSE; //Go to end round
+    }
+    semaphoreCount++;
   }
   return DisplayMode;
 }
@@ -2136,7 +2375,7 @@ void PlayerLifeDisplay(void)
 // elements, depending on the flags and settings
 // Input: none
 // Output: none
-void Draw(unsigned long enemyFrame, int explosionDraw, int explosionDraw2, int bunkerHit, int bunkerHit1, int playerShot)
+void Draw(unsigned long enemyFrame, unsigned long missileFrame, int explosionDraw, int explosionDraw2, int bunkerHit, int bunkerHit1, int playerShot)
 {
   Nokia5110_ClearBuffer();
   
@@ -2147,7 +2386,7 @@ void Draw(unsigned long enemyFrame, int explosionDraw, int explosionDraw2, int b
   DrawArea(bunkerHit1);
   DrawPlayer(playerShot);
   DrawLasers();  
-  DrawMissiles();
+  DrawMissiles(missileFrame);
   DrawEnemyLasers();
   Nokia5110_DisplayBuffer();      // draw buffer
 }
@@ -2178,13 +2417,15 @@ void UpdateFrame(void)
     break;
     case ROUND1:
     {
+      //Variables for input and random numbers
       int buttonCode, shuffleDirection, enemyIndexFire, enemyFireFlag;
-      int lasersCollide, bunkerDamage, bunkerDamage1, enemyHitL, enemyHitM, shootSound, shootSound1, playerHit, enemyAdvanceFlag;
-      unsigned long enemyFrame;
-
-      //Settings for this round
-      //Update Laser Settings
-      UpdateSettings(&LaserParamsPlayer, &LaserParamsEnemy, &MissileParamsPlayer);
+      //Variables for Event Flags
+      int playerHit = 0;
+      int lasersCollide, bunkerDamage, bunkerDamage1, enemyHitL, enemyHitM, shootSound, shootSound1, enemyAdvanceFlag;
+      //Variables for Object Counting
+      int pLaserCount, eLaserCount, pMissileCount;
+      //Variables for states of things
+      unsigned long enemyFrame, missileFrame;
 
       //Input data and random numbers to work with
       buttonCode = Read_Buttons();
@@ -2192,39 +2433,34 @@ void UpdateFrame(void)
       enemyIndexFire = RandomInvaderFire();            //Which enemy should fire?
       enemyFireFlag = FireEnemyLaser(enemyIndexFire);  //Should that chosen enemy fire?
       
-      //Create or dissipate Image Objects
-      //Move existing objects
+      //Create/Dissipate/Modify Image Objects
       enemyFrame = AnimateEnemies();                    //Animate Enemy by swapping with second image to look alive
       MoveInvaderShuffle(shuffleDirection);             //Move the Enemies in the random seeded direction
       enemyAdvanceFlag = MoveInvaderAdvance();          //Advance/Move forward if an alloted time has been reached
-      MovePlayer();                                     //Move Player based on ADC      
-      shootSound = firePlayerLaser(buttonCode, LaserImagePlayer, Player, &LaserParamsPlayer); //Fire the Players laser, Include settings
-      shootSound1 = firePlayerMissile(buttonCode, MissileImagePlayer, Player);                //Fire the Players Missile
-      //Fire enemy laser if active
-      fireLaserEnemy(LaserImageEnemy, Enemy, &LaserParamsEnemy, enemyFireFlag, enemyIndexFire);
+      fireLaserEnemy(LaserImageEnemy, Enemy, &LaserParamsEnemy, enemyFireFlag, enemyIndexFire); //Fire enemy laser if active    
 
       //Move Lasers
-      MoveMissile();                                          //Move and animate the Missile
+      missileFrame = MoveMissile(MissileImagePlayer, &MissileParamsPlayer);  //Move and animate the Missile
       MoveLaserUp(LaserImagePlayer, &LaserParamsPlayer);      //Move the Players Laser
       MoveLaserDown(LaserImageEnemy, &LaserParamsEnemy);      //Move the Enemy Lasers
 
       //Collision Detection
-      enemyHitL      = CrashCheck(LaserImagePlayer, Enemy, ExplosionObject, 1, MAX_LASERS, MAX_ENEMIES, &LaserParamsPlayer);
-      enemyHitM      = CrashCheck(MissileImagePlayer, Enemy, ExplosionObject, 1, MAX_LASERS, MAX_ENEMIES, &MissileParamsPlayer);
-      bunkerDamage  = CrashCheck(LaserImagePlayer, Bunker, ExplosionObject, 0, MAX_LASERS, 3, &LaserParamsPlayer);
-      bunkerDamage1 = CrashCheck(LaserImageEnemy, Bunker, ExplosionObject, 0, FULL_ENEMY_LASER_INDEX, 3, &LaserParamsEnemy);
-      playerHit     = CrashCheck(LaserImageEnemy, Player, ExplosionObject, 1, FULL_ENEMY_LASER_INDEX, MAX_ENEMIES, &LaserParamsEnemy);
-      lasersCollide = CrashCheck(LaserImagePlayer, LaserImageEnemy, ExplosionObject, 0, MAX_LASERS, FULL_ENEMY_LASER_INDEX, &LaserParamsPlayer);
-      lasersCollide = CrashCheck(LaserImagePlayer, LaserImageEnemy, ExplosionObject, 0, MAX_LASERS, FULL_ENEMY_LASER_INDEX, &LaserParamsEnemy);
+      enemyHitL      = CrashCheck(LaserImagePlayer, Enemy, ExplosionObject, 1, MAX_LASERS_PLAYER, MAX_ENEMIES);
+      enemyHitM      = CrashCheck(MissileImagePlayer, Enemy, ExplosionObject, 1, MAX_LASERS_PLAYER, MAX_ENEMIES);
+      bunkerDamage   = CrashCheck(LaserImagePlayer, Bunker, ExplosionObject, 0, MAX_LASERS_PLAYER, 3);
+      bunkerDamage1  = CrashCheck(LaserImageEnemy, Bunker, ExplosionObject, 0, MAX_LASERS_ENEMIES, 3);
+      playerHit      = CrashCheck(LaserImageEnemy, Player, ExplosionObject, 1, MAX_LASERS_ENEMIES, MAX_ENEMIES);
+      lasersCollide  = CrashCheck(LaserImagePlayer, LaserImageEnemy, ExplosionObject, 0, MAX_LASERS_PLAYER, MAX_LASERS_ENEMIES);
 
-      //Adjust the laser object numbers
-      //CountLasers(0, enemyHitL);
-      //CountLasers(2, enemyHitM);
-      //CountLasers(0, bunkerDamage);
-      //CountLasers(0, lasersCollide);
-      //CountLasers(1, playerHit);
-      //CountLasers(1, bunkerDamage1);
-      //CountLasers(1, lasersCollide);
+      MovePlayer(playerHit);                                     //Move Player based on ADC      
+      shootSound = firePlayerLaser(buttonCode, LaserImagePlayer, Player, &LaserParamsPlayer); //Fire the Players laser, Include settings
+      shootSound1 = firePlayerMissile(buttonCode, MissileImagePlayer, Player, &MissileParamsPlayer);                //Fire the Players Missile
+
+      //Update Laser Settings for this round
+      pLaserCount   = enemyHitL + bunkerDamage + lasersCollide;
+      eLaserCount   = bunkerDamage1 + playerHit + lasersCollide;
+      pMissileCount = enemyHitM;
+      UpdateSettings(&LaserParamsPlayer, &LaserParamsEnemy, &MissileParamsPlayer, pLaserCount, eLaserCount, pMissileCount);
 
       //Play Sounds
       PlaySoundShoot(shootSound);
@@ -2232,6 +2468,7 @@ void UpdateFrame(void)
       PlaySoundInvaderKilled(enemyHitL);
       PlaySoundInvaderKilled(enemyHitM);
       PlaySoundExplosion(bunkerDamage1);
+      PlaySoundExplosion(playerHit);
       PlaySoundFastInvader1(enemyAdvanceFlag);
       //PlaySoundHighPitch(enemyAdvanceFlag);
       
@@ -2239,7 +2476,7 @@ void UpdateFrame(void)
       PlayerLifeDisplay();
 
       //Print Bitmaps
-      Draw(enemyFrame, enemyHitL, enemyHitM, bunkerDamage, bunkerDamage1,playerHit);
+      Draw(enemyFrame, missileFrame, enemyHitL, enemyHitM, bunkerDamage, bunkerDamage1,playerHit);
       DisplayMode = LifeCheck();
     }
     break;
@@ -2259,162 +2496,172 @@ void UpdateFrame(void)
       {
         //semaphoreCount = 0;
         randomEnemiesFormation = GetRandomNumber(RANDOM_FORMATIONS);
-        InitEnemies(randomEnemiesFormation);
+    
+        InitEnemies(randomEnemiesFormation, DisplayMode);
         InitBunkerObjects(DisplayMode);
         InitPlayer();
         InitProjectiles();
+        InitProjectileSettings(DisplayMode);
         DisplayMode = ROUND2;
       }
     }
     break;
     case ROUND2:
     {
+      //Variables for input and random numbers
       int buttonCode, shuffleDirection, enemyIndexFire, enemyFireFlag;
-      int lasersCollide, bunkerDamage, bunkerDamage1, enemyHitL, enemyHitM, shootSound, playerHit;
-      unsigned long enemyFrame;
-
-      //Settings for this round
-      UpdateSettings(&LaserParamsPlayer, &LaserParamsEnemy, &MissileParamsPlayer);
+      //Variables for Event Flags
+      int playerHit = 0;
+      int lasersCollide, bunkerDamage, bunkerDamage1, enemyHitL, enemyHitM, shootSound, shootSound1, enemyAdvanceFlag;
+      //Variables for Object Counting
+      int pLaserCount, eLaserCount, pMissileCount;
+      //Variables for states of things
+      unsigned long enemyFrame, missileFrame;
 
       //Input data and random numbers to work with
-      //Random_Init(3);
       buttonCode = Read_Buttons();
-      shuffleDirection = RandomInvaderShuffle();
+      shuffleDirection = RandomInvaderShuffle();       //Should the Enemies move left or right or stay still
       enemyIndexFire = RandomInvaderFire();            //Which enemy should fire?
-      enemyFireFlag  = FireEnemyLaser(enemyIndexFire);          //Should that chosen enemy fire?
+      enemyFireFlag = FireEnemyLaser(enemyIndexFire);  //Should that chosen enemy fire?
       
-      //Create or dissipate Image Objects
-      //Move existing objects
-      enemyFrame = AnimateEnemies();
-      MoveInvaderShuffle(shuffleDirection);
-      MovePlayer();
+      //Create/Dissipate/Modify Image Objects
+      enemyFrame = AnimateEnemies();                    //Animate Enemy by swapping with second image to look alive
+      MoveInvaderShuffle(shuffleDirection);             //Move the Enemies in the random seeded direction
+      enemyAdvanceFlag = MoveInvaderAdvance();          //Advance/Move forward if an alloted time has been reached
+      fireLaserEnemy(LaserImageEnemy, Enemy, &LaserParamsEnemy, enemyFireFlag, enemyIndexFire); //Fire enemy laser if active    
 
-      shootSound = firePlayerLaser(buttonCode, LaserImagePlayer, Player, &LaserParamsPlayer);
-      //Fire enemy laser if active
-      fireLaserEnemy(LaserImageEnemy, Enemy, &LaserParamsEnemy, enemyFireFlag, enemyIndexFire);
-      
       //Move Lasers
+      missileFrame = MoveMissile(MissileImagePlayer, &MissileParamsPlayer);  //Move and animate the Missile
       MoveLaserUp(LaserImagePlayer, &LaserParamsPlayer);      //Move the Players Laser
       MoveLaserDown(LaserImageEnemy, &LaserParamsEnemy);      //Move the Enemy Lasers
 
       //Collision Detection
-      enemyHitL      = CrashCheck(LaserImagePlayer, Enemy, ExplosionObject, 1, MAX_LASERS, MAX_ENEMIES, &LaserParamsPlayer);
-      enemyHitM      = CrashCheck(MissileImagePlayer, Enemy, ExplosionObject, 1, MAX_LASERS, MAX_ENEMIES, &MissileParamsPlayer);
-      bunkerDamage  = CrashCheck(LaserImagePlayer, Bunker, ExplosionObject, 0, MAX_LASERS, 3, &LaserParamsPlayer);
-      bunkerDamage1 = CrashCheck(LaserImageEnemy, Bunker, ExplosionObject, 0, FULL_ENEMY_LASER_INDEX, 3, &LaserParamsEnemy);
-      playerHit     = CrashCheck(LaserImageEnemy, Player, ExplosionObject, 1, FULL_ENEMY_LASER_INDEX, MAX_ENEMIES, &LaserParamsEnemy);
-      lasersCollide = CrashCheck(LaserImagePlayer, LaserImageEnemy, ExplosionObject, 0, MAX_LASERS, FULL_ENEMY_LASER_INDEX, &LaserParamsPlayer);
+      enemyHitL      = CrashCheck(LaserImagePlayer, Enemy, ExplosionObject, 1, MAX_LASERS_PLAYER, MAX_ENEMIES);
+      enemyHitM      = CrashCheck(MissileImagePlayer, Enemy, ExplosionObject, 1, MAX_LASERS_PLAYER, MAX_ENEMIES);
+      bunkerDamage   = CrashCheck(LaserImagePlayer, Bunker, ExplosionObject, 0, MAX_LASERS_PLAYER, 3);
+      bunkerDamage1  = CrashCheck(LaserImageEnemy, Bunker, ExplosionObject, 0, MAX_LASERS_ENEMIES, 3);
+      playerHit      = CrashCheck(LaserImageEnemy, Player, ExplosionObject, 1, MAX_LASERS_ENEMIES, MAX_ENEMIES);
+      lasersCollide  = CrashCheck(LaserImagePlayer, LaserImageEnemy, ExplosionObject, 0, MAX_LASERS_PLAYER, MAX_LASERS_ENEMIES);
 
-      //Adjust the laser object numbers
-      CountLasers(0, enemyHitL);
-      CountLasers(2, enemyHitM);
-      CountLasers(0, bunkerDamage);
-      CountLasers(0, lasersCollide);
-      CountLasers(1, playerHit);
-      CountLasers(1, bunkerDamage1);
-      CountLasers(1, lasersCollide);
+      MovePlayer(playerHit);                                     //Move Player based on ADC      
+      shootSound = firePlayerLaser(buttonCode, LaserImagePlayer, Player, &LaserParamsPlayer); //Fire the Players laser, Include settings
+      shootSound1 = firePlayerMissile(buttonCode, MissileImagePlayer, Player, &MissileParamsPlayer);                //Fire the Players Missile
 
+      //Update Laser Settings for this round
+      pLaserCount   = enemyHitL + bunkerDamage + lasersCollide;
+      eLaserCount   = bunkerDamage1 + playerHit + lasersCollide;
+      pMissileCount = enemyHitM;
+      UpdateSettings(&LaserParamsPlayer, &LaserParamsEnemy, &MissileParamsPlayer, pLaserCount, eLaserCount, pMissileCount);
+
+      //Play Sounds
       PlaySoundShoot(shootSound);
+      PlaySoundShoot(shootSound1);
       PlaySoundInvaderKilled(enemyHitL);
       PlaySoundInvaderKilled(enemyHitM);
       PlaySoundExplosion(bunkerDamage1);
       PlaySoundExplosion(playerHit);
+      PlaySoundFastInvader1(enemyAdvanceFlag);
+      //PlaySoundHighPitch(enemyAdvanceFlag);
       
-      //LED Life
+      //LED Life display
       PlayerLifeDisplay();
 
       //Print Bitmaps
-      Draw(enemyFrame, enemyHitL, enemyHitM, bunkerDamage, bunkerDamage1,playerHit);
+      Draw(enemyFrame, missileFrame, enemyHitL, enemyHitM, bunkerDamage, bunkerDamage1,playerHit);
       DisplayMode = LifeCheck();
+
     }
     break;
     case TRANSITION_ROUND3:
     {
-      static int semaphoreCount=0;
+      //static int semaphoreCount=0;
+      int buttonCode;
       int randomEnemiesFormation = 0;
       //Clear all the objects and variables
       Nokia5110_Clear();
       ClearAllObjects();
       Nokia5110_SetCursor(1, 2);
       Nokia5110_OutString("Round 3");
-      //Wait for some time then refresh
-      if(semaphoreCount>30)
+      //Refresh if the button is pressed
+      buttonCode = Read_Buttons();
+      if(buttonCode!=0)
       {
-        semaphoreCount = 0;
+        //semaphoreCount = 0;
         randomEnemiesFormation = GetRandomNumber(RANDOM_FORMATIONS);
-        InitEnemies(randomEnemiesFormation);
+    
+        InitEnemies(randomEnemiesFormation, DisplayMode);
         InitBunkerObjects(DisplayMode);
         InitPlayer();
         InitProjectiles();
+        InitProjectileSettings(DisplayMode);
         DisplayMode = ROUND3;
-        //Nokia5110_SetCursor(2, 2);
-        //Nokia5110_OutString("TREd");
       }
-      else
-      {
-        semaphoreCount++;
-      }
-
     }
     break;
     case ROUND3:
     {
+      //Variables for input and random numbers
       int buttonCode, shuffleDirection, enemyIndexFire, enemyFireFlag;
-      int lasersCollide, bunkerDamage, bunkerDamage1, enemyHitL, enemyHitM, shootSound, playerHit;
-      unsigned long enemyFrame;
-
-      //Settings for this round
-      //Update Laser Settings
-      UpdateSettings(&LaserParamsPlayer, &LaserParamsEnemy, &MissileParamsPlayer);
+      //Variables for Event Flags
+      int playerHit = 0;
+      int lasersCollide, bunkerDamage, bunkerDamage1, enemyHitL, enemyHitM, shootSound, shootSound1, enemyAdvanceFlag;
+      //Variables for Object Counting
+      int pLaserCount, eLaserCount, pMissileCount;
+      //Variables for states of things
+      unsigned long enemyFrame, missileFrame;
 
       //Input data and random numbers to work with
-      //Random_Init(3);
       buttonCode = Read_Buttons();
-      shuffleDirection = RandomInvaderShuffle();
+      shuffleDirection = RandomInvaderShuffle();       //Should the Enemies move left or right or stay still
       enemyIndexFire = RandomInvaderFire();            //Which enemy should fire?
-      enemyFireFlag  = FireEnemyLaser(enemyIndexFire);          //Should that chosen enemy fire?
+      enemyFireFlag = FireEnemyLaser(enemyIndexFire);  //Should that chosen enemy fire?
       
-      //Create or dissipate Image Objects
-      //Move existing objects
-      enemyFrame = AnimateEnemies();
-      MoveInvaderShuffle(shuffleDirection);
-      MovePlayer();
-      shootSound = firePlayerLaser(buttonCode, LaserImagePlayer, Player, &LaserParamsPlayer);
-      //Fire enemy laser if active
-      fireLaserEnemy(LaserImageEnemy, Enemy, &LaserParamsEnemy, enemyFireFlag, enemyIndexFire);
-      
+      //Create/Dissipate/Modify Image Objects
+      enemyFrame = AnimateEnemies();                    //Animate Enemy by swapping with second image to look alive
+      MoveInvaderShuffle(shuffleDirection);             //Move the Enemies in the random seeded direction
+      enemyAdvanceFlag = MoveInvaderAdvance();          //Advance/Move forward if an alloted time has been reached
+      fireLaserEnemy(LaserImageEnemy, Enemy, &LaserParamsEnemy, enemyFireFlag, enemyIndexFire); //Fire enemy laser if active    
+
       //Move Lasers
+      missileFrame = MoveMissile(MissileImagePlayer, &MissileParamsPlayer);  //Move and animate the Missile
       MoveLaserUp(LaserImagePlayer, &LaserParamsPlayer);      //Move the Players Laser
       MoveLaserDown(LaserImageEnemy, &LaserParamsEnemy);      //Move the Enemy Lasers
 
       //Collision Detection
-      enemyHitL      = CrashCheck(LaserImagePlayer, Enemy, ExplosionObject, 1, MAX_LASERS, MAX_ENEMIES, &LaserParamsPlayer);
-      enemyHitM      = CrashCheck(MissileImagePlayer, Enemy, ExplosionObject, 1, MAX_LASERS, MAX_ENEMIES, &MissileParamsPlayer);
-      bunkerDamage  = CrashCheck(LaserImagePlayer, Bunker, ExplosionObject, 0, MAX_LASERS, 3, &LaserParamsPlayer);
-      bunkerDamage1 = CrashCheck(LaserImageEnemy, Bunker, ExplosionObject, 0, FULL_ENEMY_LASER_INDEX, 3, &LaserParamsEnemy);
-      playerHit     = CrashCheck(LaserImageEnemy, Player, ExplosionObject, 1, FULL_ENEMY_LASER_INDEX, MAX_ENEMIES, &LaserParamsEnemy);
-      lasersCollide = CrashCheck(LaserImagePlayer, LaserImageEnemy, ExplosionObject, 0, MAX_LASERS, FULL_ENEMY_LASER_INDEX, &LaserParamsPlayer);
+      enemyHitL      = CrashCheck(LaserImagePlayer, Enemy, ExplosionObject, 1, MAX_LASERS_PLAYER, MAX_ENEMIES);
+      enemyHitM      = CrashCheck(MissileImagePlayer, Enemy, ExplosionObject, 1, MAX_LASERS_PLAYER, MAX_ENEMIES);
+      bunkerDamage   = CrashCheck(LaserImagePlayer, Bunker, ExplosionObject, 0, MAX_LASERS_PLAYER, 3);
+      bunkerDamage1  = CrashCheck(LaserImageEnemy, Bunker, ExplosionObject, 0, MAX_LASERS_ENEMIES, 3);
+      playerHit      = CrashCheck(LaserImageEnemy, Player, ExplosionObject, 1, MAX_LASERS_ENEMIES, MAX_ENEMIES);
+      lasersCollide  = CrashCheck(LaserImagePlayer, LaserImageEnemy, ExplosionObject, 0, MAX_LASERS_PLAYER, MAX_LASERS_ENEMIES);
 
-      //Adjust the laser object numbers
-      //CountLasers(0, enemyHitL);
-      //CountLasers(2, enemyHitM);
-      //CountLasers(0, bunkerDamage);
-      //CountLasers(0, lasersCollide);
-      //CountLasers(1, playerHit);
-      //CountLasers(1, bunkerDamage1);
-      //CountLasers(1, lasersCollide);
+      MovePlayer(playerHit);                                     //Move Player based on ADC      
+      shootSound = firePlayerLaser(buttonCode, LaserImagePlayer, Player, &LaserParamsPlayer); //Fire the Players laser, Include settings
+      shootSound1 = firePlayerMissile(buttonCode, MissileImagePlayer, Player, &MissileParamsPlayer);                //Fire the Players Missile
 
+      //Update Laser Settings for this round
+      pLaserCount   = enemyHitL + bunkerDamage + lasersCollide;
+      eLaserCount   = bunkerDamage1 + playerHit + lasersCollide;
+      pMissileCount = enemyHitM;
+      UpdateSettings(&LaserParamsPlayer, &LaserParamsEnemy, &MissileParamsPlayer, pLaserCount, eLaserCount, pMissileCount);
+
+      //Play Sounds
       PlaySoundShoot(shootSound);
+      PlaySoundShoot(shootSound1);
       PlaySoundInvaderKilled(enemyHitL);
       PlaySoundInvaderKilled(enemyHitM);
       PlaySoundExplosion(bunkerDamage1);
+      PlaySoundExplosion(playerHit);
+      PlaySoundFastInvader1(enemyAdvanceFlag);
+      //PlaySoundHighPitch(enemyAdvanceFlag);
       
-      //LED Life
+      //LED Life display
       PlayerLifeDisplay();
 
       //Print Bitmaps
-      Draw(enemyFrame, enemyHitL, enemyHitM, bunkerDamage, bunkerDamage1,playerHit);
+      Draw(enemyFrame, missileFrame, enemyHitL, enemyHitM, bunkerDamage, bunkerDamage1,playerHit);
       DisplayMode = LifeCheck();
+      
     }
     break;
     case WIN:
@@ -2424,11 +2671,11 @@ void UpdateFrame(void)
 
       Nokia5110_Clear();
       Nokia5110_SetCursor(1, 1);
-      Nokia5110_OutString("Congrats");
+      Nokia5110_OutString("Well Done!!");
       Nokia5110_SetCursor(1, 2);
       Nokia5110_OutString("You Won");
-      Nokia5110_SetCursor(2, 4);
-      Nokia5110_OutString("Hero");
+      Nokia5110_SetCursor(1, 4);
+      Nokia5110_OutString("Play Again?");
       //Nokia5110_SetCursor(2, 4);
       //Nokia5110_OutUDec(1234);
             
