@@ -94,8 +94,10 @@ Port A, SSI0 (PA2, PA3, PA5, PA6, PA7) sends data to Nokia5110 LCD
 #include "LED.h"
 #include "Nokia5110.h"
 #include <string.h>
-#define SERVER "embsysmooc.appspot.com"
-#define REQUEST "GET /query?city=Cape%20Town&id=Turyn%20Lim%20Banda&greet=Greetings%20from%20South%20Africa!&edxcode=7326 HTTP/1.1\r\nUser-Agent: Keil\r\nHost:embsysmooc.appspot.com\r\nAccept: */*\r\n\r\n"
+//#define SERVER "embsysmooc.appspot.com"
+//#define REQUEST "GET /query?city=Cape%20Town&id=Turyn%20Lim%20Banda&greet=Greetings%20from%20South%20Africa!&edxcode=7326 HTTP/1.1\r\nUser-Agent: Keil\r\nHost:embsysmooc.appspot.com\r\nAccept: */*\r\n\r\n"
+#define SERVER "test.integretis.com"
+#define REQUEST "GET /processors/devicebroker/BaseMessageReceiver?pAccount=TLB9395&pMessage=Data%20from%20K5%20TivaC HTTP/1.1\r\nUser-Agent: Keil\r\nHost:test.integretis.com\r\nAccept: */*\r\n\r\n"
 // these three strings will be filled by getWeather
 #define MAXLEN 100
 char City[MAXLEN];

@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\rvmdk\getWeather.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\rvmdk\getWeather.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5.03 [Build 76]: Last Updated: Mon Dec 03 01:31:19 2018
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Wed Dec 26 15:32:25 2018
 <BR><P>
 <H3>Maximum Stack Usage =        704 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -35,13 +35,13 @@ Function Pointers
  <LI><a href="#[3]">IntDefaultHandler</a> from startup_rvmdk.o(RESET) referenced 112 times from startup_rvmdk.o(RESET)
  <LI><a href="#[1]">NmiSR</a> from startup_rvmdk.o(RESET) referenced from startup_rvmdk.o(RESET)
  <LI><a href="#[14]">Reset_Handler</a> from startup_rvmdk.o(RESET) referenced from startup_rvmdk.o(RESET)
- <LI><a href="#[a]">SimpleLinkNetAppEventHandler</a> from main.o(i.SimpleLinkNetAppEventHandler) referenced from driver.o(i._SlDrvClassifyRxMsg)
- <LI><a href="#[9]">SimpleLinkWlanEventHandler</a> from main.o(i.SimpleLinkWlanEventHandler) referenced from driver.o(i._SlDrvClassifyRxMsg)
+ <LI><a href="#[7]">SimpleLinkNetAppEventHandler</a> from main.o(i.SimpleLinkNetAppEventHandler) referenced from driver.o(i._SlDrvClassifyRxMsg)
+ <LI><a href="#[a]">SimpleLinkWlanEventHandler</a> from main.o(i.SimpleLinkWlanEventHandler) referenced from driver.o(i._SlDrvClassifyRxMsg)
  <LI><a href="#[5]">UARTStdioIntHandler</a> from uartstdio.o(i.UARTStdioIntHandler) referenced from startup_rvmdk.o(RESET)
- <LI><a href="#[8]">_SlDrvDeviceEventHandler</a> from device.o(i._SlDrvDeviceEventHandler) referenced from driver.o(i._SlDrvClassifyRxMsg)
+ <LI><a href="#[9]">_SlDrvDeviceEventHandler</a> from device.o(i._SlDrvDeviceEventHandler) referenced from driver.o(i._SlDrvClassifyRxMsg)
  <LI><a href="#[b]">_SlDrvMsgReadSpawnCtx</a> from driver.o(i._SlDrvMsgReadSpawnCtx) referenced from driver.o(i._SlDrvMsgReadCmdCtx)
  <LI><a href="#[b]">_SlDrvMsgReadSpawnCtx</a> from driver.o(i._SlDrvMsgReadSpawnCtx) referenced from driver.o(i._SlDrvRxIrqHandler)
- <LI><a href="#[7]">_SlDrvNetAppEventHandler</a> from netapp.o(i._SlDrvNetAppEventHandler) referenced from driver.o(i._SlDrvClassifyRxMsg)
+ <LI><a href="#[8]">_SlDrvNetAppEventHandler</a> from netapp.o(i._SlDrvNetAppEventHandler) referenced from driver.o(i._SlDrvClassifyRxMsg)
  <LI><a href="#[c]">_SlDrvRxIrqHandler</a> from driver.o(i._SlDrvRxIrqHandler) referenced from device.o(i.sl_Start)
  <LI><a href="#[d]">_sl_HandleAsync_Accept</a> from socket.o(i._sl_HandleAsync_Accept) referenced from driver.o(.constdata)
  <LI><a href="#[e]">_sl_HandleAsync_Connect</a> from socket.o(i._sl_HandleAsync_Connect) referenced from driver.o(.constdata)
@@ -337,8 +337,8 @@ Global Symbols
 <LI><a href="#[38]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Nokia5110_OutString
 </UL>
 <BR>[Called By]<UL><LI><a href="#[6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
-<LI><a href="#[9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SimpleLinkWlanEventHandler
-<LI><a href="#[a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SimpleLinkNetAppEventHandler
+<LI><a href="#[a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SimpleLinkWlanEventHandler
+<LI><a href="#[7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SimpleLinkNetAppEventHandler
 <LI><a href="#[3d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SimpleLinkHttpServerCallback
 <LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getWeather
 <LI><a href="#[23]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CreateConnection
@@ -429,17 +429,17 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[27]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_OutString
 </UL>
-<BR>[Called By]<UL><LI><a href="#[7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_SlDrvNetAppEventHandler
+<BR>[Called By]<UL><LI><a href="#[8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_SlDrvNetAppEventHandler
 </UL>
 
-<P><STRONG><a name="[a]"></a>SimpleLinkNetAppEventHandler</STRONG> (Thumb, 24 bytes, Stack size 0 bytes, main.o(i.SimpleLinkNetAppEventHandler))
+<P><STRONG><a name="[7]"></a>SimpleLinkNetAppEventHandler</STRONG> (Thumb, 24 bytes, Stack size 0 bytes, main.o(i.SimpleLinkNetAppEventHandler))
 <BR><BR>[Stack]<UL><LI>Max Depth = 144<LI>Call Chain = SimpleLinkNetAppEventHandler &rArr; LCD_OutString &rArr; UARTprintf &rArr; UARTvprintf &rArr; UARTwrite &rArr; UARTPrimeTransmit
 </UL>
 <BR>[Calls]<UL><LI><a href="#[27]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_OutString
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> driver.o(i._SlDrvClassifyRxMsg)
 </UL>
-<P><STRONG><a name="[9]"></a>SimpleLinkWlanEventHandler</STRONG> (Thumb, 50 bytes, Stack size 0 bytes, main.o(i.SimpleLinkWlanEventHandler))
+<P><STRONG><a name="[a]"></a>SimpleLinkWlanEventHandler</STRONG> (Thumb, 50 bytes, Stack size 0 bytes, main.o(i.SimpleLinkWlanEventHandler))
 <BR><BR>[Stack]<UL><LI>Max Depth = 144<LI>Call Chain = SimpleLinkWlanEventHandler &rArr; LCD_OutString &rArr; UARTprintf &rArr; UARTvprintf &rArr; UARTwrite &rArr; UARTPrimeTransmit
 </UL>
 <BR>[Calls]<UL><LI><a href="#[27]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_OutString
@@ -544,7 +544,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[4a]"></a>_SlAsyncEventGenericHandler</STRONG> (Thumb, 732 bytes, Stack size 176 bytes, driver.o(i._SlAsyncEventGenericHandler))
+<P><STRONG><a name="[4a]"></a>_SlAsyncEventGenericHandler</STRONG> (Thumb, 750 bytes, Stack size 176 bytes, driver.o(i._SlAsyncEventGenericHandler))
 <BR><BR>[Stack]<UL><LI>Max Depth = 256<LI>Call Chain = _SlAsyncEventGenericHandler &rArr; _sl_HandleAsync_PingResponse &rArr; _SlNonOsSemGet &rArr; _SlNonOsMainLoopTask
 </UL>
 <BR>[Calls]<UL><LI><a href="#[12]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_sl_HandleAsync_PingResponse
@@ -564,7 +564,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sl_WlanDisconnect
 </UL>
 
-<P><STRONG><a name="[62]"></a>_SlDrvClassifyRxMsg</STRONG> (Thumb, 114 bytes, Stack size 0 bytes, driver.o(i._SlDrvClassifyRxMsg))
+<P><STRONG><a name="[62]"></a>_SlDrvClassifyRxMsg</STRONG> (Thumb, 124 bytes, Stack size 0 bytes, driver.o(i._SlDrvClassifyRxMsg))
 <BR><BR>[Called By]<UL><LI><a href="#[60]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_SlDrvMsgRead
 </UL>
 
@@ -600,7 +600,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[67]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sl_NetAppSendTokenValue
 </UL>
 
-<P><STRONG><a name="[55]"></a>_SlDrvDataReadOp</STRONG> (Thumb, 326 bytes, Stack size 40 bytes, driver.o(i._SlDrvDataReadOp))
+<P><STRONG><a name="[55]"></a>_SlDrvDataReadOp</STRONG> (Thumb, 324 bytes, Stack size 40 bytes, driver.o(i._SlDrvDataReadOp))
 <BR><BR>[Stack]<UL><LI>Max Depth = 120<LI>Call Chain = _SlDrvDataReadOp &rArr; _SlDrvWaitForPoolObj &rArr; _SlNonOsSemGet &rArr; _SlNonOsMainLoopTask
 </UL>
 <BR>[Calls]<UL><LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_SlDrvMsgWrite
@@ -622,7 +622,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sl_Send
 </UL>
 
-<P><STRONG><a name="[8]"></a>_SlDrvDeviceEventHandler</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, device.o(i._SlDrvDeviceEventHandler))
+<P><STRONG><a name="[9]"></a>_SlDrvDeviceEventHandler</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, device.o(i._SlDrvDeviceEventHandler))
 <BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = _SlDrvDeviceEventHandler &rArr; _sl_HandleAsync_InitComplete &rArr; _SlDrvReleasePoolObj &rArr; _SlNonOsSemGet &rArr; _SlNonOsMainLoopTask
 </UL>
 <BR>[Calls]<UL><LI><a href="#[13]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_sl_HandleAsync_Stop
@@ -668,7 +668,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_SlDrvDriverCBInit
 </UL>
 
-<P><STRONG><a name="[60]"></a>_SlDrvMsgRead</STRONG> (Thumb, 834 bytes, Stack size 40 bytes, driver.o(i._SlDrvMsgRead))
+<P><STRONG><a name="[60]"></a>_SlDrvMsgRead</STRONG> (Thumb, 840 bytes, Stack size 40 bytes, driver.o(i._SlDrvMsgRead))
 <BR><BR>[Stack]<UL><LI>Max Depth = 104<LI>Call Chain = _SlDrvMsgRead &rArr; _SlDrvRxHdrRead &rArr; spi_Write
 </UL>
 <BR>[Calls]<UL><LI><a href="#[63]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_Read
@@ -683,7 +683,7 @@ Global Symbols
 <LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_SlDrvMsgReadCmdCtx
 </UL>
 
-<P><STRONG><a name="[53]"></a>_SlDrvMsgReadCmdCtx</STRONG> (Thumb, 156 bytes, Stack size 16 bytes, driver.o(i._SlDrvMsgReadCmdCtx))
+<P><STRONG><a name="[53]"></a>_SlDrvMsgReadCmdCtx</STRONG> (Thumb, 158 bytes, Stack size 16 bytes, driver.o(i._SlDrvMsgReadCmdCtx))
 <BR><BR>[Stack]<UL><LI>Max Depth = 272<LI>Call Chain = _SlDrvMsgReadCmdCtx &rArr; _SlAsyncEventGenericHandler &rArr; _sl_HandleAsync_PingResponse &rArr; _SlNonOsSemGet &rArr; _SlNonOsMainLoopTask
 </UL>
 <BR>[Calls]<UL><LI><a href="#[65]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_SlNonOsSpawn
@@ -695,7 +695,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[4f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_SlDrvCmdOp
 </UL>
 
-<P><STRONG><a name="[b]"></a>_SlDrvMsgReadSpawnCtx</STRONG> (Thumb, 132 bytes, Stack size 16 bytes, driver.o(i._SlDrvMsgReadSpawnCtx))
+<P><STRONG><a name="[b]"></a>_SlDrvMsgReadSpawnCtx</STRONG> (Thumb, 138 bytes, Stack size 16 bytes, driver.o(i._SlDrvMsgReadSpawnCtx))
 <BR><BR>[Stack]<UL><LI>Max Depth = 272<LI>Call Chain = _SlDrvMsgReadSpawnCtx &rArr; _SlAsyncEventGenericHandler &rArr; _sl_HandleAsync_PingResponse &rArr; _SlNonOsSemGet &rArr; _SlNonOsMainLoopTask
 </UL>
 <BR>[Calls]<UL><LI><a href="#[60]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_SlDrvMsgRead
@@ -717,7 +717,7 @@ Global Symbols
 <LI><a href="#[4f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_SlDrvCmdOp
 </UL>
 
-<P><STRONG><a name="[7]"></a>_SlDrvNetAppEventHandler</STRONG> (Thumb, 198 bytes, Stack size 72 bytes, netapp.o(i._SlDrvNetAppEventHandler))
+<P><STRONG><a name="[8]"></a>_SlDrvNetAppEventHandler</STRONG> (Thumb, 202 bytes, Stack size 72 bytes, netapp.o(i._SlDrvNetAppEventHandler))
 <BR><BR>[Stack]<UL><LI>Max Depth = 216<LI>Call Chain = _SlDrvNetAppEventHandler &rArr; SimpleLinkHttpServerCallback &rArr; LCD_OutString &rArr; UARTprintf &rArr; UARTvprintf &rArr; UARTwrite &rArr; UARTPrimeTransmit
 </UL>
 <BR>[Calls]<UL><LI><a href="#[12]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_sl_HandleAsync_PingResponse
@@ -732,7 +732,7 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[5a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_SlDrvDriverCBDeinit
 </UL>
 
-<P><STRONG><a name="[5e]"></a>_SlDrvObjInit</STRONG> (Thumb, 54 bytes, Stack size 8 bytes, driver.o(i._SlDrvObjInit))
+<P><STRONG><a name="[5e]"></a>_SlDrvObjInit</STRONG> (Thumb, 56 bytes, Stack size 8 bytes, driver.o(i._SlDrvObjInit))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = _SlDrvObjInit
 </UL>
 <BR>[Calls]<UL><LI><a href="#[4c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
@@ -755,7 +755,7 @@ Global Symbols
 <LI><a href="#[28]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sl_Connect
 </UL>
 
-<P><STRONG><a name="[61]"></a>_SlDrvRxHdrRead</STRONG> (Thumb, 282 bytes, Stack size 32 bytes, driver.o(i._SlDrvRxHdrRead))
+<P><STRONG><a name="[61]"></a>_SlDrvRxHdrRead</STRONG> (Thumb, 280 bytes, Stack size 32 bytes, driver.o(i._SlDrvRxHdrRead))
 <BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = _SlDrvRxHdrRead &rArr; spi_Write
 </UL>
 <BR>[Calls]<UL><LI><a href="#[66]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_Write
@@ -765,7 +765,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[60]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_SlDrvMsgRead
 </UL>
 
-<P><STRONG><a name="[c]"></a>_SlDrvRxIrqHandler</STRONG> (Thumb, 52 bytes, Stack size 8 bytes, driver.o(i._SlDrvRxIrqHandler))
+<P><STRONG><a name="[c]"></a>_SlDrvRxIrqHandler</STRONG> (Thumb, 54 bytes, Stack size 8 bytes, driver.o(i._SlDrvRxIrqHandler))
 <BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = _SlDrvRxIrqHandler &rArr; _SlNonOsSpawn
 </UL>
 <BR>[Calls]<UL><LI><a href="#[65]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_SlNonOsSpawn
@@ -790,7 +790,7 @@ Global Symbols
 <LI><a href="#[28]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sl_Connect
 </UL>
 
-<P><STRONG><a name="[64]"></a>_SlFindAndSetActiveObj</STRONG> (Thumb, 138 bytes, Stack size 20 bytes, driver.o(i._SlFindAndSetActiveObj))
+<P><STRONG><a name="[64]"></a>_SlFindAndSetActiveObj</STRONG> (Thumb, 144 bytes, Stack size 20 bytes, driver.o(i._SlFindAndSetActiveObj))
 <BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = _SlFindAndSetActiveObj
 </UL>
 <BR>[Called By]<UL><LI><a href="#[60]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_SlDrvMsgRead
@@ -904,17 +904,17 @@ Global Symbols
 <LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_SlNonOsSemGet
 <LI><a href="#[4b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
 </UL>
-<BR>[Called By]<UL><LI><a href="#[7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_SlDrvNetAppEventHandler
+<BR>[Called By]<UL><LI><a href="#[8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_SlDrvNetAppEventHandler
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> driver.o(.constdata)
 </UL>
-<P><STRONG><a name="[11]"></a>_sl_HandleAsync_DnsGetHostByService</STRONG> (Thumb, 102 bytes, Stack size 16 bytes, netapp.o(i._sl_HandleAsync_DnsGetHostByService))
+<P><STRONG><a name="[11]"></a>_sl_HandleAsync_DnsGetHostByService</STRONG> (Thumb, 100 bytes, Stack size 16 bytes, netapp.o(i._sl_HandleAsync_DnsGetHostByService))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = _sl_HandleAsync_DnsGetHostByService
 </UL>
 <BR>[Calls]<UL><LI><a href="#[52]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_SlNonOsSemSet
 <LI><a href="#[4b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
 </UL>
-<BR>[Called By]<UL><LI><a href="#[7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_SlDrvNetAppEventHandler
+<BR>[Called By]<UL><LI><a href="#[8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_SlDrvNetAppEventHandler
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> driver.o(.constdata)
 </UL>
@@ -926,7 +926,7 @@ Global Symbols
 <LI><a href="#[57]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_SlDrvReleasePoolObj
 <LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetStartResponseConvert
 </UL>
-<BR>[Called By]<UL><LI><a href="#[8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_SlDrvDeviceEventHandler
+<BR>[Called By]<UL><LI><a href="#[9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_SlDrvDeviceEventHandler
 </UL>
 
 <P><STRONG><a name="[12]"></a>_sl_HandleAsync_PingResponse</STRONG> (Thumb, 120 bytes, Stack size 32 bytes, netapp.o(i._sl_HandleAsync_PingResponse))
@@ -937,7 +937,7 @@ Global Symbols
 <LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CopyPingResultsToReport
 <LI><a href="#[4b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
 </UL>
-<BR>[Called By]<UL><LI><a href="#[7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_SlDrvNetAppEventHandler
+<BR>[Called By]<UL><LI><a href="#[8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_SlDrvNetAppEventHandler
 <LI><a href="#[4a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_SlAsyncEventGenericHandler
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> driver.o(.constdata)
@@ -956,7 +956,7 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[52]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_SlNonOsSemSet
 <LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_SlNonOsSemGet
 </UL>
-<BR>[Called By]<UL><LI><a href="#[8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_SlDrvDeviceEventHandler
+<BR>[Called By]<UL><LI><a href="#[9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_SlDrvDeviceEventHandler
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> driver.o(.constdata)
 </UL>
@@ -974,7 +974,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[6]"></a>main</STRONG> (Thumb, 174 bytes, Stack size 0 bytes, main.o(i.main))
+<P><STRONG><a name="[6]"></a>main</STRONG> (Thumb, 172 bytes, Stack size 0 bytes, main.o(i.main))
 <BR><BR>[Stack]<UL><LI>Max Depth = 704<LI>Call Chain = main &rArr; configureSimpleLinkToDefaultState &rArr; sl_NetAppMDNSUnRegisterService &rArr; sl_NetAppMDNSRegisterUnregisterService &rArr; _SlDrvCmdOp &rArr; _SlDrvMsgReadCmdCtx &rArr; _SlAsyncEventGenericHandler &rArr; _sl_HandleAsync_PingResponse &rArr; _SlNonOsSemGet &rArr; _SlNonOsMainLoopTask
 </UL>
 <BR>[Calls]<UL><LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;stopWDT
@@ -1056,7 +1056,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getWeather
 </UL>
 
-<P><STRONG><a name="[89]"></a>sl_NetAppMDNSRegisterUnregisterService</STRONG> (Thumb, 118 bytes, Stack size 312 bytes, netapp.o(i.sl_NetAppMDNSRegisterUnregisterService))
+<P><STRONG><a name="[89]"></a>sl_NetAppMDNSRegisterUnregisterService</STRONG> (Thumb, 120 bytes, Stack size 312 bytes, netapp.o(i.sl_NetAppMDNSRegisterUnregisterService))
 <BR><BR>[Stack]<UL><LI>Max Depth = 608<LI>Call Chain = sl_NetAppMDNSRegisterUnregisterService &rArr; _SlDrvCmdOp &rArr; _SlDrvMsgReadCmdCtx &rArr; _SlAsyncEventGenericHandler &rArr; _sl_HandleAsync_PingResponse &rArr; _SlNonOsSemGet &rArr; _SlNonOsMainLoopTask
 </UL>
 <BR>[Calls]<UL><LI><a href="#[4f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_SlDrvCmdOp
@@ -1080,7 +1080,7 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_SlDrvCmdSend
 <LI><a href="#[4b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
 </UL>
-<BR>[Called By]<UL><LI><a href="#[7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_SlDrvNetAppEventHandler
+<BR>[Called By]<UL><LI><a href="#[8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_SlDrvNetAppEventHandler
 </UL>
 
 <P><STRONG><a name="[74]"></a>sl_NetCfgSet</STRONG> (Thumb, 58 bytes, Stack size 32 bytes, netcfg.o(i.sl_NetCfgSet))
@@ -1289,7 +1289,7 @@ Local Symbols
 <BR>[Called By]<UL><LI><a href="#[6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[78]"></a>getWeather</STRONG> (Thumb, 266 bytes, Stack size 16 bytes, main.o(i.getWeather))
+<P><STRONG><a name="[78]"></a>getWeather</STRONG> (Thumb, 258 bytes, Stack size 16 bytes, main.o(i.getWeather))
 <BR><BR>[Stack]<UL><LI>Max Depth = 400<LI>Call Chain = getWeather &rArr; sl_NetAppDnsGetHostByName &rArr; _SlDrvCmdOp &rArr; _SlDrvMsgReadCmdCtx &rArr; _SlAsyncEventGenericHandler &rArr; _sl_HandleAsync_PingResponse &rArr; _SlNonOsSemGet &rArr; _SlNonOsMainLoopTask
 </UL>
 <BR>[Calls]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sl_Send
