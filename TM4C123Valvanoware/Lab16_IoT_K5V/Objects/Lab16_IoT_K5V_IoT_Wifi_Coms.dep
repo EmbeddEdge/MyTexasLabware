@@ -1,0 +1,41 @@
+Dependencies for Project 'Lab16_IoT_K5V', Target 'IoT_Wifi_Coms': (DO NOT MODIFY !)
+F (.\startup_rvmdk.S)(0x5C20FE44)(--cpu Cortex-M4 --pd "__EVAL SETA 1" -g --apcs=interwork -I.\RTE\_IoT_Wifi_Coms-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123-IC:\Keil_v5\ARM\CMSIS\Include--pd "__UVISION_VERSION SETA 526" --pd "TM4C123GH6PM SETA 1"--list .\listings\startup_rvmdk.lst --xref -o .\objects\startup_rvmdk.o --depend .\objects\startup_rvmdk.d)
+F (.\main.c)(0x5C237963)(--c99 --gnu -c --cpu Cortex-M4 -D__EVAL -g -O0 --apcs=interwork --signed_chars -I ..\CC3100 -I ..\CC3100\platform\ek-tm4c123gxl -I ..\CC3100\simplelink -I ..\CC3100\simplelink\include -I ..\..\TM4C123Valvanoware-I.\RTE\_IoT_Wifi_Coms-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="526" -DTM4C123GH6PM-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
+I (..\cc3100\simplelink\include\simplelink.h)(0x5C237606)
+I (..\CC3100\platform\ek-tm4c123gxl\user.h)(0x5C20FE43)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x599F2F9C)
+I (..\CC3100\platform\ek-tm4c123gxl\board.h)(0x5C20FE43)
+I (..\CC3100\platform\ek-tm4c123gxl\spi.h)(0x5C20FE43)
+I (..\cc3100\simplelink\include\../source/nonos.h)(0x5C20FE43)
+I (..\cc3100\simplelink\include\../source/objInclusion.h)(0x5C20FE43)
+I (..\cc3100\simplelink\include\../source/datatypes.h)(0x5C20FE43)
+I (..\cc3100\simplelink\include\trace.h)(0x5C20FE43)
+I (..\cc3100\simplelink\include\fs.h)(0x5C20FE43)
+I (..\cc3100\simplelink\include\socket.h)(0x5C20FE43)
+I (..\cc3100\simplelink\include\netapp.h)(0x5C20FE43)
+I (..\cc3100\simplelink\include\wlan.h)(0x5C20FE43)
+I (..\cc3100\simplelink\include\device.h)(0x5C20FE43)
+I (..\cc3100\simplelink\include\netcfg.h)(0x5C20FE43)
+I (..\cc3100\simplelink\include\wlan_rx_filters.h)(0x5C20FE43)
+I (..\..\TM4C123Valvanoware\inc/hw_memmap.h)(0x53886068)
+I (..\..\TM4C123Valvanoware\inc/hw_types.h)(0x53886068)
+I (..\..\TM4C123Valvanoware\driverlib/debug.h)(0x5C20FE45)
+I (..\..\TM4C123Valvanoware\driverlib/fpu.h)(0x5C20FE45)
+I (..\..\TM4C123Valvanoware\driverlib/gpio.h)(0x5C20FE45)
+I (..\..\TM4C123Valvanoware\driverlib/pin_map.h)(0x5C20FE45)
+I (..\..\TM4C123Valvanoware\driverlib/rom.h)(0x5C20FE45)
+I (..\..\TM4C123Valvanoware\driverlib/sysctl.h)(0x5C20FE45)
+I (..\..\TM4C123Valvanoware\driverlib/uart.h)(0x5C20FE45)
+I (..\..\TM4C123Valvanoware\utils/uartstdio.h)(0x5C20FE45)
+I (C:\Keil_v5\ARM\ARMCC\include\stdarg.h)(0x599F2F9A)
+I (..\..\TM4C123Valvanoware\utils/cmdline.h)(0x5C20FE45)
+I (application_commands.h)(0x5C20FE44)
+I (LED.h)(0x5C20FE44)
+I (Nokia5110.h)(0x5C20FE44)
+F (.\LED.c)(0x5C20FE44)(--c99 --gnu -c --cpu Cortex-M4 -D__EVAL -g -O0 --apcs=interwork --signed_chars -I ..\CC3100 -I ..\CC3100\platform\ek-tm4c123gxl -I ..\CC3100\simplelink -I ..\CC3100\simplelink\include -I ..\..\TM4C123Valvanoware-I.\RTE\_IoT_Wifi_Coms-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="526" -DTM4C123GH6PM-o .\objects\led.o --omf_browse .\objects\led.crf --depend .\objects\led.d)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599F2F9E)
+I (../inc/tm4c123gh6pm.h)(0x5388606A)
+F (.\Nokia5110.c)(0x5C20FE44)(--c99 --gnu -c --cpu Cortex-M4 -D__EVAL -g -O0 --apcs=interwork --signed_chars -I ..\CC3100 -I ..\CC3100\platform\ek-tm4c123gxl -I ..\CC3100\simplelink -I ..\CC3100\simplelink\include -I ..\..\TM4C123Valvanoware-I.\RTE\_IoT_Wifi_Coms-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="526" -DTM4C123GH6PM-o .\objects\nokia5110.o --omf_browse .\objects\nokia5110.crf --depend .\objects\nokia5110.d)
+I (Nokia5110.h)(0x5C20FE44)
+I (../inc/tm4c123gh6pm.h)(0x5388606A)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599F2F9E)
