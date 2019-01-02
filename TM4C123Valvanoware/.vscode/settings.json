@@ -4,6 +4,9 @@
         "simplelink.h\u0000link.h": "c",
         "simplelink.h\u0000plelink.h": "c",
         "user.h": "c",
-        "hw_memmap.h": "c"
-    }
+        "hw_memmap.h": "c",
+        "bsp.h": "c"
+    },
+    "C_Cpp.intelliSenseEngineFallback": "Enabled",
+    "C_Cpp.errorSquiggles": "Disabled"
 }
