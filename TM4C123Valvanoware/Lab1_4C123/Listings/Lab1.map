@@ -670,22 +670,22 @@ Image Symbol Table
     i.lightsensorstart                       0x000030bc   Section        0  bsp.o(i.lightsensorstart)
     lightsensorstart                         0x000030bd   Thumb Code    36  bsp.o(i.lightsensorstart)
     i.main                                   0x000030e0   Section        0  lab1.o(i.main)
-    i.pushColor                              0x00003168   Section        0  bsp.o(i.pushColor)
-    pushColor                                0x00003169   Thumb Code    18  bsp.o(i.pushColor)
-    i.setAddrWindow                          0x0000317c   Section        0  bsp.o(i.setAddrWindow)
-    setAddrWindow                            0x0000317d   Thumb Code   106  bsp.o(i.setAddrWindow)
-    i.sqrt32                                 0x000031f0   Section        0  lab1.o(i.sqrt32)
-    i.writecommand                           0x00003210   Section        0  bsp.o(i.writecommand)
-    writecommand                             0x00003211   Thumb Code    62  bsp.o(i.writecommand)
-    i.writedata                              0x00003258   Section        0  bsp.o(i.writedata)
-    writedata                                0x00003259   Thumb Code    64  bsp.o(i.writedata)
-    .constdata                               0x000032a0   Section     1403  bsp.o(.constdata)
-    Font                                     0x000032a0   Data        1275  bsp.o(.constdata)
-    Rcmd1                                    0x0000379b   Data          59  bsp.o(.constdata)
-    Rcmd2green                               0x000037d6   Data          13  bsp.o(.constdata)
-    Rcmd2red                                 0x000037e3   Data          13  bsp.o(.constdata)
-    Rcmd3                                    0x000037f0   Data          43  bsp.o(.constdata)
-    .constdata                               0x0000381c   Section       72  texas.o(.constdata)
+    i.pushColor                              0x00003178   Section        0  bsp.o(i.pushColor)
+    pushColor                                0x00003179   Thumb Code    18  bsp.o(i.pushColor)
+    i.setAddrWindow                          0x0000318c   Section        0  bsp.o(i.setAddrWindow)
+    setAddrWindow                            0x0000318d   Thumb Code   106  bsp.o(i.setAddrWindow)
+    i.sqrt32                                 0x00003200   Section        0  lab1.o(i.sqrt32)
+    i.writecommand                           0x00003220   Section        0  bsp.o(i.writecommand)
+    writecommand                             0x00003221   Thumb Code    62  bsp.o(i.writecommand)
+    i.writedata                              0x00003268   Section        0  bsp.o(i.writedata)
+    writedata                                0x00003269   Thumb Code    64  bsp.o(i.writedata)
+    .constdata                               0x000032b0   Section     1403  bsp.o(.constdata)
+    Font                                     0x000032b0   Data        1275  bsp.o(.constdata)
+    Rcmd1                                    0x000037ab   Data          59  bsp.o(.constdata)
+    Rcmd2green                               0x000037e6   Data          13  bsp.o(.constdata)
+    Rcmd2red                                 0x000037f3   Data          13  bsp.o(.constdata)
+    Rcmd3                                    0x00003800   Data          43  bsp.o(.constdata)
+    .constdata                               0x0000382c   Section       72  texas.o(.constdata)
     .data                                    0x20000000   Section       70  lab1.o(.data)
     soundSum                                 0x2000003c   Data           4  lab1.o(.data)
     time                                     0x20000040   Data           4  lab1.o(.data)
@@ -1000,13 +1000,13 @@ Image Symbol Table
     WideTimer4A_Handler                      0x00002a05   Thumb Code    16  bsp.o(i.WideTimer4A_Handler)
     WideTimer5A_Handler                      0x00002a1d   Thumb Code    16  bsp.o(i.WideTimer5A_Handler)
     drawaxes                                 0x00002cdd   Thumb Code   152  lab1.o(i.drawaxes)
-    main                                     0x000030e1   Thumb Code   124  lab1.o(i.main)
-    sqrt32                                   0x000031f1   Thumb Code    30  lab1.o(i.sqrt32)
-    Key                                      0x0000381c   Data           8  texas.o(.constdata)
-    Scramble                                 0x00003824   Data          32  texas.o(.constdata)
-    DeScramble                               0x00003844   Data          32  texas.o(.constdata)
-    Region$$Table$$Base                      0x00003864   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x00003884   Number         0  anon$$obj.o(Region$$Table)
+    main                                     0x000030e1   Thumb Code   140  lab1.o(i.main)
+    sqrt32                                   0x00003201   Thumb Code    30  lab1.o(i.sqrt32)
+    Key                                      0x0000382c   Data           8  texas.o(.constdata)
+    Scramble                                 0x00003834   Data          32  texas.o(.constdata)
+    DeScramble                               0x00003854   Data          32  texas.o(.constdata)
+    Region$$Table$$Base                      0x00003874   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x00003894   Number         0  anon$$obj.o(Region$$Table)
     Time                                     0x20000000   Data           4  lab1.o(.data)
     Steps                                    0x20000004   Data           4  lab1.o(.data)
     Magnitude                                0x20000008   Data           4  lab1.o(.data)
@@ -1088,9 +1088,9 @@ Memory Map of the image
 
   Image Entry point : 0x00000311
 
-  Load Region LR_1 (Base: 0x00000000, Size: 0x000039a4, Max: 0xffffffff, ABSOLUTE)
+  Load Region LR_1 (Base: 0x00000000, Size: 0x000039b4, Max: 0xffffffff, ABSOLUTE)
 
-    Execution Region ER_RO (Exec base: 0x00000000, Load base: 0x00000000, Size: 0x00003884, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_RO (Exec base: 0x00000000, Load base: 0x00000000, Size: 0x00003894, Max: 0xffffffff, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -1249,31 +1249,31 @@ Memory Map of the image
     0x00002fd8   0x00002fd8   0x00000094   Code   RO          196    i.i2cinit           bsp.o
     0x0000306c   0x0000306c   0x00000050   Code   RO          197    i.lightsensorend    bsp.o
     0x000030bc   0x000030bc   0x00000024   Code   RO          198    i.lightsensorstart  bsp.o
-    0x000030e0   0x000030e0   0x00000088   Code   RO           14    i.main              lab1.o
-    0x00003168   0x00003168   0x00000012   Code   RO          199    i.pushColor         bsp.o
-    0x0000317a   0x0000317a   0x00000002   PAD
-    0x0000317c   0x0000317c   0x00000074   Code   RO          200    i.setAddrWindow     bsp.o
-    0x000031f0   0x000031f0   0x0000001e   Code   RO           16    i.sqrt32            lab1.o
-    0x0000320e   0x0000320e   0x00000002   PAD
-    0x00003210   0x00003210   0x00000048   Code   RO          203    i.writecommand      bsp.o
-    0x00003258   0x00003258   0x00000048   Code   RO          204    i.writedata         bsp.o
-    0x000032a0   0x000032a0   0x0000057b   Data   RO          206    .constdata          bsp.o
-    0x0000381b   0x0000381b   0x00000001   PAD
-    0x0000381c   0x0000381c   0x00000048   Data   RO          668    .constdata          texas.o
-    0x00003864   0x00003864   0x00000020   Data   RO         1084    Region$$Table       anon$$obj.o
+    0x000030e0   0x000030e0   0x00000098   Code   RO           14    i.main              lab1.o
+    0x00003178   0x00003178   0x00000012   Code   RO          199    i.pushColor         bsp.o
+    0x0000318a   0x0000318a   0x00000002   PAD
+    0x0000318c   0x0000318c   0x00000074   Code   RO          200    i.setAddrWindow     bsp.o
+    0x00003200   0x00003200   0x0000001e   Code   RO           16    i.sqrt32            lab1.o
+    0x0000321e   0x0000321e   0x00000002   PAD
+    0x00003220   0x00003220   0x00000048   Code   RO          203    i.writecommand      bsp.o
+    0x00003268   0x00003268   0x00000048   Code   RO          204    i.writedata         bsp.o
+    0x000032b0   0x000032b0   0x0000057b   Data   RO          206    .constdata          bsp.o
+    0x0000382b   0x0000382b   0x00000001   PAD
+    0x0000382c   0x0000382c   0x00000048   Data   RO          668    .constdata          texas.o
+    0x00003874   0x00003874   0x00000020   Data   RO         1084    Region$$Table       anon$$obj.o
 
 
-    Execution Region ER_RW (Exec base: 0x20000000, Load base: 0x00003884, Size: 0x00000120, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_RW (Exec base: 0x20000000, Load base: 0x00003894, Size: 0x00000120, Max: 0xffffffff, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x20000000   0x00003884   0x00000046   Data   RW           18    .data               lab1.o
-    0x20000046   0x000038ca   0x00000002   PAD
-    0x20000048   0x000038cc   0x00000044   Data   RW          207    .data               bsp.o
-    0x2000008c   0x00003910   0x00000094   Data   RW          669    .data               texas.o
+    0x20000000   0x00003894   0x00000046   Data   RW           18    .data               lab1.o
+    0x20000046   0x000038da   0x00000002   PAD
+    0x20000048   0x000038dc   0x00000044   Data   RW          207    .data               bsp.o
+    0x2000008c   0x00003920   0x00000094   Data   RW          669    .data               texas.o
 
 
-    Execution Region ER_ZI (Exec base: 0x20000120, Load base: 0x000039a4, Size: 0x00000a50, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_ZI (Exec base: 0x20000120, Load base: 0x000039b4, Size: 0x00000a50, Max: 0xffffffff, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -1293,13 +1293,13 @@ Image component sizes
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
       5672        618       1403         68         12      32605   bsp.o
-      1914        300          0         70       2000      13251   lab1.o
+      1930        300          0         70       2000      13259   lab1.o
        468         50          0          0          0        535   profile.o
        292         18        620          0        512       5672   startup_tm4c123.o
       3696        830         72        148         20      18295   texas.o
 
     ----------------------------------------------------------------------
-     12060       1816       2128        288       2544      70358   Object Totals
+     12076       1816       2128        288       2544      70366   Object Totals
          0          0         32          0          0          0   (incl. Generated)
         18          0          1          2          0          0   (incl. Padding)
 
@@ -1348,15 +1348,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-     12340       1832       2128        288       2640      65998   Grand Totals
-     12340       1832       2128        288       2640      65998   ELF Image Totals
-     12340       1832       2128        288          0          0   ROM Totals
+     12356       1832       2128        288       2640      66006   Grand Totals
+     12356       1832       2128        288       2640      66006   ELF Image Totals
+     12356       1832       2128        288          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                14468 (  14.13kB)
+    Total RO  Size (Code + RO Data)                14484 (  14.14kB)
     Total RW  Size (RW Data + ZI Data)              2928 (   2.86kB)
-    Total ROM Size (Code + RO Data + RW Data)      14756 (  14.41kB)
+    Total ROM Size (Code + RO Data + RW Data)      14772 (  14.43kB)
 
 ==============================================================================
 
