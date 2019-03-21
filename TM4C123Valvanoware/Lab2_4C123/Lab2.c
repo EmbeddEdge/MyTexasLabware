@@ -411,8 +411,8 @@ int main(void){
   // Task2, Task3, Task4, Task5 are main threads
   OS_AddThreads(&Task2, &Task3, &Task4, &Task5);
   // when grading change 1000 to 4-digit number from edX
-  TExaS_Init(GRADER, 1000);          // initialize the Lab 2 grader
-//  TExaS_Init(LOGICANALYZER, 1000); // initialize the Lab 2 logic analyzer
+  TExaS_Init(GRADER, 4694);          // initialize the Lab 2 grader
+  //TExaS_Init(LOGICANALYZER, 1000); // initialize the Lab 2 logic analyzer
   OS_Launch(BSP_Clock_GetFreq()/THREADFREQ); // doesn't return, interrupts enabled in here
   return 0;             // this never executes
 }
@@ -435,9 +435,12 @@ int main_step1(void){
 // Implement the three mailbox functions as defined in OS.c and OS.h
 // Use this a simple main program to test the mailbox functions.
 uint32_t Out;
-int main_step2(void){ uint32_t in=0;
+int main_step2(void)
+{ 
+  uint32_t in=0;
   OS_MailBox_Init();
-  while(1){
+  while(1)
+  {
     OS_MailBox_Send(in);
     Out = OS_MailBox_Recv();
     in++;
@@ -465,8 +468,8 @@ int main_step3(void){
 // Task2 will stall
   OS_AddThreads3(&Task3, &Task4, &Task5);
   // when grading change 1000 to 4-digit number from edX
-  TExaS_Init(GRADER, 1000);          // initialize the Lab 2 grader
-//  TExaS_Init(LOGICANALYZER, 1000); // initialize the Lab 2 logic analyzer
+//  TExaS_Init(GRADER, 1000);          // initialize the Lab 2 grader
+  TExaS_Init(LOGICANALYZER, 1000); // initialize the Lab 2 logic analyzer
   OS_Launch(BSP_Clock_GetFreq()/THREADFREQ); // doesn't return, interrupts enabled in here
   return 0;             // this never executes
 }
@@ -488,8 +491,8 @@ int main_step4(void){
 // Tasks 2 and 5 will stall
   OS_AddThreads(&Task2, &Task3, &Task4, &Task5);
   // when grading change 1000 to 4-digit number from edX
-  TExaS_Init(GRADER, 1000);          // initialize the Lab 2 grader
-//  TExaS_Init(LOGICANALYZER, 1000); // initialize the Lab 2 logic analyzer
+//  TExaS_Init(GRADER, 1000);          // initialize the Lab 2 grader
+  TExaS_Init(LOGICANALYZER, 1000); // initialize the Lab 2 logic analyzer
   OS_Launch(BSP_Clock_GetFreq()/THREADFREQ); // doesn't return, interrupts enabled in here
   return 0;             // this never executes
 }
