@@ -18,7 +18,7 @@ void StartOS(void);
 struct tcb{
   int32_t *sp;       // pointer to stack (valid for threads not running
   struct tcb *next;  // linked-list pointer
-  int32_t Blocked;// nonzero if blocked on this semaphore
+  int32_t *Blocked;// nonzero if blocked on this semaphore
    // nonzero if this thread is sleeping
 //*FILL THIS IN****
 };
@@ -78,7 +78,9 @@ int OS_AddThreads(void(*thread0)(void),
   tcbs[0].next = &tcbs[1]; // 0 points to 1
   tcbs[1].next = &tcbs[2]; // 1 points to 2
   tcbs[2].next = &tcbs[3]; // 2 points to 3
-  tcbs[3].next = &tcbs[0]; // 3 points to 0
+  tcbs[3].next = &tcbs[4]; // 3 points to 4
+  tcbs[4].next = &tcbs[5]; // 5 points to 5
+  tcbs[5].next = &tcbs[0]; // 5 points to 0
   // initialize RunPt
   RunPt = &tcbs[0];       // thread 0 will run first
   // initialize four stacks, including initial PC
@@ -86,6 +88,8 @@ int OS_AddThreads(void(*thread0)(void),
   SetInitialStack(1); Stacks[1][STACKSIZE-2] = (int32_t)(thread1); // PC
   SetInitialStack(2); Stacks[2][STACKSIZE-2] = (int32_t)(thread2); // PC
   SetInitialStack(3); Stacks[3][STACKSIZE-2] = (int32_t)(thread3); // PC
+  SetInitialStack(4); Stacks[4][STACKSIZE-2] = (int32_t)(thread4); // PC
+  SetInitialStack(5); Stacks[5][STACKSIZE-2] = (int32_t)(thread5); // PC
   EndCritical(status);
   return 1;               // successful
 }
@@ -131,6 +135,11 @@ void Scheduler(void)
 {
   // every time slice
   // ROUND ROBIN, skip blocked and sleeping threads
+  RunPt = RunPt->next;
+  while(RunPt->Blocked)
+  {
+    RunPt = RunPt->next;
+  }
 }
 
 //******** OS_Suspend ***************
@@ -161,7 +170,7 @@ void OS_Sleep(uint32_t sleepTime){
 // Outputs: none
 void OS_InitSemaphore(int32_t *semaPt, int32_t value)
 {
-  //***IMPLEMENT THIS***
+  //***IMPLEMENT THIS*** //done
   *semaPt = value;
 }
 
@@ -171,13 +180,13 @@ void OS_InitSemaphore(int32_t *semaPt, int32_t value)
 // Lab3 block if less than zero
 // Inputs:  pointer to a counting semaphore
 // Outputs: none
-void OS_Wait(int32_t *semaPt) //***IMPLEMENT THIS***
+void OS_Wait(int32_t *semaPt) //***IMPLEMENT THIS*** //done
 {
   DisableInterrupts();
   *semaPt = *semaPt-1;
   if(*semaPt<0)
   {
-    RunPt->Blocked=*semaPt;
+    RunPt->Blocked=semaPt;
     EnableInterrupts();
     OS_Suspend();
   }
@@ -190,7 +199,7 @@ void OS_Wait(int32_t *semaPt) //***IMPLEMENT THIS***
 // Lab3 wakeup blocked thread if appropriate
 // Inputs:  pointer to a counting semaphore
 // Outputs: none
-void OS_Signal(int32_t *semaPt) //***IMPLEMENT THIS***
+void OS_Signal(int32_t *semaPt) //***IMPLEMENT THIS*** //done
 {
   tcbType *pt;
   DisableInterrupts();
@@ -198,7 +207,7 @@ void OS_Signal(int32_t *semaPt) //***IMPLEMENT THIS***
   if(*semaPt<=0)
   {
     pt=RunPt->next;
-    while(pt->Blocked!=*semaPt)
+    while(pt->Blocked!=semaPt)
     {
       pt=pt->next;
     }
