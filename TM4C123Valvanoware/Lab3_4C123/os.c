@@ -18,8 +18,8 @@ void StartOS(void);
 struct tcb{
   int32_t *sp;       // pointer to stack (valid for threads not running
   struct tcb *next;  // linked-list pointer
-  int32_t *Blocked;// nonzero if blocked on this semaphore
-   // nonzero if this thread is sleeping
+  int32_t *Blocked;  // nonzero if blocked on this semaphore
+  int32_t Sleep     // nonzero if this thread is sleeping
 //*FILL THIS IN****
 };
 typedef struct tcb tcbType;
@@ -27,7 +27,7 @@ tcbType tcbs[NUMTHREADS];
 tcbType *RunPt;
 int32_t Stacks[NUMTHREADS][STACKSIZE];
 
-
+static void runperiodicevents(void);
 // ******** OS_Init ************
 // Initialize operating system, disable interrupts
 // Initialize OS controlled I/O: periodic interrupt, bus clock as fast as possible
@@ -38,6 +38,7 @@ void OS_Init(void){
   DisableInterrupts();
   BSP_Clock_InitFastest();// set processor clock to fastest speed
   // perform any initializations needed
+  BSP_PeriodicTask_Init(&runperiodicevents, 1000, 6);
 }
 
 void SetInitialStack(int i){
@@ -111,10 +112,17 @@ int OS_AddPeriodicEventThread(void(*thread)(void), uint32_t period){
 
 }
 
-void static runperiodicevents(void){
-// ****IMPLEMENT THIS****
-// **RUN PERIODIC THREADS, DECREMENT SLEEP COUNTERS
-
+void static runperiodicevents(void) // ****IMPLEMENT THIS**** 
+{
+  int i;
+  // **RUN PERIODIC THREADS, DECREMENT SLEEP COUNTERS
+  for(i=0;i<NUMTHREADS;i++)
+  {
+    if(tcbs[i].Sleep > 0)
+    {
+      tcbs[i].Sleep--;
+    }
+  }
 }
 
 //******** OS_Launch ***************
@@ -136,7 +144,7 @@ void Scheduler(void)
   // every time slice
   // ROUND ROBIN, skip blocked and sleeping threads
   RunPt = RunPt->next;
-  while(RunPt->Blocked)
+  while((RunPt->Blocked) || (RunPt->Sleep))
   {
     RunPt = RunPt->next;
   }
@@ -158,9 +166,12 @@ void OS_Suspend(void){
 // input:  number of msec to sleep
 // output: none
 // OS_Sleep(0) implements cooperative multitasking
-void OS_Sleep(uint32_t sleepTime){
-// set sleep parameter in TCB
-// suspend, stops running
+void OS_Sleep(uint32_t sleepTime)
+{
+  // set sleep parameter in TCB
+  RunPt->Sleep = sleepTime;
+  // suspend, stops running
+  OS_Suspend();
 }
 
 // ******** OS_InitSemaphore ************
