@@ -19,7 +19,7 @@ struct tcb{
   int32_t *sp;       // pointer to stack (valid for threads not running
   struct tcb *next;  // linked-list pointer
   int32_t *Blocked;  // nonzero if blocked on this semaphore
-  int32_t Sleep     // nonzero if this thread is sleeping
+  int32_t Sleep;     // nonzero if this thread is sleeping
 //*FILL THIS IN****
 };
 typedef struct tcb tcbType;
@@ -106,10 +106,22 @@ int OS_AddThreads(void(*thread0)(void),
 // These threads cannot spin, block, loop, sleep, or kill
 // These threads can call OS_Signal
 // In Lab 3 this will be called exactly twice
-int OS_AddPeriodicEventThread(void(*thread)(void), uint32_t period){
-// ****IMPLEMENT THIS****
+int OS_AddPeriodicEventThread(void(*thread)(void), uint32_t period) // ****IMPLEMENT THIS****
+{
+  static int count = 0;
+  period = 1000/period;
+  uint32_t freq;
+  freq = period;
+  if(count==0)
+  {
+    BSP_PeriodicTask_InitB(*thread, freq, 0);
+    count++;
+  }
+  else
+  {
+    BSP_PeriodicTask_InitC(*thread, freq, 0);
+  }
   return 1;
-
 }
 
 void static runperiodicevents(void) // ****IMPLEMENT THIS**** 

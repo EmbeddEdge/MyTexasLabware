@@ -758,7 +758,7 @@ void TaskR(void){ // dummy
   }
 }
 
-int main(void){
+int main_step4(void){
   OS_Init();
   Profile_Init();  // initialize the 7 hardware profiling pins
   OS_FIFO_Init();
@@ -872,7 +872,7 @@ void TaskZ(void){ // dummy
   }
 }
 
-int main_step5(void){
+int main(void){
   OS_Init();
   Profile_Init();  // initialize the 7 hardware profiling pins
   OS_FIFO_Init();
