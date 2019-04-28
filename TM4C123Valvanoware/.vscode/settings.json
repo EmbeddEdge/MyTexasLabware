@@ -5,7 +5,8 @@
         "simplelink.h\u0000plelink.h": "c",
         "user.h": "c",
         "hw_memmap.h": "c",
-        "bsp.h": "c"
+        "bsp.h": "c",
+        "tm4c123gh6pm.h": "c"
     },
     "C_Cpp.intelliSenseEngineFallback": "Enabled",
     "C_Cpp.errorSquiggles": "Disabled"
