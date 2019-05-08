@@ -189,7 +189,7 @@ int main(void){
   if(BSP_Button1_Input() == 0){ // run TExaS if Button1 is pressed
     BSP_LCD_DrawString(0, 0, "Running TExaS grader", LCD_YELLOW);
     // change 1000 to 4-digit number from edX
-    TExaS_Init(GRADER, 1000);   // initialize the Lab 5 grader
+    TExaS_Init(GRADER, 1268);   // initialize the Lab 5 grader
 //    TExaS_Init(LOGICANALYZER, 1000);  
 // Logic analyzer will run, but the Lab 5 doesn't really use the logic analyzer
     while(BSP_Button1_Input() == 0){};
@@ -245,6 +245,10 @@ int main(void){
   i = OS_File_Size(m);          // i = 5
   i = OS_File_Size(p);          // i = 3
   i = OS_File_Size(p+1);        // i = 0
+  OS_File_Read(n, 0, Buff);     // "buf0"
+  OS_File_Read(n, 6, Buff);     // "buf6"
+  OS_File_Read(p, 0, Buff);     // "arr0"
+  OS_File_Read(p, 2, Buff);     // "arr2"
   OS_File_Flush();              // 0x0003FE00
   while(1){
     DisplayDirectory(index);
