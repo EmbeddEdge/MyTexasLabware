@@ -58,21 +58,26 @@ extern NotifyCharacteristic_t NotifyCharacteristicList[];
 // Inputs: pointer to message
 //         stores the FCS into message itself
 // Outputs: none
-void SetFCS(uint8_t *msg){
-//****You implement this function as part of Lab 6*****
-
-  
+void SetFCS(uint8_t *msg)
+{
+  //****You implement this function as part of Lab 6*****
+  msg[0] ^= msg[1];
+  msg[0] ^= msg[2];
+  msg[0] ^= msg[3];
+  msg[0] ^= msg[4];
+  msg[0] ^= msg[5];
+  msg[0] ^= msg[6];
+  msg[0] ^= msg[7];
 }
 //*************BuildGetStatusMsg**************
 // Create a Get Status message, used in Lab 6
 // Inputs pointer to empty buffer of at least 6 bytes
 // Output none
 // build the necessary NPI message that will Get Status
-void BuildGetStatusMsg(uint8_t *msg){
-// hint: see NPI_GetStatus in AP.c
-//****You implement this function as part of Lab 6*****
-
-  
+void BuildGetStatusMsg(uint8_t *msg)
+{
+  // hint: see NPI_GetStatus in AP.c
+  //****You implement this function as part of Lab 6*****
 }
 //*************Lab6_GetStatus**************
 // Get status of connection, used in Lab 6
