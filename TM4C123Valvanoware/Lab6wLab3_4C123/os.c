@@ -299,7 +299,6 @@ uint32_t OS_FIFO_Get(void)
 {
   uint32_t data;
   //***IMPLEMENT THIS(Done)***
-  uint32_t data;
   OS_Wait(&CurrentSize);
   data = Fifo[GetI];
   GetI = (GetI+1)%FSIZE;
